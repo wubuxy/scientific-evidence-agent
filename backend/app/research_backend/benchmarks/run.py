@@ -145,6 +145,8 @@ async def run_case(task, documents, settings, method, directory, embedder, max_t
     messages = [dict(role="system", content=system), dict(role="user", content=question)]
     reads, ledger, trace = {}, {}, []
     ledger_processed, ledger_skipped_budget = set(), 0
+    ledger_attempts, ledger_rejected_reads = {}, set()
+    last_pin_error, last_report_error = None, None
     used, calibration, result = 0, 1.0, None
     model = model or ChatModel(settings)
 
@@ -166,7 +168,7 @@ async def run_case(task, documents, settings, method, directory, embedder, max_t
             for hit in found["hits"]:
                 await execute("sources_read", dict(source_id=hit["source_id"], start_line=hit["start_line"],
                     line_count=min(40, hit["end_line"] - hit["start_line"] + 1)))
-    status, error, last_tool_error = "failed", None, None
+    status, error = "failed", None
     try:
         for step in range(max_steps):
             archive_old_observations(messages, keep=2)
@@ -182,9 +184,16 @@ async def run_case(task, documents, settings, method, directory, embedder, max_t
             active = [finish] if finishing else definitions
             pinning = False
             pending = set(reads) - ledger_processed
+            exhausted = {eid for eid in pending if ledger_attempts.get(eid, 0) >= 2}
+            ledger_processed.update(exhausted)
+            ledger_rejected_reads.update(exhausted)
+            pending -= exhausted
             if method == "grep-ledger" and pending and step < max_steps - 1:
                 pin_definition = next(d for d in definitions if d["function"]["name"] == "pin_evidence")
-                pin_messages = final_context(system + "\nThis turn only record useful exact excerpts with pin_evidence, or an empty entries list if irrelevant. Do not submit answers yet.",
+                pin_instruction = system + "\nThis turn only record useful exact excerpts with pin_evidence, or an empty entries list if irrelevant. Do not submit answers yet."
+                if last_pin_error:
+                    pin_instruction += "\nPrevious pin validation failed: " + last_pin_error[:1000] + "\nCorrect that error; preserve original newlines and use shorter excerpts. You may return empty entries."
+                pin_messages = final_context(pin_instruction,
                     question, {eid: reads[eid] for eid in reads if eid in pending}, char_budget=7000)
                 pin_estimate = estimate_prompt_tokens(pin_messages, [pin_definition]) * calibration * 1.15
                 if used + pin_estimate + 1000 + minimum_final_estimate + final_output <= max_tokens:
@@ -204,8 +213,8 @@ async def run_case(task, documents, settings, method, directory, embedder, max_t
                     evidence[eid + ":" + target_id] = dict(reads[eid], quote=pin["quote"])
                 messages = final_context(system, question, evidence, char_budget=9000)
                 messages[0]["content"] += "\nFinish now; unknown is preferable to unsupported answers."
-                if last_tool_error:
-                    messages[0]["content"] += "\nCorrect the previous submission error: " + last_tool_error[:1200]
+                if last_report_error:
+                    messages[0]["content"] += "\nCorrect the previous submission error: " + last_report_error[:1200]
             raw = estimate_prompt_tokens(messages, active)
             remaining = max_tokens - used - int(raw * calibration * 1.15)
             if finishing and remaining < final_output:
@@ -215,6 +224,9 @@ async def run_case(task, documents, settings, method, directory, embedder, max_t
             if remaining < 256:
                 error = "token_budget_preflight"; break
             budget = min(final_output if finishing else 1000 if pinning else 1800, remaining)
+            if pinning:
+                for eid in pending:
+                    ledger_attempts[eid] = ledger_attempts.get(eid, 0) + 1
             sent = json.loads(json.dumps(messages))
             response = await model.complete(messages, active, budget)
             if response.get("tokens") is None:
@@ -249,10 +261,13 @@ async def run_case(task, documents, settings, method, directory, embedder, max_t
                     observation = dict(data=await execute(name, arguments))
                     if pinning:
                         ledger_processed.update(pending)
-                    last_tool_error = None
+                        last_pin_error = None
                 except (ValueError, LookupError) as exc:
                     observation = dict(error=str(exc))
-                    last_tool_error = str(exc)
+                    if pinning:
+                        last_pin_error = str(exc)
+                    if name == "finish_report":
+                        last_report_error = str(exc)
                 trace[-1].setdefault("tool_results", []).append(dict(name=name, **observation))
                 messages.append(dict(role="tool", tool_call_id=call["id"], content=json.dumps(observation, ensure_ascii=False)))
             if status == "completed":
@@ -266,7 +281,7 @@ async def run_case(task, documents, settings, method, directory, embedder, max_t
     prediction = dict(task_id=task["id"], status=status, error=error, method=method, model=settings.llm_model,
         answers=(result or {}).get("answers", []), reads=read_exports, tokens_used=used,
         elapsed_seconds=round(time.monotonic()-started, 3), model_calls=len(trace), pinned_targets=len(ledger),
-        ledger_skipped_budget=ledger_skipped_budget)
+        ledger_skipped_budget=ledger_skipped_budget, ledger_rejected_reads=len(ledger_rejected_reads))
     (directory / "trace.json").write_text(json.dumps(trace, ensure_ascii=False, indent=2), encoding="utf-8")
     (directory / "prediction.json").write_text(json.dumps(prediction, ensure_ascii=False, indent=2), encoding="utf-8")
     return prediction
