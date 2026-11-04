@@ -99,7 +99,7 @@ def score(inputs_path,gold_path,run,reference=None):
     result=dict(summaries=summaries,paired_answer_f1=comparisons,records=records,
         protocol_sha256=sha256(run/"protocol.json"),reference_protocol_sha256=sha256(reference/"protocol.json") if reference else None,
         limitations=["Development fixed-read diagnostic, not end-to-end retrieval or held-out evaluation.",
-            "Task-level bootstrap; two repeats share one selection and are not independent tasks.",
+            "Task-level bootstrap; repeats of a task are averaged, not treated as independent tasks.",
             "Full-read condition has a larger context allowance; not an equal-budget baseline.",
             "Selection cost is included per hypothetical selected-answer pipeline; actual shared experiment spend must be counted separately.",
             "Evidence character overlap is a mechanical proxy, not sufficient support or entailment."])

@@ -87,21 +87,29 @@ async def run(args):
     settings=replace(Settings.from_env(),llm_model=args.model,llm_extra_body={"enable_thinking":False})
     if not settings.llm_api_key:
         raise ValueError("Missing model credential")
-    selection_protocol=json.loads((args.selections/"protocol.json").read_text("utf-8"))
-    cases=load_cases(args.inputs,args.prior,selection_protocol["source_method"],len(selection_protocol["task_ids"]))
-    if [c["task"]["id"] for c in cases]!=selection_protocol["task_ids"] or sha256(args.inputs)!=selection_protocol["inputs_sha256"]:
-        raise ValueError("Selection inputs mismatch")
-    if any(selection_protocol["prior_predictions"][c["task"]["id"]]!=c["prediction_sha256"] for c in cases):
-        raise ValueError("Prior reads changed")
-    selection_rows=[json.loads(s) for s in (args.selections/"selections.jsonl").read_text("utf-8").splitlines()]
-    selected={r["task_id"]:r for r in selection_rows if r["method"]=="lines" and r["repeat"]==0}
-    if len(selected)!=len(cases):
-        raise ValueError("Need exactly one selection attempt per task, including failures")
+    if args.selections:
+        selection_protocol=json.loads((args.selections/"protocol.json").read_text("utf-8"))
+        cases=load_cases(args.inputs,args.prior,selection_protocol["source_method"],len(selection_protocol["task_ids"]))
+        if [c["task"]["id"] for c in cases]!=selection_protocol["task_ids"] or sha256(args.inputs)!=selection_protocol["inputs_sha256"]:
+            raise ValueError("Selection inputs mismatch")
+        if any(selection_protocol["prior_predictions"][c["task"]["id"]]!=c["prediction_sha256"] for c in cases):
+            raise ValueError("Prior reads changed")
+        selection_rows=[json.loads(s) for s in (args.selections/"selections.jsonl").read_text("utf-8").splitlines()]
+        selected={r["task_id"]:r for r in selection_rows if r["method"]=="lines" and r["repeat"]==0}
+        if len(selected)!=len(cases):
+            raise ValueError("Need exactly one selection attempt per task, including failures")
+    else:
+        if "selected" in args.policies:
+            raise ValueError("Model-selected policy requires saved selections")
+        cases=load_cases(args.inputs,args.prior,args.source_method,args.limit)
+        selected={}
     conditions=[(p,c) for p in args.policies for c in ([0] if p=="full" else [3500,9000])]
     args.out.mkdir(parents=True,exist_ok=False)
     protocol=dict(experiment="answer-replay-v1",inputs_sha256=sha256(args.inputs),
-        selection_protocol_sha256=sha256(args.selections/"protocol.json"),
-        selections_sha256=sha256(args.selections/"selections.jsonl"),
+        selection_protocol_sha256=sha256(args.selections/"protocol.json") if args.selections else None,
+        selections_sha256=sha256(args.selections/"selections.jsonl") if args.selections else None,
+        prior_protocol_sha256=sha256(args.prior/"protocol.json"),
+        prior_predictions={c["task"]["id"]:c["prediction_sha256"] for c in cases},
         methods=[f"{p}-{c}" for p,c in conditions],task_ids=[c["task"]["id"] for c in cases],
         repeats=args.repeats,model=args.model,temperature=0.1,extra_body=settings.llm_extra_body,
         no_retries=True,selection_failure_policy="fallback_to_prefix_and_count_selection_cost",
@@ -115,7 +123,7 @@ async def run(args):
     async def one(case,policy,cap,repeat):
         async with semaphore:
             task,reads=case["task"],case["reads"]
-            selection=selected[task["id"]]
+            selection=selected.get(task["id"],dict(status="not_requested",pins=[],tokens_used=0))
             pins=selection["pins"] if selection["status"]=="completed" else []
             messages,visible=build_context(task,reads,pins,policy,cap)
             selection_cost=selection["tokens_used"] if policy=="selected" else 0
@@ -159,8 +167,11 @@ async def run(args):
 
 if __name__=="__main__":
     parser=argparse.ArgumentParser(description=__doc__)
-    for name in ("inputs","prior","selections","out"):
+    for name in ("inputs","prior","out"):
         parser.add_argument("--"+name,type=Path,required=True)
+    parser.add_argument("--selections",type=Path)
+    parser.add_argument("--source-method",default="grep")
+    parser.add_argument("--limit",type=int,default=0)
     parser.add_argument("--env-file",type=Path)
     parser.add_argument("--model",default="qwen3.5-27b")
     parser.add_argument("--repeats",type=int,default=2)

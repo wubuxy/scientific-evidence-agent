@@ -108,3 +108,69 @@ async def test_failed_pins_receive_feedback_and_cannot_repeat_until_budget_exhau
     assert model.pins==2 and result["model_calls"]==4
     assert result["ledger_rejected_reads"]==1
     assert result["tokens_used"]==1200
+
+
+def test_support_review_excludes_labels_and_copies_only_visible_lines():
+    import json
+    from research_backend.benchmarks.support_review import review_messages, resolve_review
+    _, reads = fixture()
+    case = dict(id="c", question="What is trained?", claim="Only the adapter is trained.",
+                source_id="paper", evidence=reads, expected="DO_NOT_SHOW_THIS_LABEL")
+    assert "DO_NOT_SHOW_THIS_LABEL" not in json.dumps(review_messages(case))
+    result = resolve_review(dict(verdict="supported", rationale="The source states this directly.",
+        evidence_spans=[dict(evidence_id="ev", start_line=11, end_line=12)]), case)
+    assert result["evidence_spans"][0]["quote"] == "Only the adapter\nis trained."
+    assert result["needs_human_review"] is True
+
+
+@pytest.mark.parametrize("span", [dict(evidence_id="ev", start_line=9, end_line=12),
+                                  dict(evidence_id="other", start_line=10, end_line=12)])
+def test_support_review_rejects_unseen_evidence(span):
+    from research_backend.benchmarks.support_review import resolve_review
+    _, reads = fixture()
+    with pytest.raises(ValueError, match="unseen"):
+        resolve_review(dict(verdict="supported", rationale="claim", evidence_spans=[span]), dict(evidence=reads))
+
+
+def test_support_review_requires_source_alignment_and_evidence_for_decisive_verdict():
+    from research_backend.benchmarks.support_review import review_messages, resolve_review
+    _, reads = fixture()
+    with pytest.raises(ValueError, match="different source"):
+        review_messages(dict(source_id="wrong", evidence=reads))
+    with pytest.raises(ValueError, match="requires evidence"):
+        resolve_review(dict(verdict="supported", rationale="claim", evidence_spans=[]), dict(evidence=reads))
+
+
+@pytest.mark.asyncio
+async def test_answer_replay_without_selector_records_all_controls(tmp_path, monkeypatch):
+    import json
+    from argparse import Namespace
+    from research_backend.benchmarks import answer_replay as replay
+    from research_backend.config import Settings
+    task, reads = fixture()
+    task.update(id="case", source_ids=["paper"])
+    inputs = tmp_path / "inputs.json"
+    inputs.write_text("{}", encoding="utf-8")
+    prior = tmp_path / "prior"
+    prior.mkdir()
+    (prior / "protocol.json").write_text("{}", encoding="utf-8")
+    monkeypatch.setattr(replay, "load_environment", lambda: None)
+    monkeypatch.setattr(replay.Settings, "from_env", lambda: Settings(llm_api_key="offline-test"))
+    monkeypatch.setattr(replay, "load_cases", lambda *args: [dict(task=task, reads=reads, prediction_sha256="frozen")])
+    class Model:
+        def __init__(self, settings):
+            pass
+        async def complete(self, messages, definitions, max_tokens):
+            payload = dict(answers=[dict(target_id="training", answer="adapter", unanswerable=False, evidence_ids=["ev"])])
+            return dict(tokens=100, prompt_tokens=80, completion_tokens=20, response_model="fake",
+                message=dict(tool_calls=[dict(function=dict(name="finish_report", arguments=json.dumps(payload)))]))
+    monkeypatch.setattr(replay, "ChatModel", Model)
+    out = tmp_path / "out"
+    await replay.run(Namespace(env_file=None, model="fake", selections=None, inputs=inputs, prior=prior,
+        source_method="grep", limit=0, policies=["prefix", "lexical", "full"], out=out, repeats=1, concurrency=1))
+    rows = [json.loads(line) for line in (out / "predictions.jsonl").read_text("utf-8").splitlines()]
+    assert len(rows) == 5 and all(r["status"] == "completed" for r in rows)
+    assert all(r["selection_tokens"] == 0 and r["total_pipeline_tokens"] == 100 for r in rows)
+    protocol = json.loads((out / "protocol.json").read_text("utf-8"))
+    assert protocol["selections_sha256"] is None
+    assert protocol["prior_predictions"] == {"case": "frozen"}

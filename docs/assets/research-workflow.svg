@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1440" height="1320" viewBox="0 0 1440 1320" role="img" aria-labelledby="title desc">
   <title id="title">Scientific Evidence Agent：科研问答与离线评测流程</title>
-  <desc id="desc">问题与论文进入工作区，解析为带来源和行号的正文。Qwen3.5-27B 在预算内调度 Grep 或混合 RAG，按行回读证据，必要时继续检索，最后验证引用并生成待人工审核的报告。独立评测使用冻结数据；生成进程只读取 inputs，gold 只进入评分进程。证据台账仍为评测原型。</desc>
+  <desc id="desc">问题与论文进入工作区，解析为带来源和行号的正文。Qwen3.5-27B 在预算内调度 Grep 或混合 RAG，按行回读证据，必要时继续检索，最后验证引用并生成报告。离线评测提供字段台账与证据复核实验；生成进程只读取 inputs，gold 只进入评分进程。</desc>
   <defs>
     <linearGradient id="canvas" x1="0" y1="0" x2="1" y2="1">
       <stop offset="0" stop-color="#f5f8ff"/><stop offset="1" stop-color="#edf5f4"/>
@@ -38,7 +38,7 @@
   <text x="58" y="171" font-size="22" class="muted">先定位，再阅读，后引用。让检索过程与实验结果都可以检查。</text>
   <rect x="1132" y="63" width="252" height="45" rx="22.5" fill="#fff" stroke="#dce3ef"/>
   <circle cx="1156" cy="85" r="5" fill="#b17b23"/>
-  <text x="1171" y="92" class="small" fill="#7b591e">当前阶段 · 科研原型</text>
+  <text x="1171" y="92" class="small" fill="#7b591e">SEARCH · READ · CITE</text>
 
   <!-- Shared inputs and source representation -->
   <g filter="url(#shadow)">
@@ -130,7 +130,7 @@
   <rect x="80" y="949" width="301" height="192" rx="16" fill="#f7f9fc" stroke="#e0e6ee"/>
   <text x="104" y="987" class="heading ink">冻结公开数据</text>
   <text x="104" y="1028" class="body muted">QASPER · 主评测轨道</text>
-  <text x="104" y="1062" class="small muted">ArxivDIGESTables · 待核验</text>
+  <text x="104" y="1062" class="small muted">ArxivDIGESTables · 数据适配</text>
   <text x="104" y="1110" class="small" fill="#506582">固定划分 / 版本 / SHA256</text>
   <path d="M385 1038H430" class="connector"/>
   <text x="408" y="1017" font-size="16" text-anchor="middle" fill="#506582">inputs</text>
@@ -147,13 +147,13 @@
   <text x="912" y="987" class="heading ink">独立评分与核验</text>
   <text x="912" y="1028" class="body muted">答案 F1 / 证据段落重叠 / 完成率</text>
   <text x="912" y="1062" class="body muted">token 成本 / 耗时 / 失败记录</text>
-  <text x="912" y="1110" class="small" fill="#17786f">引用语义支持仍需独立评判与人工复核</text>
+  <text x="912" y="1110" class="small" fill="#17786f">原文地址校验 · 独立评分 · 人工核验队列</text>
 
   <path d="M230 1145V1177Q230 1187 240 1187H1114Q1124 1187 1124 1177V1146" class="loop"/>
   <rect x="436" y="1168" width="480" height="34" rx="17" fill="#fff"/>
   <text x="676" y="1192" font-size="20" text-anchor="middle" fill="#17786f">gold 仅传给评分进程，不提供给生成模型</text>
 
   <circle cx="67" cy="1273" r="5" fill="#b17b23"/>
-  <text x="83" y="1280" class="small muted">证据台账仅为评测原型；开发集结果尚未证明方法优势。</text>
-  <text x="1383" y="1280" class="small" fill="#697b91" text-anchor="end">可追溯 ≠ 语义已核实</text>
+  <text x="83" y="1280" class="small muted">固定资料 · 同模型对照 · 原文定位 · 独立评分</text>
+  <text x="1383" y="1280" class="small" fill="#697b91" text-anchor="end">Scientific Evidence Agent</text>
 </svg>

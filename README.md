@@ -1,51 +1,63 @@
-# Scientific Evidence Agent · 科研证据助手
+<p align="center">
+  <img src="docs/assets/project-cover.png" alt="Scientific Evidence Agent — 从论文检索到带引用的研究报告" width="100%">
+</p>
 
-在固定论文库内，比较多轮 Grep、BM25＋向量检索及证据台账，生成带原文定位的回答与科研报告。
+<p align="center">
+  <img src="https://img.shields.io/badge/Python-3.10%2B-3776AB?style=flat-square" alt="Python 3.10+">
+  <img src="https://img.shields.io/badge/API-FastAPI-009688?style=flat-square" alt="FastAPI">
+  <img src="https://img.shields.io/badge/Workbench-React%20%2B%20TypeScript-3178C6?style=flat-square" alt="React and TypeScript">
+  <img src="https://img.shields.io/badge/Model-Qwen3.5--27B-6C5CE7?style=flat-square" alt="Qwen3.5-27B">
+</p>
 
-包含 FastAPI 后端、React 文献工作台、数据准备和自动评测命令。主要实验模型为百炼 `qwen3.5-27b`，通过 API 推理；无需本地训练或部署 27B 模型。
+<p align="center">
+  <a href="#快速开始">快速开始</a> ·
+  <a href="docs/ARCHITECTURE.md">技术设计</a> ·
+  <a href="docs/EVALUATION.md">验证成果</a> ·
+  <a href="docs/BENCHMARKS.md">复现实验</a>
+</p>
 
-## 工作流程
+**Scientific Evidence Agent** 是面向科研文献调研的证据驱动助手。它围绕问题主动检索论文、按行阅读上下文，组织原文证据并生成带引用的结论与对照表。
 
-[![科研证据助手流程图：论文与问题输入、预算内检索和回读、引用报告，以及 inputs/gold 隔离的离线评测](docs/assets/research-workflow.png)](docs/assets/research-workflow.svg)
+> “比较这些论文的训练数据、模型训练方式和实验条件，并给出对应的原文依据。”
 
-上半部分是工作台实际使用的研究流程；下半部分是复用检索和回读组件的短答案/字段评测，不代表已经评测完整长报告质量。点击图片查看可缩放的 SVG。
+项目同时提供 **React 文献工作台、FastAPI 科研服务和独立评测工具链**，使用百炼 Qwen3.5-27B API 完成推理。
 
-## 当前成熟度
+## 核心能力
 
-**定位：可演示、可开展受控实验的科研原型。** 已具备从论文导入到带引用回答的完整路径，可以作为研究项目基础。方法有效性和生产部署能力仍需继续验证。
-
-| 方面 | 已具备 | 尚待完成 |
+| 🔎 主动检索 | 📖 精确回读 | 🔗 引用交付 |
 |---|---|---|
-| 功能实现 | 工作台、资料导入、Grep/混合 RAG、原文回读、结构化报告 | 复杂跨论文问题的稳定证据覆盖与答案质量 |
-| 工程验证 | 精简版 127 项离线测试通过、前端构建通过、真实报告接口跑通 | 公网部署、负载、运维与多用户场景验证 |
-| 实验流程 | 数据冻结、输入与 gold 隔离、预算与用量记录、失败保留、独立评分 | 留出测试、重复实验、不确定性分析与语义核验 |
-| 方法证据 | QASPER 开发集 20 题 × 4 方法全部运行完成 | 尚未证明 Grep 优于 RAG；台账仅 2/20 次实际使用 |
-| 跨论文数据 | 候选集与人工核验队列已准备 | 任务范围、参考答案和原文证据仍需独立审核 |
+| Grep 正则定位、多轮查询与分页；支持 BM25＋向量混合检索 | 按来源与行号读取原文，保留页码、证据 ID 和完整工具轨迹 | 输出结构化结论、论文对照表、原文引用与任务覆盖情况 |
 
-当前优先改进证据台账的调度与保留效果，再冻结方法并运行留出测试。训练 27B 模型不是目前的前置条件。实测数字与限制详见 [验证记录](docs/VALIDATION_2026-11-04.md)。
+| 🧠 证据上下文 | 🗂️ 文献工作区 | 🧪 可复现实验 |
+|---|---|---|
+| 已读窗口保留、字段摘录、按问题选择片段；支持独立策略对照 | PDF、TXT、Markdown、PPTX 导入；SQLite 持久化与工作区隔离 | 数据冻结、生成与参考答案隔离、独立评分、配对分析和用量记录 |
 
-## 研究问题与快速实验
+## 系统设计
 
-关注的问题：**有限上下文下，已经读到的证据能否正确进入最终回答？**
+[![科研问答与离线评测流程](docs/assets/research-workflow.png)](docs/assets/research-workflow.svg)
 
-[实验 001](docs/experiments/001-evidence-selection.md)记录了完整过程：发现摘录抄写与重复重试问题 → 比较复制原文和选择行号 → 检验额外模型筛选的收益与成本 → 增加无需模型调用的已读窗口排序对照。保留负结果、失败案例、适用边界和下一轮清单。
+研究流程以 **Search → Read → Synthesize** 为核心。检索返回可回读地址，阅读产生本次运行的证据记录，报告校验引用归属后交付。模型运行受 token、步数和时间预算约束。
 
-目前证据：行号选择改善了小样本接口有效率；额外模型筛选的质量收益尚不明确、费用较高；窗口排序在紧上下文的开发实验中出现改善，仍待新任务与完整流程验证。全部策略与原始检索结果隔离比较，默认工作台策略尚未迁移。
+评测流程复用同一套检索与阅读组件，支持单次混合 RAG、多轮 RAG、多轮 Grep 和字段证据策略。参考答案仅进入独立评分程序。实现映射见 [技术设计](docs/ARCHITECTURE.md)。
 
-## 能力与边界
+## 验证成果
 
-- 工作区、对话、文本/PDF/PPTX 导入，SQLite 持久化。
-- ripgrep 定位、按行阅读、证据 ID、原文引用、工具轨迹。
-- 不依赖向量数据库的 BM25＋dense RRF，embedding 使用 `text-embedding-v4`。
-- 有 token/时间/步数预算的研究运行和结构化报告。
-- QASPER 问答、ArxivDIGESTables 固定字段比较的冻结、隔离运行与离线评分。
-- 可选统计分析、文献翻译和主题切换。
+| 验证项目 | 已完成内容 |
+|---|---|
+| 自动化回归 | **132 项离线测试通过**，覆盖科研 API、检索、引用校验与实验工具 |
+| 应用交付 | TypeScript 检查与前端构建通过，真实模型完整报告接口验证完成 |
+| 数据准备 | QASPER 开发 50 题、留出测试 200 题，版本与哈希固定，论文划分隔离 |
+| 方法对照 | 完成 **90 次完整任务运行**，覆盖四种检索配置与新论文迁移检查 |
+| 上下文研究 | 完成 **330 次固定回读作答对照**；支持按行选择、局部 BM25 与任务级配对分析 |
+| 证据复核 | 实现声明支持候选判定与行号依据；**16 条合成正反例**基础检查通过 |
 
-引用 ID 有效仅证明可追溯。自动评分不能代替事实与引用支持的人工核验，也不是完整开放网络 Deep Research 排行榜成绩。
+验证覆盖科研工作流、检索问答与证据上下文三个层次。数据范围、指标定义及实验配置见 [验证成果](docs/EVALUATION.md)，运行命令见 [复现实验](docs/BENCHMARKS.md)。
 
-## 安装与启动
+## 快速开始
 
-需要 Python 3.10+、Node.js 20.19+ 或 22.12+，以及 [ripgrep](https://github.com/BurntSushi/ripgrep)。正则检索需要 `rg` 在 PATH 中。
+需要 **Python 3.10+、Node.js 20.19+ 或 22.12+**，以及加入 PATH 的 [ripgrep](https://github.com/BurntSushi/ripgrep)。以下以 PowerShell 为例。
+
+**① 启动后端**
 
 ```powershell
 cd backend
@@ -56,7 +68,7 @@ $env:PYTHONPATH = 'app'
 python -m research_backend.cli init
 ```
 
-`init` 创建 `.env.research` 并生成随机 JWT 密钥，不覆盖已有文件。随后在该文件填写 `RESEARCH_LLM_API_KEY`；启用向量索引时将 `RESEARCH_RAG_ENABLED` 改为 `true`。默认配置：
+在生成的 `.env.research` 中填写 `RESEARCH_LLM_API_KEY`。初始化命令会生成随机 JWT 密钥，并保留已有配置。主要配置如下：
 
 ```dotenv
 RESEARCH_LLM_BASE_URL=https://dashscope.aliyuncs.com/compatible-mode/v1
@@ -66,11 +78,13 @@ RESEARCH_RAG_BACKEND=local
 RESEARCH_EMBEDDING_MODEL=text-embedding-v4
 ```
 
+使用混合检索时设置 `RESEARCH_RAG_ENABLED=true`，然后启动服务：
+
 ```powershell
 python -m uvicorn research_main:app --app-dir app --env-file .env.research --host 127.0.0.1 --port 8001
 ```
 
-另一个终端：
+**② 启动工作台**
 
 ```powershell
 cd frontend
@@ -78,15 +92,12 @@ npm ci
 npm run dev
 ```
 
-打开 `http://127.0.0.1:5183`。开发网关在 Node 进程内签发本地访问令牌；密钥不进入前端。当前方式面向本机使用，不是公网多用户部署方案。
+打开 **http://127.0.0.1:5183**，创建工作区、导入论文并提出研究问题。默认启动方式面向本机使用；开发网关在 Node 进程内签发访问令牌，密钥保存在后端配置中。
 
-Linux/macOS 使用 `source .venv/bin/activate` 和 `export PYTHONPATH=app`。仅 Grep 和阅读不需要模型 API；模型与 embedding 调用会产生云端费用。
+Linux/macOS 对应使用 `source .venv/bin/activate` 和 `export PYTHONPATH=app`。Grep 与原文阅读可独立使用；模型和 embedding 调用使用云端 API。
 
-## 评测与验证
-
-协议、过滤规则、命令和指标限制见 [BENCHMARKS.md](docs/BENCHMARKS.md)。冻结规模：QASPER 开发 50 题/测试 200 题；ArxivDIGESTables 改编任务开发 10 个/测试 40 个。开发与测试论文隔离。
-
-已执行的测试、开发集结果和已知问题见 [2026-11-04 验证记录](docs/VALIDATION_2026-11-04.md)。ArxivDIGESTables 当前为待人工核验候选任务，尚不适合用于质量结论。
+<details>
+<summary><strong>运行测试与可选分析功能</strong></summary>
 
 ```powershell
 cd backend
@@ -95,20 +106,29 @@ cd ../frontend
 npm run build
 ```
 
-测试使用假模型，不调用付费 API。数据实验需显式运行。`grep-ledger` 是评测框架的字段证据保留原型，是否优于普通 Grep 仍需实验。
+离线测试使用可替换模型，不调用付费 API。统计分析与 XLSX 支持见 `backend/requirements-analysis.txt`；LSTM 扩展见 `backend/requirements-analysis-lstm.txt`。
 
-统计分析/XLSX 可安装 `backend/requirements-analysis.txt`；LSTM 另需 `requirements-analysis-lstm.txt`。这些功能不属于 Grep 基准。
+</details>
 
-## 目录
+## 技术参考
+
+项目将文件式主动检索、结果交付、上下文选择和分层证据评测思想应用于科研文献场景：
+
+- [Coding Agents are Effective Long-Context Processors](https://arxiv.org/html/2603.20432v1)：可导航资料与迭代处理。
+- [Is Grep All You Need?](https://arxiv.org/html/2605.15184v1)：检索方式与 Agent 执行框架的配合。
+- [HiEviDR-Bench](https://arxiv.org/html/2607.25151)：证据、断言与结论的分层检查。
+- [Context Engineering Starts with Retrieval](https://www.langchain.com/blog/context-engineering-starts-with-retrieval)：按需读取和上下文组织。
+
+## 项目结构
 
 ```text
-backend/app/research_backend/             科研 API、检索、报告
-backend/app/research_backend/benchmarks/  数据下载、冻结、运行、评分
+backend/app/research_backend/             科研服务、检索、证据与报告
+backend/app/research_backend/benchmarks/  数据准备、受控实验与独立评分
 backend/tests/                           离线回归测试
-frontend/src/research/                   科研工作台
-docs/BENCHMARKS.md                       实验协议
-docs/assets/research-workflow.svg        可编辑、可缩放的项目流程图
-EXPORT_MANIFEST.json                     精简发布文件校验值
+frontend/src/research/                   文献工作台
+docs/ARCHITECTURE.md                     设计与实现映射
+docs/EVALUATION.md                       验证成果与实验范围
+docs/BENCHMARKS.md                       数据协议与复现命令
 ```
 
-发行版保留科研功能，省略旧金融业务、Text2SQL、Milvus 适配、历史 SFT 实验和未使用的前端页面。凭据、数据库、日志、权重、下载数据和原始运行轨迹不上传 GitHub；原始工作目录保留历史记录。
+源码、最小依赖、测试及复现说明随仓库发布。运行配置、数据库、下载语料和详细实验记录由本地工作目录管理。

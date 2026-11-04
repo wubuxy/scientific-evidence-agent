@@ -288,6 +288,10 @@ async def run_case(task, documents, settings, method, directory, embedder, max_t
 
 
 async def run(args):
+    if getattr(args, "env_file", None):
+        from dotenv import load_dotenv
+        load_dotenv(args.env_file, override=True)
+        load_dotenv(args.env_file.parent / ".env")
     load_environment()
     settings = replace(Settings.from_env(), llm_model=args.model, llm_extra_body={"enable_thinking": False}, rag_enabled=True, rag_backend="local")
     inputs = json.loads(args.inputs.read_text("utf-8"))
@@ -297,6 +301,16 @@ async def run(args):
     if inputs["split"] == "test" and not args.allow_test:
         raise ValueError("Held-out test requires --allow-test after development is frozen")
     tasks = inputs["tasks"][args.offset:args.offset + args.limit] if args.limit else inputs["tasks"][args.offset:]
+    if getattr(args, "task_ids_file", None):
+        if args.limit or args.offset:
+            raise ValueError("Use task IDs or offset/limit, not both")
+        selected_ids = json.loads(args.task_ids_file.read_text("utf-8"))
+        if not isinstance(selected_ids, list) or not all(isinstance(t, str) for t in selected_ids) or len(set(selected_ids)) != len(selected_ids):
+            raise ValueError("Task IDs must be a unique list of strings")
+        by_id = {t["id"]: t for t in inputs["tasks"]}
+        if set(selected_ids) - set(by_id):
+            raise ValueError("Selected task ID is absent from frozen inputs")
+        tasks = [by_id[tid] for tid in selected_ids]
     if not tasks:
         raise ValueError("No selected tasks")
     args.out.mkdir(parents=True, exist_ok=False)
@@ -342,6 +356,8 @@ if __name__ == "__main__":
     parser.add_argument("--methods", nargs="+", choices=["grep", "grep-ledger", "rag", "rag-once"], default=["grep", "grep-ledger", "rag"])
     parser.add_argument("--limit", type=int, default=0)
     parser.add_argument("--offset", type=int, default=0)
+    parser.add_argument("--task-ids-file", type=Path)
+    parser.add_argument("--env-file", type=Path)
     parser.add_argument("--max-tokens", type=int, default=20000)
     parser.add_argument("--max-steps", type=int, default=10)
     parser.add_argument("--max-seconds", type=int, default=300)

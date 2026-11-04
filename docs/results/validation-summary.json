@@ -1,0 +1,107 @@
+{
+  "updated": "2026-11-04",
+  "model": "qwen3.5-27b",
+  "scope": "development runs and engineering validation; frozen test set reserved",
+  "checks": {
+    "offline_tests_passed": 132,
+    "frontend_typecheck": "passed",
+    "frontend_production_build": "passed",
+    "live_report_api": "completed"
+  },
+  "datasets": {
+    "qasper": {
+      "dev_tasks": 50,
+      "test_tasks": 200,
+      "dev_papers": 44,
+      "test_papers": 162,
+      "split_papers_overlap": 0
+    },
+    "arxiv_digestables": {
+      "dev_tasks": 10,
+      "test_tasks": 40,
+      "purpose": "data adaptation and annotation workflow"
+    }
+  },
+  "experiments": [
+    {
+      "name": "retrieval_comparison",
+      "task_count": 20,
+      "attempts": 80,
+      "completed": 80,
+      "methods": [
+        "grep",
+        "grep-ledger",
+        "rag",
+        "rag-once"
+      ],
+      "repeats": 1,
+      "protocol_sha256": "193658dcd3715843e3d5b7075227d14d81d95e5c4b695ad4dbe4473c84ac5238",
+      "predictions_sha256": "0052b9cae33e6d85d7ae063d05ed52cca9fdae5e6f98c678759d73971555c3f7"
+    },
+    {
+      "name": "fresh_paper_grep",
+      "task_count": 10,
+      "attempts": 10,
+      "completed": 10,
+      "methods": [
+        "grep"
+      ],
+      "repeats": 1,
+      "protocol_sha256": "e21cb9679fe7c356c33b4802d4f39b1f70f864668383534a6a5c526f130dfbbe",
+      "predictions_sha256": "5e265a0283f6dfacb79f469b455500ebc2fab9fb58f7a6c0c8d034b0f21d0bbe"
+    },
+    {
+      "name": "model_selection_replay",
+      "task_count": 20,
+      "attempts": 200,
+      "completed": 200,
+      "methods": [
+        "prefix-3500",
+        "selected-3500",
+        "prefix-9000",
+        "selected-9000",
+        "full-0"
+      ],
+      "repeats": 2,
+      "protocol_sha256": "471ba7c06ed8ad7465836a65786003e7b5bdd217d1490c3284775ff2938fb7be",
+      "predictions_sha256": "7d16c9cec05c7122f15b3c61d9ae7c7272519ba67badaa4e04987555e964540c"
+    },
+    {
+      "name": "lexical_replay",
+      "task_count": 20,
+      "attempts": 80,
+      "completed": 80,
+      "methods": [
+        "lexical-3500",
+        "lexical-9000"
+      ],
+      "repeats": 2,
+      "protocol_sha256": "22b7b1d0fc8589e249b303aa5de74de255dd9a0dcb83a0122d10155c82cafd68",
+      "predictions_sha256": "1f9816146684e7571343b4f59d0ef483698d2bef5e68413b2425d4d75a634c8a"
+    },
+    {
+      "name": "fresh_paper_replay",
+      "task_count": 10,
+      "attempts": 50,
+      "completed": 50,
+      "methods": [
+        "prefix-3500",
+        "prefix-9000",
+        "lexical-3500",
+        "lexical-9000",
+        "full-0"
+      ],
+      "repeats": 1,
+      "protocol_sha256": "a2223c3ab490e673e04b04fdf18e029f0623638b7b9c35991e53cd55e3335252",
+      "predictions_sha256": "714380a36dcda04d4856fcd07422703a234cb8308c776befcbf7962395859884"
+    }
+  ],
+  "support_smoke": {
+    "attempts": 16,
+    "completed": 16,
+    "label_matches": 16,
+    "measured_tokens": 13871,
+    "scope": "16 authored synthetic examples; single model, one attempt; preliminary triage check, not real-world accuracy",
+    "protocol_sha256": "e3601bfd46f38802d4de9b436ff10d9531abd84863fff71fc9643a9f6a16544c"
+  }
+}

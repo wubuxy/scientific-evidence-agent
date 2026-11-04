@@ -1,0 +1,245 @@
+{
+  "origin": "Authored synthetic contrastive examples, not a real-world benchmark.",
+  "cases": [
+    {
+      "id": "case-01",
+      "question": "What is trained?",
+      "claim": "Only the adapter is trained.",
+      "source_id": "synthetic-paper",
+      "evidence": [
+        {
+          "id": "excerpt",
+          "source_id": "synthetic-paper",
+          "start_line": 10,
+          "end_line": 11,
+          "quote": "The encoder remains frozen.\nOnly the adapter is trained."
+        }
+      ]
+    },
+    {
+      "id": "case-02",
+      "question": "What is trained?",
+      "claim": "The encoder is trained.",
+      "source_id": "synthetic-paper",
+      "evidence": [
+        {
+          "id": "excerpt",
+          "source_id": "synthetic-paper",
+          "start_line": 10,
+          "end_line": 11,
+          "quote": "The encoder remains frozen.\nOnly the adapter is trained."
+        }
+      ]
+    },
+    {
+      "id": "case-03",
+      "question": "Which encoder does the proposed model use?",
+      "claim": "The proposed system uses a GRU encoder.",
+      "source_id": "synthetic-paper",
+      "evidence": [
+        {
+          "id": "excerpt",
+          "source_id": "synthetic-paper",
+          "start_line": 10,
+          "end_line": 11,
+          "quote": "The baseline uses BERT.\nOur proposed system uses a GRU encoder."
+        }
+      ]
+    },
+    {
+      "id": "case-04",
+      "question": "Which encoder does the proposed model use?",
+      "claim": "The proposed system uses BERT.",
+      "source_id": "synthetic-paper",
+      "evidence": [
+        {
+          "id": "excerpt",
+          "source_id": "synthetic-paper",
+          "start_line": 10,
+          "end_line": 11,
+          "quote": "The baseline uses BERT.\nOur proposed system uses a GRU encoder."
+        }
+      ]
+    },
+    {
+      "id": "case-05",
+      "question": "Where does the method improve results?",
+      "claim": "The method improves English accuracy.",
+      "source_id": "synthetic-paper",
+      "evidence": [
+        {
+          "id": "excerpt",
+          "source_id": "synthetic-paper",
+          "start_line": 10,
+          "end_line": 11,
+          "quote": "The method improves English accuracy.\nOn German, accuracy decreases."
+        }
+      ]
+    },
+    {
+      "id": "case-06",
+      "question": "Where does the method improve results?",
+      "claim": "The method improves accuracy in both English and German.",
+      "source_id": "synthetic-paper",
+      "evidence": [
+        {
+          "id": "excerpt",
+          "source_id": "synthetic-paper",
+          "start_line": 10,
+          "end_line": 11,
+          "quote": "The method improves English accuracy.\nOn German, accuracy decreases."
+        }
+      ]
+    },
+    {
+      "id": "case-07",
+      "question": "How many examples are used for training?",
+      "claim": "Training uses 20 examples.",
+      "source_id": "synthetic-paper",
+      "evidence": [
+        {
+          "id": "excerpt",
+          "source_id": "synthetic-paper",
+          "start_line": 10,
+          "end_line": 11,
+          "quote": "Training uses 20 examples.\nEvaluation uses 200 separate examples."
+        }
+      ]
+    },
+    {
+      "id": "case-08",
+      "question": "How many examples are used for training?",
+      "claim": "Training uses 200 examples.",
+      "source_id": "synthetic-paper",
+      "evidence": [
+        {
+          "id": "excerpt",
+          "source_id": "synthetic-paper",
+          "start_line": 10,
+          "end_line": 11,
+          "quote": "Training uses 20 examples.\nEvaluation uses 200 separate examples."
+        }
+      ]
+    },
+    {
+      "id": "case-09",
+      "question": "What are the reported scores?",
+      "claim": "The F1 score is 82 percent.",
+      "source_id": "synthetic-paper",
+      "evidence": [
+        {
+          "id": "excerpt",
+          "source_id": "synthetic-paper",
+          "start_line": 10,
+          "end_line": 11,
+          "quote": "F1 is 82 percent.\nAccuracy is 71 percent."
+        }
+      ]
+    },
+    {
+      "id": "case-10",
+      "question": "What are the reported scores?",
+      "claim": "Accuracy is 82 percent.",
+      "source_id": "synthetic-paper",
+      "evidence": [
+        {
+          "id": "excerpt",
+          "source_id": "synthetic-paper",
+          "start_line": 10,
+          "end_line": 11,
+          "quote": "F1 is 82 percent.\nAccuracy is 71 percent."
+        }
+      ]
+    },
+    {
+      "id": "case-11",
+      "question": "What relation was observed?",
+      "claim": "Longer inputs were associated with lower accuracy.",
+      "source_id": "synthetic-paper",
+      "evidence": [
+        {
+          "id": "excerpt",
+          "source_id": "synthetic-paper",
+          "start_line": 10,
+          "end_line": 11,
+          "quote": "In this observational study, longer inputs correlate with lower accuracy.\nNo controlled intervention was performed."
+        }
+      ]
+    },
+    {
+      "id": "case-12",
+      "question": "What relation was observed?",
+      "claim": "Longer inputs caused the lower accuracy.",
+      "source_id": "synthetic-paper",
+      "evidence": [
+        {
+          "id": "excerpt",
+          "source_id": "synthetic-paper",
+          "start_line": 10,
+          "end_line": 11,
+          "quote": "In this observational study, longer inputs correlate with lower accuracy.\nNo controlled intervention was performed."
+        }
+      ]
+    },
+    {
+      "id": "case-13",
+      "question": "What hardware information is available?",
+      "claim": "This excerpt does not describe training hardware.",
+      "source_id": "synthetic-paper",
+      "evidence": [
+        {
+          "id": "excerpt",
+          "source_id": "synthetic-paper",
+          "start_line": 10,
+          "end_line": 11,
+          "quote": "This excerpt lists dropout and learning rate.\nTraining hardware is not described in this excerpt."
+        }
+      ]
+    },
+    {
+      "id": "case-14",
+      "question": "What hardware information is available?",
+      "claim": "The study did not use GPUs.",
+      "source_id": "synthetic-paper",
+      "evidence": [
+        {
+          "id": "excerpt",
+          "source_id": "synthetic-paper",
+          "start_line": 10,
+          "end_line": 11,
+          "quote": "This excerpt lists dropout and learning rate.\nTraining hardware is not described in this excerpt."
+        }
+      ]
+    },
+    {
+      "id": "case-15",
+      "question": "Has multilingual training been completed?",
+      "claim": "Multilingual training is planned as future work.",
+      "source_id": "synthetic-paper",
+      "evidence": [
+        {
+          "id": "excerpt",
+          "source_id": "synthetic-paper",
+          "start_line": 10,
+          "end_line": 11,
+          "quote": "We plan multilingual training as future work.\nAll experiments reported here used English-only training."
+        }
+      ]
+    },
+    {
+      "id": "case-16",
+      "question": "Has multilingual training been completed?",
+      "claim": "Multilingual training was completed in the reported experiments.",
+      "source_id": "synthetic-paper",
+      "evidence": [
+        {
+          "id": "excerpt",
+          "source_id": "synthetic-paper",
+          "start_line": 10,
+          "end_line": 11,
+          "quote": "We plan multilingual training as future work.\nAll experiments reported here used English-only training."
+        }
+      ]
+    }
+  ]
+}
