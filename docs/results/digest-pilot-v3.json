@@ -1,0 +1,132 @@
+{
+  "dataset": "arxivdigestables-values-adapted",
+  "split": "dev",
+  "summaries": {
+    "grep": {
+      "tasks": 2,
+      "completed": 2,
+      "answer_token_f1": 0.009615384615384616,
+      "answer_token_f1_n": 2,
+      "read_paragraph_recall": null,
+      "read_paragraph_recall_n": 0,
+      "cited_paragraph_overlap_f1": null,
+      "cited_paragraph_overlap_f1_n": 0,
+      "tokens_used": 32459.0,
+      "tokens_used_n": 2,
+      "elapsed_seconds": 60.391000000000005,
+      "elapsed_seconds_n": 2
+    },
+    "grep-ledger": {
+      "tasks": 2,
+      "completed": 2,
+      "answer_token_f1": 0.009615384615384616,
+      "answer_token_f1_n": 2,
+      "read_paragraph_recall": null,
+      "read_paragraph_recall_n": 0,
+      "cited_paragraph_overlap_f1": null,
+      "cited_paragraph_overlap_f1_n": 0,
+      "tokens_used": 36332.0,
+      "tokens_used_n": 2,
+      "elapsed_seconds": 79.844,
+      "elapsed_seconds_n": 2
+    },
+    "rag": {
+      "tasks": 2,
+      "completed": 2,
+      "answer_token_f1": 0.009615384615384616,
+      "answer_token_f1_n": 2,
+      "read_paragraph_recall": null,
+      "read_paragraph_recall_n": 0,
+      "cited_paragraph_overlap_f1": null,
+      "cited_paragraph_overlap_f1_n": 0,
+      "tokens_used": 31640.0,
+      "tokens_used_n": 2,
+      "elapsed_seconds": 53.6255,
+      "elapsed_seconds_n": 2
+    },
+    "rag-once": {
+      "tasks": 2,
+      "completed": 2,
+      "answer_token_f1": 0.0,
+      "answer_token_f1_n": 2,
+      "read_paragraph_recall": null,
+      "read_paragraph_recall_n": 0,
+      "cited_paragraph_overlap_f1": null,
+      "cited_paragraph_overlap_f1_n": 0,
+      "tokens_used": 5483.5,
+      "tokens_used_n": 2,
+      "elapsed_seconds": 9.4375,
+      "elapsed_seconds_n": 2
+    }
+  },
+  "limitations": [
+    "Task-macro token F1; not a semantic correctness judge or published leaderboard score.",
+    "Paragraph overlap counts a located portion; it does not establish entailment.",
+    "ArxivDIGESTables evidence labels remain pending, so evidence scores are null.",
+    "Missing and failed runs remain in the answer-score denominator."
+  ],
+  "protocol": {
+    "dataset": "arxivdigestables-values-adapted",
+    "split": "dev",
+    "inputs_sha256": "a93c727319c018abcc923643d6002da99807c947d2b14bd5fcd62ed11c56ecd0",
+    "model": "qwen3.5-27b",
+    "extra_body": {
+      "enable_thinking": false
+    },
+    "embedding_model": "text-embedding-v4",
+    "retrieval": "local_bm25_dense_rrf",
+    "max_tokens": 40000,
+    "max_steps": 14,
+    "methods": [
+      "grep",
+      "grep-ledger",
+      "rag",
+      "rag-once"
+    ],
+    "task_ids": [
+      "digest-6b7fbba6-eced-41ab-ab6c-e467247e1277",
+      "digest-df560e34-f675-447c-b112-dbc47859244d"
+    ],
+    "started_utc": "2026-11-04T13:05:25.566396+00:00",
+    "code_sha256": {
+      "__init__.py": "00990f0c5216aa4b48ae2175ee82c617dbd93dbbe6179bbd4ae3bed4bf154b37",
+      "analysis.py": "6e801f1f151fbc4f6d8f38a0edd0c646ee7a3edb9e61b2229fe6bf889850baf5",
+      "analysis_worker.py": "f6ae1c577b7db332ef69041187fe5bd38d10a0e7991cdd716c04ba7b17de23b3",
+      "api.py": "e1a4b23ba8ac3d0f259be97f580046baaf51e040db9aeba1f76580dc687f6fe6",
+      "benchmarks\\__init__.py": "8253402da7e4c0f5a5d0463034ba39c91691f3f3af421b36522552ebbf7c1e75",
+      "benchmarks\\download.py": "a81c7653185c943316f2e1bfd740ca1be5e6413d9acd254532361bc52fec498b",
+      "benchmarks\\prepare.py": "48a4c7c89adf42975321fb58f63f3f534c680118b2e327027dab290a661697f9",
+      "benchmarks\\prepare_digestables.py": "6cb7ebe4d90aa8d18330f8508fc5f1a7cd3ee8180fc646ce8774e0e07dbf54cc",
+      "benchmarks\\run.py": "cd3251ead3443946f5e9cd6043da949eb2185b95138d76f235339260ddf85dcb",
+      "benchmarks\\score.py": "abbcba3312a46b76e961738ddd1edf0bf06913d4a2184077f63792563e14902b",
+      "cli.py": "73dfdc052046746722406af71d6800dca9336157c456889637d8bbef89d60490",
+      "config.py": "b1a9972cab32e6ecf3ca32640fe41d13616e0e154f092d9f315a8f9455c04de7",
+      "datasets.py": "0a2d0a9226b12e851884f24d0239b0ba18f412a210522dac6ef8808d066ad11f",
+      "discovery.py": "85e3ce9827e24363645fbf323a1e16fffbe6992d496842aacccb6bb917688586",
+      "evaluation.py": "d63b23c1672c89c86897613de3851340617c1fc4a043f8528e2c652f6b1d4a0f",
+      "ingest.py": "8e7fcdc3e0e707be2ec25effa536d94e424d452e995421455a8f29446a992046",
+      "lab_api.py": "8fb2cefdae85bf45383d51943bde31010c545c42a6030fb549659b79a41b72ec",
+      "lab_runtime.py": "2d1fdd640f68178993b25bd4476cf6e33a4058b077083e39fe4bc9d0aa26ef3a",
+      "lab_schemas.py": "55bd4049dba5cd9c83d3f7ecba93913a8b5d3e7959bc266b7399708f2b7e91b2",
+      "legacy_rag.py": "a54cf5986c89b34917e6a920faae09df69c752b0371ae2bc035a7393e8bdb3c1",
+      "local_rag.py": "88b0f65b1519f88542a05822bff1f29b4dd1a1574604b5e0a27bbe56bb9fa75d",
+      "lstm_model.py": "f00c21d3b1b5ee0c0934a1a1d3d867b0bc7535f21ffe35856d3ca730bf446731",
+      "memory.py": "c48c2bab42ce1705b41f6285d9215e3299e0f32d0dd3e51fb2c404b938d1ec4f",
+      "providers.py": "80396ea3d4884e6e88cd9b098253000cbe6ac9cea893999ec354f8648ac011b1",
+      "retrieval.py": "56f19dced93333e67bf2ddfe447e3bccfaa1cb1c6ce6a3652eb2c8c4be3b8763",
+      "runtime.py": "29d50909f43483e01ff34257a12596a18fb2966a1c11b9aafde5c41c57afb18b",
+      "schemas.py": "eb5eb918cca1704fbd9b6f4fa208bc689425a2b8cfde830296acf9219e90e7cb",
+      "store.py": "5bc6e4c046e4f85cb0ca23c3bed93ae33f85fd1fc0d9309a272f77583f2808da",
+      "tools.py": "7610761ca6302e891b0087cd89b5db7804aaef548baf1fabf473a79e684c07dc",
+      "translation.py": "36ab9c97d1f065f0136585fc41e7b9df7cbdbc0ade1509a222971db3d9f29262"
+    }
+  },
+  "usage": {
+    "embedding_calls": 7,
+    "embedding_tokens": 70,
+    "measured_llm_tokens": 211829,
+    "missing_usage_runs": 0
+  },
+  "ledger_runs_with_pins": 0,
+  "ledger_runs_skipping_for_budget": 2
+}

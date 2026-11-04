@@ -1,0 +1,12 @@
+{
+  "description": "Synthetic smoke fixtures only. These are not actual scientific publications or a generalization benchmark.",
+  "documents": [
+    {"id": "a", "title": "Synthetic method A", "kind": "paper", "blocks": [{"text": "Training configuration\nbatch size = 64\nThe evaluation dataset is FixtureQA.", "page": 2}]},
+    {"id": "b", "title": "Synthetic method B", "kind": "paper", "blocks": [{"text": "The retriever is removed in this ablation.\nPerformance is measured on FixtureQA.", "page": 4}]}
+  ],
+  "cases": [
+    {"id": "exact_configuration", "query": "batch size", "gold_source_ids": ["a"]},
+    {"id": "shared_dataset", "query": "FixtureQA", "gold_source_ids": ["a", "b"]},
+    {"id": "paraphrase_gap", "query": "without retrieval", "gold_source_ids": ["b"]}
+  ]
+}
