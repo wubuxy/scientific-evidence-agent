@@ -1,0 +1,159 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="1320" viewBox="0 0 1440 1320" role="img" aria-labelledby="title desc">
+  <title id="title">Scientific Evidence Agent：科研问答与离线评测流程</title>
+  <desc id="desc">问题与论文进入工作区，解析为带来源和行号的正文。Qwen3.5-27B 在预算内调度 Grep 或混合 RAG，按行回读证据，必要时继续检索，最后验证引用并生成待人工审核的报告。独立评测使用冻结数据；生成进程只读取 inputs，gold 只进入评分进程。证据台账仍为评测原型。</desc>
+  <defs>
+    <linearGradient id="canvas" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#f5f8ff"/><stop offset="1" stop-color="#edf5f4"/>
+    </linearGradient>
+    <linearGradient id="agent" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#293c94"/><stop offset="1" stop-color="#4769d8"/>
+    </linearGradient>
+    <filter id="shadow" x="-15%" y="-15%" width="130%" height="145%">
+      <feDropShadow dx="0" dy="5" stdDeviation="9" flood-color="#24334d" flood-opacity="0.07"/>
+    </filter>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M1 1 L9 5 L1 9" fill="none" stroke="#7b8ca7" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+    </marker>
+    <marker id="teal-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M1 1 L9 5 L1 9" fill="none" stroke="#15888b" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+    </marker>
+    <style>
+      text { font-family: "Microsoft YaHei", "Noto Sans SC", "PingFang SC", sans-serif; }
+      .ink { fill: #172a46; }
+      .muted { fill: #5c6d83; }
+      .eyebrow { font-size: 18px; font-weight: 700; letter-spacing: 2px; }
+      .heading { font-size: 27px; font-weight: 700; }
+      .body { font-size: 21px; }
+      .small { font-size: 19px; }
+      .connector { fill: none; stroke: #7b8ca7; stroke-width: 2.5; marker-end: url(#arrow); }
+      .loop { fill: none; stroke: #15888b; stroke-width: 2.5; stroke-dasharray: 7 7; marker-end: url(#teal-arrow); }
+      .icon { fill: none; stroke: currentColor; stroke-width: 2.3; stroke-linecap: round; stroke-linejoin: round; }
+    </style>
+  </defs>
+  <rect width="1440" height="1320" rx="30" fill="url(#canvas)"/>
+  <path d="M1065 0H1440V194C1285 177 1202 91 1065 0Z" fill="#e9eefc"/>
+  <rect x="56" y="47" width="6" height="34" rx="3" fill="#4162cc"/>
+  <text x="78" y="71" class="eyebrow" fill="#3e5cc0">SCIENTIFIC EVIDENCE AGENT</text>
+  <text x="56" y="131" font-size="43" font-weight="700" class="ink">从论文到可追溯的科研回答</text>
+  <text x="58" y="171" font-size="22" class="muted">先定位，再阅读，后引用。让检索过程与实验结果都可以检查。</text>
+  <rect x="1132" y="63" width="252" height="45" rx="22.5" fill="#fff" stroke="#dce3ef"/>
+  <circle cx="1156" cy="85" r="5" fill="#b17b23"/>
+  <text x="1171" y="92" class="small" fill="#7b591e">当前阶段 · 科研原型</text>
+
+  <!-- Shared inputs and source representation -->
+  <g filter="url(#shadow)">
+    <rect x="56" y="211" width="346" height="155" rx="18" fill="#fff" stroke="#dfe6ef"/>
+    <rect x="458" y="211" width="484" height="155" rx="18" fill="#fff" stroke="#dfe6ef"/>
+    <rect x="998" y="211" width="386" height="155" rx="18" fill="#fff" stroke="#dfe6ef"/>
+  </g>
+  <g class="icon" color="#4162cc" transform="translate(83 239)">
+    <path d="M4 0H23L31 8V35H4Z M23 0V9H31 M10 17H24 M10 24H24"/>
+  </g>
+  <text x="131" y="263" class="heading ink">研究输入</text>
+  <text x="84" y="306" class="body muted">问题 · 目标论文 · 比较字段</text>
+  <text x="84" y="339" class="small muted">PDF / TXT / Markdown / PPTX</text>
+  <path d="M405 288H451" class="connector"/>
+  <g class="icon" color="#4162cc" transform="translate(488 241)">
+    <path d="M0 3H30 M0 14H22 M0 25H30 M36 3H39 M29 14H39 M36 25H39"/>
+  </g>
+  <text x="545" y="263" class="heading ink">解析与定位</text>
+  <text x="487" y="306" class="body muted">提取原生文本 → 标准正文与行号</text>
+  <text x="487" y="339" class="small muted">保留来源 / 页码，Grep 与 RAG 共用正文</text>
+  <path d="M946 288H991" class="connector"/>
+  <g class="icon" color="#4162cc" transform="translate(1028 239)">
+    <ellipse cx="16" cy="5" rx="16" ry="5"/><path d="M0 5V28C0 35 32 35 32 28V5 M0 16C0 23 32 23 32 16"/>
+  </g>
+  <text x="1077" y="263" class="heading ink">工作区资料库</text>
+  <text x="1027" y="306" class="body muted">SQLite · 资料与证据记录</text>
+  <text x="1027" y="339" class="small muted">权限隔离 / 运行轨迹 / 本地索引</text>
+
+  <!-- Runtime: tool orchestration, retrieval, reading, delivery -->
+  <rect x="56" y="419" width="1328" height="429" rx="22" fill="#fff" stroke="#dfe6ef"/>
+  <path d="M1191 367V383Q1191 395 1179 395H347Q335 395 335 407V479" class="connector"/>
+  <text x="83" y="459" class="eyebrow" fill="#4162cc">01 / 在线研究流程</text>
+  <text x="851" y="459" class="small muted">React 工作台 → FastAPI → 有预算的 Agent</text>
+
+  <rect x="80" y="487" width="279" height="230" rx="18" fill="url(#agent)"/>
+  <circle cx="113" cy="525" r="15" fill="#fff" fill-opacity="0.15"/>
+  <text x="113" y="531" font-size="17" text-anchor="middle" fill="#fff" font-weight="700">1</text>
+  <text x="139" y="534" class="heading" fill="#fff">规划与调度</text>
+  <text x="106" y="580" font-size="25" font-weight="600" fill="#fff">Qwen3.5-27B</text>
+  <text x="106" y="617" class="body" fill="#e0e8ff">百炼 API · 无需本地训练</text>
+  <path d="M106 637H333" stroke="#fff" stroke-opacity="0.2"/>
+  <text x="106" y="670" class="small" fill="#e0e8ff">明确论文与字段</text>
+  <text x="106" y="699" class="small" fill="#e0e8ff">约束 token / 步数 / 时间</text>
+  <path d="M363 602H407" class="connector"/>
+
+  <rect x="414" y="487" width="279" height="230" rx="18" fill="#f5f7ff" stroke="#dce3f7"/>
+  <circle cx="447" cy="525" r="15" fill="#e3e9fd"/>
+  <text x="447" y="531" font-size="17" text-anchor="middle" fill="#4162cc" font-weight="700">2</text>
+  <text x="473" y="534" class="heading ink">检索定位</text>
+  <rect x="435" y="555" width="237" height="64" rx="10" fill="#fff" stroke="#e1e7f4"/>
+  <text x="452" y="583" class="body" fill="#3455b9" font-weight="700">Grep</text>
+  <text x="452" y="607" font-size="18" class="muted">正则 / 分页 / 行号定位</text>
+  <rect x="435" y="629" width="237" height="67" rx="10" fill="#fff" stroke="#e1e7f4"/>
+  <text x="452" y="657" class="body" fill="#3455b9" font-weight="700">混合 RAG</text>
+  <text x="452" y="682" font-size="18" class="muted">BM25 + 向量 → RRF</text>
+  <path d="M697 602H741" class="connector"/>
+
+  <rect x="748" y="487" width="279" height="230" rx="18" fill="#f0f9f7" stroke="#d5ebe6"/>
+  <circle cx="781" cy="525" r="15" fill="#dcefe8"/>
+  <text x="781" y="531" font-size="17" text-anchor="middle" fill="#17786f" font-weight="700">3</text>
+  <text x="807" y="534" class="heading ink">原文回读</text>
+  <text x="774" y="579" class="body" fill="#17786f" font-weight="700">sources_read</text>
+  <text x="774" y="616" class="body muted">按行阅读相邻上下文</text>
+  <text x="774" y="651" class="body muted">记录本次 evidence ID</text>
+  <text x="774" y="686" class="small muted">收尾保留各已读窗口信息</text>
+  <path d="M1031 602H1075" class="connector"/>
+  <text x="1054" y="582" font-size="17" text-anchor="middle" class="muted">收尾</text>
+
+  <rect x="1082" y="487" width="279" height="230" rx="18" fill="#faf8f2" stroke="#e9e2d2"/>
+  <circle cx="1115" cy="525" r="15" fill="#f0e8d3"/>
+  <text x="1115" y="531" font-size="17" text-anchor="middle" fill="#8b6a29" font-weight="700">4</text>
+  <text x="1141" y="534" class="heading ink">引用与交付</text>
+  <text x="1108" y="579" class="body ink" font-weight="700">finish_report</text>
+  <text x="1108" y="616" class="body muted">校验结构与已读引用</text>
+  <text x="1108" y="651" class="body muted">结论 / 对照表 / 覆盖缺口</text>
+  <rect x="1105" y="668" width="233" height="31" rx="15" fill="#eee6d2"/>
+  <text x="1221" y="690" class="small" text-anchor="middle" fill="#795d25">报告交由研究者审核</text>
+
+  <path d="M888 721V758Q888 774 872 774H235Q219 774 219 758V722" class="loop"/>
+  <rect x="302" y="757" width="500" height="34" rx="17" fill="#fff"/>
+  <text x="552" y="780" font-size="20" text-anchor="middle" fill="#17786f">证据不足且预算允许 → 调整查询，继续检索</text>
+  <text x="84" y="822" class="small muted">说明：检索预览用于定位；只有本次回读的证据可用于报告引用。</text>
+
+  <!-- Offline benchmark: inputs/gold split is intentional -->
+  <rect x="56" y="878" width="1328" height="351" rx="22" fill="#fff" stroke="#dfe6ef"/>
+  <text x="83" y="921" class="eyebrow" fill="#15888b">02 / 离线评测流程</text>
+  <text x="800" y="921" class="small muted">复用检索与回读组件，评测短答案 / 固定字段</text>
+
+  <rect x="80" y="949" width="301" height="192" rx="16" fill="#f7f9fc" stroke="#e0e6ee"/>
+  <text x="104" y="987" class="heading ink">冻结公开数据</text>
+  <text x="104" y="1028" class="body muted">QASPER · 主评测轨道</text>
+  <text x="104" y="1062" class="small muted">ArxivDIGESTables · 待核验</text>
+  <text x="104" y="1110" class="small" fill="#506582">固定划分 / 版本 / SHA256</text>
+  <path d="M385 1038H430" class="connector"/>
+  <text x="408" y="1017" font-size="16" text-anchor="middle" fill="#506582">inputs</text>
+
+  <rect x="437" y="949" width="394" height="192" rx="16" fill="#f4f7ff" stroke="#dce3f7"/>
+  <text x="461" y="987" class="heading ink">生成进程只读取 inputs</text>
+  <text x="461" y="1028" class="body muted">Grep / Grep＋台账 / 多轮 RAG</text>
+  <text x="461" y="1062" class="body muted">单次 RAG · 同模型与预算上限</text>
+  <rect x="459" y="1081" width="350" height="40" rx="8" fill="#e7ecfb"/>
+  <text x="634" y="1108" class="small" text-anchor="middle" fill="#3c589d">输出：答案 / 引用 / 轨迹 / 用量</text>
+  <path d="M835 1038H880" class="connector"/>
+
+  <rect x="887" y="949" width="474" height="192" rx="16" fill="#f0f9f7" stroke="#d5ebe6"/>
+  <text x="912" y="987" class="heading ink">独立评分与核验</text>
+  <text x="912" y="1028" class="body muted">答案 F1 / 证据段落重叠 / 完成率</text>
+  <text x="912" y="1062" class="body muted">token 成本 / 耗时 / 失败记录</text>
+  <text x="912" y="1110" class="small" fill="#17786f">引用语义支持仍需独立评判与人工复核</text>
+
+  <path d="M230 1145V1177Q230 1187 240 1187H1114Q1124 1187 1124 1177V1146" class="loop"/>
+  <rect x="436" y="1168" width="480" height="34" rx="17" fill="#fff"/>
+  <text x="676" y="1192" font-size="20" text-anchor="middle" fill="#17786f">gold 仅传给评分进程，不提供给生成模型</text>
+
+  <circle cx="67" cy="1273" r="5" fill="#b17b23"/>
+  <text x="83" y="1280" class="small muted">证据台账仅为评测原型；开发集结果尚未证明方法优势。</text>
+  <text x="1383" y="1280" class="small" fill="#697b91" text-anchor="end">可追溯 ≠ 语义已核实</text>
+</svg>
