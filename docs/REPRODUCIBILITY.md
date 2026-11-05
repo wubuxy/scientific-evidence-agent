@@ -45,23 +45,21 @@ python -m pytest tests -q --junitxml=test-results/full.xml
 python -m pytest tests -q --without-rg --junitxml=test-results/without-rg.xml
 ```
 
-`--without-rg` 仅在当前测试进程中模拟无法发现 `rg`，不修改系统 PATH，也不卸载程序。只有标记为 `requires_rg` 的三个真实集成测试会跳过；字面降级、正则不可用错误，以及不依赖外部搜索的分支成本核算仍运行。
+`--without-rg` 仅在当前测试进程中模拟无法发现 `rg`，不修改系统 PATH，也不卸载程序。只有标记为 `requires_rg` 的五个真实集成测试会跳过；字面降级、正则不可用错误，以及不依赖外部搜索的分支成本核算仍运行。
 
 scipy 和 openpyxl 的检查发生在对应测试中。缺少 scipy 不会跳过 CSV、翻译、来源对齐、工作区隔离和任务取消测试；缺少 torch 仅影响 LSTM 测试。`pytest -q` 显示通过、跳过及原因，不把“收集数”写成“通过数”。
 
 ## 本地验证记录
 
-截至 2026-11-05，本机 Windows 验证如下，所有组合均收集 140 项：
+截至 2026-11-05，加入演示资料与完整评测链路检查后，本机 Windows 最新验证如下，所有组合均收集 163 项：
 
 | 环境 | 通过 | 跳过 | 失败 |
 |---|---:|---:|---:|
-| Python 3.10，干净核心依赖环境，含 rg | 127 | 13（统计、XLSX、LSTM） | 0 |
-| 同一核心环境，模拟缺少 rg | 124 | 16（上述 13 项加 3 项 rg 集成） | 0 |
-| Python 3.13，干净分析依赖环境，含 rg，无 torch | 139 | 1（LSTM） | 0 |
-| Python 3.13，同一干净环境补齐 CPU torch 2.15.0 | 140 | 0 | 0 |
-| Python 3.10，已有完整依赖环境，含 rg 和 CPU torch | 140 | 0 | 0 |
+| Python 3.10，干净核心依赖环境，含 rg | 150 | 13（统计、XLSX、LSTM） | 0 |
+| 同一核心环境，模拟缺少 rg | 145 | 18（上述 13 项加 5 项 rg 集成） | 0 |
+| Python 3.13，干净完整环境，含 rg 和 CPU torch 2.15.0 | 163 | 0 | 0 |
 
-干净环境的核心和分析依赖按提交的约束文件安装，CPU torch 从官方索引补齐；已有完整环境的 140 项结果单独列出。机器可读结果及完整环境的主要包版本见 [validation-summary.json](results/validation-summary.json) 的 `checks`。模型质量实验仍沿用原有结果，本轮工程回归不增加独立评测题数。
+干净环境的核心和分析依赖按提交的约束文件安装，CPU torch 从官方索引补齐。140、142、152 项的历史矩阵保存在机器记录的 `offline_test_profiles_before_demo`、`offline_test_profiles_before_agent_evals`、`offline_test_profiles_before_eval_completion` 中；最新结果和包版本见 [validation-summary.json](results/validation-summary.json) 的 `checks`。端到端 CLI 使用本地假模型端点，覆盖两轮五组分支、两次生产报告、六个声明／单元格和显式合成标注校准，不产生云模型费用。模型质量实验仍沿用原有结果，不增加独立评测题数。
 
 ## 持续集成
 
@@ -73,8 +71,11 @@ scipy 和 openpyxl 的检查发生在对应测试中。缺少 scipy 不会跳过
 | 完整后端 | Ubuntu / Python 3.13；安装分析依赖和 CPU PyTorch |
 | 缺少 rg | Ubuntu 核心环境再次执行 `--without-rg` |
 | 前端 | Node 24；`npm ci`、类型检查、生产构建 |
+| Docker demo | 构建与健康启动、无模型的论文导入 / 检索检查、配置初始化幂等性、重启持久化 |
 
 后端作业先安装并检查真实 `rg`，再运行回归。每次保存 JUnit XML 和已安装版本，作为保留 14 天的 Actions artifact。配置完成与 GitHub 托管运行通过分别记录；本地结果不能替代尚未执行的远端 CI 状态。
+
+提交 `6ecbf6f` 的原四项 GitHub 作业已通过：[运行记录](https://github.com/wubuxy/scientific-evidence-agent/actions/runs/42020298737)。新增的 Docker demo 作业已完成本地等价检查，托管执行状态单独记录。Docker 启动与回放边界见 [演示说明](DEMO.md)。
 
 更新依赖约束时，在 `backend` 执行以下命令并重新验证环境矩阵：
 

@@ -3,12 +3,65 @@
   "model": "qwen3.5-27b",
   "scope": "development runs and engineering validation; frozen test set reserved",
   "checks": {
-    "offline_tests_passed": 140,
+    "offline_tests_passed": 163,
     "frontend_typecheck": "passed",
     "frontend_production_build": "passed",
     "live_report_api": "completed",
-    "offline_tests_collected": 140,
+    "offline_tests_collected": 163,
     "offline_test_profiles": [
+      {
+        "profile": "core",
+        "platform": "Windows",
+        "python": "3.10.20",
+        "dependencies": "requirements-research.txt + constraints-ci.txt",
+        "collected": 163,
+        "passed": 150,
+        "skipped": 13,
+        "failed": 0,
+        "errors": 0
+      },
+      {
+        "profile": "core-without-rg",
+        "platform": "Windows",
+        "python": "3.10.20",
+        "dependencies": "core; rg discovery disabled by --without-rg",
+        "collected": 163,
+        "passed": 145,
+        "skipped": 18,
+        "failed": 0,
+        "errors": 0
+      },
+      {
+        "profile": "full-locked",
+        "platform": "Windows",
+        "python": "3.13.13",
+        "dependencies": "core + analysis under constraints-ci.txt; CPU torch from the official index",
+        "collected": 163,
+        "passed": 163,
+        "skipped": 0,
+        "failed": 0,
+        "errors": 0,
+        "packages": {
+          "fastapi": "0.162.0",
+          "numpy": "2.5.4",
+          "scipy": "1.18.1",
+          "openpyxl": "3.1.5",
+          "torch": "2.15.0+cpu",
+          "pydantic": "2.14.3",
+          "pytest": "9.2.0",
+          "pytest-asyncio": "1.4.1.post1",
+          "openai": "3.46.0"
+        }
+      }
+    ],
+    "ci_workflow": ".github/workflows/ci.yml",
+    "ci_status": "Local checks passed; hosted status is published by GitHub Actions for each commit.",
+    "workflow_actionlint": "passed locally; actionlint 1.7.12 official Docker image",
+    "reproducibility_guide": "docs/REPRODUCIBILITY.md",
+    "frontend_build_note": "npm ci, explicit TypeScript check, and production build passed; 558.01 kB analysis chunk warning remains",
+    "dependency_constraints_sha256": "f2e946c20ebb1c80ab79be44342d045f6ff55236bb364a515fae6a63e254a1a2",
+    "reproducibility_note": "Windows core/full/no-rg matrices and actual evaluation CLIs passed. Endpoint data and calibration labels are explicitly synthetic software fixtures. Existing real-model experiments are unchanged.",
+    "offline_test_profiles_before_demo": [
       {
         "profile": "core",
         "platform": "Windows",
@@ -76,13 +129,132 @@
         }
       }
     ],
-    "ci_workflow": ".github/workflows/ci.yml",
-    "ci_status": "configured; GitHub-hosted run not yet executed",
-    "workflow_actionlint": "passed locally; actionlint 1.7.12 official Docker image",
-    "reproducibility_guide": "docs/REPRODUCIBILITY.md",
-    "frontend_build_note": "npm ci, explicit TypeScript check, and production build passed; 558.01 kB analysis chunk warning remains",
-    "dependency_constraints_sha256": "f2e946c20ebb1c80ab79be44342d045f6ff55236bb364a515fae6a63e254a1a2",
-    "reproducibility_note": "Local Windows results from 2026-11-05; GitHub-hosted Linux/Windows CI has not run yet. Research experiment results were not rerun."
+    "ci_previous_run": {
+      "commit": "6ecbf6f5e6856125b0afdb367d089680bfa792df",
+      "conclusion": "success",
+      "jobs": 4,
+      "url": "https://github.com/wubuxy/scientific-evidence-agent/actions/runs/42020298737"
+    },
+    "docker_demo": {
+      "build": "passed",
+      "startup": "healthy",
+      "http_smoke": "passed",
+      "config_initialization_idempotent": "passed",
+      "restart_persistence": "passed",
+      "model_calls": 0,
+      "local_url": "http://127.0.0.1:5183/demo",
+      "browser_visual_review": "not completed: Windows browser URL could not be established by the environment",
+      "gif_recording": "not completed"
+    },
+    "offline_test_profiles_before_agent_evals": [
+      {
+        "profile": "core",
+        "platform": "Windows",
+        "python": "3.10.20",
+        "dependencies": "requirements-research.txt + constraints-ci.txt",
+        "collected": 142,
+        "passed": 129,
+        "skipped": 13,
+        "failed": 0,
+        "errors": 0
+      },
+      {
+        "profile": "core-without-rg",
+        "platform": "Windows",
+        "python": "3.10.20",
+        "dependencies": "core; rg discovery disabled by --without-rg",
+        "collected": 142,
+        "passed": 126,
+        "skipped": 16,
+        "failed": 0,
+        "errors": 0
+      },
+      {
+        "profile": "full-locked",
+        "platform": "Windows",
+        "python": "3.13.13",
+        "dependencies": "core + analysis under constraints-ci.txt; CPU torch from the official index",
+        "collected": 142,
+        "passed": 142,
+        "skipped": 0,
+        "failed": 0,
+        "errors": 0,
+        "packages": {
+          "fastapi": "0.162.0",
+          "numpy": "2.5.4",
+          "scipy": "1.18.1",
+          "openpyxl": "3.1.5",
+          "torch": "2.15.0+cpu",
+          "pydantic": "2.14.3",
+          "pytest": "9.2.0",
+          "pytest-asyncio": "1.4.1.post1",
+          "openai": "3.46.0"
+        }
+      }
+    ],
+    "automatic_agent_eval": {
+      "module": "research_backend.benchmarks.trials",
+      "generation_scope": "short-answer repeats, five paired repair branches, production workbench report Runtime",
+      "offline_tests": 21,
+      "local_mock_endpoint_integration": "passed",
+      "cli_acceptance": {
+        "paired_repair_attempts": 10,
+        "production_report_attempts": 2,
+        "reviewed_units": 6,
+        "loopback_model_requests": 28
+      },
+      "physical_and_logical_costs": "counted separately; cancellation preserves known usage",
+      "human_calibration": "two annotators plus adjudication; blank labels rejected",
+      "new_cloud_model_calls": 0,
+      "new_training_runs": 0,
+      "workbench_full_report_semantic_quality": "candidate review executable; no new human-labelled accuracy result"
+    },
+    "offline_test_profiles_before_eval_completion": [
+      {
+        "profile": "core",
+        "platform": "Windows",
+        "python": "3.10.20",
+        "dependencies": "requirements-research.txt + constraints-ci.txt",
+        "collected": 152,
+        "passed": 139,
+        "skipped": 13,
+        "failed": 0,
+        "errors": 0
+      },
+      {
+        "profile": "core-without-rg",
+        "platform": "Windows",
+        "python": "3.10.20",
+        "dependencies": "core; rg discovery disabled by --without-rg",
+        "collected": 152,
+        "passed": 136,
+        "skipped": 16,
+        "failed": 0,
+        "errors": 0
+      },
+      {
+        "profile": "full-locked",
+        "platform": "Windows",
+        "python": "3.13.13",
+        "dependencies": "core + analysis under constraints-ci.txt; CPU torch from the official index",
+        "collected": 152,
+        "passed": 152,
+        "skipped": 0,
+        "failed": 0,
+        "errors": 0,
+        "packages": {
+          "fastapi": "0.162.0",
+          "numpy": "2.5.4",
+          "scipy": "1.18.1",
+          "openpyxl": "3.1.5",
+          "torch": "2.15.0+cpu",
+          "pydantic": "2.14.3",
+          "pytest": "9.2.0",
+          "pytest-asyncio": "1.4.1.post1",
+          "openai": "3.46.0"
+        }
+      }
+    ]
   },
   "datasets": {
     "qasper": {

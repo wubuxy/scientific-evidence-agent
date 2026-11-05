@@ -148,6 +148,8 @@ async def run_case(task, documents, settings, method, directory, embedder, max_t
     ledger_attempts, ledger_rejected_reads = {}, set()
     last_pin_error, last_report_error = None, None
     used, calibration, result = 0, 1.0, None
+    cancelled = False
+    model_calls_attempted, unknown_model_usage = 0, False
     model = model or ChatModel(settings)
 
     async def execute(name, arguments):
@@ -228,8 +230,14 @@ async def run_case(task, documents, settings, method, directory, embedder, max_t
                 for eid in pending:
                     ledger_attempts[eid] = ledger_attempts.get(eid, 0) + 1
             sent = json.loads(json.dumps(messages))
-            response = await model.complete(messages, active, budget)
+            model_calls_attempted += 1
+            try:
+                response = await model.complete(messages, active, budget)
+            except (Exception, asyncio.CancelledError):
+                unknown_model_usage = True
+                raise
             if response.get("tokens") is None:
+                unknown_model_usage = True
                 raise ValueError("Benchmark requires measured provider token usage")
             used += response["tokens"]
             if response.get("prompt_tokens"):
@@ -274,16 +282,22 @@ async def run_case(task, documents, settings, method, directory, embedder, max_t
                 break
         if status != "completed" and error is None:
             error = "max_steps"
+    except asyncio.CancelledError:
+        error, cancelled = "cancelled", True
     except Exception as exc:
         error = type(exc).__name__  # SDK messages can include sensitive request details.
     reverse = {v: k for k, v in source_map.items()}
     read_exports = [{k: e[k] for k in ("id", "quote", "start_line", "end_line")} | {"source_id": reverse[e["source_id"]]} for e in reads.values()]
     prediction = dict(task_id=task["id"], status=status, error=error, method=method, model=settings.llm_model,
-        answers=(result or {}).get("answers", []), reads=read_exports, tokens_used=used,
-        elapsed_seconds=round(time.monotonic()-started, 3), model_calls=len(trace), pinned_targets=len(ledger),
+        answers=(result or {}).get("answers", []), reads=read_exports,
+        tokens_used=None if unknown_model_usage else used, known_tokens_used=used,
+        elapsed_seconds=round(time.monotonic()-started, 3), model_calls=model_calls_attempted,
+        completed_model_calls=len(trace), pinned_targets=len(ledger),
         ledger_skipped_budget=ledger_skipped_budget, ledger_rejected_reads=len(ledger_rejected_reads))
     (directory / "trace.json").write_text(json.dumps(trace, ensure_ascii=False, indent=2), encoding="utf-8")
     (directory / "prediction.json").write_text(json.dumps(prediction, ensure_ascii=False, indent=2), encoding="utf-8")
+    if cancelled:
+        raise asyncio.CancelledError()
     return prediction
 
 
@@ -320,6 +334,11 @@ async def run(args):
         retrieval="local_bm25_dense_rrf", max_tokens=args.max_tokens, max_steps=args.max_steps,
         methods=args.methods, task_ids=[t["id"] for t in tasks], started_utc=__import__("datetime").datetime.now(__import__("datetime").timezone.utc).isoformat(),
         code_sha256={str(p.relative_to(code_root)): sha256(p) for p in sorted(code_root.rglob("*.py"))})
+    if any(m.startswith("repair-") for m in args.methods):
+        from .repair_arms import POLICY
+        if any(len(t["source_ids"]) != 1 or len(t["targets"]) != 1 for t in tasks):
+            raise ValueError("Repair study requires one paper and target per task")
+        protocol["repair_policy"] = POLICY
     (args.out / "protocol.json").write_text(json.dumps(protocol, indent=2), encoding="utf-8")
     documents = {d["id"]: d for d in inputs["documents"]}
     embedder = CachedEmbedder(settings, args.cache or args.out / "embedding-cache")
@@ -331,20 +350,60 @@ async def run(args):
             directory = args.out / method / task["id"]
             directory.mkdir(parents=True)
             try:
-                result = await asyncio.wait_for(run_case(task, documents, settings, method, directory, embedder,
-                                                        args.max_tokens, args.max_steps), timeout=args.max_seconds)
+                if method.startswith("report-"):
+                    from .reports import run_report
+                    operation = run_report(task, documents, settings, method, directory, embedder,
+                                           args.max_tokens, args.max_steps, args.max_seconds)
+                else:
+                    operation = run_case(task, documents, settings, method, directory, embedder,
+                                         args.max_tokens, args.max_steps)
+                result = await asyncio.wait_for(operation, timeout=args.max_seconds + 5)
             except Exception as exc:
-                result = dict(task_id=task["id"], method=method, status="failed", error=type(exc).__name__,
-                              answers=[], reads=[], tokens_used=None, elapsed_seconds=None)
+                saved = directory / "prediction.json"
+                result = (json.loads(saved.read_text("utf-8")) if saved.exists() else
+                    dict(task_id=task["id"], method=method, status="failed", error=type(exc).__name__,
+                         answers=[], reads=[], tokens_used=None, elapsed_seconds=None))
                 (directory / "prediction.json").write_text(json.dumps(result), encoding="utf-8")
             predictions.append(result)
             with (args.out / "predictions.jsonl").open("a", encoding="utf-8") as handle:
                 handle.write(json.dumps(result, ensure_ascii=False) + "\n")
             print(json.dumps({k: result.get(k) for k in ("task_id", "method", "status", "tokens_used", "error")}), flush=True)
 
-    await asyncio.gather(*(one(task, method) for task in tasks for method in args.methods))
+    async def repair_group(task):
+        from .repair_arms import BASE_FRACTION, run_branches
+        async with semaphore:
+            methods = [m for m in args.methods if m.startswith("repair-")]
+            directory = args.out / "_shared" / task["id"]
+            directory.mkdir(parents=True)
+            async def execute():
+                try:
+                    base = await asyncio.wait_for(run_case(task, documents, settings, "grep", directory, embedder,
+                        int(args.max_tokens * BASE_FRACTION), args.max_steps),timeout=args.max_seconds)
+                except Exception as exc:
+                    saved = directory/"prediction.json"
+                    base = (json.loads(saved.read_text("utf-8")) if saved.exists() else
+                        dict(task_id=task["id"],status="failed",error=type(exc).__name__,
+                             answers=[],reads=[],tokens_used=None,elapsed_seconds=None))
+                return await run_branches(task, documents, settings, base, methods, args.out, args.max_tokens,max_seconds=args.max_seconds)
+            try:
+                results = await execute()
+            except Exception as exc:
+                results = [dict(task_id=task["id"], method=m, status="failed", error=type(exc).__name__,
+                                answers=[], reads=[], tokens_used=None, elapsed_seconds=None) for m in methods]
+            for result in results:
+                predictions.append(result)
+                with (args.out / "predictions.jsonl").open("a", encoding="utf-8") as handle:
+                    handle.write(json.dumps(result, ensure_ascii=False) + "\n")
+                print(json.dumps({k:result.get(k) for k in ("task_id", "method", "status", "tokens_used", "intervention_status")}), flush=True)
+
+    await asyncio.gather(*(one(task, method) for task in tasks for method in args.methods if not method.startswith("repair-")),
+                         *(repair_group(task) for task in tasks if any(m.startswith("repair-") for m in args.methods)))
+    physical_repair = [json.loads(p.read_text("utf-8")) for p in (args.out/"_shared").glob("*/repair_usage.json")]
     (args.out / "usage.json").write_text(json.dumps(dict(embedding_calls=embedder.calls, embedding_tokens=embedder.tokens,
-        measured_llm_tokens=sum(p["tokens_used"] or 0 for p in predictions),
+        measured_llm_tokens=sum(p.get("known_tokens_used", p["tokens_used"]) or 0 for p in predictions if not p["method"].startswith("repair-"))
+                           +sum(p["known_measured_tokens"] for p in physical_repair),
+        logical_policy_tokens=sum(p.get("known_tokens_used", p["tokens_used"]) or 0 for p in predictions),
+        physical_repair_usage=physical_repair,
         missing_usage_runs=sum(p["tokens_used"] is None for p in predictions)), indent=2), encoding="utf-8")
 
 
@@ -353,7 +412,8 @@ if __name__ == "__main__":
     parser.add_argument("--inputs", type=Path, required=True)
     parser.add_argument("--out", type=Path, required=True)
     parser.add_argument("--model", default="qwen3.5-27b")
-    parser.add_argument("--methods", nargs="+", choices=["grep", "grep-ledger", "rag", "rag-once"], default=["grep", "grep-ledger", "rag"])
+    from .trials import METHODS
+    parser.add_argument("--methods", nargs="+", choices=sorted(METHODS), default=["grep", "grep-ledger", "rag"])
     parser.add_argument("--limit", type=int, default=0)
     parser.add_argument("--offset", type=int, default=0)
     parser.add_argument("--task-ids-file", type=Path)

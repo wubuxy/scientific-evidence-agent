@@ -44,6 +44,12 @@ python -m research_backend.benchmarks.review --inputs ../benchmark-data/digestab
 
 默认 `qwen3.5-27b`、temperature=0.1、`enable_thinking=false`；累计 token 预算包括输入与输出，embedding 用量另计并支持缓存。协议保存代码 / 数据哈希、模型、参数与日期。每轮保留所有尝试，评分包含失败与缺失任务；不从重复运行中挑选最好结果。
 
+## 完整轨迹重复与可靠性分析
+
+`benchmarks.trials` 在每个试次重新运行所选 Agent，固定任务、代码与预算，独立读取 gold 评分。短答案报告词面通过的 pass-at-k / pass-all-k、先按任务汇总重复、再按共享论文连接组进行配对 bootstrap；完整报告另报契约、字段和覆盖指标。失败 / 缺失计入分母，不完整成本明确标记，不把词面正确或契约通过解释成语义正确。
+
+计划、运行、评分命令和训练路线见 [Agent 自动评测与训练](AGENT_EVAL_AND_TRAINING.md)。`plan` 和 `score` 不调用模型，`run` 使用已配置的模型服务；新模块没有新增定时收费任务。
+
 ## 固定回读对照
 
 从已有 Grep 运行加载原文窗口，检查其与冻结正文一致，再独立比较上下文策略：
@@ -63,6 +69,10 @@ python -m research_backend.benchmarks.answer_replay --inputs ../benchmark-data/q
 ```
 
 程序按地址复制原文，校验已读范围与资料归属。选择调用成本计入 `selected` 方案，配对分析按任务汇总重复结果。字符保留率度量上下文内容保留，语义支持由单独步骤检查。
+
+## 完整报告与五组重复对照
+
+统一入口 `benchmarks.trials` 同时支持短答案方法、`report-grep` / `report-rag` 和五组 `repair-*` 方法。完整报告调用工作台实际 Runtime；报告与短答案分开制定计划。报告可导出声明和表格事实单元，使用联合原文判定，再通过双人标注和分歧仲裁校准。固定协议、独立评分、成本口径、完整命令与无云调用验收脚本见 [Agent 自动评测与训练路线](AGENT_EVAL_AND_TRAINING.md)。
 
 ## 证据支持复核
 
