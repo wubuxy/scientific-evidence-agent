@@ -1,0 +1,221 @@
+{
+  "schema_version": 1,
+  "recording": {
+    "run_id": "d9c1882b-877d-4550-8723-fe34a92bcf8d",
+    "recorded_at": "2026-10-28T12:45:19.528767+00:00",
+    "model": "qwen-plus",
+    "tokens_used": 19349,
+    "question": "只使用工作区内两篇论文，搜索并阅读原文后比较 QASPER 和 ArxivDIGESTables 的研究任务与数据规模（问题数/表格数、涉及论文数）。给出 2—4 条带证据的结论，每篇一个对比行，并说明为什么不能直接比较二者的方法性能。未报告的信息写未报告，不使用网络。",
+    "report": {
+      "title": "QASPER vs ArxivDIGESTables：研究任务与数据规模对比",
+      "claims": [
+        {
+          "text": "QASPER 是一个面向学术论文的信息寻求型问答（QA）数据集，任务是根据论文标题和摘要提出问题，并在全文中定位答案及支持证据。",
+          "evidence_ids": [
+            "ev_a8649daeeeba083ec9c43a1ab55dce77"
+          ],
+          "qualification": ""
+        },
+        {
+          "text": "ArxivDIGESTables 是一个面向文献综述的表格生成数据集，任务是为一组输入论文自动生成结构化表格（含 schema 和 cell values），用于比较和归纳多篇论文的共性方面。",
+          "evidence_ids": [
+            "ev_7dbe2480c68c5ffa130b0827a106aaff"
+          ],
+          "qualification": ""
+        }
+      ],
+      "comparison_rows": [
+        {
+          "source_id": "3d5bfafa-9b77-49b9-9e4b-80374484b164",
+          "method": "信息寻求问答（QA）",
+          "dataset": "QASPER",
+          "model": "未报告",
+          "metric": "未报告",
+          "result": "未报告",
+          "conditions": "未报告",
+          "comparability": "unknown",
+          "evidence_ids": [
+            "ev_a8649daeeeba083ec9c43a1ab55dce77"
+          ]
+        },
+        {
+          "source_id": "4fe16e95-c89e-420c-a48c-f35787a2d37e",
+          "method": "文献综述表格生成（schema + value generation）",
+          "dataset": "ArxivDIGESTables",
+          "model": "未报告",
+          "metric": "未报告",
+          "result": "未报告",
+          "conditions": "未报告",
+          "comparability": "unknown",
+          "evidence_ids": [
+            "ev_7dbe2480c68c5ffa130b0827a106aaff"
+          ]
+        }
+      ],
+      "limitations": [
+        "QASPER 明确报告了问题数（5,049）和涉及论文数（1,585），但未报告表格数（不适用）；ArxivDIGESTables 报告了表格数（2,228）和合成论文总数（7,542），但未报告问题数（不适用）；二者任务范式根本不同，无法对齐指标或性能。",
+        "本次所读片段尚未确认 ArxivDIGESTables 是否包含人工标注的问题或 QA 样例；其核心输出是表格而非问答对，因此‘问题数’维度不适用。",
+        "两篇论文均未报告模型、评估指标及具体实验条件，故无法进行方法性能直接比较；任务目标（QA vs 表格生成）、输入输出形式、评估协议均不兼容。"
+      ],
+      "verification_status": "needs_human_review"
+    },
+    "tool_calls": [
+      {
+        "id": "eb9132a4-1525-49b4-99bc-1c536428ef5f",
+        "name": "sources_list",
+        "arguments": {},
+        "status": "succeeded",
+        "elapsed_ms": 16,
+        "evidence_ids": []
+      },
+      {
+        "id": "5dfa52ee-5fe7-4a51-a258-73e2453fa2e6",
+        "name": "sources_read",
+        "arguments": {
+          "source_id": "3d5bfafa-9b77-49b9-9e4b-80374484b164",
+          "start_line": 1,
+          "line_count": 80
+        },
+        "status": "succeeded",
+        "elapsed_ms": 16,
+        "evidence_ids": [
+          "ev_a8649daeeeba083ec9c43a1ab55dce77"
+        ]
+      },
+      {
+        "id": "65997fa2-4392-420c-af0a-08e44bb01d18",
+        "name": "sources_read",
+        "arguments": {
+          "source_id": "4fe16e95-c89e-420c-a48c-f35787a2d37e",
+          "start_line": 1,
+          "line_count": 80
+        },
+        "status": "succeeded",
+        "elapsed_ms": 15,
+        "evidence_ids": [
+          "ev_7dbe2480c68c5ffa130b0827a106aaff"
+        ]
+      },
+      {
+        "id": "e855c66e-5e77-47ec-a93f-038dbda3042e",
+        "name": "sources_grep",
+        "arguments": {
+          "query": "questions|papers|dataset.*size|number.*questions|number.*papers",
+          "source_ids": [
+            "3d5bfafa-9b77-49b9-9e4b-80374484b164"
+          ]
+        },
+        "status": "succeeded",
+        "elapsed_ms": 172,
+        "evidence_ids": [
+          "ev_4befe6e68f9e44e2ae193e6797c76b9b",
+          "ev_1b09215a98d93dabed54daaf6f919b95",
+          "ev_3b1050351ee006c7e1a5644ae9a8752e",
+          "ev_87268b91a7d5b16fbaa8cf19711506cf",
+          "ev_dbaaff2766987c75d4fd49fc3322049b",
+          "ev_cc548e772265b6834001f70fa8102195",
+          "ev_0e463aa124b3c329c3e9d5cbc2463ad4",
+          "ev_7221a37d4aba61c271dc9696ee9ddf6b",
+          "ev_47644c806cf2ab2b293ccf4c6520f535",
+          "ev_a10d207763953bef35bbc701940356b1"
+        ]
+      }
+    ]
+  },
+  "sources": [
+    {
+      "id": "3d5bfafa-9b77-49b9-9e4b-80374484b164",
+      "title": "A Dataset of Information-Seeking Questions and Answers Anchored in Research Papers",
+      "short_title": "QASPER",
+      "authors": "Pradeep Dasigi, Kyle Lo, Iz Beltagy, Arman Cohan, Noah A. Smith, Matt Gardner",
+      "uri": "https://arxiv.org/abs/2105.03011v1",
+      "license": "CC BY 4.0",
+      "license_url": "https://creativecommons.org/licenses/by/4.0/",
+      "source_hash": "7aaa103d0d4a431142c64d6f38bbff246e14ba8b5369fd0582a8a0e32d75a78f",
+      "content_sha256": "5137e9aae0d5c9ca7031585c93adaf76267931d9cd194408954475f37f375cc3",
+      "line_count": 1052,
+      "file": "/demo/papers/qasper.txt",
+      "blocks_file": "/demo/papers/qasper.blocks.json"
+    },
+    {
+      "id": "4fe16e95-c89e-420c-a48c-f35787a2d37e",
+      "title": "ArxivDIGESTables: Synthesizing Scientific Literature into Tables using Language Models",
+      "short_title": "ArxivDIGESTables",
+      "authors": "Benjamin Newman, Yoonjoo Lee, Aakanksha Naik, Pao Siangliulue, Raymond Fok, Juho Kim, Daniel S. Weld, Joseph Chee Chang, Kyle Lo",
+      "uri": "https://arxiv.org/abs/2410.22360v1",
+      "license": "CC BY 4.0",
+      "license_url": "https://creativecommons.org/licenses/by/4.0/",
+      "source_hash": "f0a41771d2f878a6b4f34cba435fa838a6bb93195a63e4356a2210b3abd37cbd",
+      "content_sha256": "243150fdb32bcde1d3c164b23744de83b9dc254df30252ff1ad56f70e309e342",
+      "line_count": 1637,
+      "file": "/demo/papers/digestables.txt",
+      "blocks_file": "/demo/papers/digestables.blocks.json"
+    }
+  ],
+  "evidence": [
+    {
+      "id": "ev_a8649daeeeba083ec9c43a1ab55dce77",
+      "source_id": "3d5bfafa-9b77-49b9-9e4b-80374484b164",
+      "source_hash": "7aaa103d0d4a431142c64d6f38bbff246e14ba8b5369fd0582a8a0e32d75a78f",
+      "start_line": 1,
+      "end_line": 80,
+      "quote": "A Dataset of Information-Seeking Questions\nand Answers Anchored in Research Papers\nPradeep Dasigi|Kyle Lo|Iz Beltagy|Arman Cohan|\nNoah A. Smith}|Matt Gardner|\n|Allen Institute for AI}Paul G. Allen School of CSE, University of Washington\n{pradeepd,kylel,beltagy,armanc,noah,mattg}@allenai.org\nAbstract\nReaders of academic research papers often\nread with the goal of answering speciﬁc ques-\ntions. Question Answering systems that can\nanswer those questions can make consumption\nof the content much more efﬁcient. However,\nbuilding such tools requires data that reﬂect\nthe difﬁculty of the task arising from complex\nreasoning about claims made in multiple parts\nof a paper. In contrast, existing information-\nseeking question answering datasets usually\ncontain questions about generic factoid-type\ninformation. We therefore present Q ASPER ,\na dataset of 5,049 questions over 1,585 Natu-\nral Language Processing papers. Each ques-\ntion is written by an NLP practitioner who\nread only the title and abstract of the corre-\nsponding paper, and the question seeks infor-\nmation present in the full text. The questions\nare then answered by a separate set of NLP\npractitioners who also provide supporting ev-\nidence to answers. We ﬁnd that existing mod-\nels that do well on other QA tasks do not per-\nform well on answering these questions, un-\nderperforming humans by at least 27 F1points\nwhen answering them from entire papers, moti-\nvating further research in document-grounded,\ninformation-seeking QA, which our dataset is\ndesigned to facilitate.\n1 Introduction\nMachines built to assist humans who engage with\ntexts to seek information ought to be designed with\nan awareness of the information need. Abstractly,\nthe human’s need should deﬁne the lens through\nwhich the system views the text in order to ﬁnd\ndesired information. Existing information-seeking\nmachine reading datasets (e.g., Kwiatkowski et al.,\n2019; Clark et al., 2020) have led to signiﬁcant\nprogress in reading at scale (e.g., Asai et al., 2020;\nGuu et al., 2020; Liu et al., 2020). However, most\nof those benchmarks focus on an “open domain”\nsetting where the questions are not anchored in any\nparticular user context. The result is an emphasis\nQuasar: Datasets for Question Answering by Search and Reading\nAbstractWepresenttwonewlarge-scaledatasetsaimedatevaluatingsystemsdesignedtocomprehendanaturallanguagequeryandextractitsanswerfromalargecorpusoftext.TheQUASAR-Sdatasetconsistsof37000cloze-style(fill-in-the-gap)queriesconstructedfromdefinitionsofsoftwareentitytagsonthepopularwebsiteStackOverflow.Weevaluateseveralbaselinesonbothdatasets,rangingfromsimpleheuristicstopowerfulneuralmodels,andshowthattheselagbehindhumanperformanceby16.4%&32.1%forQuasar-Sand-Trespectively.\n3 Dataset Construction Each dataset consists of a collection of records with one QA problem per record. For each record, we include some question text, a context document relevant to the question, a set of candidate solutions, and the correct solution. \n3.2 Context Retrieval The context document for each record consists of a list of ranked and scored pseudodocumentsrelevant to the question.\nQ. Which retrieval system was used for the baselines?\n4.4 ResultsSeveral baselines rely on the retrieved context to extract the answer to a question. For these, we refer to the fraction of instances for which the correct answer is present in the context as Search Accuracy. The performance of the baseline amongthese instances is referred to as the Reading Accuracy.\nA:The dataset comes with a ranked set of relevant documents. Hence the baselines do not use a retrieval system.\nEvidence paragraphsQuestion and AnswerTitle and AbstractFigure 1: An example instance taken from Q ASPER .\nAques tion about the paper is written after reading\nonly the title and the abstract. To arrive at the an-\nswer , one ﬁnds relevant evidence , which can be spread\nacross multiple paragraphs. In this example, to answer\nthe question about “baselines”, the reader must realize\nfrom evidence from Sections 3 and 4 that “context doc-\numents” come pre-ranked in the dataset and the paper’s\n“baselines” select from these “context documents.”\non generic factoid questions, rather than the full\nrange of information needs people have.\nWe present QASPER ,1an information-seeking\nquestion answering (QA) dataset over academic re-\nsearch papers. Each question is written as a follow-\nup to the title and abstract of a particular paper,\nand the answer, if present, is identiﬁed in the rest\nof the paper, along with evidence required to ar-\nrive at it. This setup results in questions requiring\nmore complex document-level reasoning than prior\ndatasets, because (i)abstracts provide rich prompts\nfor questions that can be asked as follow-up and\n(ii)academic research papers naturally trigger ques-\n1Loosely derived from Question Answering over Scien-\ntiﬁc Research Papers . The dataset, baseline code, and other",
+      "preview_start_line": 17,
+      "preview_end_line": 35
+    },
+    {
+      "id": "ev_7dbe2480c68c5ffa130b0827a106aaff",
+      "source_id": "4fe16e95-c89e-420c-a48c-f35787a2d37e",
+      "source_hash": "f0a41771d2f878a6b4f34cba435fa838a6bb93195a63e4356a2210b3abd37cbd",
+      "start_line": 1,
+      "end_line": 80,
+      "quote": "ARXIV DIGEST ABLES : Synthesizing Scientific Literature into\nTables using Language Models\nBenjamin Newman♠*Yoonjoo Lee♡∗\nAakanksha Naik♢Pao Siangliulue♢Raymond Fok♠\nJuho Kim♡Daniel S. Weld♠♢Joseph Chee Chang♢Kyle Lo♢\n♠University of Washington♡KAIST♢Allen Institute for AI\nblnewman@cs.washington.edu, yoonjoo.lee@kaist.ac.kr\nAbstract\nWhen conducting literature reviews, scien-\ntists often create literature review tables —\ntables whose rows are publications and whose\ncolumns constitute a schema , a set of as-\npects used to compare and contrast the pa-\npers. Can we automatically generate these ta-\nbles using language models (LMs)? In this\nwork, we introduce a framework that lever-\nages LMs to perform this task by decompos-\ning it into separate schema andvalue gener-\nation steps. To enable experimentation, we\naddress two main challenges: First, we over-\ncome a lack of high-quality datasets to bench-\nmark table generation by curating and releas-\ning\n ARXIV DIGEST ABLES , a new dataset of\n2,228 literature review tables extracted from\nArXiv papers that synthesize a total of 7,542\nresearch papers. Second, to support scalable\nevaluation of model generations against human-\nauthored reference tables, we develop DECON -\nTEXT EVAL, an automatic evaluation method\nthat aligns elements of tables with the same un-\nderlying aspects despite differing surface forms.\nGiven these tools, we evaluate LMs’ abilities\nto reconstruct reference tables, finding this task\nbenefits from additional context to ground the\ngeneration (e.g. table captions, in-text refer-\nences). Finally, through a human evaluation\nstudy we find that even when LMs fail to fully\nreconstruct a reference table, their generated\nnovel aspects can still be useful.\nblnewman/arxivDIGESTables\nbnewm0609/arxivDIGESTables\n1 Introduction\nConducting literature reviews by reading and syn-\nthesizing information across a large set of docu-\nments is vital for scientists to stay abreast of their\nfields yet is increasingly laborious as the number of\nscientific publications grows exponentially (Jinha,\n2010; Bornmann et al., 2021). At the core of this\n*Equal contributions.\n1 2 \n3 Figure 1: Schematic of our literature review table gen-\neration task: (1) synthesize multiple input papers into a\ntable with both (2) a schema (columns) and (3) values.\nEach row corresponds to an input paper.\nsensemaking process is identifying a schema , a set\nof important aspects that are useful for compar-\ning and contrasting prior literature (Russell et al.,\n1993). The results of this process are often pre-\nsented in the form of literature review tables , whose\nrows are a set of papers and whose columns are a\nset of aspects that the papers share (Figure 1).\nIn this work, we conceptualize the task of liter-\nature review table generation by decomposing it\ninto two sub-tasks: (1) Schema-generation : Deter-\nmining a set of relevant shared aspects given a set\nof input papers, and (2) Value-generation : Deter-\nmining the value given an aspect and a paper. For\nexample, a table for a set of computer vision pa-\npers on video datasets (rows) might have a schema\nwith aspects like “ task ” or “ size ” (columns); cell\nvalues under the “ task ” column may say “ VQA” or\n“classification ” (values).\nPrior work has largely investigated each of the\ntwo sub-tasks independently. In particular, the\nlarge body of literature on document-grounded\nquestion-answering (Kwiatkowski et al., 2019;\nDasigi et al., 2021; Lee et al., 2023), information\nextraction (Luan et al., 2018), and query (Zhong\net al., 2021; Xu and Lapata, 2020) or aspect-based",
+      "preview_start_line": 17,
+      "preview_end_line": 40
+    }
+  ],
+  "failure": {
+    "original_text": "两篇论文均未报告模型、评估指标及具体实验条件，故无法进行方法性能直接比较；任务目标（QA vs 表格生成）、输入输出形式、评估协议均不兼容。",
+    "correction": {
+      "source_id": "3d5bfafa-9b77-49b9-9e4b-80374484b164",
+      "start_line": 453,
+      "end_line": 470,
+      "quote": "to only its local window and a pre-speciﬁed set\nof global locations of interest, thereby scaling\nself-attention computation linearly with the input\nsize (as opposed to quadratically with full context\nself-attention). LED has a similar architecture to\nBART (Lewis et al., 2020) in terms of number of\nlayers and hidden state sizes, with the distinction\nthat it has a larger position embeddings matrix,\nallowing it to process inputs of up to 16K tokens\nlong (up from 1K tokens in the original BART\nmodel). In practice, LED’s parameters are\ninitialized from a pretrained BART model, and\nLED copies BART’s position embeddings 16 times\nto ﬁll the entire 16K position embeddings matrix.\nFor all experiments we use the LED-base sized\nmodel, which uses BART-base weights.\nInput and Output Encoding For the input, we\nfollow the Longformer QA models (Beltagy et al.,",
+      "scope": "post_run_manual_review",
+      "label": "事后核对定位，不属于原运行回读"
+    },
+    "diagnosis": "把当前已读片段未找到的信息，扩展成了整篇论文没有报告。引用地址有效，仍需检查结论是否由原文支持。"
+  },
+  "experiment": {
+    "label": "离线实验结果摘要，非当前工作台自动能力",
+    "date": "2026-11-05",
+    "model": "qwen3.5-27b",
+    "tasks": 6,
+    "summaries": {
+      "baseline": {
+        "answer_token_f1": 0.40988675958188153,
+        "tokens_used": 13622.666666666666
+      },
+      "review-rewrite": {
+        "answer_token_f1": 0.40988675958188153,
+        "tokens_used": 16099.666666666666
+      },
+      "review-reread": {
+        "answer_token_f1": 0.49322009291521485,
+        "tokens_used": 16280.5
+      }
+    },
+    "paired": {
+      "mean_difference": 0.08333333333333333,
+      "bootstrap_95": [
+        0.0,
+        0.25
+      ],
+      "tasks": 6,
+      "improved": 1,
+      "worse": 0,
+      "tied": 5
+    },
+    "note": "增益来自 1 题，其余 5 题不变；不支持稳定或显著优势结论。"
+  }
+}

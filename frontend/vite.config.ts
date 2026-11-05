@@ -5,7 +5,8 @@ import { defineConfig, loadEnv, type Plugin, type ProxyOptions } from 'vite'
 
 // Local development gateway: credentials stay in the Node process, never in VITE_*.
 export default defineConfig(({ mode }) => {
-  const backend = fileURLToPath(new URL('../backend', import.meta.url))
+  const backend = process.env.RESEARCH_CONFIG_DIR || fileURLToPath(new URL('../backend', import.meta.url))
+  const apiTarget = process.env.RESEARCH_API_TARGET || 'http://127.0.0.1:8001'
   const env = loadEnv(mode, backend, '')
   const researchEnv = loadEnv('research', backend, '')
   const secret = process.env.JWT_SECRET_KEY || researchEnv.JWT_SECRET_KEY || env.JWT_SECRET_KEY
@@ -17,7 +18,7 @@ export default defineConfig(({ mode }) => {
     return `${data}.${createHmac('sha256', secret).update(data).digest('base64url')}`
   }
   const apiProxy: ProxyOptions = {
-    target: 'http://127.0.0.1:8001',
+    target: apiTarget,
     configure(proxy) {
       proxy.on('proxyReq', (request) => request.setHeader('Authorization', `Bearer ${token()}`))
     },
@@ -43,7 +44,7 @@ export default defineConfig(({ mode }) => {
   }
   const proxy = {
     '/api/v1': apiProxy,
-    '/research-health': { target: 'http://127.0.0.1:8001', rewrite: () => '/health' },
+    '/research-health': { target: apiTarget, rewrite: () => '/health' },
   }
   return {
     plugins: [react(), localGuard],

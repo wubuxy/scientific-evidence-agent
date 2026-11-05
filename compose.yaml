@@ -1,0 +1,58 @@
+name: scientific-evidence-agent
+
+x-backend: &backend-image
+  image: scientific-evidence-agent-backend:local
+  build:
+    context: ./backend
+
+services:
+  config:
+    <<: *backend-image
+    command: [python, scripts/init_container.py, /config/.env.research]
+    volumes:
+      - demo-config:/config
+    restart: "no"
+
+  backend:
+    <<: *backend-image
+    depends_on:
+      config:
+        condition: service_completed_successfully
+    env_file:
+      - path: ./.env.demo
+        required: false
+    environment:
+      RESEARCH_DATA_DIR: /data/research
+    command: [python, -m, uvicorn, research_main:app, --app-dir, app, --env-file, /config/.env.research, --host, 0.0.0.0, --port, "8001"]
+    volumes:
+      - demo-config:/config:ro
+      - research-data:/data/research
+    healthcheck:
+      test: [CMD, python, -c, "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8001/health', timeout=3)"]
+      interval: 5s
+      timeout: 5s
+      retries: 12
+      start_period: 10s
+
+  frontend:
+    build:
+      context: ./frontend
+    depends_on:
+      backend:
+        condition: service_healthy
+    environment:
+      RESEARCH_CONFIG_DIR: /config
+      RESEARCH_API_TARGET: http://backend:8001
+    volumes:
+      - demo-config:/config:ro
+    ports:
+      - "127.0.0.1:${RESEARCH_DEMO_PORT:-5183}:5183"
+    healthcheck:
+      test: [CMD, node, -e, "fetch('http://127.0.0.1:5183/research-health').then(r => {if (!r.ok) process.exit(1)}).catch(() => process.exit(1))"]
+      interval: 10s
+      timeout: 5s
+      retries: 6
+
+volumes:
+  demo-config:
+  research-data:
