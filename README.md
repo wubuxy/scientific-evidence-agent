@@ -44,7 +44,7 @@
 
 | 验证项目 | 已完成内容 |
 |---|---|
-| 自动化回归 | **140 项离线测试通过**，覆盖科研 API、检索、引用校验与实验工具 |
+| 自动化回归 | **完整依赖环境下 140 项离线测试通过**；最小依赖与缺少 rg 时的覆盖范围见[复现说明](docs/REPRODUCIBILITY.md) |
 | 应用交付 | TypeScript 检查与前端构建通过，真实模型完整报告接口验证完成 |
 | 数据准备 | QASPER 开发 50 题、留出测试 200 题，版本与哈希固定，论文划分隔离 |
 | 方法对照 | **36 道独立开发题、96 次完整上游任务运行**，覆盖四种检索配置与新论文检查 |
@@ -67,13 +67,15 @@
 
 需要 **Python 3.10+、Node.js 20.19+ 或 22.12+**，以及加入 PATH 的 [ripgrep](https://github.com/BurntSushi/ripgrep)。以下以 PowerShell 为例。
 
+Windows 可通过 `winget install BurntSushi.ripgrep.MSVC` 安装 ripgrep，Ubuntu/Debian 使用 `sudo apt-get install ripgrep`，macOS 使用 `brew install ripgrep`。安装后运行 `rg --version` 检查；Windows 可能需要重新打开终端。
+
 **① 启动后端**
 
 ```powershell
 cd backend
 python -m venv .venv
 .\.venv\Scripts\Activate.ps1
-pip install -r requirements-research.txt
+python -m pip install -r requirements-research.txt -c constraints-ci.txt
 $env:PYTHONPATH = 'app'
 python -m research_backend.cli init
 ```
@@ -112,11 +114,15 @@ Linux/macOS 对应使用 `source .venv/bin/activate` 和 `export PYTHONPATH=app`
 ```powershell
 cd backend
 python -m pytest tests -q
+python -m pytest tests -q --without-rg
 cd ../frontend
+npm ci
 npm run build
 ```
 
-离线测试使用可替换模型，不调用付费 API。统计分析与 XLSX 支持见 `backend/requirements-analysis.txt`；LSTM 扩展见 `backend/requirements-analysis-lstm.txt`。
+离线测试使用可替换模型，不调用付费 API。`requirements-research.txt` 提供科研主线最小依赖；统计分析与 XLSX 支持见 `backend/requirements-analysis.txt`，LSTM 扩展见 `backend/requirements-analysis-lstm.txt`。缺少可选依赖时仅跳过对应测试，pytest 会显示原因。
+
+GitHub Actions 配置覆盖 Linux / Windows、Python 3.10 / 3.13、核心与完整依赖，以及 Node 24 前端构建。安装命令、测试矩阵和结果口径见[复现说明](docs/REPRODUCIBILITY.md)。
 
 </details>
 

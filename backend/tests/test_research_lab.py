@@ -20,10 +20,14 @@ from research_backend.lab_schemas import AnalysisCreate, TranslationCreate
 from research_backend.store import Store
 from research_backend.translation import prepare_translation, resolve_target_language, translation_messages
 
-pytest.importorskip("scipy")
-from research_backend.analysis import compute_analysis
-
 SECRET = "lab-offline-test-secret-" * 3
+
+
+@pytest.fixture
+def compute_analysis():
+    pytest.importorskip("scipy", reason="statistical analysis requires requirements-analysis.txt")
+    from research_backend.analysis import compute_analysis
+    return compute_analysis
 
 
 def auth(subject="alice"):
@@ -34,7 +38,7 @@ def params(method, **extra):
     return AnalysisCreate(dataset_id="fixture", method=method, columns=["a", "b"], **extra).model_dump()
 
 
-def test_welch_reference_statistic_effect_and_confidence_interval():
+def test_welch_reference_statistic_effect_and_confidence_interval(compute_analysis):
     data = dict(columns=["a", "b"], rows=[[1, 4], [2, 5], [3, 6]])
     result = compute_analysis(data, params("welch_t"))
     assert result["statistic"] == pytest.approx(-3.674234614174767)
@@ -44,7 +48,7 @@ def test_welch_reference_statistic_effect_and_confidence_interval():
     assert result["confidence_interval"]["low"] < -3 < result["confidence_interval"]["high"] < 0
 
 
-def test_paired_missing_rows_preserve_subject_alignment():
+def test_paired_missing_rows_preserve_subject_alignment(compute_analysis):
     data = dict(columns=["a", "b"], rows=[[1, 1], [2, None], [None, 9], [4, 2], [5, 3]])
     result = compute_analysis(data, params("paired_t"))
     assert result["sample_size"] == 3
@@ -53,7 +57,7 @@ def test_paired_missing_rows_preserve_subject_alignment():
     assert result["p_value"] == pytest.approx(0.1835034190722739)
 
 
-def test_chi_square_weighted_table_matches_reference():
+def test_chi_square_weighted_table_matches_reference(compute_analysis):
     data = dict(columns=["a", "b", "count"], rows=[["X", "u", 10], ["X", "v", 10], ["X", "w", 20], ["Y", "u", 20], ["Y", "v", 20], ["Y", "w", 20]])
     result = compute_analysis(data, params("chi_square", weight_column="count", continuity_correction=False))
     assert result["statistic"] == pytest.approx(2.7777777777777777)
@@ -63,7 +67,7 @@ def test_chi_square_weighted_table_matches_reference():
     assert result["tables"][1]["rows"][0][1:] == [12, 12, 16]
 
 
-def test_sparse_categories_warn_and_offer_fisher():
+def test_sparse_categories_warn_and_offer_fisher(compute_analysis):
     data = dict(columns=["a", "b", "count"], rows=[["X", "u", 0], ["X", "v", 4], ["Y", "u", 6], ["Y", "v", 0]])
     result = compute_analysis(data, params("chi_square", weight_column="count"))
     assert result["warnings"] and 0 <= result["fisher_exact"]["p_value"] <= 1
@@ -73,12 +77,12 @@ def test_sparse_categories_warn_and_offer_fisher():
 
 
 @pytest.mark.parametrize("method", ["welch_t", "paired_t", "correlation", "linear_regression", "hotelling_t2"])
-def test_degenerate_numeric_inputs_are_rejected(method):
+def test_degenerate_numeric_inputs_are_rejected(method, compute_analysis):
     with pytest.raises(ValueError):
         compute_analysis(dict(columns=["a", "b"], rows=[[1, 1]] * 5), params(method))
 
 
-def test_regression_known_line_and_hotelling_zero_mean():
+def test_regression_known_line_and_hotelling_zero_mean(compute_analysis):
     result = compute_analysis(dict(columns=["a", "b"], rows=[[i, 2 * i + 3] for i in range(8)]), params("linear_regression"))
     assert result["slope"] == pytest.approx(2) and result["intercept"] == pytest.approx(3)
     assert result["r_squared"] == pytest.approx(1)
@@ -98,6 +102,7 @@ def test_parser_preserves_missing_categorical_and_numeric_values():
 
 
 def test_xlsx_formulas_are_not_executed():
+    pytest.importorskip("openpyxl", reason="XLSX import requires requirements-analysis.txt")
     from openpyxl import Workbook
     book = Workbook()
     book.active.append(["index", "formula"])
@@ -213,6 +218,7 @@ def test_pasted_translation_modes_reach_provider_and_do_not_share_cache(lab_clie
     assert client.post(base + "/translations", headers=auth(), json={**body, "style": "unsupported"}).status_code == 422
 
 
+@pytest.mark.usefixtures("compute_analysis")
 def test_analysis_api_exports_and_publishes_traceable_source(lab_client):
     client, wid = lab_client; base = f"/api/v1/workspaces/{wid}"
     response = client.post(base + "/datasets/upload", headers=auth(), files={"file": ("data.csv", b"a,b\n1,4\n2,5\n3,6")})
@@ -245,8 +251,8 @@ def test_long_line_translation_offsets_reconstruct_original(tmp_path):
     assert all(segment["start_line"] == 1 and segment["start_char"] is not None for segment in job["segments"])
 
 
-def test_lstm_scaler_and_training_are_not_fitted_to_test_data(tmp_path):
-    pytest.importorskip("torch")
+def test_lstm_scaler_and_training_are_not_fitted_to_test_data(tmp_path, compute_analysis):
+    pytest.importorskip("torch", reason="LSTM requires requirements-analysis-lstm.txt")
     values = 10 + np.arange(80) * .02 + np.sin(np.arange(80) / 4)
     data = dict(columns=["signal"], rows=[[float(v)] for v in values])
     parameters = AnalysisCreate(dataset_id="fixture", method="lstm", columns=["signal"], window=6, epochs=5).model_dump()

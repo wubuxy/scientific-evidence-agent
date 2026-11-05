@@ -258,6 +258,7 @@ class EvidenceModel:
             "function": {"name": name, "arguments": json.dumps(args, ensure_ascii=False)}}]}}
 
 
+@pytest.mark.requires_rg
 def test_full_research_run_with_evidence_report_and_sse(tmp_path):
     with TestClient(create_app(Settings(data_dir=tmp_path, jwt_secret=SECRET), model=EvidenceModel())) as client:
         wid = workspace(client)
@@ -404,6 +405,7 @@ def test_recursive_sql_has_execution_budget(client):
     assert result.status_code == 422
 
 
+@pytest.mark.requires_rg
 def test_grep_agent_regex_and_public_literal_are_distinct(client):
     wid = workspace(client)
     source(client, wid, "alpha\nbeta\na.b\naXb")

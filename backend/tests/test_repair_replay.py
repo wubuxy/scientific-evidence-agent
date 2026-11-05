@@ -24,6 +24,7 @@ def test_repair_gate_distinguishes_support_from_adequacy_and_role():
         assert needs_repair(diagnosis(**update))
 
 
+@pytest.mark.requires_rg
 def test_targeted_read_is_one_bounded_canonical_same_paper_window(tmp_path):
     task, doc, reads = fixture()
     extra, audit = targeted_read(task, {"p":doc}, reads, diagnosis(), tmp_path)
@@ -62,6 +63,14 @@ async def test_three_arm_replay_keeps_controls_separate_and_counts_shared_cost_o
     monkeypatch.setattr(replay, "load_cases", lambda *args: [dict(task=task, reads=reads, prediction_sha256="frozen")])
     monkeypatch.setattr(replay, "load_environment", lambda: None)
     monkeypatch.setattr(replay.Settings, "from_env", lambda: Settings(llm_api_key="offline-test"))
+
+    def read_missing_evidence(task, documents, reads, diagnosis, directory, binary=""):
+        # Branch accounting is independent of the real-rg integration test above.
+        lines = documents["p"]["text"].splitlines()
+        return dict(id="new", source_id="p", start_line=50, end_line=70,
+                    quote="\n".join(lines[49:70])), dict(reason="read")
+
+    monkeypatch.setattr(replay, "targeted_read", read_missing_evidence)
     class Model:
         def __init__(self, settings): pass
         async def complete(self, messages, definitions, max_tokens):

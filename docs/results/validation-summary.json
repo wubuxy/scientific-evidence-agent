@@ -6,7 +6,83 @@
     "offline_tests_passed": 140,
     "frontend_typecheck": "passed",
     "frontend_production_build": "passed",
-    "live_report_api": "completed"
+    "live_report_api": "completed",
+    "offline_tests_collected": 140,
+    "offline_test_profiles": [
+      {
+        "profile": "core",
+        "platform": "Windows",
+        "python": "3.10.20",
+        "dependencies": "requirements-research.txt + constraints-ci.txt",
+        "collected": 140,
+        "passed": 127,
+        "skipped": 13,
+        "failed": 0,
+        "errors": 0
+      },
+      {
+        "profile": "core-without-rg",
+        "platform": "Windows",
+        "python": "3.10.20",
+        "dependencies": "core; rg discovery disabled by --without-rg",
+        "collected": 140,
+        "passed": 124,
+        "skipped": 16,
+        "failed": 0,
+        "errors": 0
+      },
+      {
+        "profile": "analysis",
+        "platform": "Windows",
+        "python": "3.13.13",
+        "dependencies": "core + requirements-analysis.txt + constraints-ci.txt",
+        "collected": 140,
+        "passed": 139,
+        "skipped": 1,
+        "failed": 0,
+        "errors": 0
+      },
+      {
+        "profile": "full-existing",
+        "platform": "Windows",
+        "python": "3.10.20",
+        "dependencies": "existing deepresearch environment, including CPU torch",
+        "collected": 140,
+        "passed": 140,
+        "skipped": 0,
+        "failed": 0,
+        "errors": 0
+      },
+      {
+        "profile": "full-locked",
+        "platform": "Windows",
+        "python": "3.13.13",
+        "dependencies": "core + analysis under constraints-ci.txt; CPU torch installed from the official PyTorch index",
+        "collected": 140,
+        "passed": 140,
+        "skipped": 0,
+        "failed": 0,
+        "errors": 0,
+        "packages": {
+          "fastapi": "0.162.0",
+          "numpy": "2.5.4",
+          "scipy": "1.18.1",
+          "openpyxl": "3.1.5",
+          "torch": "2.15.0+cpu",
+          "pydantic": "2.14.3",
+          "pytest": "9.2.0",
+          "pytest-asyncio": "1.4.1.post1",
+          "openai": "3.46.0"
+        }
+      }
+    ],
+    "ci_workflow": ".github/workflows/ci.yml",
+    "ci_status": "configured; GitHub-hosted run not yet executed",
+    "workflow_actionlint": "passed locally; actionlint 1.7.12 official Docker image",
+    "reproducibility_guide": "docs/REPRODUCIBILITY.md",
+    "frontend_build_note": "npm ci, explicit TypeScript check, and production build passed; 558.01 kB analysis chunk warning remains",
+    "dependency_constraints_sha256": "f2e946c20ebb1c80ab79be44342d045f6ff55236bb364a515fae6a63e254a1a2",
+    "reproducibility_note": "Local Windows results from 2026-11-05; GitHub-hosted Linux/Windows CI has not run yet. Research experiment results were not rerun."
   },
   "datasets": {
     "qasper": {
