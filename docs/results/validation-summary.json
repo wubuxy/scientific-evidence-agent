@@ -1,43 +1,21 @@
 {
-  "updated": "2026-11-05",
+  "updated": "2026-11-06",
   "model": "qwen3.5-27b",
-  "scope": "development runs and engineering validation; frozen test set reserved",
+  "scope": "Agent development runs, engineering validation, and separately reported local verifier pilot; QASPER frozen test set reserved",
   "checks": {
-    "offline_tests_passed": 163,
+    "offline_tests_passed": 168,
     "frontend_typecheck": "passed",
     "frontend_production_build": "passed",
     "live_report_api": "completed",
-    "offline_tests_collected": 163,
+    "offline_tests_collected": 168,
     "offline_test_profiles": [
-      {
-        "profile": "core",
-        "platform": "Windows",
-        "python": "3.10.20",
-        "dependencies": "requirements-research.txt + constraints-ci.txt",
-        "collected": 163,
-        "passed": 150,
-        "skipped": 13,
-        "failed": 0,
-        "errors": 0
-      },
-      {
-        "profile": "core-without-rg",
-        "platform": "Windows",
-        "python": "3.10.20",
-        "dependencies": "core; rg discovery disabled by --without-rg",
-        "collected": 163,
-        "passed": 145,
-        "skipped": 18,
-        "failed": 0,
-        "errors": 0
-      },
       {
         "profile": "full-locked",
         "platform": "Windows",
         "python": "3.13.13",
         "dependencies": "core + analysis under constraints-ci.txt; CPU torch from the official index",
-        "collected": 163,
-        "passed": 163,
+        "collected": 168,
+        "passed": 168,
         "skipped": 0,
         "failed": 0,
         "errors": 0,
@@ -51,16 +29,29 @@
           "pytest": "9.2.0",
           "pytest-asyncio": "1.4.1.post1",
           "openai": "3.46.0"
-        }
+        },
+        "evidence": "docs/results/scifact-verifier-pilot-v1/windows-full.xml"
+      },
+      {
+        "profile": "core",
+        "platform": "Ubuntu 24.04 / WSL2",
+        "python": "3.12.3",
+        "dependencies": "requirements-research.txt + constraints-ci.txt; rg installed",
+        "collected": 168,
+        "passed": 155,
+        "skipped": 13,
+        "failed": 0,
+        "errors": 0,
+        "evidence": "docs/results/scifact-verifier-pilot-v1/ubuntu-core.xml"
       }
     ],
     "ci_workflow": ".github/workflows/ci.yml",
-    "ci_status": "Local checks passed; hosted status is published by GitHub Actions for each commit.",
+    "ci_status": "Five hosted jobs passed for 4c36c8f; final results/audit commit status is published by GitHub Actions.",
     "workflow_actionlint": "passed locally; actionlint 1.7.12 official Docker image",
     "reproducibility_guide": "docs/REPRODUCIBILITY.md",
     "frontend_build_note": "npm ci, explicit TypeScript check, and production build passed; 558.01 kB analysis chunk warning remains",
     "dependency_constraints_sha256": "f2e946c20ebb1c80ab79be44342d045f6ff55236bb364a515fae6a63e254a1a2",
-    "reproducibility_note": "Windows core/full/no-rg matrices and actual evaluation CLIs passed. Endpoint data and calibration labels are explicitly synthetic software fixtures. Existing real-model experiments are unchanged.",
+    "reproducibility_note": "Latest Windows full and server Ubuntu core suites passed. Prior Windows core/no-rg counts are archived rather than extrapolated. Published pilot audit independently recomputes fixed test macro F1 without a GPU.",
     "offline_test_profiles_before_demo": [
       {
         "profile": "core",
@@ -130,10 +121,10 @@
       }
     ],
     "ci_previous_run": {
-      "commit": "6ecbf6f5e6856125b0afdb367d089680bfa792df",
+      "commit": "4c36c8fbd1cf521795524c9c8cd72e53acf278b0",
       "conclusion": "success",
-      "jobs": 4,
-      "url": "https://github.com/wubuxy/scientific-evidence-agent/actions/runs/42020298737"
+      "jobs": 5,
+      "url": "https://github.com/wubuxy/scientific-evidence-agent/actions/runs/42060005247"
     },
     "docker_demo": {
       "build": "passed",
@@ -207,7 +198,8 @@
       "human_calibration": "two annotators plus adjudication; blank labels rejected",
       "new_cloud_model_calls": 0,
       "new_training_runs": 0,
-      "workbench_full_report_semantic_quality": "candidate review executable; no new human-labelled accuracy result"
+      "workbench_full_report_semantic_quality": "candidate review executable; no new human-labelled accuracy result",
+      "scope": "Agent evaluation engineering acceptance at commit 716482d; local verifier training is recorded separately."
     },
     "offline_test_profiles_before_eval_completion": [
       {
@@ -239,6 +231,52 @@
         "dependencies": "core + analysis under constraints-ci.txt; CPU torch from the official index",
         "collected": 152,
         "passed": 152,
+        "skipped": 0,
+        "failed": 0,
+        "errors": 0,
+        "packages": {
+          "fastapi": "0.162.0",
+          "numpy": "2.5.4",
+          "scipy": "1.18.1",
+          "openpyxl": "3.1.5",
+          "torch": "2.15.0+cpu",
+          "pydantic": "2.14.3",
+          "pytest": "9.2.0",
+          "pytest-asyncio": "1.4.1.post1",
+          "openai": "3.46.0"
+        }
+      }
+    ],
+    "offline_test_profiles_before_verifier_pilot": [
+      {
+        "profile": "core",
+        "platform": "Windows",
+        "python": "3.10.20",
+        "dependencies": "requirements-research.txt + constraints-ci.txt",
+        "collected": 163,
+        "passed": 150,
+        "skipped": 13,
+        "failed": 0,
+        "errors": 0
+      },
+      {
+        "profile": "core-without-rg",
+        "platform": "Windows",
+        "python": "3.10.20",
+        "dependencies": "core; rg discovery disabled by --without-rg",
+        "collected": 163,
+        "passed": 145,
+        "skipped": 18,
+        "failed": 0,
+        "errors": 0
+      },
+      {
+        "profile": "full-locked",
+        "platform": "Windows",
+        "python": "3.13.13",
+        "dependencies": "core + analysis under constraints-ci.txt; CPU torch from the official index",
+        "collected": 163,
+        "passed": 163,
         "skipped": 0,
         "failed": 0,
         "errors": 0,
@@ -407,5 +445,40 @@
       "qwen3.5-397b-a17b"
     ],
     "purpose": "candidate judgment comparison, not human ground truth"
+  },
+  "local_verifier_pilot": {
+    "name": "scifact-verifier-pilot-v1",
+    "model": "Qwen/Qwen2.5-1.5B-Instruct",
+    "gpu": "NVIDIA RTX A5000",
+    "source_commit": "320ad58fb4ef24f342d0b2187131efcd8f860616",
+    "freeze_commit": "4c36c8fbd1cf521795524c9c8cd72e53acf278b0",
+    "train_pairs": 535,
+    "calibration_pairs": 65,
+    "test_pairs": 129,
+    "test_groups": 90,
+    "training_seeds": [
+      20261105,
+      20261106,
+      20261107
+    ],
+    "formal_training_runs": 3,
+    "new_cloud_model_calls": 0,
+    "test_macro_f1": {
+      "base": 0.21164021164021163,
+      "lora-20261105": 0.48981416137379447,
+      "lora-20261106": 0.5190476190476191,
+      "lora-20261107": 0.4932765151515152,
+      "majority": 0.21164021164021163
+    },
+    "mean_test_macro_f1_gain": 0.28907255355076467,
+    "paper_cluster_bootstrap_95": [
+      0.22018833767665635,
+      0.3519615474536303
+    ],
+    "preregistered_numeric_gate": true,
+    "production_adoption": false,
+    "reason": "Base NF4 predicts all test cases supported; contradiction recall after tuning is 0/19, 1/19 and 0/19. Calibration-only BF16 diagnostic reveals precision sensitivity. No evidence of full Agent quality improvement.",
+    "report": "docs/results/SCIFACT_VERIFIER_PILOT_V1.md",
+    "predictions_sha256": "c7be93b4dad42f99720ce67a82d8745b44acc8fdfdc9997549ac9daea4493db9"
   }
 }

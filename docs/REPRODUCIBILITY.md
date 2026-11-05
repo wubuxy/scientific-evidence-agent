@@ -51,15 +51,16 @@ scipy 和 openpyxl 的检查发生在对应测试中。缺少 scipy 不会跳过
 
 ## 本地验证记录
 
-截至 2026-11-05，加入演示资料与完整评测链路检查后，本机 Windows 最新验证如下，所有组合均收集 163 项：
+截至 2026-11-06，加入核验器 pilot 的划分与协议检查后，最新验证如下，均收集 168 项：
 
 | 环境 | 通过 | 跳过 | 失败 |
 |---|---:|---:|---:|
-| Python 3.10，干净核心依赖环境，含 rg | 150 | 13（统计、XLSX、LSTM） | 0 |
-| 同一核心环境，模拟缺少 rg | 145 | 18（上述 13 项加 5 项 rg 集成） | 0 |
-| Python 3.13，干净完整环境，含 rg 和 CPU torch 2.15.0 | 163 | 0 | 0 |
+| Windows / Python 3.13，干净完整环境，含 rg 和 CPU torch 2.15.0 | 168 | 0 | 0 |
+| A5000 主机 Ubuntu / Python 3.12，核心依赖环境，含 rg | 155 | 13（统计、XLSX、LSTM） | 0 |
 
-干净环境的核心和分析依赖按提交的约束文件安装，CPU torch 从官方索引补齐。140、142、152 项的历史矩阵保存在机器记录的 `offline_test_profiles_before_demo`、`offline_test_profiles_before_agent_evals`、`offline_test_profiles_before_eval_completion` 中；最新结果和包版本见 [validation-summary.json](results/validation-summary.json) 的 `checks`。端到端 CLI 使用本地假模型端点，覆盖两轮五组分支、两次生产报告、六个声明／单元格和显式合成标注校准，不产生云模型费用。模型质量实验仍沿用原有结果，不增加独立评测题数。
+干净环境的核心和分析依赖按提交的约束文件安装，CPU torch 从官方索引补齐。140、142、152、163 项的历史矩阵分别保存在机器记录的 `offline_test_profiles_before_demo`、`offline_test_profiles_before_agent_evals`、`offline_test_profiles_before_eval_completion`、`offline_test_profiles_before_verifier_pilot` 中；最新结果和包版本见 [validation-summary.json](results/validation-summary.json) 的 `checks`。历史 163 项时 Windows 核心环境为 150 passed / 13 skipped，缺 rg 为 145 passed / 18 skipped；这些历史数值不冒充最新运行。
+
+端到端 Agent CLI 使用本地假模型端点，覆盖两轮五组分支、两次生产报告、六个声明／单元格和显式合成标注校准，不产生云模型费用。新增的真实单卡核验器训练与 Agent 效果分开统计，完整环境、适配器、评分与局限见 [A5000 pilot 结果](results/SCIFACT_VERIFIER_PILOT_V1.md)。在仓库根目录执行 `python scripts/audit_verifier_pilot.py` 可复查已发布的原始预测和测试分数，无需下载模型。
 
 ## 持续集成
 
@@ -73,9 +74,9 @@ scipy 和 openpyxl 的检查发生在对应测试中。缺少 scipy 不会跳过
 | 前端 | Node 24；`npm ci`、类型检查、生产构建 |
 | Docker demo | 构建与健康启动、无模型的论文导入 / 检索检查、配置初始化幂等性、重启持久化 |
 
-后端作业先安装并检查真实 `rg`，再运行回归。每次保存 JUnit XML 和已安装版本，作为保留 14 天的 Actions artifact。配置完成与 GitHub 托管运行通过分别记录；本地结果不能替代尚未执行的远端 CI 状态。
+后端作业先安装并检查真实 `rg`，再运行回归与已发布 pilot 结果审计。每次保存 JUnit XML 和已安装版本，作为保留 14 天的 Actions artifact。配置完成与 GitHub 托管运行通过分别记录；本地结果不能替代尚未执行的远端 CI 状态。
 
-提交 `6ecbf6f` 的原四项 GitHub 作业已通过：[运行记录](https://github.com/wubuxy/scientific-evidence-agent/actions/runs/42020298737)。新增的 Docker demo 作业已完成本地等价检查，托管执行状态单独记录。Docker 启动与回放边界见 [演示说明](DEMO.md)。
+提交 `4c36c8f` 的三项后端、前端与 Docker demo 共五个 GitHub 作业已通过：[运行记录](https://github.com/wubuxy/scientific-evidence-agent/actions/runs/42060005247)。后续提交的状态以对应 Actions 运行记录为准。Docker 启动与回放边界见 [演示说明](DEMO.md)。
 
 更新依赖约束时，在 `backend` 执行以下命令并重新验证环境矩阵：
 

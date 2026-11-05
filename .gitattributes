@@ -2,3 +2,10 @@ frontend/public/demo/** text eol=lf
 # Canonical paper text preserves original spaces for source hashes and citations.
 frontend/public/demo/papers/*.txt whitespace=-blank-at-eol
 backend/constraints-ci.txt text eol=lf
+# Frozen experiment hashes must survive Windows and Linux checkouts.
+backend/app/research_backend/benchmarks/verifier_pilot.py text eol=lf
+docs/experiments/SCIFACT_VERIFIER_PILOT.md text eol=lf
+docs/experiments/diagnose_verifier_calibration.py text eol=lf
+docs/dataset-manifests/scifact-verifier-pilot-v1.json text eol=lf
+docs/results/scifact-verifier-pilot-v1/** text eol=lf
+scripts/audit_verifier_pilot.py text eol=lf

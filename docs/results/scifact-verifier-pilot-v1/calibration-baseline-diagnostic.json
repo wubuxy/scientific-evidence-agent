@@ -1,0 +1,918 @@
+{
+  "scope": "post-hoc calibration diagnostic; no test predictions or gold read",
+  "script_sha256": "fb6afe3a65ddb4f194ea776719024e37416417376e3809f367d46ad47d1070f5",
+  "plan_sha256": "3f9c82022a525eb99b1ccc722baf734251b2e80969ed8390bed500d17b9dd03e",
+  "case_ids": [
+    "official-train-1289-21239672",
+    "official-train-1295-21239672",
+    "official-train-529-10546779",
+    "official-train-529-25413327",
+    "official-train-529-36651210",
+    "official-train-530-10546779",
+    "official-train-530-25413327",
+    "official-train-530-36651210",
+    "official-train-530-87610599",
+    "official-train-531-10546779",
+    "official-train-531-25413327",
+    "official-train-531-36651210",
+    "official-train-1258-12040627",
+    "official-train-618-6836086",
+    "official-train-1032-6836086",
+    "official-train-1033-6836086",
+    "official-train-1284-3578380",
+    "official-train-1065-20418809",
+    "official-train-568-23418635",
+    "official-train-1208-10284593",
+    "official-train-1186-7485455",
+    "official-train-894-14724693",
+    "official-train-403-1921218",
+    "official-train-404-1921218",
+    "official-train-406-6796297",
+    "official-train-1138-6796297",
+    "official-train-736-5389095",
+    "official-train-1148-4828631",
+    "official-train-1091-2603304",
+    "official-train-290-15048300",
+    "official-train-292-15048300",
+    "official-train-1381-13481880",
+    "official-train-224-6944800",
+    "official-train-225-6944800",
+    "official-train-226-6944800",
+    "official-train-1247-5114282",
+    "official-train-4-22942787",
+    "official-train-18-22942787",
+    "official-train-965-40817021",
+    "official-train-767-2488880",
+    "official-train-1378-2488880",
+    "official-train-896-14338915",
+    "official-train-897-14338915",
+    "official-train-916-18037805",
+    "official-train-455-12643937",
+    "official-train-657-8533245",
+    "official-train-1054-10072941",
+    "official-train-382-11659421",
+    "official-train-979-11659421",
+    "official-train-1376-3944632",
+    "official-train-1293-43329366",
+    "official-train-732-34469966",
+    "official-train-733-34469966",
+    "official-train-245-3430789",
+    "official-train-245-8447873",
+    "official-train-246-3430789",
+    "official-train-246-8447873",
+    "official-train-449-12209494",
+    "official-train-449-3430789",
+    "official-train-1205-5558754",
+    "official-train-1118-23351136",
+    "official-train-26-32390525",
+    "official-train-27-32390525",
+    "official-train-1374-21993510",
+    "official-train-1375-21993510"
+  ],
+  "free_generation_selection": "first 12 calibration input rows; no label selection",
+  "methods": {
+    "nf4": {
+      "counts": {
+        "supported": 65
+      },
+      "predictions": [
+        {
+          "id": "official-train-1289-21239672",
+          "verdict": "supported",
+          "unrestricted_first_token": "A"
+        },
+        {
+          "id": "official-train-1295-21239672",
+          "verdict": "supported",
+          "unrestricted_first_token": "A"
+        },
+        {
+          "id": "official-train-529-10546779",
+          "verdict": "supported",
+          "unrestricted_first_token": "A"
+        },
+        {
+          "id": "official-train-529-25413327",
+          "verdict": "supported",
+          "unrestricted_first_token": "A"
+        },
+        {
+          "id": "official-train-529-36651210",
+          "verdict": "supported",
+          "unrestricted_first_token": "A"
+        },
+        {
+          "id": "official-train-530-10546779",
+          "verdict": "supported",
+          "unrestricted_first_token": "A"
+        },
+        {
+          "id": "official-train-530-25413327",
+          "verdict": "supported",
+          "unrestricted_first_token": "A"
+        },
+        {
+          "id": "official-train-530-36651210",
+          "verdict": "supported",
+          "unrestricted_first_token": "A"
+        },
+        {
+          "id": "official-train-530-87610599",
+          "verdict": "supported",
+          "unrestricted_first_token": "A"
+        },
+        {
+          "id": "official-train-531-10546779",
+          "verdict": "supported",
+          "unrestricted_first_token": "A"
+        },
+        {
+          "id": "official-train-531-25413327",
+          "verdict": "supported",
+          "unrestricted_first_token": "A"
+        },
+        {
+          "id": "official-train-531-36651210",
+          "verdict": "supported",
+          "unrestricted_first_token": "A"
+        },
+        {
+          "id": "official-train-1258-12040627",
+          "verdict": "supported",
+          "unrestricted_first_token": "A"
+        },
+        {
+          "id": "official-train-618-6836086",
+          "verdict": "supported",
+          "unrestricted_first_token": "A"
+        },
+        {
+          "id": "official-train-1032-6836086",
+          "verdict": "supported",
+          "unrestricted_first_token": "A"
+        },
+        {
+          "id": "official-train-1033-6836086",
+          "verdict": "supported",
+          "unrestricted_first_token": "A"
+        },
+        {
+          "id": "official-train-1284-3578380",
+          "verdict": "supported",
+          "unrestricted_first_token": "A"
+        },
+        {
+          "id": "official-train-1065-20418809",
+          "verdict": "supported",
+          "unrestricted_first_token": "A"
+        },
+        {
+          "id": "official-train-568-23418635",
+          "verdict": "supported",
+          "unrestricted_first_token": "A"
+        },
+        {
+          "id": "official-train-1208-10284593",
+          "verdict": "supported",
+          "unrestricted_first_token": "A"
+        },
+        {
+          "id": "official-train-1186-7485455",
+          "verdict": "supported",
+          "unrestricted_first_token": "A"
+        },
+        {
+          "id": "official-train-894-14724693",
+          "verdict": "supported",
+          "unrestricted_first_token": "A"
+        },
+        {
+          "id": "official-train-403-1921218",
+          "verdict": "supported",
+          "unrestricted_first_token": "A"
+        },
+        {
+          "id": "official-train-404-1921218",
+          "verdict": "supported",
+          "unrestricted_first_token": "A"
+        },
+        {
+          "id": "official-train-406-6796297",
+          "verdict": "supported",
+          "unrestricted_first_token": "A"
+        },
+        {
+          "id": "official-train-1138-6796297",
+          "verdict": "supported",
+          "unrestricted_first_token": "A"
+        },
+        {
+          "id": "official-train-736-5389095",
+          "verdict": "supported",
+          "unrestricted_first_token": "A"
+        },
+        {
+          "id": "official-train-1148-4828631",
+          "verdict": "supported",
+          "unrestricted_first_token": "A"
+        },
+        {
+          "id": "official-train-1091-2603304",
+          "verdict": "supported",
+          "unrestricted_first_token": "A"
+        },
+        {
+          "id": "official-train-290-15048300",
+          "verdict": "supported",
+          "unrestricted_first_token": "A"
+        },
+        {
+          "id": "official-train-292-15048300",
+          "verdict": "supported",
+          "unrestricted_first_token": "A"
+        },
+        {
+          "id": "official-train-1381-13481880",
+          "verdict": "supported",
+          "unrestricted_first_token": "A"
+        },
+        {
+          "id": "official-train-224-6944800",
+          "verdict": "supported",
+          "unrestricted_first_token": "A"
+        },
+        {
+          "id": "official-train-225-6944800",
+          "verdict": "supported",
+          "unrestricted_first_token": "A"
+        },
+        {
+          "id": "official-train-226-6944800",
+          "verdict": "supported",
+          "unrestricted_first_token": "A"
+        },
+        {
+          "id": "official-train-1247-5114282",
+          "verdict": "supported",
+          "unrestricted_first_token": "A"
+        },
+        {
+          "id": "official-train-4-22942787",
+          "verdict": "supported",
+          "unrestricted_first_token": "A"
+        },
+        {
+          "id": "official-train-18-22942787",
+          "verdict": "supported",
+          "unrestricted_first_token": "A"
+        },
+        {
+          "id": "official-train-965-40817021",
+          "verdict": "supported",
+          "unrestricted_first_token": "A"
+        },
+        {
+          "id": "official-train-767-2488880",
+          "verdict": "supported",
+          "unrestricted_first_token": "A"
+        },
+        {
+          "id": "official-train-1378-2488880",
+          "verdict": "supported",
+          "unrestricted_first_token": "A"
+        },
+        {
+          "id": "official-train-896-14338915",
+          "verdict": "supported",
+          "unrestricted_first_token": "A"
+        },
+        {
+          "id": "official-train-897-14338915",
+          "verdict": "supported",
+          "unrestricted_first_token": "A"
+        },
+        {
+          "id": "official-train-916-18037805",
+          "verdict": "supported",
+          "unrestricted_first_token": "A"
+        },
+        {
+          "id": "official-train-455-12643937",
+          "verdict": "supported",
+          "unrestricted_first_token": "A"
+        },
+        {
+          "id": "official-train-657-8533245",
+          "verdict": "supported",
+          "unrestricted_first_token": "A"
+        },
+        {
+          "id": "official-train-1054-10072941",
+          "verdict": "supported",
+          "unrestricted_first_token": "A"
+        },
+        {
+          "id": "official-train-382-11659421",
+          "verdict": "supported",
+          "unrestricted_first_token": "A"
+        },
+        {
+          "id": "official-train-979-11659421",
+          "verdict": "supported",
+          "unrestricted_first_token": "A"
+        },
+        {
+          "id": "official-train-1376-3944632",
+          "verdict": "supported",
+          "unrestricted_first_token": "A"
+        },
+        {
+          "id": "official-train-1293-43329366",
+          "verdict": "supported",
+          "unrestricted_first_token": "A"
+        },
+        {
+          "id": "official-train-732-34469966",
+          "verdict": "supported",
+          "unrestricted_first_token": "A"
+        },
+        {
+          "id": "official-train-733-34469966",
+          "verdict": "supported",
+          "unrestricted_first_token": "A"
+        },
+        {
+          "id": "official-train-245-3430789",
+          "verdict": "supported",
+          "unrestricted_first_token": "A"
+        },
+        {
+          "id": "official-train-245-8447873",
+          "verdict": "supported",
+          "unrestricted_first_token": "A"
+        },
+        {
+          "id": "official-train-246-3430789",
+          "verdict": "supported",
+          "unrestricted_first_token": "A"
+        },
+        {
+          "id": "official-train-246-8447873",
+          "verdict": "supported",
+          "unrestricted_first_token": "A"
+        },
+        {
+          "id": "official-train-449-12209494",
+          "verdict": "supported",
+          "unrestricted_first_token": "A"
+        },
+        {
+          "id": "official-train-449-3430789",
+          "verdict": "supported",
+          "unrestricted_first_token": "A"
+        },
+        {
+          "id": "official-train-1205-5558754",
+          "verdict": "supported",
+          "unrestricted_first_token": "A"
+        },
+        {
+          "id": "official-train-1118-23351136",
+          "verdict": "supported",
+          "unrestricted_first_token": "A"
+        },
+        {
+          "id": "official-train-26-32390525",
+          "verdict": "supported",
+          "unrestricted_first_token": "A"
+        },
+        {
+          "id": "official-train-27-32390525",
+          "verdict": "supported",
+          "unrestricted_first_token": "A"
+        },
+        {
+          "id": "official-train-1374-21993510",
+          "verdict": "supported",
+          "unrestricted_first_token": "A"
+        },
+        {
+          "id": "official-train-1375-21993510",
+          "verdict": "supported",
+          "unrestricted_first_token": "A"
+        }
+      ],
+      "free_generation": [
+        {
+          "id": "official-train-1289-21239672",
+          "text": "A"
+        },
+        {
+          "id": "official-train-1295-21239672",
+          "text": "A"
+        },
+        {
+          "id": "official-train-529-10546779",
+          "text": "A"
+        },
+        {
+          "id": "official-train-529-25413327",
+          "text": "A"
+        },
+        {
+          "id": "official-train-529-36651210",
+          "text": "A"
+        },
+        {
+          "id": "official-train-530-10546779",
+          "text": "A"
+        },
+        {
+          "id": "official-train-530-25413327",
+          "text": "A"
+        },
+        {
+          "id": "official-train-530-36651210",
+          "text": "A"
+        },
+        {
+          "id": "official-train-530-87610599",
+          "text": "A"
+        },
+        {
+          "id": "official-train-531-10546779",
+          "text": "A"
+        },
+        {
+          "id": "official-train-531-25413327",
+          "text": "A"
+        },
+        {
+          "id": "official-train-531-36651210",
+          "text": "A"
+        }
+      ],
+      "calibration_metrics": {
+        "cases": 65,
+        "accuracy": 0.3384615384615385,
+        "macro_f1": 0.1685823754789272,
+        "per_class": {
+          "supported": {
+            "precision": 0.3384615384615385,
+            "recall": 1.0,
+            "f1": 0.5057471264367817,
+            "support": 22
+          },
+          "contradicted": {
+            "precision": null,
+            "recall": 0.0,
+            "f1": 0.0,
+            "support": 12
+          },
+          "insufficient": {
+            "precision": null,
+            "recall": 0.0,
+            "f1": 0.0,
+            "support": 31
+          }
+        },
+        "missing_predictions": 0,
+        "unsupported_false_supported_rate": 1.0,
+        "confusion": {
+          "supported": {
+            "supported": 22
+          },
+          "contradicted": {
+            "supported": 12
+          },
+          "insufficient": {
+            "supported": 31
+          }
+        }
+      }
+    },
+    "bf16": {
+      "counts": {
+        "supported": 50,
+        "contradicted": 15
+      },
+      "predictions": [
+        {
+          "id": "official-train-1289-21239672",
+          "verdict": "supported",
+          "unrestricted_first_token": "A"
+        },
+        {
+          "id": "official-train-1295-21239672",
+          "verdict": "supported",
+          "unrestricted_first_token": "A"
+        },
+        {
+          "id": "official-train-529-10546779",
+          "verdict": "supported",
+          "unrestricted_first_token": "A"
+        },
+        {
+          "id": "official-train-529-25413327",
+          "verdict": "supported",
+          "unrestricted_first_token": "A"
+        },
+        {
+          "id": "official-train-529-36651210",
+          "verdict": "supported",
+          "unrestricted_first_token": "A"
+        },
+        {
+          "id": "official-train-530-10546779",
+          "verdict": "supported",
+          "unrestricted_first_token": "A"
+        },
+        {
+          "id": "official-train-530-25413327",
+          "verdict": "supported",
+          "unrestricted_first_token": "A"
+        },
+        {
+          "id": "official-train-530-36651210",
+          "verdict": "supported",
+          "unrestricted_first_token": "A"
+        },
+        {
+          "id": "official-train-530-87610599",
+          "verdict": "supported",
+          "unrestricted_first_token": "A"
+        },
+        {
+          "id": "official-train-531-10546779",
+          "verdict": "supported",
+          "unrestricted_first_token": "A"
+        },
+        {
+          "id": "official-train-531-25413327",
+          "verdict": "supported",
+          "unrestricted_first_token": "A"
+        },
+        {
+          "id": "official-train-531-36651210",
+          "verdict": "supported",
+          "unrestricted_first_token": "A"
+        },
+        {
+          "id": "official-train-1258-12040627",
+          "verdict": "supported",
+          "unrestricted_first_token": "A"
+        },
+        {
+          "id": "official-train-618-6836086",
+          "verdict": "contradicted",
+          "unrestricted_first_token": "B"
+        },
+        {
+          "id": "official-train-1032-6836086",
+          "verdict": "contradicted",
+          "unrestricted_first_token": "B"
+        },
+        {
+          "id": "official-train-1033-6836086",
+          "verdict": "contradicted",
+          "unrestricted_first_token": "B"
+        },
+        {
+          "id": "official-train-1284-3578380",
+          "verdict": "supported",
+          "unrestricted_first_token": "A"
+        },
+        {
+          "id": "official-train-1065-20418809",
+          "verdict": "supported",
+          "unrestricted_first_token": "A"
+        },
+        {
+          "id": "official-train-568-23418635",
+          "verdict": "supported",
+          "unrestricted_first_token": "A"
+        },
+        {
+          "id": "official-train-1208-10284593",
+          "verdict": "supported",
+          "unrestricted_first_token": "A"
+        },
+        {
+          "id": "official-train-1186-7485455",
+          "verdict": "supported",
+          "unrestricted_first_token": "A"
+        },
+        {
+          "id": "official-train-894-14724693",
+          "verdict": "supported",
+          "unrestricted_first_token": "A"
+        },
+        {
+          "id": "official-train-403-1921218",
+          "verdict": "contradicted",
+          "unrestricted_first_token": "B"
+        },
+        {
+          "id": "official-train-404-1921218",
+          "verdict": "supported",
+          "unrestricted_first_token": "A"
+        },
+        {
+          "id": "official-train-406-6796297",
+          "verdict": "supported",
+          "unrestricted_first_token": "A"
+        },
+        {
+          "id": "official-train-1138-6796297",
+          "verdict": "supported",
+          "unrestricted_first_token": "A"
+        },
+        {
+          "id": "official-train-736-5389095",
+          "verdict": "supported",
+          "unrestricted_first_token": "A"
+        },
+        {
+          "id": "official-train-1148-4828631",
+          "verdict": "supported",
+          "unrestricted_first_token": "A"
+        },
+        {
+          "id": "official-train-1091-2603304",
+          "verdict": "supported",
+          "unrestricted_first_token": "A"
+        },
+        {
+          "id": "official-train-290-15048300",
+          "verdict": "supported",
+          "unrestricted_first_token": "A"
+        },
+        {
+          "id": "official-train-292-15048300",
+          "verdict": "supported",
+          "unrestricted_first_token": "A"
+        },
+        {
+          "id": "official-train-1381-13481880",
+          "verdict": "supported",
+          "unrestricted_first_token": "A"
+        },
+        {
+          "id": "official-train-224-6944800",
+          "verdict": "supported",
+          "unrestricted_first_token": "A"
+        },
+        {
+          "id": "official-train-225-6944800",
+          "verdict": "contradicted",
+          "unrestricted_first_token": "B"
+        },
+        {
+          "id": "official-train-226-6944800",
+          "verdict": "supported",
+          "unrestricted_first_token": "A"
+        },
+        {
+          "id": "official-train-1247-5114282",
+          "verdict": "supported",
+          "unrestricted_first_token": "A"
+        },
+        {
+          "id": "official-train-4-22942787",
+          "verdict": "supported",
+          "unrestricted_first_token": "A"
+        },
+        {
+          "id": "official-train-18-22942787",
+          "verdict": "supported",
+          "unrestricted_first_token": "A"
+        },
+        {
+          "id": "official-train-965-40817021",
+          "verdict": "supported",
+          "unrestricted_first_token": "A"
+        },
+        {
+          "id": "official-train-767-2488880",
+          "verdict": "supported",
+          "unrestricted_first_token": "A"
+        },
+        {
+          "id": "official-train-1378-2488880",
+          "verdict": "supported",
+          "unrestricted_first_token": "A"
+        },
+        {
+          "id": "official-train-896-14338915",
+          "verdict": "supported",
+          "unrestricted_first_token": "A"
+        },
+        {
+          "id": "official-train-897-14338915",
+          "verdict": "supported",
+          "unrestricted_first_token": "A"
+        },
+        {
+          "id": "official-train-916-18037805",
+          "verdict": "supported",
+          "unrestricted_first_token": "A"
+        },
+        {
+          "id": "official-train-455-12643937",
+          "verdict": "supported",
+          "unrestricted_first_token": "A"
+        },
+        {
+          "id": "official-train-657-8533245",
+          "verdict": "supported",
+          "unrestricted_first_token": "A"
+        },
+        {
+          "id": "official-train-1054-10072941",
+          "verdict": "supported",
+          "unrestricted_first_token": "A"
+        },
+        {
+          "id": "official-train-382-11659421",
+          "verdict": "supported",
+          "unrestricted_first_token": "A"
+        },
+        {
+          "id": "official-train-979-11659421",
+          "verdict": "supported",
+          "unrestricted_first_token": "A"
+        },
+        {
+          "id": "official-train-1376-3944632",
+          "verdict": "supported",
+          "unrestricted_first_token": "A"
+        },
+        {
+          "id": "official-train-1293-43329366",
+          "verdict": "contradicted",
+          "unrestricted_first_token": "B"
+        },
+        {
+          "id": "official-train-732-34469966",
+          "verdict": "supported",
+          "unrestricted_first_token": "A"
+        },
+        {
+          "id": "official-train-733-34469966",
+          "verdict": "supported",
+          "unrestricted_first_token": "A"
+        },
+        {
+          "id": "official-train-245-3430789",
+          "verdict": "supported",
+          "unrestricted_first_token": "A"
+        },
+        {
+          "id": "official-train-245-8447873",
+          "verdict": "contradicted",
+          "unrestricted_first_token": "B"
+        },
+        {
+          "id": "official-train-246-3430789",
+          "verdict": "supported",
+          "unrestricted_first_token": "A"
+        },
+        {
+          "id": "official-train-246-8447873",
+          "verdict": "contradicted",
+          "unrestricted_first_token": "B"
+        },
+        {
+          "id": "official-train-449-12209494",
+          "verdict": "contradicted",
+          "unrestricted_first_token": "B"
+        },
+        {
+          "id": "official-train-449-3430789",
+          "verdict": "supported",
+          "unrestricted_first_token": "A"
+        },
+        {
+          "id": "official-train-1205-5558754",
+          "verdict": "contradicted",
+          "unrestricted_first_token": "B"
+        },
+        {
+          "id": "official-train-1118-23351136",
+          "verdict": "contradicted",
+          "unrestricted_first_token": "B"
+        },
+        {
+          "id": "official-train-26-32390525",
+          "verdict": "contradicted",
+          "unrestricted_first_token": "B"
+        },
+        {
+          "id": "official-train-27-32390525",
+          "verdict": "contradicted",
+          "unrestricted_first_token": "B"
+        },
+        {
+          "id": "official-train-1374-21993510",
+          "verdict": "contradicted",
+          "unrestricted_first_token": "B"
+        },
+        {
+          "id": "official-train-1375-21993510",
+          "verdict": "contradicted",
+          "unrestricted_first_token": "B"
+        }
+      ],
+      "free_generation": [
+        {
+          "id": "official-train-1289-21239672",
+          "text": "A"
+        },
+        {
+          "id": "official-train-1295-21239672",
+          "text": "A"
+        },
+        {
+          "id": "official-train-529-10546779",
+          "text": "A"
+        },
+        {
+          "id": "official-train-529-25413327",
+          "text": "A"
+        },
+        {
+          "id": "official-train-529-36651210",
+          "text": "A"
+        },
+        {
+          "id": "official-train-530-10546779",
+          "text": "A"
+        },
+        {
+          "id": "official-train-530-25413327",
+          "text": "A"
+        },
+        {
+          "id": "official-train-530-36651210",
+          "text": "A"
+        },
+        {
+          "id": "official-train-530-87610599",
+          "text": "B"
+        },
+        {
+          "id": "official-train-531-10546779",
+          "text": "A"
+        },
+        {
+          "id": "official-train-531-25413327",
+          "text": "A"
+        },
+        {
+          "id": "official-train-531-36651210",
+          "text": "A"
+        }
+      ],
+      "calibration_metrics": {
+        "cases": 65,
+        "accuracy": 0.36923076923076925,
+        "macro_f1": 0.25308641975308643,
+        "per_class": {
+          "supported": {
+            "precision": 0.44,
+            "recall": 1.0,
+            "f1": 0.6111111111111112,
+            "support": 22
+          },
+          "contradicted": {
+            "precision": 0.13333333333333333,
+            "recall": 0.16666666666666666,
+            "f1": 0.14814814814814814,
+            "support": 12
+          },
+          "insufficient": {
+            "precision": null,
+            "recall": 0.0,
+            "f1": 0.0,
+            "support": 31
+          }
+        },
+        "missing_predictions": 0,
+        "unsupported_false_supported_rate": 0.6511627906976745,
+        "confusion": {
+          "supported": {
+            "supported": 22
+          },
+          "contradicted": {
+            "supported": 10,
+            "contradicted": 2
+          },
+          "insufficient": {
+            "supported": 18,
+            "contradicted": 13
+          }
+        }
+      }
+    }
+  }
+}
