@@ -1,9 +1,9 @@
 {
-  "updated": "2026-11-04",
+  "updated": "2026-11-05",
   "model": "qwen3.5-27b",
   "scope": "development runs and engineering validation; frozen test set reserved",
   "checks": {
-    "offline_tests_passed": 132,
+    "offline_tests_passed": 140,
     "frontend_typecheck": "passed",
     "frontend_production_build": "passed",
     "live_report_api": "completed"
@@ -94,6 +94,48 @@
       "repeats": 1,
       "protocol_sha256": "a2223c3ab490e673e04b04fdf18e029f0623638b7b9c35991e53cd55e3335252",
       "predictions_sha256": "714380a36dcda04d4856fcd07422703a234cb8308c776befcbf7962395859884"
+    },
+    {
+      "name": "fresh6_grep",
+      "task_count": 6,
+      "attempts": 6,
+      "completed": 6,
+      "methods": [
+        "grep"
+      ],
+      "repeats": 1,
+      "protocol_sha256": "14c6c2724914b01a03ef05fcb17080703c4f62f4ce269edf3751d87cd19338c8",
+      "predictions_sha256": "61b80ab5e6b417f1a16e1ad47b2f43caad64ef4b84bdd2bf8895aa9a62f1a829",
+      "counting_note": "branch records may reuse base answers; not independent extra tasks"
+    },
+    {
+      "name": "review_reread_pilot",
+      "task_count": 6,
+      "attempts": 18,
+      "completed": 18,
+      "methods": [
+        "baseline",
+        "review-rewrite",
+        "review-reread"
+      ],
+      "repeats": 1,
+      "protocol_sha256": "c14937fd96ad9b654729f7265052c81da879a2eb0047bd77a67628e2490351ea",
+      "predictions_sha256": "1b14f99d35c152a15e52562af71295ec21e1c840141b91f532800c9568530b55",
+      "counting_note": "branch records may reuse base answers; not independent extra tasks"
+    },
+    {
+      "name": "empty_read_control",
+      "task_count": 6,
+      "attempts": 12,
+      "completed": 12,
+      "methods": [
+        "baseline",
+        "empty-read-rescue"
+      ],
+      "repeats": 1,
+      "protocol_sha256": "69e9614715356df29432a16d79bbc1e05f0841f6c6fdcbd3c687ae19862ae517",
+      "predictions_sha256": "23488a7156f6bcac58d0edd32b6d3a5bd64cafe7aa1ecab078871f51ab46de1f",
+      "counting_note": "branch records may reuse base answers; not independent extra tasks"
     }
   ],
   "support_smoke": {
@@ -103,5 +145,19 @@
     "measured_tokens": 13871,
     "scope": "16 authored synthetic examples; single model, one attempt; preliminary triage check, not real-world accuracy",
     "protocol_sha256": "e3601bfd46f38802d4de9b436ff10d9531abd84863fff71fc9643a9f6a16544c"
+  },
+  "development_coverage": {
+    "unique_tasks": 36,
+    "unique_papers": 35,
+    "complete_upstream_runs": 96,
+    "fixed_read_answers": 330
+  },
+  "cross_model_review": {
+    "cases": 16,
+    "models": [
+      "qwen3.5-27b",
+      "qwen3.5-397b-a17b"
+    ],
+    "purpose": "candidate judgment comparison, not human ground truth"
   }
 }

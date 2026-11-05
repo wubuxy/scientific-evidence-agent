@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="680" viewBox="0 0 1440 680" role="img" aria-labelledby="title desc">
+<title id="title">核验驱动回读的受控实验</title>
+<desc id="desc">固定问题、原始答案与已读证据，比较原始答案、核验后仅重答、核验后补读重答。另有仅无回读时触发的关键词补读对照。每个分支包含上游费用并独立评分。</desc>
+<defs>
+<linearGradient id="bg" x2="1" y2="1"><stop stop-color="#f3f6ff"/><stop offset="1" stop-color="#edf7f5"/></linearGradient>
+<marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10" fill="none" stroke="#8999b2" stroke-width="1.6"/></marker>
+<style>text{font-family:"Microsoft YaHei","Noto Sans SC",sans-serif}.small{font-size:19px;fill:#5e708e}.label{font-size:21px;fill:#243e67}.title{font-size:25px;font-weight:bold;fill:#152d50}</style>
+</defs>
+<rect width="1440" height="680" rx="28" fill="url(#bg)"/>
+<rect x="48" y="43" width="5" height="26" rx="2" fill="#4a63d9"/>
+<text x="68" y="65" font-size="21" letter-spacing="2" fill="#4a63d9" font-weight="bold">EVIDENCE GUIDED READING</text>
+<text x="48" y="116" font-size="38" font-weight="bold" fill="#152d50">一次定向回读 如何验证它的作用</text>
+<text x="48" y="151" class="small">固定上游轨迹，区分新增证据与再次作答的作用。生成过程不接触参考答案。</text>
+<rect x="1090" y="55" width="300" height="54" rx="27" fill="#fff" stroke="#dce4ef"/>
+<text x="1240" y="89" text-anchor="middle" font-size="20" fill="#386a66">离线研究 · 每分支 20k tokens</text>
+<rect x="48" y="205" width="310" height="250" rx="20" fill="#fff" stroke="#dce4ef"/>
+<text x="74" y="247" class="title">共享起点</text>
+<text x="74" y="291" class="label">同一个论文问题</text>
+<text x="74" y="328" class="label">原始 Grep 答案</text>
+<text x="74" y="365" class="label">已回读原文与引用地址</text>
+<rect x="72" y="394" width="262" height="34" rx="10" fill="#eef2ff"/>
+<text x="203" y="418" text-anchor="middle" font-size="17" fill="#4a63d9">前序调用费用计入各分支</text>
+<rect x="412" y="279" width="350" height="176" rx="20" fill="#eaf3f1" stroke="#cce6df"/>
+<text x="438" y="320" class="title">结构化核验</text>
+<text x="438" y="362" class="label">事实支持 · 回答充分性</text>
+<text x="438" y="395" class="label">方法归属 · 实验阶段</text>
+<text x="438" y="430" class="small">发现缺口后给出查询与原文锚点</text>
+<rect x="834" y="194" width="556" height="94" rx="18" fill="#fff" stroke="#dce4ef"/>
+<circle cx="871" cy="229" r="17" fill="#e9edf6"/><text x="871" y="236" text-anchor="middle" font-size="19" fill="#4c6282">A</text>
+<text x="906" y="235" class="title">原始答案</text><text x="906" y="267" class="small">保留已有结果，作为参照</text>
+<rect x="834" y="310" width="556" height="94" rx="18" fill="#f1f3ff" stroke="#d9dffb"/>
+<circle cx="871" cy="345" r="17" fill="#dfe5ff"/><text x="871" y="352" text-anchor="middle" font-size="19" fill="#4a63d9">B</text>
+<text x="906" y="351" class="title">核验后仅重答</text><text x="906" y="383" class="small">相同已读证据，增加复核意见</text>
+<rect x="834" y="426" width="556" height="94" rx="18" fill="#e4f4ef" stroke="#bee3d6"/>
+<circle cx="871" cy="461" r="17" fill="#bfe6d8"/><text x="871" y="468" text-anchor="middle" font-size="19" fill="#187764">C</text>
+<text x="906" y="467" class="title">核验后补读 再作答</text><text x="906" y="499" class="small">一次同论文 Grep 定位，最多回读 40 行</text>
+<g fill="none" stroke="#8999b2" stroke-width="2.5" marker-end="url(#arrow)"><path d="M358 241H823"/><path d="M358 365H400"/><path d="M762 355H823"/><path d="M762 413H794V473H823"/></g>
+<rect x="48" y="551" width="1342" height="80" rx="18" fill="#fff" stroke="#dce4ef"/>
+<text x="75" y="583" font-size="20" fill="#947539" font-weight="bold">补充对照</text>
+<text x="200" y="583" class="small">仅原始回读为空时，按问题关键词补读一次；无需核验模型。</text>
+<text x="75" y="613" font-size="18" fill="#5e708e">统一记录：完整任务分母 · 触发与回退 · 可见原文 · 分支总费用 · 实际新增调用 · 独立评分</text>
+</svg>

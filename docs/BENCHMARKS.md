@@ -75,3 +75,16 @@ python -m research_backend.benchmarks.support_review --inputs tests/fixtures/sup
 输出保存为 `reviews.jsonl`，包括候选判定、理由、程序解析的原文行范围、token 和运行状态。`needs_human_review=true` 标识人工核验步骤；该模块供离线研究使用，不改变默认报告流程。
 
 指标定义与已执行规模见 [验证成果](EVALUATION.md)。
+
+## 核验驱动的一次回读
+
+复用一组已经完成的单论文 Grep 轨迹，分别保存原始答案、仅复核重答、复核后补读重答三组结果。核验区分支持、充分性、方法归属与实验阶段；每个分支的 token 预算包含原始任务和复核调用。
+
+```powershell
+python -m research_backend.benchmarks.repair_replay --inputs ../benchmark-data/qasper-v1/dev/inputs.json --prior ../benchmark-runs/qasper-dev --out ../benchmark-runs/review-reread --max-tokens 20000
+python -m research_backend.benchmarks.score --inputs ../benchmark-data/qasper-v1/dev/inputs.json --gold ../benchmark-data/qasper-v1/dev/gold.json --run ../benchmark-runs/review-reread
+```
+
+`--prior` 必须来自同模型、同 token 上限的 Grep 运行；试验限定单论文、单目标。一次定位最多取 50 个匹配，优先未读位置，再按距离已有锚点排序；最多补读 40 行。输出记录触发、回退、用量与各组实际可见证据，评分保留全部任务。
+
+增加 `--control-only` 并使用新的输出目录，可运行不调用核验模型的规则对照：仅原始回读为空时，由问题生成关键词查询并补读一次。`usage.json` 记录物理上实际新增的调用，分支预测中的成本则包含共享上游费用；两者分别计量。
