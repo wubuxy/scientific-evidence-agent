@@ -1,0 +1,19 @@
+{
+  "description": "Corrected gold labels for 13 SciFact training-set claim-document pairs",
+  "source_paper": "Gold Label Errors in the SciFact Benchmark: An LLM-Assisted Annotation Audit",
+  "corrections": [
+    {"claim_id": 164, "original_label": "SUPPORT", "corrected_label": "CONTRADICT", "error_type": "label_reversal", "justification": "Evidence states 'no association was detected between bariatric surgery and cancer'"},
+    {"claim_id": 165, "original_label": "SUPPORT", "corrected_label": "CONTRADICT", "error_type": "label_reversal", "justification": "Same study; no association with cancer including breast cancer"},
+    {"claim_id": 933, "original_label": "SUPPORT", "corrected_label": "CONTRADICT", "error_type": "label_reversal", "justification": "Evidence reports significantly less morphine use (P=.03); claim says 'increased'"},
+    {"claim_id": 1386, "original_label": "CONTRADICT", "corrected_label": "SUPPORT", "error_type": "label_reversal", "justification": "'Reduced stimulatory capacity' = represses, which supports the claim"},
+    {"claim_id": 576, "original_label": "SUPPORT", "corrected_label": "NEI", "error_type": "label_reversal", "justification": "Anti-CTLA-4 doesn't reinvigorate exhausted T cells per evidence"},
+    {"claim_id": 621, "original_label": "SUPPORT", "corrected_label": "NEI", "error_type": "entity_mismatch", "justification": "Study explicitly recruited adults who 'did not meet criteria for dementia'; claim says 'Individuals with Alzheimers'"},
+    {"claim_id": 657, "original_label": "SUPPORT", "corrected_label": "NEI", "error_type": "entity_mismatch", "justification": "Evidence is about RHBDL4; claim attributes function to signal peptide peptidase (different enzyme)"},
+    {"claim_id": 79, "original_label": "SUPPORT", "corrected_label": "NEI", "error_type": "rationale_error", "justification": "Abstract never mentions pyroptosis"},
+    {"claim_id": 416, "original_label": "SUPPORT", "corrected_label": "NEI", "error_type": "causal_misread", "justification": "Evidence shows effect modification, not that APOE4 causes longer reproductive period"},
+    {"claim_id": 1036, "original_label": "SUPPORT", "corrected_label": "NEI", "error_type": "entity_mismatch", "justification": "Paper is about bovine SCNT; claim says 'human'"},
+    {"claim_id": 1040, "original_label": "SUPPORT", "corrected_label": "NEI", "error_type": "entity_mismatch", "justification": "Paper is about vertebrate nucleosomes; claim says 'yeasts'"},
+    {"claim_id": 1145, "original_label": "SUPPORT", "corrected_label": "NEI", "error_type": "modality_mismatch", "justification": "Evidence is a microsimulation projection, not observed reduction"},
+    {"claim_id": 1297, "original_label": "SUPPORT", "corrected_label": "NEI", "error_type": "numerical_mismatch", "justification": "Evidence reports ~15 million hospitalizations; claim says '30 million cases'"}
+  ]
+}

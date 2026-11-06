@@ -1,0 +1,18 @@
+{
+  "description": "Corrected gold labels for 11 SciFact dev-set claim-document pairs + 1 per-document error",
+  "source_paper": "Gold Label Errors in the SciFact Benchmark: An LLM-Assisted Annotation Audit",
+  "corrections": [
+    {"claim_id": 593, "doc_id": 19675911, "original_label": "SUPPORT", "corrected_label": "CONTRADICT", "error_type": "label_reversal", "justification": "Evidence states incidence 'did not change over time'; claim says 'decreased by 10%'"},
+    {"claim_id": 879, "doc_id": null, "original_label": "CONTRADICT", "corrected_label": "SUPPORT", "error_type": "label_reversal", "justification": "Abstract sentence [6] concludes 'the large majority of lincRNAs do not function through encoded proteins', agreeing with claim"},
+    {"claim_id": 1385, "doc_id": null, "original_label": "SUPPORT", "corrected_label": "CONTRADICT", "error_type": "label_reversal", "justification": "Rationale states 'enhancing cSMAC formation reduced stimulatory capacity', opposite of claim"},
+    {"claim_id": 808, "doc_id": null, "original_label": "SUPPORT", "corrected_label": "CONTRADICT", "error_type": "label_reversal", "justification": "Abstract sentence [3] states 'does not rely on cis-acting sequences', contradicting claim"},
+    {"claim_id": 343, "doc_id": null, "original_label": "SUPPORT", "corrected_label": "NEI", "error_type": "outcome_mismatch", "justification": "Claim asks about bleeding events; evidence reports CV mortality, MI, stroke, CHF—bleeding never mentioned"},
+    {"claim_id": 1368, "doc_id": null, "original_label": "SUPPORT", "corrected_label": "NEI", "error_type": "outcome_mismatch", "justification": "Claim asks about preterm birth; evidence reports gestational diabetes, pre-eclampsia, SGA—preterm birth absent"},
+    {"claim_id": 770, "doc_id": null, "original_label": "SUPPORT", "corrected_label": "NEI", "error_type": "outcome_mismatch", "justification": "PFS non-significant (p=0.07); QoL comparison is between two fluoropyrimidines, not single-agent vs combination"},
+    {"claim_id": 1216, "doc_id": null, "original_label": "SUPPORT", "corrected_label": "NEI", "error_type": "entity_mismatch", "justification": "Paper reports on mouse Tmem27; claim specifies 'human beta cells'"},
+    {"claim_id": 1274, "doc_id": null, "original_label": "SUPPORT", "corrected_label": "NEI", "error_type": "entity_mismatch", "justification": "Paper studies V. cholerae and A. baylyi; claim attributes to E. coli"},
+    {"claim_id": 847, "doc_id": null, "original_label": "CONTRADICT", "corrected_label": "NEI", "error_type": "entity_mismatch", "justification": "Rationale cites rifampicin (1960s drug); claim says 'new drugs'. Moxifloxacin data supports claim direction but 'often' is unsupported"},
+    {"claim_id": 208, "doc_id": null, "original_label": "SUPPORT", "corrected_label": "CONTRADICT", "error_type": "overgeneralization", "justification": "Abstract sentences [1] and [8] establish CHEK2 role in breast cancer and report OR 2.26 for 1100delC mutation"},
+    {"claim_id": 597, "doc_id": null, "original_label": "SUPPORT", "corrected_label": "NEI", "error_type": "per_document_outcome_mismatch", "justification": "Third evidence document discusses cervical cancer mortality; claim is about incidence"}
+  ]
+}

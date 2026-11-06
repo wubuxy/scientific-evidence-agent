@@ -52,7 +52,7 @@
 | 上下文研究 | 完成 **330 次固定回读作答对照**；支持按行选择、局部 BM25 与任务级配对分析 |
 | 证据复核 | 实现声明支持候选判定与行号依据；**16 条合成正反例**基础检查通过 |
 | 定向回读 | 实现 **6 题三组受控对照**，分离原始答案、复核重答与补读重答；记录统一预算与实际调用费用 |
-| 单卡核验器研究 | A5000 上完成 **1.5B/7B 双精度、三种子 BF16 LoRA 与 MiniCheck** 对照；新 128 对测试上 7B macro F1 0.581→平均 0.746，但支持精确率门槛未通过，见[完整结果与风险取舍](docs/results/SCIFACT_VERIFIER_SCALE_V2.md) |
+| 单卡核验器研究 | A5000 上完成 **1.5B/7B 双精度、三种子 BF16 LoRA 与 MiniCheck** 对照；原始 gold 的新 128 对测试上 7B macro F1 0.581→平均 0.746，但支持精确率门槛未通过，见[完整结果](docs/results/SCIFACT_VERIFIER_SCALE_V2.md)及后续[标签与误判诊断](docs/results/VERIFIER_DATA_DIAGNOSIS.md) |
 
 验证覆盖科研工作流、检索问答与证据上下文三个层次。数据范围、指标定义及实验配置见 [验证成果](docs/EVALUATION.md)，运行命令见 [复现实验](docs/BENCHMARKS.md)。
 
