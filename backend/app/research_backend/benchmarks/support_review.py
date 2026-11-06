@@ -8,7 +8,7 @@ from pathlib import Path
 import time
 from typing import Literal
 
-from pydantic import Field
+from pydantic import ConfigDict, Field
 from ..config import Settings, load_environment
 from ..providers import ChatModel, decode_tool_arguments
 from ..schemas import Contract
@@ -25,6 +25,12 @@ class Review(Contract):
     verdict: Literal["supported", "contradicted", "insufficient"]
     rationale: str = Field(min_length=1, max_length=800)
     evidence_spans: list[Span] = Field(max_length=6)
+
+
+class RecordedReview(Review):
+    """Offline recovery may retain bounded verbose prose without changing decisions."""
+    model_config = ConfigDict(str_strip_whitespace=False)
+    rationale: str = Field(min_length=1, max_length=4000)
 
 
 SYSTEM = """Review whether the supplied source excerpts support the proposed claim.
@@ -58,8 +64,8 @@ def review_messages(case):
     return [dict(role="system", content=SYSTEM), dict(role="user", content=json.dumps(payload, ensure_ascii=False))]
 
 
-def resolve_review(payload, case):
-    review = Review.model_validate(payload)
+def resolve_review(payload, case, *, allow_long_rationale=False):
+    review = (RecordedReview if allow_long_rationale else Review).model_validate(payload)
     if review.verdict != "insufficient" and not review.evidence_spans:
         raise ValueError("Decisive verdict requires evidence spans")
     by_id = {e["id"]: e for e in case["evidence"]}

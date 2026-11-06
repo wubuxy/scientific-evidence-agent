@@ -88,3 +88,22 @@ async def test_judge_checkpoint_preserves_unknown_usage_and_stops_further_calls(
     assert len(result["records"])==3 and all(r["status"]=="failed" for r in result["records"])
     assert len(list((tmp_path/"judge").glob("case-*.json")))==3
     assert result["records"][-1]["error"]=="prior_unknown_usage"
+
+
+@pytest.mark.parametrize("bad", [None,"verdict","span","too_long","extra"])
+def test_format_recovery_preserves_full_reason_and_rejects_other_errors(bad):
+    module=script("recover_review_format")
+    case=dict(evidence=[dict(id="e",source_id="p",start_line=1,end_line=1,quote="alpha")])
+    payload=dict(verdict="supported",rationale="Evidence "*100,
+                 evidence_spans=[dict(evidence_id="e",start_line=1,end_line=1)])
+    if bad=="verdict":payload["verdict"]="probably"
+    if bad=="span":payload["evidence_spans"][0]["end_line"]=2
+    if bad=="too_long":payload["rationale"]="x"*4001
+    if bad=="extra":payload["invented_field"]=True
+    if bad:
+        with pytest.raises(ValueError):module.recover(payload,case)
+    else:
+        result=module.recover(payload,case)
+        assert result["rationale"]==payload["rationale"]
+        assert result["verdict"]==payload["verdict"]
+        assert result["evidence_spans"][0]["quote"]=="alpha"

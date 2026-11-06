@@ -72,6 +72,9 @@ async def judge_bundle(bundle, model, ceiling):
 
 def validated_reviews(bundle, path):
     artifact = load(path)
+    rationale_policy = artifact.get("rationale_policy", "strict-800")
+    if rationale_policy not in {"strict-800", "offline-retain-4000"}:
+        raise ValueError("Unknown review rationale policy")
     cases = {c["id"]:c for c in checked_cases(bundle)}
     if artifact["cases_fingerprint"] != fingerprint(bundle):
         raise ValueError("Reviews do not match the exact evidence/claims bundle")
@@ -87,7 +90,7 @@ def validated_reviews(bundle, path):
         review = record["review"]
         payload = {k:review[k] for k in ("verdict","rationale")}
         payload["evidence_spans"] = [{k:s[k] for k in ("evidence_id","start_line","end_line")} for s in review["evidence_spans"]]
-        canonical = resolve_review(payload,cases[identifier])
+        canonical = resolve_review(payload,cases[identifier], allow_long_rationale=rationale_policy=="offline-retain-4000")
         if canonical != review:
             raise ValueError("Review spans differ from the supplied canonical evidence")
     return keyed
