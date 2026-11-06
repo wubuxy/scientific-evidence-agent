@@ -262,6 +262,26 @@ def analyze_reports(inputs_path, gold_path, root, reviews_path=None):
                      "All planned failures and missing attempts remain in task denominators; no judge costs are included in task tokens."])
 
 
+def export_annotation_bundle(bundle, directory):
+    """Keep method metadata with the coordinator; distribute only the human view."""
+    from .claim_labels import checked_cases
+    cases = checked_cases(bundle)
+    # Case IDs from export_cases are opaque hashes. Sorting removes method/trial
+    # blocks without changing claims, evidence or the scorer's original bundle.
+    human_cases = [dict(id=c["id"], question=c["question"], claim=c["claim"],
+        evidence=[{key:e[key] for key in ("id", "source_id", "start_line", "end_line", "quote")}
+                  for e in c["evidence"]]) for c in sorted(cases, key=lambda c:c["id"])]
+    directory = Path(directory)
+    directory.mkdir(parents=True, exist_ok=False)
+    write_new(directory/"cases.json", bundle)
+    write_new(directory/"human-cases.json", dict(format=1,
+        purpose="human evidence review; method, run metadata and candidate labels withheld", cases=human_cases))
+    for name in ("annotator-a", "annotator-b", "adjudication"):
+        write_new(directory/(name+".json"), dict(annotation_source="human", annotator=name,
+            cases_sha256=digest(directory/"cases.json"),
+            labels=[dict(id=c["id"], verdict=None, rationale=None, evidence_spans=[]) for c in human_cases]))
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     sub = parser.add_subparsers(dest="command",required=True)
@@ -271,12 +291,9 @@ def main():
     export.add_argument("--out",type=Path,required=True)
     args = parser.parse_args()
     bundle = export_cases(args.inputs,args.run)
-    args.out.mkdir(parents=True,exist_ok=False)
-    write_new(args.out/"cases.json",bundle)
-    for name in ("annotator-a", "annotator-b", "adjudication"):
-        write_new(args.out/(name+".json"),dict(annotation_source="human", annotator=name,
-            cases_sha256=digest(args.out/"cases.json"), labels=[dict(id=c["id"],verdict=None) for c in bundle["cases"]]))
-    print(json.dumps(dict(cases=len(bundle["cases"]),status="exported_blind_annotation_templates")))
+    export_annotation_bundle(bundle, args.out)
+    print(json.dumps(dict(cases=len(bundle["cases"]), status="exported_unannotated_human_packets",
+        distribute="human-cases.json and the assigned annotator file; keep cases.json with coordinator")))
 
 
 if __name__ == "__main__":

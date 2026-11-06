@@ -1,10 +1,20 @@
 # 证据核验器的数据对照实验计划
 
-日期：2026-11-06。状态：**根据已完成诊断形成的下一轮方案，尚未启动新训练，尚未冻结新增数据与独立测试 ID**。研究目标是判断标签质量、难例覆盖和支持判定规则分别能解释多少错误，而非预设微调一定是最终方案。依据见[数据诊断](../results/VERIFIER_DATA_DIAGNOSIS.md)。
+日期：2026-11-06。状态：**已完成公开更正建议的探索性六次训练对照；本计划要求的双人仲裁、目标域新增数据与独立测试尚未完成或冻结**。公开建议对照没有稳定收益，详见[标签干预结果](../results/SCIFACT_LABEL_ABLATION_V1.md)，不能将其当成人工仲裁版 A/B 的完成记录。研究目标是判断标签质量、难例覆盖和支持判定规则分别能解释多少错误，而非预设微调一定是最终方案。依据见[数据诊断](../results/VERIFIER_DATA_DIAGNOSIS.md)。
 
 ## 数据和标注准备
 
 先复核已准备的 83 对样本。两位人工标注者独立判断，仅看到声明和本次提供的摘要；不显示原标签、模型输出和外部审计结论。记录 supported / contradicted / insufficient、证据句位置、数量与范围等限定，以及无法判断的原因。对分歧进行仲裁，报告原始一致率、Cohen's kappa 和仲裁数量。LLM 意见只作为候选意见，不充当第二位人工标注者。
+
+分发与填写遵循[双人标注协议](../HUMAN_REVIEW_PROTOCOL.md)。后续自动评测、静态 skill 与离线经验更新的依赖顺序见[评测和经验更新路线](../AGENT_SKILLS_AND_EVOLUTION.md)，不与本阶段标签对照同时改变提示或策略。
+
+从仓库根目录、使用已安装科研依赖的 Python 打包已有诊断样本：
+
+```powershell
+python scripts/package_verifier_review.py --inputs test-results/verifier-data-diagnosis/review/blind-inputs.json --out test-results/verifier-human-review-v1
+```
+
+输出目录必须不存在，避免覆盖人工工作。分别分发 `annotator-a.zip` 和 `annotator-b.zip`；每个压缩包仅包含人工阅读材料、该人的空白模板及协议，原始标签映射不在包中。给摘要添加的行号是阅读包内的物理文本行号，原文内容不变。打包完成不代表标注完成。
 
 任务判据固定为“所提供证据是否支持完整声明”。没有显著差异不自动证明零效应；研究对象、结局、比较组或阶段不匹配时，需要明确区分矛盾与证据不足。公开审计所列的更正也遵守这套判据，不能照单全收。只按 claim–document 对记录更正，保留原始标签、建议标签、最终标签、原因与来源。
 

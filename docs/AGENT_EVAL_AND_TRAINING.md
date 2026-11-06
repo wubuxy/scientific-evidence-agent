@@ -78,7 +78,7 @@ python -m research_backend.benchmarks.claim_labels judge --cases ../benchmark-ru
 python -m research_backend.benchmarks.trials score --inputs ../benchmark-data/qasper-v1/dev/inputs.json --gold ../benchmark-data/qasper-v1/dev/gold.json --run ../benchmark-runs/repeated-report --reviews ../benchmark-runs/report-reviews.json --out ../benchmark-runs/report-reviewed-scores.json
 ```
 
-导出会生成 `cases.json`、`annotator-a.json`、`annotator-b.json` 和 `adjudication.json`。声明和表格的每个已填写事实单元分别评判；跨论文声明将全部所引证据一起交给判定器，不能选一个最高分的引用代替联合判断。自定义表格字段不会覆盖标准字段的检查。`field_presence_rate` 仅统计请求字段是否填写；对自由文本中隐含的字段不做语义推断，不能当成回答充分性。
+导出会生成协调者使用的 `cases.json`、人工阅读用的 `human-cases.json`、`annotator-a.json`、`annotator-b.json` 和 `adjudication.json`。人工阅读版按不透明 ID 排序，仅保留问题、声明及证据；方法、轮次与候选标签不随人工包分发。每人只接收阅读版和自己的标签模板，具体见[双人标注协议](HUMAN_REVIEW_PROTOCOL.md)。声明和表格的每个已填写事实单元分别评判；跨论文声明将全部所引证据一起交给判定器，不能选一个最高分的引用代替联合判断。自定义表格字段不会覆盖标准字段的检查。`field_presence_rate` 仅统计请求字段是否填写；对自由文本中隐含的字段不做语义推断，不能当成回答充分性。
 
 两位标注者分别填写各自文件的 `verdict`，使用不同的 `annotator` 标识；分歧在第三个文件中仲裁。保留 `cases_sha256`，不要把模型候选意见复制成独立人工标签。完成后运行：
 

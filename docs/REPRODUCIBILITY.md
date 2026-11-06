@@ -51,14 +51,14 @@ scipy 和 openpyxl 的检查发生在对应测试中。缺少 scipy 不会跳过
 
 ## 本地验证记录
 
-截至 2026-11-06，加入标签干预的文档范围、评分隔离、失败分母、阈值与六次训练模型释放检查后，最新验证如下，均收集 186 项：
+截至 2026-11-06，加入人工阅读包的方法隔离、原文保留及空白标签拒绝检查后，Windows 完整环境收集并通过 187 项。下表同时保留上一提交的 Ubuntu 核心环境记录，收集数分开列出：
 
-| 环境 | 通过 | 跳过 | 失败 |
-|---|---:|---:|---:|
-| Windows / Python 3.13，干净完整环境，含 rg 和 CPU torch 2.15.0 | 186 | 0 | 0 |
-| A5000 主机 Ubuntu / Python 3.12，核心依赖环境，含 rg | 173 | 13（统计、XLSX、LSTM） | 0 |
+| 环境 | 收集 | 通过 | 跳过 | 失败 |
+|---|---:|---:|---:|---:|
+| Windows / Python 3.13，完整环境，含 rg 和 CPU torch 2.15.0，本轮 | 187 | 187 | 0 | 0 |
+| A5000 主机 Ubuntu / Python 3.12，核心依赖环境，含 rg，上一提交 | 186 | 173 | 13（统计、XLSX、LSTM） | 0 |
 
-干净环境的核心和分析依赖按提交的约束文件安装，CPU torch 从官方索引补齐。140、142、152、163、168、177 项的历史矩阵分别保存在机器记录的 `offline_test_profiles_before_demo`、`offline_test_profiles_before_agent_evals`、`offline_test_profiles_before_eval_completion`、`offline_test_profiles_before_verifier_pilot`、`offline_test_profiles_before_verifier_scale`、`offline_test_profiles_before_verifier_labels` 中；最新结果和包版本见 [validation-summary.json](results/validation-summary.json) 的 `checks`。历史 163 项时 Windows 核心环境为 150 passed / 13 skipped，缺 rg 为 145 passed / 18 skipped；这些历史数值不冒充最新运行。
+干净环境的核心和分析依赖按提交的约束文件安装，CPU torch 从官方索引补齐。140、142、152、163、168、177、186 项的历史矩阵分别保存在机器记录的 `offline_test_profiles_before_demo`、`offline_test_profiles_before_agent_evals`、`offline_test_profiles_before_eval_completion`、`offline_test_profiles_before_verifier_pilot`、`offline_test_profiles_before_verifier_scale`、`offline_test_profiles_before_verifier_labels`、`offline_test_profiles_before_human_review` 中；最新结果和包版本见 [validation-summary.json](results/validation-summary.json) 的 `checks`。历史 163 项时 Windows 核心环境为 150 passed / 13 skipped，缺 rg 为 145 passed / 18 skipped；这些历史数值不冒充最新运行。
 
 端到端 Agent CLI 使用本地假模型端点，覆盖两轮五组分支、两次生产报告、六个声明／单元格和显式合成标注校准，不产生云模型费用。新增的真实单卡核验器训练与 Agent 效果分开统计，完整环境、适配器、评分与局限见 [A5000 pilot 结果](results/SCIFACT_VERIFIER_PILOT_V1.md)。在仓库根目录执行 `python scripts/audit_verifier_pilot.py` 可复查已发布的原始预测和测试分数，无需下载模型。
 

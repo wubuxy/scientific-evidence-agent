@@ -1,0 +1,40 @@
+{
+  "date": "2026-11-06",
+  "scope": "engineering and unannotated packet preparation, not new model quality results",
+  "full_tests": {
+    "command": "python -m pytest tests -q",
+    "cwd": "backend",
+    "python": "3.13.13",
+    "passed": 187,
+    "skipped": 0,
+    "failed": 0,
+    "elapsed_seconds": 52.0
+  },
+  "targeted_tests": {
+    "eval_completion": 12,
+    "agent_trials": 10,
+    "includes_loopback_cli_smoke": true,
+    "real_model_calls": 0
+  },
+  "packet": {
+    "cases": 83,
+    "completed_human_labels": 0,
+    "source_sha256": "b8dad4b04a704717dd4ff1b077c9768e20e526ccb4d0c088ae8be5098ea78227",
+    "server_directory": "D:/Ding/results/verifier-human-review-v1",
+    "distributable_sha256": {
+      "annotator-a.zip": "3fa3d2a337a6769c96968b61c594699dd81a511e9d1947203d1a748c4de2d185",
+      "annotator-b.zip": "8c6cdb7f7cf70f12b68e66a2c3eb4baf755ad1a76f329573f965b52eafda0d1e"
+    },
+    "checks": [
+      "83 case IDs covered by each blank template",
+      "claims and evidence text identical to original packet",
+      "only assigned labels, human view and instructions in each zip",
+      "coordinator metadata excluded"
+    ]
+  },
+  "source_sha256": {
+    "backend/app/research_backend/benchmarks/reports.py": "14808a38b029ea5b0251e58377a1afa94425d5d54401bb11b5be44dcdd6ee579",
+    "backend/tests/test_eval_completion.py": "9f91f4ecf0c85fc1ea6ab9ee3c37b6ca30857e15a65df239ffac7f450bd79660",
+    "scripts/package_verifier_review.py": "3f14af45e3234fb49568d0906c12cd1cd56fa79c53a0d5907fb6242e16554762"
+  }
+}

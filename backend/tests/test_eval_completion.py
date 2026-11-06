@@ -199,6 +199,35 @@ def test_calibration_is_explicit_and_missing_judgements_stay_in_denominator(tmp_
     assert result["macro_f1"]==pytest.approx(2/3)
 
 
+def test_human_export_hides_methods_and_labels_but_preserves_evidence_and_calibration(tmp_path):
+    files = calibration_files(tmp_path)
+    bundle = trials.load(files[0])
+    for case in bundle["cases"]:
+        case.update(method="HIDDEN_METHOD", task_id="HIDDEN_TASK", repeat=72, human_label="HIDDEN_LABEL")
+        case["evidence"][0]["candidate_review"] = "HIDDEN_REVIEW"
+    bundle["cases"].reverse()
+    original = json.dumps(bundle, sort_keys=True)
+    directory = tmp_path/"packets"
+    reports.export_annotation_bundle(bundle, directory)
+    assert json.dumps(bundle, sort_keys=True)==original
+    assert trials.load(directory/"cases.json")==bundle
+    human = trials.load(directory/"human-cases.json")
+    assert "HIDDEN" not in json.dumps(human)
+    assert [c["id"] for c in human["cases"]]==["0", "1", "2"]
+    for case in human["cases"]:
+        assert set(case)=={"id", "question", "claim", "evidence"}
+        assert len(case["evidence"])==2 and case["evidence"][1]["quote"]=="beta"
+        assert case["evidence"][1]["start_line"]==2
+    for name in ("annotator-a", "annotator-b", "adjudication"):
+        packet = trials.load(directory/(name+".json"))
+        assert packet["cases_sha256"]==trials.digest(directory/"cases.json")
+        assert all(row["verdict"] is None for row in packet["labels"])
+    with pytest.raises(ValueError, match="Incomplete"):
+        claim_labels.labels(directory/"annotator-a.json", directory/"cases.json", {"0","1","2"})
+    with pytest.raises(FileExistsError):
+        reports.export_annotation_bundle(bundle, directory)
+
+
 def test_blank_labels_disagreements_and_forged_review_spans_are_rejected(tmp_path):
     files = calibration_files(tmp_path)
     annotations = trials.load(files[2])

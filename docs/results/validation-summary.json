@@ -3,19 +3,19 @@
   "model": "qwen3.5-27b",
   "scope": "Agent development runs, engineering validation, and separately reported local verifier studies; QASPER frozen test set reserved",
   "checks": {
-    "offline_tests_passed": 186,
+    "offline_tests_passed": 187,
     "frontend_typecheck": "passed",
     "frontend_production_build": "passed",
     "live_report_api": "completed",
-    "offline_tests_collected": 186,
+    "offline_tests_collected": 187,
     "offline_test_profiles": [
       {
         "profile": "full-locked",
         "platform": "Windows",
         "python": "3.13.13",
         "dependencies": "core + analysis under constraints-ci.txt; CPU torch from the official index",
-        "collected": 186,
-        "passed": 186,
+        "collected": 187,
+        "passed": 187,
         "skipped": 0,
         "failed": 0,
         "errors": 0,
@@ -30,19 +30,7 @@
           "pytest-asyncio": "1.4.1.post1",
           "openai": "3.46.0"
         },
-        "evidence": "docs/results/scifact-label-ablation-v1/windows-full.xml"
-      },
-      {
-        "profile": "core",
-        "platform": "Ubuntu 24.04 / WSL2",
-        "python": "3.12.3",
-        "dependencies": "requirements-research.txt + constraints-ci.txt; rg installed",
-        "collected": 186,
-        "passed": 173,
-        "skipped": 13,
-        "failed": 0,
-        "errors": 0,
-        "evidence": "docs/results/scifact-label-ablation-v1/ubuntu-core.xml"
+        "evidence": "docs/results/human-review-validation.json"
       }
     ],
     "ci_workflow": ".github/workflows/ci.yml",
@@ -51,7 +39,7 @@
     "reproducibility_guide": "docs/REPRODUCIBILITY.md",
     "frontend_build_note": "npm ci, explicit TypeScript check, and production build passed; 558.01 kB analysis chunk warning remains",
     "dependency_constraints_sha256": "f2e946c20ebb1c80ab79be44342d045f6ff55236bb364a515fae6a63e254a1a2",
-    "reproducibility_note": "Windows full: 186 passed; Ubuntu core: 173 passed, 13 optional-dependency skips. Label intervention tests cover correction scope, gold isolation, missing denominators, thresholds, repeated bootstrap groups and six training/reload model lifecycles.",
+    "reproducibility_note": "Windows full: 187 passed, zero skips. Prior 186-case Windows and Ubuntu profiles retained separately. Human export regression checks hide method and candidate metadata while preserving evidence and blank-label rejection.",
     "offline_test_profiles_before_demo": [
       {
         "profile": "core",
@@ -381,6 +369,43 @@
         "failed": 0,
         "errors": 0,
         "evidence": "docs/results/scifact-verifier-scale-v2/ubuntu-core.xml"
+      }
+    ],
+    "offline_test_profiles_before_human_review": [
+      {
+        "profile": "full-locked",
+        "platform": "Windows",
+        "python": "3.13.13",
+        "dependencies": "core + analysis under constraints-ci.txt; CPU torch from the official index",
+        "collected": 186,
+        "passed": 186,
+        "skipped": 0,
+        "failed": 0,
+        "errors": 0,
+        "packages": {
+          "fastapi": "0.162.0",
+          "numpy": "2.5.4",
+          "scipy": "1.18.1",
+          "openpyxl": "3.1.5",
+          "torch": "2.15.0+cpu",
+          "pydantic": "2.14.3",
+          "pytest": "9.2.0",
+          "pytest-asyncio": "1.4.1.post1",
+          "openai": "3.46.0"
+        },
+        "evidence": "docs/results/scifact-label-ablation-v1/windows-full.xml"
+      },
+      {
+        "profile": "core",
+        "platform": "Ubuntu 24.04 / WSL2",
+        "python": "3.12.3",
+        "dependencies": "requirements-research.txt + constraints-ci.txt; rg installed",
+        "collected": 186,
+        "passed": 173,
+        "skipped": 13,
+        "failed": 0,
+        "errors": 0,
+        "evidence": "docs/results/scifact-label-ablation-v1/ubuntu-core.xml"
       }
     ]
   },
