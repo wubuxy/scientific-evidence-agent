@@ -46,3 +46,11 @@ python -m research_backend.benchmarks.trials score --inputs benchmark-data/qaspe
 ```
 
 生成命令不接收 gold。公开计划和逐题指标；正文、完整回读轨迹、配置与凭据不提交到 Git。
+
+## 执行环境修订
+
+批次 run001 在 Windows 深目录中导入资料失败，40 条上游尚未到模型调用阶段，200 个策略结果均失败。原结果按原分母评分并保存在 `docs/results/repair-five-arm-dev20-v1/failed-run001`，不覆盖、不选择性补跑。无研究答案可用于调整方法。
+
+批次 run002 改用短目录 `D:/Ding/r5/run002`，20 篇任务资料已通过离线导入检查，网络调用为零。`plan-run002.json` 重新记录执行时间和修订来源；题目、模型、方法、源码、重复、预算和决策标准全部不变。run002 按整批 200 个计划结果单列分析，同时报告 run001 的基础设施失败，不能将这两批混为一份没有失败的历史。
+
+Windows 执行时将上面命令中的 plan 替换为 `plan-run002.json`，运行和评分目录均替换为 `D:/Ding/r5/run002`。保留原计划作为失败批次的复现依据。
