@@ -1,0 +1,116 @@
+{
+  "format": 1,
+  "config": {
+    "seeds": [
+      20261106,
+      20261107,
+      20261108
+    ],
+    "steps": 128,
+    "accumulation": 4,
+    "precision": "bf16",
+    "bootstrap_draws": 5000,
+    "bootstrap_seed": 20261109,
+    "calibration_max_fpr": 0.05,
+    "wall_seconds": 10800
+  },
+  "inherited_training_config": {
+    "seeds": [
+      20261106,
+      20261107,
+      20261108
+    ],
+    "steps": 128,
+    "accumulation": 4,
+    "rank": 8,
+    "alpha": 16,
+    "dropout": 0.05,
+    "lr": 0.0002,
+    "weight_decay": 0.01,
+    "warmup": 8,
+    "qwen_max_length": 1536,
+    "minicheck_max_length": 3072,
+    "test_target": 128,
+    "batch_size": 1,
+    "wall_seconds": 10800,
+    "bootstrap_draws": 5000
+  },
+  "methods": [
+    "raw-20261106",
+    "proposed-20261106",
+    "proposed-20261107",
+    "raw-20261107",
+    "raw-20261108",
+    "proposed-20261108"
+  ],
+  "references": [
+    "large-bf16",
+    "minicheck-bf16"
+  ],
+  "model_dirs": {
+    "large": "/mnt/d/Ding/models/Qwen2.5-7B-Instruct"
+  },
+  "model_sha256": {
+    "config.json": "7463bb0ea78315365e6c6b74de4e73bbcc8359dfb0c5a737584e077d42c0b03c",
+    "configuration.json": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+    "generation_config.json": "3a8f9087e486054c8a4a08dae2e5a3ba62e23da212b5b8c08bc42cb983c3459f",
+    "merges.txt": "599bab54075088774b1733fde865d5bd747cbcc7a547c5bc12610e874e26f5e3",
+    "model-00001-of-00004.safetensors": "a1333e6293854747c481288ea83b348226af178dd565c49b6f9495ba1966aba7",
+    "model-00002-of-00004.safetensors": "f5d25a2772cb825164a2a2c0fb6d51a87e282abf21e4dd75bc5cfb3cd0ea6185",
+    "model-00003-of-00004.safetensors": "8efdec4c1bc12317ae1a38dc42b595ce777738a64deea3fcb8a0a91381bcdfd5",
+    "model-00004-of-00004.safetensors": "1a72d403cdf0c1ec3cb7f289f17b394a01e64394c2e9b3c0f94dbce3faf879bd",
+    "model.safetensors.index.json": "624bf7c47cd12468fdc16e38a47cf4f19e0415b859a223ba3c027eed2f0e1028",
+    "tokenizer.json": "c0382117ea329cdf097041132f6d735924b697924d6f6fc3945713e96ce87539",
+    "tokenizer_config.json": "5b5d4f65d0acd3b2d56a35b56d374a36cbc1c8fa5cf3b3febbbfabf22f359583",
+    "vocab.json": "ca10d7e9fb3ed18575dd1e277a2579c16d108e32f27439684afa0e10b1440910"
+  },
+  "code_sha256": {
+    "backend/app/research_backend/benchmarks/verifier_labels.py": "d9a9bf7a71da9742b4949b2ada34b5d41d9598aebb81e41383d5b6ac2a1e5bba",
+    "backend/app/research_backend/benchmarks/verifier_scale.py": "d624d14248f15215842b79baf26e32fbb0b0ec5d8cba46182c91824941f7b8ef",
+    "backend/app/research_backend/benchmarks/verifier_pilot.py": "df27d93dfe41e3845d22e4ef0e83aa60d2080a7206752682eeb43e0a26292556",
+    "backend/app/research_backend/benchmarks/trials.py": "00126fbf6a985daffc1b823fd84fb2347a5f342b4e1647afb04bcb15da44cbc8",
+    "docs/experiments/SCIFACT_LABEL_ABLATION_PILOT.md": "129375825e14ba16f1be68ee9287263a20180b0bddae57d92f96b02fcda6cda4"
+  },
+  "original_plan_sha256": "9620b12ed6dccef49d1fd42238d1cd1667f2ec9e99befc79ba7b6cd669028a2f",
+  "original_predictions_sha256": "5e035d122bfdf88abfc4e192ab1c29365f7c4516837980f56832fbe1e47e1826",
+  "external_provenance": {
+    "author": "Julien Sylvestre",
+    "license": "CC BY 4.0",
+    "source_commit": "5711f3fdf2305552df2b6e700dca2ebd7c8806e1",
+    "paper": "https://aclanthology.org/2026.bionlp-1.9.pdf",
+    "retrieved": "2026-11-06",
+    "status": "Published single-annotator correction proposal, not an official SciFact gold replacement",
+    "files": {
+      "dev_corrections.json": {
+        "url": "https://raw.githubusercontent.com/Kefez/scifact-audit-bionlp2026/5711f3fdf2305552df2b6e700dca2ebd7c8806e1/corrections/dev_corrections.json",
+        "sha256": "c45ff40e3a8906192595462596dd56146e476aafa5b39fb3cf5a367b80a62b23"
+      },
+      "train_corrections.json": {
+        "url": "https://raw.githubusercontent.com/Kefez/scifact-audit-bionlp2026/5711f3fdf2305552df2b6e700dca2ebd7c8806e1/corrections/train_corrections.json",
+        "sha256": "f4b1a65a99c70da33b4ce9a38567abdd0e540cebdbe5bb1eeae428f1b703286e"
+      }
+    }
+  },
+  "counts": {
+    "calibration": 65,
+    "test": 128,
+    "challenge": 16,
+    "empty-evidence": 32
+  },
+  "training_cases": 535,
+  "files": {
+    "calibration-inputs.json": "882594178d0c6af1ab8b3c1deb0e0a5da7713ee6031421760d2e8899da9b965e",
+    "challenge-inputs.json": "7c080addcfa8d8861c85a40064cb65220ca5179f770b092c76f2766f7d82e0a6",
+    "correction-overlay.json": "58e384d4a7d6dba0cce887aef91e9561d3b80c7489b5dff9a72ae35e1d205a7d",
+    "empty-evidence-inputs.json": "3b5e73774d1c72d4d74c7c3ffc25e4bad17ee4261612c5fb95ec74f19827b75f",
+    "labels-doc597.json": "6a1821caa3b1cc8d3259b3516e80e37c82ccae74fb06ac764c92c2b2f5029c17",
+    "labels-original.json": "40a58f3839cd4e37260a7c9dce3a9c44c4b38189a77dc4b6e25490de75d9b507",
+    "labels-published.json": "5cb088fe8464664c2e208c60e4f3abac6c78eff07a000614577f0b4fdabdb213",
+    "reference-predictions.json": "dd4085079b65f4945ec1cd81bd86610f521636f18853201511ccf8890f585add",
+    "test-inputs.json": "1ea2b98a5e6e27771c390902e9bae6a7028056ab42a34cf37864d09ae3407067",
+    "training-order.json": "37f36861f1243dcce8b1ea9993c12428b80c3f506eee49216d9b34f7aa5add11",
+    "training-proposed.json": "6a2c7ea117cb3df6917aa8e8dc3d3416f3264edcc9666dc9969e766a55bd5fdb",
+    "training-raw.json": "53199bbca8c681330f267a0fe866c988829a2ebc8da2c4e7d2b7d7ee2ab91582"
+  },
+  "scope": "Observed SciFact v2 development data; exploratory label intervention, no new human gold"
+}
