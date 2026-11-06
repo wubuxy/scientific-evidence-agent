@@ -4,7 +4,7 @@ import json
 from pathlib import Path
 import time
 
-from pydantic import Field
+from pydantic import Field, ValidationError
 
 from ..providers import ChatModel, decode_tool_arguments
 from ..retrieval import lexical_pattern
@@ -44,7 +44,7 @@ async def run_branches(task, documents, settings, base, methods, root, ceiling, 
     reads = base.get("reads", [])
     base_known = base.get("known_tokens_used", base.get("tokens_used")) or 0
     common = dict(question=task["question"], targets=task["targets"], initial_answers=base.get("answers", []))
-    results, diagnosis, review_error = [], None, None
+    results, diagnosis, review_error, review_details = [], None, None, []
     base_seconds = base.get("elapsed_seconds") or 0
     review_started = time.monotonic()
     review = MeasuredModel(model, ceiling, base_known, preflight=True,
@@ -59,6 +59,10 @@ async def run_branches(task, documents, settings, base, methods, root, ceiling, 
                 raise ValueError("Review anchor was not visible")
         except Exception as exc:
             review_error = type(exc).__name__
+            if isinstance(exc, ValidationError):
+                review_details = [{"field": list(e["loc"]), "type": e["type"]}
+                                  for e in exc.errors(include_input=False, include_url=False)]
+            diagnosis = None
     review_seconds = time.monotonic()-review_started
     physical_calls = list(review.calls)
     for method in methods:
@@ -70,12 +74,16 @@ async def run_branches(task, documents, settings, base, methods, root, ceiling, 
             deadline=time.monotonic()+max_seconds-base_seconds-(review_seconds if uses_review else 0) if max_seconds is not None else None)
         result = dict(base, method=method, elapsed_seconds=None, intervention_status="original")
         audit = dict(policy=POLICY, review=diagnosis.model_dump() if uses_review and diagnosis else None)
+        if uses_review:
+            audit.update(review_error=review_error, review_validation_errors=review_details)
         shown = visible_reads(task, reads, 6000)
         unknown = base.get("tokens_used") is None or (uses_review and review.tokens is None)
         should_write = eligible and not unknown and method != "repair-baseline"
         if uses_review and (not diagnosis or not needs_repair(diagnosis)):
             should_write = False
-            result["intervention_status"] = "review_failed:" + review_error if review_error else "review_passed"
+            result["intervention_status"] = ("review_skipped:prefix_not_completed" if base["status"] != "completed" else
+                "review_skipped:unknown_prefix_usage" if base.get("tokens_used") is None else
+                "review_failed:" + review_error if review_error else "review_passed")
         if should_write:
             try:
                 extra = None
