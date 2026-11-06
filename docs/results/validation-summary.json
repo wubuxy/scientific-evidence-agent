@@ -3,19 +3,19 @@
   "model": "qwen3.5-27b",
   "scope": "Agent development runs, engineering validation, and separately reported local verifier studies; QASPER frozen test set reserved",
   "checks": {
-    "offline_tests_passed": 187,
+    "offline_tests_passed": 195,
     "frontend_typecheck": "passed",
     "frontend_production_build": "passed",
     "live_report_api": "completed",
-    "offline_tests_collected": 187,
+    "offline_tests_collected": 195,
     "offline_test_profiles": [
       {
         "profile": "full-locked",
         "platform": "Windows",
         "python": "3.13.13",
         "dependencies": "core + analysis under constraints-ci.txt; CPU torch from the official index",
-        "collected": 187,
-        "passed": 187,
+        "collected": 195,
+        "passed": 195,
         "skipped": 0,
         "failed": 0,
         "errors": 0,
@@ -30,7 +30,7 @@
           "pytest-asyncio": "1.4.1.post1",
           "openai": "3.46.0"
         },
-        "evidence": "docs/results/human-review-validation.json"
+        "evidence": "docs/results/repair-study-validation.json"
       }
     ],
     "ci_workflow": ".github/workflows/ci.yml",
@@ -39,7 +39,7 @@
     "reproducibility_guide": "docs/REPRODUCIBILITY.md",
     "frontend_build_note": "npm ci, explicit TypeScript check, and production build passed; 558.01 kB analysis chunk warning remains",
     "dependency_constraints_sha256": "f2e946c20ebb1c80ab79be44342d045f6ff55236bb364a515fae6a63e254a1a2",
-    "reproducibility_note": "Windows full: 187 passed, zero skips. Prior 186-case Windows and Ubuntu profiles retained separately. Human export regression checks hide method and candidate metadata while preserving evidence and blank-label rejection.",
+    "reproducibility_note": "Windows full: 195 passed, zero skips. Earlier profiles are preserved separately. New checks cover cached gate routing, cost and budget failures, source drift, unreviewed prefixes, and invalid review anchors.",
     "offline_test_profiles_before_demo": [
       {
         "profile": "core",
@@ -406,6 +406,31 @@
         "failed": 0,
         "errors": 0,
         "evidence": "docs/results/scifact-label-ablation-v1/ubuntu-core.xml"
+      }
+    ],
+    "offline_test_profiles_before_repair": [
+      {
+        "profile": "full-locked",
+        "platform": "Windows",
+        "python": "3.13.13",
+        "dependencies": "core + analysis under constraints-ci.txt; CPU torch from the official index",
+        "collected": 187,
+        "passed": 187,
+        "skipped": 0,
+        "failed": 0,
+        "errors": 0,
+        "packages": {
+          "fastapi": "0.162.0",
+          "numpy": "2.5.4",
+          "scipy": "1.18.1",
+          "openpyxl": "3.1.5",
+          "torch": "2.15.0+cpu",
+          "pydantic": "2.14.3",
+          "pytest": "9.2.0",
+          "pytest-asyncio": "1.4.1.post1",
+          "openai": "3.46.0"
+        },
+        "evidence": "docs/results/human-review-validation.json"
       }
     ]
   },
@@ -812,5 +837,27 @@
     "source_commit": "e3d4108181568881824e2e6fdc9021c8f974e778",
     "plan_sha256": "ff82cc1016edaf2526bb119dd8b7fb5ca3765c0fe607f070d3d6871c581f79e6",
     "wall_seconds": 2024.0
+  },
+  "repair_dev20_v1": {
+    "tasks": 20,
+    "paper_groups": 19,
+    "repeats": 2,
+    "shared_prefixes": 40,
+    "policy_outcomes": 200,
+    "model": "qwen3.5-27b",
+    "primary": "repair-reread minus repair-search",
+    "f1_difference": 0.03913228652207514,
+    "bootstrap_95": [
+      -0.060118508967331084,
+      0.16272421818096164
+    ],
+    "advance": false,
+    "known_physical_tokens": 582726,
+    "preflight_tokens": 310,
+    "cached_followup_outcomes": 40,
+    "cached_followup_new_calls": 0,
+    "report": "docs/results/REPAIR_FIVE_ARM_DEV20_V1.md",
+    "source_commit": "fd77d96",
+    "replay_commit": "26f4bb4"
   }
 }

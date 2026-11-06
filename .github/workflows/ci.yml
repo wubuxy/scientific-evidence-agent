@@ -71,6 +71,8 @@ jobs:
         run: python -m pytest tests -q --junitxml=test-results/pytest.xml
       - name: Audit published verifier pilot
         run: python ../scripts/audit_verifier_pilot.py
+      - name: Audit repair study and cached gate comparison
+        run: python ../scripts/audit_repair_study.py
       - name: Audit scale study and interrupted attempt
         run: |
           python ../scripts/audit_verifier_scale.py

@@ -1,0 +1,20 @@
+{
+  "date": "2026-11-06",
+  "source_commit": "26f4bb4",
+  "command": "backend/.venv-ci-analysis/Scripts/python.exe -m pytest backend/tests -q",
+  "platform": "Windows",
+  "python": "3.13.13",
+  "collected": 195,
+  "passed": 195,
+  "skipped": 0,
+  "failed": 0,
+  "elapsed_seconds": 56.86,
+  "aggregate_audit": {
+    "command": "python scripts/audit_repair_study.py",
+    "passed": true,
+    "original_records": 200,
+    "replayed_records": 40,
+    "intervals": 6,
+    "note": "Independent stdlib arithmetic and cluster resampling; does not recompute answers from source text."
+  }
+}

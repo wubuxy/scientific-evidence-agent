@@ -1,0 +1,4859 @@
+{
+  "scope": "exploratory reused development pool; lexical QA metrics, not semantic report quality",
+  "plan_sha256": "d387065cd39ccf30873cb1a75fb25f6d6edafd4c2b6b6edbcbd6025f13b80c6b",
+  "task_clusters": [
+    [
+      "qasper-e374169ee10f835f660ab8403a5701114586f167",
+      "qasper-d4db7df65aa4ece63e1de813e5ce98ce1b4dbe7f"
+    ],
+    [
+      "qasper-c0bee6539eb6956a7347daa9d2419b367bd02064"
+    ],
+    [
+      "qasper-932b39fd6c47c6a880621a62e6a978491d881d60"
+    ],
+    [
+      "qasper-ff6c9af28f0e2bb4fb6a69f124665f8ceb966fbc"
+    ],
+    [
+      "qasper-7ee5c45b127fb284a4a9e72bb9b980a602f7445a"
+    ],
+    [
+      "qasper-49eb52b3ec0647e165a5e41488088c80a20cc78f"
+    ],
+    [
+      "qasper-c1c44fd96c3fa6e16949ae8fa453e511c6435c68"
+    ],
+    [
+      "qasper-fc77d70c305fa80447b191248aba93da63ac3704"
+    ],
+    [
+      "qasper-c09a92e25e6a81369fcc4ae6045491f2690ccc10"
+    ],
+    [
+      "qasper-f161e6d5aecf8fae3a26374dcb3e4e1b40530c95"
+    ],
+    [
+      "qasper-2e89ebd2e4008c67bb2413699589ee55f59c4f36"
+    ],
+    [
+      "qasper-3941401a182a3d6234894a5c8a75d48c6116c45c"
+    ],
+    [
+      "qasper-0f567251a6566f65170a1329eeeb5105932036b2"
+    ],
+    [
+      "qasper-252a645af9876241fb166e5822992ce17fec6eb6"
+    ],
+    [
+      "qasper-1beb4a590fa6127a138f4ed1dd13d5d51cc96809"
+    ],
+    [
+      "qasper-498c0229f831c82a5eb494cdb3547452112a66a0"
+    ],
+    [
+      "qasper-67ec8ef85844e01746c13627090dc2706bb2a4f3"
+    ],
+    [
+      "qasper-dc2a2c177cd5df6da5d03e6e74262bf424850ec9"
+    ],
+    [
+      "qasper-777bb3dcdbc32e925df0f7ec3adb96f15dd3dc47"
+    ]
+  ],
+  "primary_comparison": "repair-reread minus repair-search",
+  "contrasts": {
+    "repair-search": {
+      "mean_difference": 0.03913228652207514,
+      "tasks": 20,
+      "independent_paper_groups": 19,
+      "bootstrap_95": [
+        -0.060118508967331084,
+        0.16272421818096164
+      ]
+    },
+    "repair-keyword": {
+      "mean_difference": 0.11629048830023972,
+      "tasks": 20,
+      "independent_paper_groups": 19,
+      "bootstrap_95": [
+        0.006213118248721966,
+        0.2710224056669085
+      ]
+    },
+    "repair-rewrite": {
+      "mean_difference": 0.041746794871794876,
+      "tasks": 20,
+      "independent_paper_groups": 19,
+      "bootstrap_95": [
+        0.0,
+        0.09333333333333334
+      ]
+    },
+    "repair-baseline": {
+      "mean_difference": 0.13646338646338646,
+      "tasks": 20,
+      "independent_paper_groups": 19,
+      "bootstrap_95": [
+        0.01972498814604078,
+        0.29167629167629167
+      ]
+    }
+  },
+  "secondary_intervals": "Unadjusted exploratory intervals; do not choose a secondary contrast as the main finding",
+  "cost_ratio_c_to_e": 0.9443028362354167,
+  "advance_criteria": {
+    "f1_gain_at_least_5pp": false,
+    "lower_95_above_zero": false,
+    "cost_ratio_at_most_1_2": true
+  },
+  "advance_to_confirmation": false,
+  "summaries": {
+    "repair-baseline": {
+      "tasks": 20,
+      "repeats": 2,
+      "planned_attempts": 40,
+      "completed": 40,
+      "mean_answer_token_f1": 0.2709195727851679,
+      "lexical_reliability": {
+        "1": {
+          "pass_at_k": 0.0,
+          "pass_all_k": 0.0
+        },
+        "2": {
+          "pass_at_k": 0.0,
+          "pass_all_k": 0.0
+        }
+      },
+      "mean_tokens": 6502.275,
+      "total_known_tokens": 260091,
+      "known_token_attempts": 40,
+      "unknown_token_attempts": 0,
+      "mean_elapsed_seconds_known_only": null,
+      "known_elapsed_attempts": 0,
+      "diagnostic_counts": {
+        "answer_or_budget_mismatch": 24,
+        "no_read": 8,
+        "annotated_evidence_not_read": 8
+      },
+      "read_paragraph_recall": 0.5462962962962963,
+      "read_paragraph_recall_n": 36,
+      "cited_paragraph_overlap_f1": 0.23192556306591394,
+      "cited_paragraph_overlap_f1_n": 36,
+      "citation_address_valid_target_rate": 1.0,
+      "abstention_agreement_with_any_reference": 0.675
+    },
+    "repair-rewrite": {
+      "tasks": 20,
+      "repeats": 2,
+      "planned_attempts": 40,
+      "completed": 40,
+      "mean_answer_token_f1": 0.3656361643767595,
+      "lexical_reliability": {
+        "1": {
+          "pass_at_k": 0.1,
+          "pass_all_k": 0.1
+        },
+        "2": {
+          "pass_at_k": 0.1,
+          "pass_all_k": 0.1
+        }
+      },
+      "mean_tokens": 8585.05,
+      "total_known_tokens": 343402,
+      "known_token_attempts": 40,
+      "unknown_token_attempts": 0,
+      "mean_elapsed_seconds_known_only": null,
+      "known_elapsed_attempts": 0,
+      "diagnostic_counts": {
+        "answer_or_budget_mismatch": 20,
+        "no_read": 8,
+        "lexical_pass": 4,
+        "annotated_evidence_not_read": 8
+      },
+      "read_paragraph_recall": 0.5462962962962963,
+      "read_paragraph_recall_n": 36,
+      "cited_paragraph_overlap_f1": 0.23192556306591394,
+      "cited_paragraph_overlap_f1_n": 36,
+      "citation_address_valid_target_rate": 1.0,
+      "abstention_agreement_with_any_reference": 0.75
+    },
+    "repair-reread": {
+      "tasks": 20,
+      "repeats": 2,
+      "planned_attempts": 40,
+      "completed": 40,
+      "mean_answer_token_f1": 0.40738295924855433,
+      "lexical_reliability": {
+        "1": {
+          "pass_at_k": 0.1,
+          "pass_all_k": 0.1
+        },
+        "2": {
+          "pass_at_k": 0.1,
+          "pass_all_k": 0.1
+        }
+      },
+      "mean_tokens": 8891.225,
+      "total_known_tokens": 355649,
+      "known_token_attempts": 40,
+      "unknown_token_attempts": 0,
+      "mean_elapsed_seconds_known_only": null,
+      "known_elapsed_attempts": 0,
+      "diagnostic_counts": {
+        "answer_or_budget_mismatch": 22,
+        "annotated_evidence_not_read": 12,
+        "lexical_pass": 4,
+        "no_read": 2
+      },
+      "read_paragraph_recall": 0.6018518518518519,
+      "read_paragraph_recall_n": 36,
+      "cited_paragraph_overlap_f1": 0.23902432849801272,
+      "cited_paragraph_overlap_f1_n": 36,
+      "citation_address_valid_target_rate": 1.0,
+      "abstention_agreement_with_any_reference": 0.825
+    },
+    "repair-keyword": {
+      "tasks": 20,
+      "repeats": 2,
+      "planned_attempts": 40,
+      "completed": 40,
+      "mean_answer_token_f1": 0.2910924709483146,
+      "lexical_reliability": {
+        "1": {
+          "pass_at_k": 0.0,
+          "pass_all_k": 0.0
+        },
+        "2": {
+          "pass_at_k": 0.0,
+          "pass_all_k": 0.0
+        }
+      },
+      "mean_tokens": 8810.9,
+      "total_known_tokens": 352436,
+      "known_token_attempts": 40,
+      "unknown_token_attempts": 0,
+      "mean_elapsed_seconds_known_only": null,
+      "known_elapsed_attempts": 0,
+      "diagnostic_counts": {
+        "answer_or_budget_mismatch": 25,
+        "annotated_evidence_not_read": 15
+      },
+      "read_paragraph_recall": 0.5740740740740741,
+      "read_paragraph_recall_n": 36,
+      "cited_paragraph_overlap_f1": 0.2380984025720868,
+      "cited_paragraph_overlap_f1_n": 36,
+      "citation_address_valid_target_rate": 1.0,
+      "abstention_agreement_with_any_reference": 0.75
+    },
+    "repair-search": {
+      "tasks": 20,
+      "repeats": 2,
+      "planned_attempts": 40,
+      "completed": 40,
+      "mean_answer_token_f1": 0.3682506727264792,
+      "lexical_reliability": {
+        "1": {
+          "pass_at_k": 0.075,
+          "pass_all_k": 0.075
+        },
+        "2": {
+          "pass_at_k": 0.1,
+          "pass_all_k": 0.05
+        }
+      },
+      "mean_tokens": 9415.65,
+      "total_known_tokens": 376626,
+      "known_token_attempts": 40,
+      "unknown_token_attempts": 0,
+      "mean_elapsed_seconds_known_only": null,
+      "known_elapsed_attempts": 0,
+      "diagnostic_counts": {
+        "answer_or_budget_mismatch": 24,
+        "annotated_evidence_not_read": 10,
+        "lexical_pass": 3,
+        "no_read": 3
+      },
+      "read_paragraph_recall": 0.6018518518518519,
+      "read_paragraph_recall_n": 36,
+      "cited_paragraph_overlap_f1": 0.22344893167261587,
+      "cited_paragraph_overlap_f1_n": 36,
+      "citation_address_valid_target_rate": 1.0,
+      "abstention_agreement_with_any_reference": 0.825
+    }
+  },
+  "usage_by_repeat": [
+    {
+      "embedding_calls": 0,
+      "embedding_tokens": 0,
+      "measured_llm_tokens": 294687,
+      "logical_policy_tokens": 857754,
+      "physical_repair_usage": [
+        {
+          "known_measured_tokens": 12429,
+          "unknown_usage_calls": 0,
+          "prefix_usage_unknown": false,
+          "physical_intervention_calls": 4,
+          "note": "Physical shared calls counted once; policy costs charge each standalone branch its prefix and applicable review."
+        },
+        {
+          "known_measured_tokens": 15527,
+          "unknown_usage_calls": 0,
+          "prefix_usage_unknown": false,
+          "physical_intervention_calls": 4,
+          "note": "Physical shared calls counted once; policy costs charge each standalone branch its prefix and applicable review."
+        },
+        {
+          "known_measured_tokens": 12522,
+          "unknown_usage_calls": 0,
+          "prefix_usage_unknown": false,
+          "physical_intervention_calls": 6,
+          "note": "Physical shared calls counted once; policy costs charge each standalone branch its prefix and applicable review."
+        },
+        {
+          "known_measured_tokens": 16864,
+          "unknown_usage_calls": 0,
+          "prefix_usage_unknown": false,
+          "physical_intervention_calls": 4,
+          "note": "Physical shared calls counted once; policy costs charge each standalone branch its prefix and applicable review."
+        },
+        {
+          "known_measured_tokens": 13186,
+          "unknown_usage_calls": 0,
+          "prefix_usage_unknown": false,
+          "physical_intervention_calls": 6,
+          "note": "Physical shared calls counted once; policy costs charge each standalone branch its prefix and applicable review."
+        },
+        {
+          "known_measured_tokens": 14458,
+          "unknown_usage_calls": 0,
+          "prefix_usage_unknown": false,
+          "physical_intervention_calls": 4,
+          "note": "Physical shared calls counted once; policy costs charge each standalone branch its prefix and applicable review."
+        },
+        {
+          "known_measured_tokens": 14092,
+          "unknown_usage_calls": 0,
+          "prefix_usage_unknown": false,
+          "physical_intervention_calls": 6,
+          "note": "Physical shared calls counted once; policy costs charge each standalone branch its prefix and applicable review."
+        },
+        {
+          "known_measured_tokens": 18322,
+          "unknown_usage_calls": 0,
+          "prefix_usage_unknown": false,
+          "physical_intervention_calls": 6,
+          "note": "Physical shared calls counted once; policy costs charge each standalone branch its prefix and applicable review."
+        },
+        {
+          "known_measured_tokens": 14149,
+          "unknown_usage_calls": 0,
+          "prefix_usage_unknown": false,
+          "physical_intervention_calls": 4,
+          "note": "Physical shared calls counted once; policy costs charge each standalone branch its prefix and applicable review."
+        },
+        {
+          "known_measured_tokens": 13101,
+          "unknown_usage_calls": 0,
+          "prefix_usage_unknown": false,
+          "physical_intervention_calls": 4,
+          "note": "Physical shared calls counted once; policy costs charge each standalone branch its prefix and applicable review."
+        },
+        {
+          "known_measured_tokens": 12028,
+          "unknown_usage_calls": 0,
+          "prefix_usage_unknown": false,
+          "physical_intervention_calls": 6,
+          "note": "Physical shared calls counted once; policy costs charge each standalone branch its prefix and applicable review."
+        },
+        {
+          "known_measured_tokens": 12925,
+          "unknown_usage_calls": 0,
+          "prefix_usage_unknown": false,
+          "physical_intervention_calls": 6,
+          "note": "Physical shared calls counted once; policy costs charge each standalone branch its prefix and applicable review."
+        },
+        {
+          "known_measured_tokens": 13093,
+          "unknown_usage_calls": 0,
+          "prefix_usage_unknown": false,
+          "physical_intervention_calls": 6,
+          "note": "Physical shared calls counted once; policy costs charge each standalone branch its prefix and applicable review."
+        },
+        {
+          "known_measured_tokens": 13690,
+          "unknown_usage_calls": 0,
+          "prefix_usage_unknown": false,
+          "physical_intervention_calls": 4,
+          "note": "Physical shared calls counted once; policy costs charge each standalone branch its prefix and applicable review."
+        },
+        {
+          "known_measured_tokens": 19652,
+          "unknown_usage_calls": 0,
+          "prefix_usage_unknown": false,
+          "physical_intervention_calls": 4,
+          "note": "Physical shared calls counted once; policy costs charge each standalone branch its prefix and applicable review."
+        },
+        {
+          "known_measured_tokens": 13508,
+          "unknown_usage_calls": 0,
+          "prefix_usage_unknown": false,
+          "physical_intervention_calls": 4,
+          "note": "Physical shared calls counted once; policy costs charge each standalone branch its prefix and applicable review."
+        },
+        {
+          "known_measured_tokens": 14677,
+          "unknown_usage_calls": 0,
+          "prefix_usage_unknown": false,
+          "physical_intervention_calls": 4,
+          "note": "Physical shared calls counted once; policy costs charge each standalone branch its prefix and applicable review."
+        },
+        {
+          "known_measured_tokens": 14851,
+          "unknown_usage_calls": 0,
+          "prefix_usage_unknown": false,
+          "physical_intervention_calls": 4,
+          "note": "Physical shared calls counted once; policy costs charge each standalone branch its prefix and applicable review."
+        },
+        {
+          "known_measured_tokens": 14612,
+          "unknown_usage_calls": 0,
+          "prefix_usage_unknown": false,
+          "physical_intervention_calls": 4,
+          "note": "Physical shared calls counted once; policy costs charge each standalone branch its prefix and applicable review."
+        },
+        {
+          "known_measured_tokens": 21001,
+          "unknown_usage_calls": 0,
+          "prefix_usage_unknown": false,
+          "physical_intervention_calls": 6,
+          "note": "Physical shared calls counted once; policy costs charge each standalone branch its prefix and applicable review."
+        }
+      ],
+      "missing_usage_runs": 0
+    },
+    {
+      "embedding_calls": 0,
+      "embedding_tokens": 0,
+      "measured_llm_tokens": 288039,
+      "logical_policy_tokens": 830450,
+      "physical_repair_usage": [
+        {
+          "known_measured_tokens": 13464,
+          "unknown_usage_calls": 0,
+          "prefix_usage_unknown": false,
+          "physical_intervention_calls": 4,
+          "note": "Physical shared calls counted once; policy costs charge each standalone branch its prefix and applicable review."
+        },
+        {
+          "known_measured_tokens": 18118,
+          "unknown_usage_calls": 0,
+          "prefix_usage_unknown": false,
+          "physical_intervention_calls": 6,
+          "note": "Physical shared calls counted once; policy costs charge each standalone branch its prefix and applicable review."
+        },
+        {
+          "known_measured_tokens": 12625,
+          "unknown_usage_calls": 0,
+          "prefix_usage_unknown": false,
+          "physical_intervention_calls": 6,
+          "note": "Physical shared calls counted once; policy costs charge each standalone branch its prefix and applicable review."
+        },
+        {
+          "known_measured_tokens": 13513,
+          "unknown_usage_calls": 0,
+          "prefix_usage_unknown": false,
+          "physical_intervention_calls": 4,
+          "note": "Physical shared calls counted once; policy costs charge each standalone branch its prefix and applicable review."
+        },
+        {
+          "known_measured_tokens": 15542,
+          "unknown_usage_calls": 0,
+          "prefix_usage_unknown": false,
+          "physical_intervention_calls": 4,
+          "note": "Physical shared calls counted once; policy costs charge each standalone branch its prefix and applicable review."
+        },
+        {
+          "known_measured_tokens": 12266,
+          "unknown_usage_calls": 0,
+          "prefix_usage_unknown": false,
+          "physical_intervention_calls": 6,
+          "note": "Physical shared calls counted once; policy costs charge each standalone branch its prefix and applicable review."
+        },
+        {
+          "known_measured_tokens": 11889,
+          "unknown_usage_calls": 0,
+          "prefix_usage_unknown": false,
+          "physical_intervention_calls": 4,
+          "note": "Physical shared calls counted once; policy costs charge each standalone branch its prefix and applicable review."
+        },
+        {
+          "known_measured_tokens": 18224,
+          "unknown_usage_calls": 0,
+          "prefix_usage_unknown": false,
+          "physical_intervention_calls": 6,
+          "note": "Physical shared calls counted once; policy costs charge each standalone branch its prefix and applicable review."
+        },
+        {
+          "known_measured_tokens": 14086,
+          "unknown_usage_calls": 0,
+          "prefix_usage_unknown": false,
+          "physical_intervention_calls": 4,
+          "note": "Physical shared calls counted once; policy costs charge each standalone branch its prefix and applicable review."
+        },
+        {
+          "known_measured_tokens": 14513,
+          "unknown_usage_calls": 0,
+          "prefix_usage_unknown": false,
+          "physical_intervention_calls": 4,
+          "note": "Physical shared calls counted once; policy costs charge each standalone branch its prefix and applicable review."
+        },
+        {
+          "known_measured_tokens": 14891,
+          "unknown_usage_calls": 0,
+          "prefix_usage_unknown": false,
+          "physical_intervention_calls": 4,
+          "note": "Physical shared calls counted once; policy costs charge each standalone branch its prefix and applicable review."
+        },
+        {
+          "known_measured_tokens": 13046,
+          "unknown_usage_calls": 0,
+          "prefix_usage_unknown": false,
+          "physical_intervention_calls": 6,
+          "note": "Physical shared calls counted once; policy costs charge each standalone branch its prefix and applicable review."
+        },
+        {
+          "known_measured_tokens": 14075,
+          "unknown_usage_calls": 0,
+          "prefix_usage_unknown": false,
+          "physical_intervention_calls": 6,
+          "note": "Physical shared calls counted once; policy costs charge each standalone branch its prefix and applicable review."
+        },
+        {
+          "known_measured_tokens": 12453,
+          "unknown_usage_calls": 0,
+          "prefix_usage_unknown": false,
+          "physical_intervention_calls": 4,
+          "note": "Physical shared calls counted once; policy costs charge each standalone branch its prefix and applicable review."
+        },
+        {
+          "known_measured_tokens": 16091,
+          "unknown_usage_calls": 0,
+          "prefix_usage_unknown": false,
+          "physical_intervention_calls": 4,
+          "note": "Physical shared calls counted once; policy costs charge each standalone branch its prefix and applicable review."
+        },
+        {
+          "known_measured_tokens": 19241,
+          "unknown_usage_calls": 0,
+          "prefix_usage_unknown": false,
+          "physical_intervention_calls": 6,
+          "note": "Physical shared calls counted once; policy costs charge each standalone branch its prefix and applicable review."
+        },
+        {
+          "known_measured_tokens": 12904,
+          "unknown_usage_calls": 0,
+          "prefix_usage_unknown": false,
+          "physical_intervention_calls": 4,
+          "note": "Physical shared calls counted once; policy costs charge each standalone branch its prefix and applicable review."
+        },
+        {
+          "known_measured_tokens": 13552,
+          "unknown_usage_calls": 0,
+          "prefix_usage_unknown": false,
+          "physical_intervention_calls": 4,
+          "note": "Physical shared calls counted once; policy costs charge each standalone branch its prefix and applicable review."
+        },
+        {
+          "known_measured_tokens": 14429,
+          "unknown_usage_calls": 0,
+          "prefix_usage_unknown": false,
+          "physical_intervention_calls": 4,
+          "note": "Physical shared calls counted once; policy costs charge each standalone branch its prefix and applicable review."
+        },
+        {
+          "known_measured_tokens": 13117,
+          "unknown_usage_calls": 0,
+          "prefix_usage_unknown": false,
+          "physical_intervention_calls": 4,
+          "note": "Physical shared calls counted once; policy costs charge each standalone branch its prefix and applicable review."
+        }
+      ],
+      "missing_usage_runs": 0
+    }
+  ],
+  "known_physical_tokens": 582726,
+  "known_logical_policy_tokens": 1688204,
+  "usage_complete": true,
+  "diagnostics": {
+    "repair-baseline": {
+      "status": {
+        "completed": 40
+      },
+      "interventions": {
+        "original": 40
+      },
+      "extra_read_attempts": 0,
+      "improved_vs_prefix": 0,
+      "worsened_vs_prefix": 0
+    },
+    "repair-rewrite": {
+      "status": {
+        "completed": 40
+      },
+      "interventions": {
+        "review_passed": 22,
+        "rewritten": 15,
+        "review_failed:ValidationError": 3
+      },
+      "extra_read_attempts": 0,
+      "improved_vs_prefix": 5,
+      "worsened_vs_prefix": 1
+    },
+    "repair-reread": {
+      "status": {
+        "completed": 40
+      },
+      "interventions": {
+        "review_passed": 22,
+        "rewritten": 15,
+        "review_failed:ValidationError": 3
+      },
+      "extra_read_attempts": 13,
+      "improved_vs_prefix": 9,
+      "worsened_vs_prefix": 0
+    },
+    "repair-keyword": {
+      "status": {
+        "completed": 40
+      },
+      "interventions": {
+        "rewritten": 40
+      },
+      "extra_read_attempts": 40,
+      "improved_vs_prefix": 4,
+      "worsened_vs_prefix": 5
+    },
+    "repair-search": {
+      "status": {
+        "completed": 40
+      },
+      "interventions": {
+        "rewritten": 40
+      },
+      "extra_read_attempts": 17,
+      "improved_vs_prefix": 6,
+      "worsened_vs_prefix": 5
+    }
+  },
+  "per_attempt_diagnostics": [
+    {
+      "repeat": 0,
+      "task_id": "qasper-d4db7df65aa4ece63e1de813e5ce98ce1b4dbe7f",
+      "method": "repair-baseline",
+      "status": "completed",
+      "prefix_status": "completed",
+      "error": null,
+      "intervention_status": "original",
+      "review": {
+        "support": null,
+        "adequacy": null,
+        "role": null,
+        "stage": null
+      },
+      "extra_read_windows": 0,
+      "read_windows": 1,
+      "f1_delta_from_prefix": 0.0,
+      "answer_changed": false,
+      "model_calls": 4,
+      "intervention_calls": 0
+    },
+    {
+      "repeat": 0,
+      "task_id": "qasper-d4db7df65aa4ece63e1de813e5ce98ce1b4dbe7f",
+      "method": "repair-rewrite",
+      "status": "completed",
+      "prefix_status": "completed",
+      "error": null,
+      "intervention_status": "review_passed",
+      "review": {
+        "support": "supported",
+        "adequacy": "complete",
+        "role": "aligned",
+        "stage": "aligned"
+      },
+      "extra_read_windows": 0,
+      "read_windows": 1,
+      "f1_delta_from_prefix": 0.0,
+      "answer_changed": false,
+      "model_calls": 5,
+      "intervention_calls": 1
+    },
+    {
+      "repeat": 0,
+      "task_id": "qasper-d4db7df65aa4ece63e1de813e5ce98ce1b4dbe7f",
+      "method": "repair-reread",
+      "status": "completed",
+      "prefix_status": "completed",
+      "error": null,
+      "intervention_status": "review_passed",
+      "review": {
+        "support": "supported",
+        "adequacy": "complete",
+        "role": "aligned",
+        "stage": "aligned"
+      },
+      "extra_read_windows": 0,
+      "read_windows": 1,
+      "f1_delta_from_prefix": 0.0,
+      "answer_changed": false,
+      "model_calls": 5,
+      "intervention_calls": 1
+    },
+    {
+      "repeat": 0,
+      "task_id": "qasper-d4db7df65aa4ece63e1de813e5ce98ce1b4dbe7f",
+      "method": "repair-keyword",
+      "status": "completed",
+      "prefix_status": "completed",
+      "error": null,
+      "intervention_status": "rewritten",
+      "review": {
+        "support": null,
+        "adequacy": null,
+        "role": null,
+        "stage": null
+      },
+      "extra_read_windows": 1,
+      "read_windows": 2,
+      "f1_delta_from_prefix": 0.0,
+      "answer_changed": false,
+      "model_calls": 5,
+      "intervention_calls": 1
+    },
+    {
+      "repeat": 0,
+      "task_id": "qasper-d4db7df65aa4ece63e1de813e5ce98ce1b4dbe7f",
+      "method": "repair-search",
+      "status": "completed",
+      "prefix_status": "completed",
+      "error": null,
+      "intervention_status": "rewritten",
+      "review": {
+        "support": null,
+        "adequacy": null,
+        "role": null,
+        "stage": null
+      },
+      "extra_read_windows": 0,
+      "read_windows": 1,
+      "f1_delta_from_prefix": 0.0,
+      "answer_changed": false,
+      "model_calls": 6,
+      "intervention_calls": 2
+    },
+    {
+      "repeat": 0,
+      "task_id": "qasper-c0bee6539eb6956a7347daa9d2419b367bd02064",
+      "method": "repair-baseline",
+      "status": "completed",
+      "prefix_status": "completed",
+      "error": null,
+      "intervention_status": "original",
+      "review": {
+        "support": null,
+        "adequacy": null,
+        "role": null,
+        "stage": null
+      },
+      "extra_read_windows": 0,
+      "read_windows": 0,
+      "f1_delta_from_prefix": 0.0,
+      "answer_changed": false,
+      "model_calls": 3,
+      "intervention_calls": 0
+    },
+    {
+      "repeat": 0,
+      "task_id": "qasper-c0bee6539eb6956a7347daa9d2419b367bd02064",
+      "method": "repair-rewrite",
+      "status": "completed",
+      "prefix_status": "completed",
+      "error": null,
+      "intervention_status": "rewritten",
+      "review": {
+        "support": "insufficient",
+        "adequacy": "unknown",
+        "role": "not_applicable",
+        "stage": "not_applicable"
+      },
+      "extra_read_windows": 0,
+      "read_windows": 0,
+      "f1_delta_from_prefix": 0.0,
+      "answer_changed": false,
+      "model_calls": 5,
+      "intervention_calls": 2
+    },
+    {
+      "repeat": 0,
+      "task_id": "qasper-c0bee6539eb6956a7347daa9d2419b367bd02064",
+      "method": "repair-reread",
+      "status": "completed",
+      "prefix_status": "completed",
+      "error": null,
+      "intervention_status": "rewritten",
+      "review": {
+        "support": "insufficient",
+        "adequacy": "unknown",
+        "role": "not_applicable",
+        "stage": "not_applicable"
+      },
+      "extra_read_windows": 1,
+      "read_windows": 1,
+      "f1_delta_from_prefix": 0.0,
+      "answer_changed": true,
+      "model_calls": 5,
+      "intervention_calls": 2
+    },
+    {
+      "repeat": 0,
+      "task_id": "qasper-c0bee6539eb6956a7347daa9d2419b367bd02064",
+      "method": "repair-keyword",
+      "status": "completed",
+      "prefix_status": "completed",
+      "error": null,
+      "intervention_status": "rewritten",
+      "review": {
+        "support": null,
+        "adequacy": null,
+        "role": null,
+        "stage": null
+      },
+      "extra_read_windows": 1,
+      "read_windows": 1,
+      "f1_delta_from_prefix": 0.0,
+      "answer_changed": true,
+      "model_calls": 4,
+      "intervention_calls": 1
+    },
+    {
+      "repeat": 0,
+      "task_id": "qasper-c0bee6539eb6956a7347daa9d2419b367bd02064",
+      "method": "repair-search",
+      "status": "completed",
+      "prefix_status": "completed",
+      "error": null,
+      "intervention_status": "rewritten",
+      "review": {
+        "support": null,
+        "adequacy": null,
+        "role": null,
+        "stage": null
+      },
+      "extra_read_windows": 1,
+      "read_windows": 1,
+      "f1_delta_from_prefix": 0.0,
+      "answer_changed": true,
+      "model_calls": 5,
+      "intervention_calls": 2
+    },
+    {
+      "repeat": 0,
+      "task_id": "qasper-252a645af9876241fb166e5822992ce17fec6eb6",
+      "method": "repair-baseline",
+      "status": "completed",
+      "prefix_status": "completed",
+      "error": null,
+      "intervention_status": "original",
+      "review": {
+        "support": null,
+        "adequacy": null,
+        "role": null,
+        "stage": null
+      },
+      "extra_read_windows": 0,
+      "read_windows": 1,
+      "f1_delta_from_prefix": 0.0,
+      "answer_changed": false,
+      "model_calls": 2,
+      "intervention_calls": 0
+    },
+    {
+      "repeat": 0,
+      "task_id": "qasper-252a645af9876241fb166e5822992ce17fec6eb6",
+      "method": "repair-rewrite",
+      "status": "completed",
+      "prefix_status": "completed",
+      "error": null,
+      "intervention_status": "rewritten",
+      "review": {
+        "support": "contradicted",
+        "adequacy": "unknown",
+        "role": "not_applicable",
+        "stage": "not_applicable"
+      },
+      "extra_read_windows": 0,
+      "read_windows": 1,
+      "f1_delta_from_prefix": 1.0,
+      "answer_changed": true,
+      "model_calls": 4,
+      "intervention_calls": 2
+    },
+    {
+      "repeat": 0,
+      "task_id": "qasper-252a645af9876241fb166e5822992ce17fec6eb6",
+      "method": "repair-reread",
+      "status": "completed",
+      "prefix_status": "completed",
+      "error": null,
+      "intervention_status": "rewritten",
+      "review": {
+        "support": "contradicted",
+        "adequacy": "unknown",
+        "role": "not_applicable",
+        "stage": "not_applicable"
+      },
+      "extra_read_windows": 1,
+      "read_windows": 2,
+      "f1_delta_from_prefix": 1.0,
+      "answer_changed": true,
+      "model_calls": 4,
+      "intervention_calls": 2
+    },
+    {
+      "repeat": 0,
+      "task_id": "qasper-252a645af9876241fb166e5822992ce17fec6eb6",
+      "method": "repair-keyword",
+      "status": "completed",
+      "prefix_status": "completed",
+      "error": null,
+      "intervention_status": "rewritten",
+      "review": {
+        "support": null,
+        "adequacy": null,
+        "role": null,
+        "stage": null
+      },
+      "extra_read_windows": 1,
+      "read_windows": 2,
+      "f1_delta_from_prefix": 0.0,
+      "answer_changed": false,
+      "model_calls": 3,
+      "intervention_calls": 1
+    },
+    {
+      "repeat": 0,
+      "task_id": "qasper-252a645af9876241fb166e5822992ce17fec6eb6",
+      "method": "repair-search",
+      "status": "completed",
+      "prefix_status": "completed",
+      "error": null,
+      "intervention_status": "rewritten",
+      "review": {
+        "support": null,
+        "adequacy": null,
+        "role": null,
+        "stage": null
+      },
+      "extra_read_windows": 0,
+      "read_windows": 1,
+      "f1_delta_from_prefix": 1.0,
+      "answer_changed": true,
+      "model_calls": 4,
+      "intervention_calls": 2
+    },
+    {
+      "repeat": 0,
+      "task_id": "qasper-ff6c9af28f0e2bb4fb6a69f124665f8ceb966fbc",
+      "method": "repair-baseline",
+      "status": "completed",
+      "prefix_status": "completed",
+      "error": null,
+      "intervention_status": "original",
+      "review": {
+        "support": null,
+        "adequacy": null,
+        "role": null,
+        "stage": null
+      },
+      "extra_read_windows": 0,
+      "read_windows": 1,
+      "f1_delta_from_prefix": 0.0,
+      "answer_changed": false,
+      "model_calls": 3,
+      "intervention_calls": 0
+    },
+    {
+      "repeat": 0,
+      "task_id": "qasper-ff6c9af28f0e2bb4fb6a69f124665f8ceb966fbc",
+      "method": "repair-rewrite",
+      "status": "completed",
+      "prefix_status": "completed",
+      "error": null,
+      "intervention_status": "rewritten",
+      "review": {
+        "support": "insufficient",
+        "adequacy": "partial",
+        "role": "aligned",
+        "stage": "aligned"
+      },
+      "extra_read_windows": 0,
+      "read_windows": 1,
+      "f1_delta_from_prefix": 0.0,
+      "answer_changed": true,
+      "model_calls": 5,
+      "intervention_calls": 2
+    },
+    {
+      "repeat": 0,
+      "task_id": "qasper-ff6c9af28f0e2bb4fb6a69f124665f8ceb966fbc",
+      "method": "repair-reread",
+      "status": "completed",
+      "prefix_status": "completed",
+      "error": null,
+      "intervention_status": "rewritten",
+      "review": {
+        "support": "insufficient",
+        "adequacy": "partial",
+        "role": "aligned",
+        "stage": "aligned"
+      },
+      "extra_read_windows": 1,
+      "read_windows": 2,
+      "f1_delta_from_prefix": 0.8,
+      "answer_changed": true,
+      "model_calls": 5,
+      "intervention_calls": 2
+    },
+    {
+      "repeat": 0,
+      "task_id": "qasper-ff6c9af28f0e2bb4fb6a69f124665f8ceb966fbc",
+      "method": "repair-keyword",
+      "status": "completed",
+      "prefix_status": "completed",
+      "error": null,
+      "intervention_status": "rewritten",
+      "review": {
+        "support": null,
+        "adequacy": null,
+        "role": null,
+        "stage": null
+      },
+      "extra_read_windows": 1,
+      "read_windows": 2,
+      "f1_delta_from_prefix": 0.8,
+      "answer_changed": true,
+      "model_calls": 4,
+      "intervention_calls": 1
+    },
+    {
+      "repeat": 0,
+      "task_id": "qasper-ff6c9af28f0e2bb4fb6a69f124665f8ceb966fbc",
+      "method": "repair-search",
+      "status": "completed",
+      "prefix_status": "completed",
+      "error": null,
+      "intervention_status": "rewritten",
+      "review": {
+        "support": null,
+        "adequacy": null,
+        "role": null,
+        "stage": null
+      },
+      "extra_read_windows": 1,
+      "read_windows": 2,
+      "f1_delta_from_prefix": 0.8,
+      "answer_changed": true,
+      "model_calls": 5,
+      "intervention_calls": 2
+    },
+    {
+      "repeat": 0,
+      "task_id": "qasper-fc77d70c305fa80447b191248aba93da63ac3704",
+      "method": "repair-baseline",
+      "status": "completed",
+      "prefix_status": "completed",
+      "error": null,
+      "intervention_status": "original",
+      "review": {
+        "support": null,
+        "adequacy": null,
+        "role": null,
+        "stage": null
+      },
+      "extra_read_windows": 0,
+      "read_windows": 1,
+      "f1_delta_from_prefix": 0.0,
+      "answer_changed": false,
+      "model_calls": 3,
+      "intervention_calls": 0
+    },
+    {
+      "repeat": 0,
+      "task_id": "qasper-fc77d70c305fa80447b191248aba93da63ac3704",
+      "method": "repair-rewrite",
+      "status": "completed",
+      "prefix_status": "completed",
+      "error": null,
+      "intervention_status": "review_passed",
+      "review": {
+        "support": "supported",
+        "adequacy": "complete",
+        "role": "aligned",
+        "stage": "aligned"
+      },
+      "extra_read_windows": 0,
+      "read_windows": 1,
+      "f1_delta_from_prefix": 0.0,
+      "answer_changed": false,
+      "model_calls": 4,
+      "intervention_calls": 1
+    },
+    {
+      "repeat": 0,
+      "task_id": "qasper-fc77d70c305fa80447b191248aba93da63ac3704",
+      "method": "repair-reread",
+      "status": "completed",
+      "prefix_status": "completed",
+      "error": null,
+      "intervention_status": "review_passed",
+      "review": {
+        "support": "supported",
+        "adequacy": "complete",
+        "role": "aligned",
+        "stage": "aligned"
+      },
+      "extra_read_windows": 0,
+      "read_windows": 1,
+      "f1_delta_from_prefix": 0.0,
+      "answer_changed": false,
+      "model_calls": 4,
+      "intervention_calls": 1
+    },
+    {
+      "repeat": 0,
+      "task_id": "qasper-fc77d70c305fa80447b191248aba93da63ac3704",
+      "method": "repair-keyword",
+      "status": "completed",
+      "prefix_status": "completed",
+      "error": null,
+      "intervention_status": "rewritten",
+      "review": {
+        "support": null,
+        "adequacy": null,
+        "role": null,
+        "stage": null
+      },
+      "extra_read_windows": 1,
+      "read_windows": 2,
+      "f1_delta_from_prefix": 0.0,
+      "answer_changed": false,
+      "model_calls": 4,
+      "intervention_calls": 1
+    },
+    {
+      "repeat": 0,
+      "task_id": "qasper-fc77d70c305fa80447b191248aba93da63ac3704",
+      "method": "repair-search",
+      "status": "completed",
+      "prefix_status": "completed",
+      "error": null,
+      "intervention_status": "rewritten",
+      "review": {
+        "support": null,
+        "adequacy": null,
+        "role": null,
+        "stage": null
+      },
+      "extra_read_windows": 1,
+      "read_windows": 2,
+      "f1_delta_from_prefix": 0.0,
+      "answer_changed": false,
+      "model_calls": 5,
+      "intervention_calls": 2
+    },
+    {
+      "repeat": 0,
+      "task_id": "qasper-3941401a182a3d6234894a5c8a75d48c6116c45c",
+      "method": "repair-baseline",
+      "status": "completed",
+      "prefix_status": "completed",
+      "error": null,
+      "intervention_status": "original",
+      "review": {
+        "support": null,
+        "adequacy": null,
+        "role": null,
+        "stage": null
+      },
+      "extra_read_windows": 0,
+      "read_windows": 0,
+      "f1_delta_from_prefix": 0.0,
+      "answer_changed": false,
+      "model_calls": 3,
+      "intervention_calls": 0
+    },
+    {
+      "repeat": 0,
+      "task_id": "qasper-3941401a182a3d6234894a5c8a75d48c6116c45c",
+      "method": "repair-rewrite",
+      "status": "completed",
+      "prefix_status": "completed",
+      "error": null,
+      "intervention_status": "rewritten",
+      "review": {
+        "support": "insufficient",
+        "adequacy": "unknown",
+        "role": "not_applicable",
+        "stage": "not_applicable"
+      },
+      "extra_read_windows": 0,
+      "read_windows": 0,
+      "f1_delta_from_prefix": 0.0,
+      "answer_changed": false,
+      "model_calls": 5,
+      "intervention_calls": 2
+    },
+    {
+      "repeat": 0,
+      "task_id": "qasper-3941401a182a3d6234894a5c8a75d48c6116c45c",
+      "method": "repair-reread",
+      "status": "completed",
+      "prefix_status": "completed",
+      "error": null,
+      "intervention_status": "rewritten",
+      "review": {
+        "support": "insufficient",
+        "adequacy": "unknown",
+        "role": "not_applicable",
+        "stage": "not_applicable"
+      },
+      "extra_read_windows": 0,
+      "read_windows": 0,
+      "f1_delta_from_prefix": 0.0,
+      "answer_changed": false,
+      "model_calls": 5,
+      "intervention_calls": 2
+    },
+    {
+      "repeat": 0,
+      "task_id": "qasper-3941401a182a3d6234894a5c8a75d48c6116c45c",
+      "method": "repair-keyword",
+      "status": "completed",
+      "prefix_status": "completed",
+      "error": null,
+      "intervention_status": "rewritten",
+      "review": {
+        "support": null,
+        "adequacy": null,
+        "role": null,
+        "stage": null
+      },
+      "extra_read_windows": 1,
+      "read_windows": 1,
+      "f1_delta_from_prefix": 0.0,
+      "answer_changed": true,
+      "model_calls": 4,
+      "intervention_calls": 1
+    },
+    {
+      "repeat": 0,
+      "task_id": "qasper-3941401a182a3d6234894a5c8a75d48c6116c45c",
+      "method": "repair-search",
+      "status": "completed",
+      "prefix_status": "completed",
+      "error": null,
+      "intervention_status": "rewritten",
+      "review": {
+        "support": null,
+        "adequacy": null,
+        "role": null,
+        "stage": null
+      },
+      "extra_read_windows": 1,
+      "read_windows": 1,
+      "f1_delta_from_prefix": 0.0,
+      "answer_changed": true,
+      "model_calls": 5,
+      "intervention_calls": 2
+    },
+    {
+      "repeat": 0,
+      "task_id": "qasper-f161e6d5aecf8fae3a26374dcb3e4e1b40530c95",
+      "method": "repair-baseline",
+      "status": "completed",
+      "prefix_status": "completed",
+      "error": null,
+      "intervention_status": "original",
+      "review": {
+        "support": null,
+        "adequacy": null,
+        "role": null,
+        "stage": null
+      },
+      "extra_read_windows": 0,
+      "read_windows": 1,
+      "f1_delta_from_prefix": 0.0,
+      "answer_changed": false,
+      "model_calls": 3,
+      "intervention_calls": 0
+    },
+    {
+      "repeat": 0,
+      "task_id": "qasper-f161e6d5aecf8fae3a26374dcb3e4e1b40530c95",
+      "method": "repair-rewrite",
+      "status": "completed",
+      "prefix_status": "completed",
+      "error": null,
+      "intervention_status": "review_passed",
+      "review": {
+        "support": "supported",
+        "adequacy": "complete",
+        "role": "aligned",
+        "stage": "aligned"
+      },
+      "extra_read_windows": 0,
+      "read_windows": 1,
+      "f1_delta_from_prefix": 0.0,
+      "answer_changed": false,
+      "model_calls": 4,
+      "intervention_calls": 1
+    },
+    {
+      "repeat": 0,
+      "task_id": "qasper-f161e6d5aecf8fae3a26374dcb3e4e1b40530c95",
+      "method": "repair-reread",
+      "status": "completed",
+      "prefix_status": "completed",
+      "error": null,
+      "intervention_status": "review_passed",
+      "review": {
+        "support": "supported",
+        "adequacy": "complete",
+        "role": "aligned",
+        "stage": "aligned"
+      },
+      "extra_read_windows": 0,
+      "read_windows": 1,
+      "f1_delta_from_prefix": 0.0,
+      "answer_changed": false,
+      "model_calls": 4,
+      "intervention_calls": 1
+    },
+    {
+      "repeat": 0,
+      "task_id": "qasper-f161e6d5aecf8fae3a26374dcb3e4e1b40530c95",
+      "method": "repair-keyword",
+      "status": "completed",
+      "prefix_status": "completed",
+      "error": null,
+      "intervention_status": "rewritten",
+      "review": {
+        "support": null,
+        "adequacy": null,
+        "role": null,
+        "stage": null
+      },
+      "extra_read_windows": 1,
+      "read_windows": 2,
+      "f1_delta_from_prefix": 0.0,
+      "answer_changed": false,
+      "model_calls": 4,
+      "intervention_calls": 1
+    },
+    {
+      "repeat": 0,
+      "task_id": "qasper-f161e6d5aecf8fae3a26374dcb3e4e1b40530c95",
+      "method": "repair-search",
+      "status": "completed",
+      "prefix_status": "completed",
+      "error": null,
+      "intervention_status": "rewritten",
+      "review": {
+        "support": null,
+        "adequacy": null,
+        "role": null,
+        "stage": null
+      },
+      "extra_read_windows": 1,
+      "read_windows": 2,
+      "f1_delta_from_prefix": 0.0,
+      "answer_changed": true,
+      "model_calls": 5,
+      "intervention_calls": 2
+    },
+    {
+      "repeat": 0,
+      "task_id": "qasper-498c0229f831c82a5eb494cdb3547452112a66a0",
+      "method": "repair-baseline",
+      "status": "completed",
+      "prefix_status": "completed",
+      "error": null,
+      "intervention_status": "original",
+      "review": {
+        "support": null,
+        "adequacy": null,
+        "role": null,
+        "stage": null
+      },
+      "extra_read_windows": 0,
+      "read_windows": 1,
+      "f1_delta_from_prefix": 0.0,
+      "answer_changed": false,
+      "model_calls": 3,
+      "intervention_calls": 0
+    },
+    {
+      "repeat": 0,
+      "task_id": "qasper-498c0229f831c82a5eb494cdb3547452112a66a0",
+      "method": "repair-rewrite",
+      "status": "completed",
+      "prefix_status": "completed",
+      "error": null,
+      "intervention_status": "review_passed",
+      "review": {
+        "support": "supported",
+        "adequacy": "complete",
+        "role": "aligned",
+        "stage": "aligned"
+      },
+      "extra_read_windows": 0,
+      "read_windows": 1,
+      "f1_delta_from_prefix": 0.0,
+      "answer_changed": false,
+      "model_calls": 4,
+      "intervention_calls": 1
+    },
+    {
+      "repeat": 0,
+      "task_id": "qasper-498c0229f831c82a5eb494cdb3547452112a66a0",
+      "method": "repair-reread",
+      "status": "completed",
+      "prefix_status": "completed",
+      "error": null,
+      "intervention_status": "review_passed",
+      "review": {
+        "support": "supported",
+        "adequacy": "complete",
+        "role": "aligned",
+        "stage": "aligned"
+      },
+      "extra_read_windows": 0,
+      "read_windows": 1,
+      "f1_delta_from_prefix": 0.0,
+      "answer_changed": false,
+      "model_calls": 4,
+      "intervention_calls": 1
+    },
+    {
+      "repeat": 0,
+      "task_id": "qasper-498c0229f831c82a5eb494cdb3547452112a66a0",
+      "method": "repair-keyword",
+      "status": "completed",
+      "prefix_status": "completed",
+      "error": null,
+      "intervention_status": "rewritten",
+      "review": {
+        "support": null,
+        "adequacy": null,
+        "role": null,
+        "stage": null
+      },
+      "extra_read_windows": 1,
+      "read_windows": 2,
+      "f1_delta_from_prefix": 0.0,
+      "answer_changed": false,
+      "model_calls": 4,
+      "intervention_calls": 1
+    },
+    {
+      "repeat": 0,
+      "task_id": "qasper-498c0229f831c82a5eb494cdb3547452112a66a0",
+      "method": "repair-search",
+      "status": "completed",
+      "prefix_status": "completed",
+      "error": null,
+      "intervention_status": "rewritten",
+      "review": {
+        "support": null,
+        "adequacy": null,
+        "role": null,
+        "stage": null
+      },
+      "extra_read_windows": 1,
+      "read_windows": 2,
+      "f1_delta_from_prefix": 0.0,
+      "answer_changed": false,
+      "model_calls": 5,
+      "intervention_calls": 2
+    },
+    {
+      "repeat": 0,
+      "task_id": "qasper-c09a92e25e6a81369fcc4ae6045491f2690ccc10",
+      "method": "repair-baseline",
+      "status": "completed",
+      "prefix_status": "completed",
+      "error": null,
+      "intervention_status": "original",
+      "review": {
+        "support": null,
+        "adequacy": null,
+        "role": null,
+        "stage": null
+      },
+      "extra_read_windows": 0,
+      "read_windows": 0,
+      "f1_delta_from_prefix": 0.0,
+      "answer_changed": false,
+      "model_calls": 3,
+      "intervention_calls": 0
+    },
+    {
+      "repeat": 0,
+      "task_id": "qasper-c09a92e25e6a81369fcc4ae6045491f2690ccc10",
+      "method": "repair-rewrite",
+      "status": "completed",
+      "prefix_status": "completed",
+      "error": null,
+      "intervention_status": "rewritten",
+      "review": {
+        "support": "insufficient",
+        "adequacy": "unknown",
+        "role": "unknown",
+        "stage": "unknown"
+      },
+      "extra_read_windows": 0,
+      "read_windows": 0,
+      "f1_delta_from_prefix": 0.0,
+      "answer_changed": false,
+      "model_calls": 5,
+      "intervention_calls": 2
+    },
+    {
+      "repeat": 0,
+      "task_id": "qasper-c09a92e25e6a81369fcc4ae6045491f2690ccc10",
+      "method": "repair-reread",
+      "status": "completed",
+      "prefix_status": "completed",
+      "error": null,
+      "intervention_status": "rewritten",
+      "review": {
+        "support": "insufficient",
+        "adequacy": "unknown",
+        "role": "unknown",
+        "stage": "unknown"
+      },
+      "extra_read_windows": 1,
+      "read_windows": 1,
+      "f1_delta_from_prefix": 0.26666666666666666,
+      "answer_changed": true,
+      "model_calls": 5,
+      "intervention_calls": 2
+    },
+    {
+      "repeat": 0,
+      "task_id": "qasper-c09a92e25e6a81369fcc4ae6045491f2690ccc10",
+      "method": "repair-keyword",
+      "status": "completed",
+      "prefix_status": "completed",
+      "error": null,
+      "intervention_status": "rewritten",
+      "review": {
+        "support": null,
+        "adequacy": null,
+        "role": null,
+        "stage": null
+      },
+      "extra_read_windows": 1,
+      "read_windows": 1,
+      "f1_delta_from_prefix": 0.26666666666666666,
+      "answer_changed": true,
+      "model_calls": 4,
+      "intervention_calls": 1
+    },
+    {
+      "repeat": 0,
+      "task_id": "qasper-c09a92e25e6a81369fcc4ae6045491f2690ccc10",
+      "method": "repair-search",
+      "status": "completed",
+      "prefix_status": "completed",
+      "error": null,
+      "intervention_status": "rewritten",
+      "review": {
+        "support": null,
+        "adequacy": null,
+        "role": null,
+        "stage": null
+      },
+      "extra_read_windows": 1,
+      "read_windows": 1,
+      "f1_delta_from_prefix": 0.26666666666666666,
+      "answer_changed": true,
+      "model_calls": 5,
+      "intervention_calls": 2
+    },
+    {
+      "repeat": 0,
+      "task_id": "qasper-7ee5c45b127fb284a4a9e72bb9b980a602f7445a",
+      "method": "repair-baseline",
+      "status": "completed",
+      "prefix_status": "completed",
+      "error": null,
+      "intervention_status": "original",
+      "review": {
+        "support": null,
+        "adequacy": null,
+        "role": null,
+        "stage": null
+      },
+      "extra_read_windows": 0,
+      "read_windows": 1,
+      "f1_delta_from_prefix": 0.0,
+      "answer_changed": false,
+      "model_calls": 3,
+      "intervention_calls": 0
+    },
+    {
+      "repeat": 0,
+      "task_id": "qasper-7ee5c45b127fb284a4a9e72bb9b980a602f7445a",
+      "method": "repair-rewrite",
+      "status": "completed",
+      "prefix_status": "completed",
+      "error": null,
+      "intervention_status": "review_passed",
+      "review": {
+        "support": "supported",
+        "adequacy": "complete",
+        "role": "aligned",
+        "stage": "aligned"
+      },
+      "extra_read_windows": 0,
+      "read_windows": 1,
+      "f1_delta_from_prefix": 0.0,
+      "answer_changed": false,
+      "model_calls": 4,
+      "intervention_calls": 1
+    },
+    {
+      "repeat": 0,
+      "task_id": "qasper-7ee5c45b127fb284a4a9e72bb9b980a602f7445a",
+      "method": "repair-reread",
+      "status": "completed",
+      "prefix_status": "completed",
+      "error": null,
+      "intervention_status": "review_passed",
+      "review": {
+        "support": "supported",
+        "adequacy": "complete",
+        "role": "aligned",
+        "stage": "aligned"
+      },
+      "extra_read_windows": 0,
+      "read_windows": 1,
+      "f1_delta_from_prefix": 0.0,
+      "answer_changed": false,
+      "model_calls": 4,
+      "intervention_calls": 1
+    },
+    {
+      "repeat": 0,
+      "task_id": "qasper-7ee5c45b127fb284a4a9e72bb9b980a602f7445a",
+      "method": "repair-keyword",
+      "status": "completed",
+      "prefix_status": "completed",
+      "error": null,
+      "intervention_status": "rewritten",
+      "review": {
+        "support": null,
+        "adequacy": null,
+        "role": null,
+        "stage": null
+      },
+      "extra_read_windows": 1,
+      "read_windows": 2,
+      "f1_delta_from_prefix": 0.0,
+      "answer_changed": false,
+      "model_calls": 4,
+      "intervention_calls": 1
+    },
+    {
+      "repeat": 0,
+      "task_id": "qasper-7ee5c45b127fb284a4a9e72bb9b980a602f7445a",
+      "method": "repair-search",
+      "status": "completed",
+      "prefix_status": "completed",
+      "error": null,
+      "intervention_status": "rewritten",
+      "review": {
+        "support": null,
+        "adequacy": null,
+        "role": null,
+        "stage": null
+      },
+      "extra_read_windows": 1,
+      "read_windows": 2,
+      "f1_delta_from_prefix": 0.0,
+      "answer_changed": false,
+      "model_calls": 5,
+      "intervention_calls": 2
+    },
+    {
+      "repeat": 0,
+      "task_id": "qasper-932b39fd6c47c6a880621a62e6a978491d881d60",
+      "method": "repair-baseline",
+      "status": "completed",
+      "prefix_status": "completed",
+      "error": null,
+      "intervention_status": "original",
+      "review": {
+        "support": null,
+        "adequacy": null,
+        "role": null,
+        "stage": null
+      },
+      "extra_read_windows": 0,
+      "read_windows": 0,
+      "f1_delta_from_prefix": 0.0,
+      "answer_changed": false,
+      "model_calls": 3,
+      "intervention_calls": 0
+    },
+    {
+      "repeat": 0,
+      "task_id": "qasper-932b39fd6c47c6a880621a62e6a978491d881d60",
+      "method": "repair-rewrite",
+      "status": "completed",
+      "prefix_status": "completed",
+      "error": null,
+      "intervention_status": "rewritten",
+      "review": {
+        "support": "insufficient",
+        "adequacy": "unknown",
+        "role": "unknown",
+        "stage": "unknown"
+      },
+      "extra_read_windows": 0,
+      "read_windows": 0,
+      "f1_delta_from_prefix": 0.0,
+      "answer_changed": false,
+      "model_calls": 5,
+      "intervention_calls": 2
+    },
+    {
+      "repeat": 0,
+      "task_id": "qasper-932b39fd6c47c6a880621a62e6a978491d881d60",
+      "method": "repair-reread",
+      "status": "completed",
+      "prefix_status": "completed",
+      "error": null,
+      "intervention_status": "rewritten",
+      "review": {
+        "support": "insufficient",
+        "adequacy": "unknown",
+        "role": "unknown",
+        "stage": "unknown"
+      },
+      "extra_read_windows": 1,
+      "read_windows": 1,
+      "f1_delta_from_prefix": 0.0,
+      "answer_changed": true,
+      "model_calls": 5,
+      "intervention_calls": 2
+    },
+    {
+      "repeat": 0,
+      "task_id": "qasper-932b39fd6c47c6a880621a62e6a978491d881d60",
+      "method": "repair-keyword",
+      "status": "completed",
+      "prefix_status": "completed",
+      "error": null,
+      "intervention_status": "rewritten",
+      "review": {
+        "support": null,
+        "adequacy": null,
+        "role": null,
+        "stage": null
+      },
+      "extra_read_windows": 1,
+      "read_windows": 1,
+      "f1_delta_from_prefix": 0.0,
+      "answer_changed": true,
+      "model_calls": 4,
+      "intervention_calls": 1
+    },
+    {
+      "repeat": 0,
+      "task_id": "qasper-932b39fd6c47c6a880621a62e6a978491d881d60",
+      "method": "repair-search",
+      "status": "completed",
+      "prefix_status": "completed",
+      "error": null,
+      "intervention_status": "rewritten",
+      "review": {
+        "support": null,
+        "adequacy": null,
+        "role": null,
+        "stage": null
+      },
+      "extra_read_windows": 0,
+      "read_windows": 0,
+      "f1_delta_from_prefix": 0.0,
+      "answer_changed": false,
+      "model_calls": 5,
+      "intervention_calls": 2
+    },
+    {
+      "repeat": 0,
+      "task_id": "qasper-2e89ebd2e4008c67bb2413699589ee55f59c4f36",
+      "method": "repair-baseline",
+      "status": "completed",
+      "prefix_status": "completed",
+      "error": null,
+      "intervention_status": "original",
+      "review": {
+        "support": null,
+        "adequacy": null,
+        "role": null,
+        "stage": null
+      },
+      "extra_read_windows": 0,
+      "read_windows": 1,
+      "f1_delta_from_prefix": 0.0,
+      "answer_changed": false,
+      "model_calls": 3,
+      "intervention_calls": 0
+    },
+    {
+      "repeat": 0,
+      "task_id": "qasper-2e89ebd2e4008c67bb2413699589ee55f59c4f36",
+      "method": "repair-rewrite",
+      "status": "completed",
+      "prefix_status": "completed",
+      "error": null,
+      "intervention_status": "review_passed",
+      "review": {
+        "support": "supported",
+        "adequacy": "complete",
+        "role": "aligned",
+        "stage": "aligned"
+      },
+      "extra_read_windows": 0,
+      "read_windows": 1,
+      "f1_delta_from_prefix": 0.0,
+      "answer_changed": false,
+      "model_calls": 4,
+      "intervention_calls": 1
+    },
+    {
+      "repeat": 0,
+      "task_id": "qasper-2e89ebd2e4008c67bb2413699589ee55f59c4f36",
+      "method": "repair-reread",
+      "status": "completed",
+      "prefix_status": "completed",
+      "error": null,
+      "intervention_status": "review_passed",
+      "review": {
+        "support": "supported",
+        "adequacy": "complete",
+        "role": "aligned",
+        "stage": "aligned"
+      },
+      "extra_read_windows": 0,
+      "read_windows": 1,
+      "f1_delta_from_prefix": 0.0,
+      "answer_changed": false,
+      "model_calls": 4,
+      "intervention_calls": 1
+    },
+    {
+      "repeat": 0,
+      "task_id": "qasper-2e89ebd2e4008c67bb2413699589ee55f59c4f36",
+      "method": "repair-keyword",
+      "status": "completed",
+      "prefix_status": "completed",
+      "error": null,
+      "intervention_status": "rewritten",
+      "review": {
+        "support": null,
+        "adequacy": null,
+        "role": null,
+        "stage": null
+      },
+      "extra_read_windows": 1,
+      "read_windows": 2,
+      "f1_delta_from_prefix": -0.03947368421052633,
+      "answer_changed": true,
+      "model_calls": 4,
+      "intervention_calls": 1
+    },
+    {
+      "repeat": 0,
+      "task_id": "qasper-2e89ebd2e4008c67bb2413699589ee55f59c4f36",
+      "method": "repair-search",
+      "status": "completed",
+      "prefix_status": "completed",
+      "error": null,
+      "intervention_status": "rewritten",
+      "review": {
+        "support": null,
+        "adequacy": null,
+        "role": null,
+        "stage": null
+      },
+      "extra_read_windows": 1,
+      "read_windows": 2,
+      "f1_delta_from_prefix": 0.0,
+      "answer_changed": false,
+      "model_calls": 5,
+      "intervention_calls": 2
+    },
+    {
+      "repeat": 0,
+      "task_id": "qasper-1beb4a590fa6127a138f4ed1dd13d5d51cc96809",
+      "method": "repair-baseline",
+      "status": "completed",
+      "prefix_status": "completed",
+      "error": null,
+      "intervention_status": "original",
+      "review": {
+        "support": null,
+        "adequacy": null,
+        "role": null,
+        "stage": null
+      },
+      "extra_read_windows": 0,
+      "read_windows": 1,
+      "f1_delta_from_prefix": 0.0,
+      "answer_changed": false,
+      "model_calls": 3,
+      "intervention_calls": 0
+    },
+    {
+      "repeat": 0,
+      "task_id": "qasper-1beb4a590fa6127a138f4ed1dd13d5d51cc96809",
+      "method": "repair-rewrite",
+      "status": "completed",
+      "prefix_status": "completed",
+      "error": null,
+      "intervention_status": "review_failed:ValidationError",
+      "review": {
+        "support": null,
+        "adequacy": null,
+        "role": null,
+        "stage": null
+      },
+      "extra_read_windows": 0,
+      "read_windows": 1,
+      "f1_delta_from_prefix": 0.0,
+      "answer_changed": false,
+      "model_calls": 4,
+      "intervention_calls": 1
+    },
+    {
+      "repeat": 0,
+      "task_id": "qasper-1beb4a590fa6127a138f4ed1dd13d5d51cc96809",
+      "method": "repair-reread",
+      "status": "completed",
+      "prefix_status": "completed",
+      "error": null,
+      "intervention_status": "review_failed:ValidationError",
+      "review": {
+        "support": null,
+        "adequacy": null,
+        "role": null,
+        "stage": null
+      },
+      "extra_read_windows": 0,
+      "read_windows": 1,
+      "f1_delta_from_prefix": 0.0,
+      "answer_changed": false,
+      "model_calls": 4,
+      "intervention_calls": 1
+    },
+    {
+      "repeat": 0,
+      "task_id": "qasper-1beb4a590fa6127a138f4ed1dd13d5d51cc96809",
+      "method": "repair-keyword",
+      "status": "completed",
+      "prefix_status": "completed",
+      "error": null,
+      "intervention_status": "rewritten",
+      "review": {
+        "support": null,
+        "adequacy": null,
+        "role": null,
+        "stage": null
+      },
+      "extra_read_windows": 1,
+      "read_windows": 2,
+      "f1_delta_from_prefix": 0.0,
+      "answer_changed": true,
+      "model_calls": 4,
+      "intervention_calls": 1
+    },
+    {
+      "repeat": 0,
+      "task_id": "qasper-1beb4a590fa6127a138f4ed1dd13d5d51cc96809",
+      "method": "repair-search",
+      "status": "completed",
+      "prefix_status": "completed",
+      "error": null,
+      "intervention_status": "rewritten",
+      "review": {
+        "support": null,
+        "adequacy": null,
+        "role": null,
+        "stage": null
+      },
+      "extra_read_windows": 0,
+      "read_windows": 1,
+      "f1_delta_from_prefix": 0.0,
+      "answer_changed": true,
+      "model_calls": 5,
+      "intervention_calls": 2
+    },
+    {
+      "repeat": 0,
+      "task_id": "qasper-49eb52b3ec0647e165a5e41488088c80a20cc78f",
+      "method": "repair-baseline",
+      "status": "completed",
+      "prefix_status": "completed",
+      "error": null,
+      "intervention_status": "original",
+      "review": {
+        "support": null,
+        "adequacy": null,
+        "role": null,
+        "stage": null
+      },
+      "extra_read_windows": 0,
+      "read_windows": 0,
+      "f1_delta_from_prefix": 0.0,
+      "answer_changed": false,
+      "model_calls": 4,
+      "intervention_calls": 0
+    },
+    {
+      "repeat": 0,
+      "task_id": "qasper-49eb52b3ec0647e165a5e41488088c80a20cc78f",
+      "method": "repair-rewrite",
+      "status": "completed",
+      "prefix_status": "completed",
+      "error": null,
+      "intervention_status": "rewritten",
+      "review": {
+        "support": "insufficient",
+        "adequacy": "unknown",
+        "role": "unknown",
+        "stage": "unknown"
+      },
+      "extra_read_windows": 0,
+      "read_windows": 0,
+      "f1_delta_from_prefix": 0.0,
+      "answer_changed": false,
+      "model_calls": 6,
+      "intervention_calls": 2
+    },
+    {
+      "repeat": 0,
+      "task_id": "qasper-49eb52b3ec0647e165a5e41488088c80a20cc78f",
+      "method": "repair-reread",
+      "status": "completed",
+      "prefix_status": "completed",
+      "error": null,
+      "intervention_status": "rewritten",
+      "review": {
+        "support": "insufficient",
+        "adequacy": "unknown",
+        "role": "unknown",
+        "stage": "unknown"
+      },
+      "extra_read_windows": 0,
+      "read_windows": 0,
+      "f1_delta_from_prefix": 0.0,
+      "answer_changed": false,
+      "model_calls": 6,
+      "intervention_calls": 2
+    },
+    {
+      "repeat": 0,
+      "task_id": "qasper-49eb52b3ec0647e165a5e41488088c80a20cc78f",
+      "method": "repair-keyword",
+      "status": "completed",
+      "prefix_status": "completed",
+      "error": null,
+      "intervention_status": "rewritten",
+      "review": {
+        "support": null,
+        "adequacy": null,
+        "role": null,
+        "stage": null
+      },
+      "extra_read_windows": 1,
+      "read_windows": 1,
+      "f1_delta_from_prefix": 0.0,
+      "answer_changed": true,
+      "model_calls": 5,
+      "intervention_calls": 1
+    },
+    {
+      "repeat": 0,
+      "task_id": "qasper-49eb52b3ec0647e165a5e41488088c80a20cc78f",
+      "method": "repair-search",
+      "status": "completed",
+      "prefix_status": "completed",
+      "error": null,
+      "intervention_status": "rewritten",
+      "review": {
+        "support": null,
+        "adequacy": null,
+        "role": null,
+        "stage": null
+      },
+      "extra_read_windows": 0,
+      "read_windows": 0,
+      "f1_delta_from_prefix": 0.0,
+      "answer_changed": false,
+      "model_calls": 6,
+      "intervention_calls": 2
+    },
+    {
+      "repeat": 0,
+      "task_id": "qasper-c1c44fd96c3fa6e16949ae8fa453e511c6435c68",
+      "method": "repair-baseline",
+      "status": "completed",
+      "prefix_status": "completed",
+      "error": null,
+      "intervention_status": "original",
+      "review": {
+        "support": null,
+        "adequacy": null,
+        "role": null,
+        "stage": null
+      },
+      "extra_read_windows": 0,
+      "read_windows": 1,
+      "f1_delta_from_prefix": 0.0,
+      "answer_changed": false,
+      "model_calls": 3,
+      "intervention_calls": 0
+    },
+    {
+      "repeat": 0,
+      "task_id": "qasper-c1c44fd96c3fa6e16949ae8fa453e511c6435c68",
+      "method": "repair-rewrite",
+      "status": "completed",
+      "prefix_status": "completed",
+      "error": null,
+      "intervention_status": "review_passed",
+      "review": {
+        "support": "supported",
+        "adequacy": "complete",
+        "role": "aligned",
+        "stage": "aligned"
+      },
+      "extra_read_windows": 0,
+      "read_windows": 1,
+      "f1_delta_from_prefix": 0.0,
+      "answer_changed": false,
+      "model_calls": 4,
+      "intervention_calls": 1
+    },
+    {
+      "repeat": 0,
+      "task_id": "qasper-c1c44fd96c3fa6e16949ae8fa453e511c6435c68",
+      "method": "repair-reread",
+      "status": "completed",
+      "prefix_status": "completed",
+      "error": null,
+      "intervention_status": "review_passed",
+      "review": {
+        "support": "supported",
+        "adequacy": "complete",
+        "role": "aligned",
+        "stage": "aligned"
+      },
+      "extra_read_windows": 0,
+      "read_windows": 1,
+      "f1_delta_from_prefix": 0.0,
+      "answer_changed": false,
+      "model_calls": 4,
+      "intervention_calls": 1
+    },
+    {
+      "repeat": 0,
+      "task_id": "qasper-c1c44fd96c3fa6e16949ae8fa453e511c6435c68",
+      "method": "repair-keyword",
+      "status": "completed",
+      "prefix_status": "completed",
+      "error": null,
+      "intervention_status": "rewritten",
+      "review": {
+        "support": null,
+        "adequacy": null,
+        "role": null,
+        "stage": null
+      },
+      "extra_read_windows": 1,
+      "read_windows": 2,
+      "f1_delta_from_prefix": 0.0,
+      "answer_changed": false,
+      "model_calls": 4,
+      "intervention_calls": 1
+    },
+    {
+      "repeat": 0,
+      "task_id": "qasper-c1c44fd96c3fa6e16949ae8fa453e511c6435c68",
+      "method": "repair-search",
+      "status": "completed",
+      "prefix_status": "completed",
+      "error": null,
+      "intervention_status": "rewritten",
+      "review": {
+        "support": null,
+        "adequacy": null,
+        "role": null,
+        "stage": null
+      },
+      "extra_read_windows": 0,
+      "read_windows": 1,
+      "f1_delta_from_prefix": -0.05714285714285716,
+      "answer_changed": true,
+      "model_calls": 5,
+      "intervention_calls": 2
+    },
+    {
+      "repeat": 0,
+      "task_id": "qasper-e374169ee10f835f660ab8403a5701114586f167",
+      "method": "repair-baseline",
+      "status": "completed",
+      "prefix_status": "completed",
+      "error": null,
+      "intervention_status": "original",
+      "review": {
+        "support": null,
+        "adequacy": null,
+        "role": null,
+        "stage": null
+      },
+      "extra_read_windows": 0,
+      "read_windows": 1,
+      "f1_delta_from_prefix": 0.0,
+      "answer_changed": false,
+      "model_calls": 3,
+      "intervention_calls": 0
+    },
+    {
+      "repeat": 0,
+      "task_id": "qasper-e374169ee10f835f660ab8403a5701114586f167",
+      "method": "repair-rewrite",
+      "status": "completed",
+      "prefix_status": "completed",
+      "error": null,
+      "intervention_status": "review_passed",
+      "review": {
+        "support": "supported",
+        "adequacy": "complete",
+        "role": "aligned",
+        "stage": "aligned"
+      },
+      "extra_read_windows": 0,
+      "read_windows": 1,
+      "f1_delta_from_prefix": 0.0,
+      "answer_changed": false,
+      "model_calls": 4,
+      "intervention_calls": 1
+    },
+    {
+      "repeat": 0,
+      "task_id": "qasper-e374169ee10f835f660ab8403a5701114586f167",
+      "method": "repair-reread",
+      "status": "completed",
+      "prefix_status": "completed",
+      "error": null,
+      "intervention_status": "review_passed",
+      "review": {
+        "support": "supported",
+        "adequacy": "complete",
+        "role": "aligned",
+        "stage": "aligned"
+      },
+      "extra_read_windows": 0,
+      "read_windows": 1,
+      "f1_delta_from_prefix": 0.0,
+      "answer_changed": false,
+      "model_calls": 4,
+      "intervention_calls": 1
+    },
+    {
+      "repeat": 0,
+      "task_id": "qasper-e374169ee10f835f660ab8403a5701114586f167",
+      "method": "repair-keyword",
+      "status": "completed",
+      "prefix_status": "completed",
+      "error": null,
+      "intervention_status": "rewritten",
+      "review": {
+        "support": null,
+        "adequacy": null,
+        "role": null,
+        "stage": null
+      },
+      "extra_read_windows": 1,
+      "read_windows": 2,
+      "f1_delta_from_prefix": 0.0,
+      "answer_changed": false,
+      "model_calls": 4,
+      "intervention_calls": 1
+    },
+    {
+      "repeat": 0,
+      "task_id": "qasper-e374169ee10f835f660ab8403a5701114586f167",
+      "method": "repair-search",
+      "status": "completed",
+      "prefix_status": "completed",
+      "error": null,
+      "intervention_status": "rewritten",
+      "review": {
+        "support": null,
+        "adequacy": null,
+        "role": null,
+        "stage": null
+      },
+      "extra_read_windows": 0,
+      "read_windows": 1,
+      "f1_delta_from_prefix": 0.0,
+      "answer_changed": false,
+      "model_calls": 5,
+      "intervention_calls": 2
+    },
+    {
+      "repeat": 0,
+      "task_id": "qasper-dc2a2c177cd5df6da5d03e6e74262bf424850ec9",
+      "method": "repair-baseline",
+      "status": "completed",
+      "prefix_status": "completed",
+      "error": null,
+      "intervention_status": "original",
+      "review": {
+        "support": null,
+        "adequacy": null,
+        "role": null,
+        "stage": null
+      },
+      "extra_read_windows": 0,
+      "read_windows": 1,
+      "f1_delta_from_prefix": 0.0,
+      "answer_changed": false,
+      "model_calls": 3,
+      "intervention_calls": 0
+    },
+    {
+      "repeat": 0,
+      "task_id": "qasper-dc2a2c177cd5df6da5d03e6e74262bf424850ec9",
+      "method": "repair-rewrite",
+      "status": "completed",
+      "prefix_status": "completed",
+      "error": null,
+      "intervention_status": "review_passed",
+      "review": {
+        "support": "supported",
+        "adequacy": "complete",
+        "role": "aligned",
+        "stage": "aligned"
+      },
+      "extra_read_windows": 0,
+      "read_windows": 1,
+      "f1_delta_from_prefix": 0.0,
+      "answer_changed": false,
+      "model_calls": 4,
+      "intervention_calls": 1
+    },
+    {
+      "repeat": 0,
+      "task_id": "qasper-dc2a2c177cd5df6da5d03e6e74262bf424850ec9",
+      "method": "repair-reread",
+      "status": "completed",
+      "prefix_status": "completed",
+      "error": null,
+      "intervention_status": "review_passed",
+      "review": {
+        "support": "supported",
+        "adequacy": "complete",
+        "role": "aligned",
+        "stage": "aligned"
+      },
+      "extra_read_windows": 0,
+      "read_windows": 1,
+      "f1_delta_from_prefix": 0.0,
+      "answer_changed": false,
+      "model_calls": 4,
+      "intervention_calls": 1
+    },
+    {
+      "repeat": 0,
+      "task_id": "qasper-dc2a2c177cd5df6da5d03e6e74262bf424850ec9",
+      "method": "repair-keyword",
+      "status": "completed",
+      "prefix_status": "completed",
+      "error": null,
+      "intervention_status": "rewritten",
+      "review": {
+        "support": null,
+        "adequacy": null,
+        "role": null,
+        "stage": null
+      },
+      "extra_read_windows": 1,
+      "read_windows": 2,
+      "f1_delta_from_prefix": 0.0,
+      "answer_changed": false,
+      "model_calls": 4,
+      "intervention_calls": 1
+    },
+    {
+      "repeat": 0,
+      "task_id": "qasper-dc2a2c177cd5df6da5d03e6e74262bf424850ec9",
+      "method": "repair-search",
+      "status": "completed",
+      "prefix_status": "completed",
+      "error": null,
+      "intervention_status": "rewritten",
+      "review": {
+        "support": null,
+        "adequacy": null,
+        "role": null,
+        "stage": null
+      },
+      "extra_read_windows": 0,
+      "read_windows": 1,
+      "f1_delta_from_prefix": 0.0,
+      "answer_changed": false,
+      "model_calls": 5,
+      "intervention_calls": 2
+    },
+    {
+      "repeat": 0,
+      "task_id": "qasper-0f567251a6566f65170a1329eeeb5105932036b2",
+      "method": "repair-baseline",
+      "status": "completed",
+      "prefix_status": "completed",
+      "error": null,
+      "intervention_status": "original",
+      "review": {
+        "support": null,
+        "adequacy": null,
+        "role": null,
+        "stage": null
+      },
+      "extra_read_windows": 0,
+      "read_windows": 1,
+      "f1_delta_from_prefix": 0.0,
+      "answer_changed": false,
+      "model_calls": 3,
+      "intervention_calls": 0
+    },
+    {
+      "repeat": 0,
+      "task_id": "qasper-0f567251a6566f65170a1329eeeb5105932036b2",
+      "method": "repair-rewrite",
+      "status": "completed",
+      "prefix_status": "completed",
+      "error": null,
+      "intervention_status": "review_passed",
+      "review": {
+        "support": "supported",
+        "adequacy": "complete",
+        "role": "aligned",
+        "stage": "aligned"
+      },
+      "extra_read_windows": 0,
+      "read_windows": 1,
+      "f1_delta_from_prefix": 0.0,
+      "answer_changed": false,
+      "model_calls": 4,
+      "intervention_calls": 1
+    },
+    {
+      "repeat": 0,
+      "task_id": "qasper-0f567251a6566f65170a1329eeeb5105932036b2",
+      "method": "repair-reread",
+      "status": "completed",
+      "prefix_status": "completed",
+      "error": null,
+      "intervention_status": "review_passed",
+      "review": {
+        "support": "supported",
+        "adequacy": "complete",
+        "role": "aligned",
+        "stage": "aligned"
+      },
+      "extra_read_windows": 0,
+      "read_windows": 1,
+      "f1_delta_from_prefix": 0.0,
+      "answer_changed": false,
+      "model_calls": 4,
+      "intervention_calls": 1
+    },
+    {
+      "repeat": 0,
+      "task_id": "qasper-0f567251a6566f65170a1329eeeb5105932036b2",
+      "method": "repair-keyword",
+      "status": "completed",
+      "prefix_status": "completed",
+      "error": null,
+      "intervention_status": "rewritten",
+      "review": {
+        "support": null,
+        "adequacy": null,
+        "role": null,
+        "stage": null
+      },
+      "extra_read_windows": 1,
+      "read_windows": 2,
+      "f1_delta_from_prefix": 0.0,
+      "answer_changed": false,
+      "model_calls": 4,
+      "intervention_calls": 1
+    },
+    {
+      "repeat": 0,
+      "task_id": "qasper-0f567251a6566f65170a1329eeeb5105932036b2",
+      "method": "repair-search",
+      "status": "completed",
+      "prefix_status": "completed",
+      "error": null,
+      "intervention_status": "rewritten",
+      "review": {
+        "support": null,
+        "adequacy": null,
+        "role": null,
+        "stage": null
+      },
+      "extra_read_windows": 0,
+      "read_windows": 1,
+      "f1_delta_from_prefix": 0.0,
+      "answer_changed": false,
+      "model_calls": 5,
+      "intervention_calls": 2
+    },
+    {
+      "repeat": 0,
+      "task_id": "qasper-777bb3dcdbc32e925df0f7ec3adb96f15dd3dc47",
+      "method": "repair-baseline",
+      "status": "completed",
+      "prefix_status": "completed",
+      "error": null,
+      "intervention_status": "original",
+      "review": {
+        "support": null,
+        "adequacy": null,
+        "role": null,
+        "stage": null
+      },
+      "extra_read_windows": 0,
+      "read_windows": 1,
+      "f1_delta_from_prefix": 0.0,
+      "answer_changed": false,
+      "model_calls": 3,
+      "intervention_calls": 0
+    },
+    {
+      "repeat": 0,
+      "task_id": "qasper-777bb3dcdbc32e925df0f7ec3adb96f15dd3dc47",
+      "method": "repair-rewrite",
+      "status": "completed",
+      "prefix_status": "completed",
+      "error": null,
+      "intervention_status": "review_passed",
+      "review": {
+        "support": "supported",
+        "adequacy": "complete",
+        "role": "aligned",
+        "stage": "aligned"
+      },
+      "extra_read_windows": 0,
+      "read_windows": 1,
+      "f1_delta_from_prefix": 0.0,
+      "answer_changed": false,
+      "model_calls": 4,
+      "intervention_calls": 1
+    },
+    {
+      "repeat": 0,
+      "task_id": "qasper-777bb3dcdbc32e925df0f7ec3adb96f15dd3dc47",
+      "method": "repair-reread",
+      "status": "completed",
+      "prefix_status": "completed",
+      "error": null,
+      "intervention_status": "review_passed",
+      "review": {
+        "support": "supported",
+        "adequacy": "complete",
+        "role": "aligned",
+        "stage": "aligned"
+      },
+      "extra_read_windows": 0,
+      "read_windows": 1,
+      "f1_delta_from_prefix": 0.0,
+      "answer_changed": false,
+      "model_calls": 4,
+      "intervention_calls": 1
+    },
+    {
+      "repeat": 0,
+      "task_id": "qasper-777bb3dcdbc32e925df0f7ec3adb96f15dd3dc47",
+      "method": "repair-keyword",
+      "status": "completed",
+      "prefix_status": "completed",
+      "error": null,
+      "intervention_status": "rewritten",
+      "review": {
+        "support": null,
+        "adequacy": null,
+        "role": null,
+        "stage": null
+      },
+      "extra_read_windows": 1,
+      "read_windows": 2,
+      "f1_delta_from_prefix": 0.0,
+      "answer_changed": false,
+      "model_calls": 4,
+      "intervention_calls": 1
+    },
+    {
+      "repeat": 0,
+      "task_id": "qasper-777bb3dcdbc32e925df0f7ec3adb96f15dd3dc47",
+      "method": "repair-search",
+      "status": "completed",
+      "prefix_status": "completed",
+      "error": null,
+      "intervention_status": "rewritten",
+      "review": {
+        "support": null,
+        "adequacy": null,
+        "role": null,
+        "stage": null
+      },
+      "extra_read_windows": 0,
+      "read_windows": 1,
+      "f1_delta_from_prefix": 0.0,
+      "answer_changed": false,
+      "model_calls": 5,
+      "intervention_calls": 2
+    },
+    {
+      "repeat": 0,
+      "task_id": "qasper-67ec8ef85844e01746c13627090dc2706bb2a4f3",
+      "method": "repair-baseline",
+      "status": "completed",
+      "prefix_status": "completed",
+      "error": null,
+      "intervention_status": "original",
+      "review": {
+        "support": null,
+        "adequacy": null,
+        "role": null,
+        "stage": null
+      },
+      "extra_read_windows": 0,
+      "read_windows": 1,
+      "f1_delta_from_prefix": 0.0,
+      "answer_changed": false,
+      "model_calls": 3,
+      "intervention_calls": 0
+    },
+    {
+      "repeat": 0,
+      "task_id": "qasper-67ec8ef85844e01746c13627090dc2706bb2a4f3",
+      "method": "repair-rewrite",
+      "status": "completed",
+      "prefix_status": "completed",
+      "error": null,
+      "intervention_status": "rewritten",
+      "review": {
+        "support": "insufficient",
+        "adequacy": "partial",
+        "role": "aligned",
+        "stage": "aligned"
+      },
+      "extra_read_windows": 0,
+      "read_windows": 1,
+      "f1_delta_from_prefix": 1.0,
+      "answer_changed": true,
+      "model_calls": 5,
+      "intervention_calls": 2
+    },
+    {
+      "repeat": 0,
+      "task_id": "qasper-67ec8ef85844e01746c13627090dc2706bb2a4f3",
+      "method": "repair-reread",
+      "status": "completed",
+      "prefix_status": "completed",
+      "error": null,
+      "intervention_status": "rewritten",
+      "review": {
+        "support": "insufficient",
+        "adequacy": "partial",
+        "role": "aligned",
+        "stage": "aligned"
+      },
+      "extra_read_windows": 1,
+      "read_windows": 2,
+      "f1_delta_from_prefix": 1.0,
+      "answer_changed": true,
+      "model_calls": 5,
+      "intervention_calls": 2
+    },
+    {
+      "repeat": 0,
+      "task_id": "qasper-67ec8ef85844e01746c13627090dc2706bb2a4f3",
+      "method": "repair-keyword",
+      "status": "completed",
+      "prefix_status": "completed",
+      "error": null,
+      "intervention_status": "rewritten",
+      "review": {
+        "support": null,
+        "adequacy": null,
+        "role": null,
+        "stage": null
+      },
+      "extra_read_windows": 1,
+      "read_windows": 2,
+      "f1_delta_from_prefix": 0.0,
+      "answer_changed": false,
+      "model_calls": 4,
+      "intervention_calls": 1
+    },
+    {
+      "repeat": 0,
+      "task_id": "qasper-67ec8ef85844e01746c13627090dc2706bb2a4f3",
+      "method": "repair-search",
+      "status": "completed",
+      "prefix_status": "completed",
+      "error": null,
+      "intervention_status": "rewritten",
+      "review": {
+        "support": null,
+        "adequacy": null,
+        "role": null,
+        "stage": null
+      },
+      "extra_read_windows": 0,
+      "read_windows": 1,
+      "f1_delta_from_prefix": 0.0,
+      "answer_changed": false,
+      "model_calls": 5,
+      "intervention_calls": 2
+    },
+    {
+      "repeat": 1,
+      "task_id": "qasper-d4db7df65aa4ece63e1de813e5ce98ce1b4dbe7f",
+      "method": "repair-baseline",
+      "status": "completed",
+      "prefix_status": "completed",
+      "error": null,
+      "intervention_status": "original",
+      "review": {
+        "support": null,
+        "adequacy": null,
+        "role": null,
+        "stage": null
+      },
+      "extra_read_windows": 0,
+      "read_windows": 1,
+      "f1_delta_from_prefix": 0.0,
+      "answer_changed": false,
+      "model_calls": 4,
+      "intervention_calls": 0
+    },
+    {
+      "repeat": 1,
+      "task_id": "qasper-d4db7df65aa4ece63e1de813e5ce98ce1b4dbe7f",
+      "method": "repair-rewrite",
+      "status": "completed",
+      "prefix_status": "completed",
+      "error": null,
+      "intervention_status": "review_failed:ValidationError",
+      "review": {
+        "support": null,
+        "adequacy": null,
+        "role": null,
+        "stage": null
+      },
+      "extra_read_windows": 0,
+      "read_windows": 1,
+      "f1_delta_from_prefix": 0.0,
+      "answer_changed": false,
+      "model_calls": 5,
+      "intervention_calls": 1
+    },
+    {
+      "repeat": 1,
+      "task_id": "qasper-d4db7df65aa4ece63e1de813e5ce98ce1b4dbe7f",
+      "method": "repair-reread",
+      "status": "completed",
+      "prefix_status": "completed",
+      "error": null,
+      "intervention_status": "review_failed:ValidationError",
+      "review": {
+        "support": null,
+        "adequacy": null,
+        "role": null,
+        "stage": null
+      },
+      "extra_read_windows": 0,
+      "read_windows": 1,
+      "f1_delta_from_prefix": 0.0,
+      "answer_changed": false,
+      "model_calls": 5,
+      "intervention_calls": 1
+    },
+    {
+      "repeat": 1,
+      "task_id": "qasper-d4db7df65aa4ece63e1de813e5ce98ce1b4dbe7f",
+      "method": "repair-keyword",
+      "status": "completed",
+      "prefix_status": "completed",
+      "error": null,
+      "intervention_status": "rewritten",
+      "review": {
+        "support": null,
+        "adequacy": null,
+        "role": null,
+        "stage": null
+      },
+      "extra_read_windows": 1,
+      "read_windows": 2,
+      "f1_delta_from_prefix": 0.0,
+      "answer_changed": false,
+      "model_calls": 5,
+      "intervention_calls": 1
+    },
+    {
+      "repeat": 1,
+      "task_id": "qasper-d4db7df65aa4ece63e1de813e5ce98ce1b4dbe7f",
+      "method": "repair-search",
+      "status": "completed",
+      "prefix_status": "completed",
+      "error": null,
+      "intervention_status": "rewritten",
+      "review": {
+        "support": null,
+        "adequacy": null,
+        "role": null,
+        "stage": null
+      },
+      "extra_read_windows": 0,
+      "read_windows": 1,
+      "f1_delta_from_prefix": 0.0,
+      "answer_changed": false,
+      "model_calls": 6,
+      "intervention_calls": 2
+    },
+    {
+      "repeat": 1,
+      "task_id": "qasper-c0bee6539eb6956a7347daa9d2419b367bd02064",
+      "method": "repair-baseline",
+      "status": "completed",
+      "prefix_status": "completed",
+      "error": null,
+      "intervention_status": "original",
+      "review": {
+        "support": null,
+        "adequacy": null,
+        "role": null,
+        "stage": null
+      },
+      "extra_read_windows": 0,
+      "read_windows": 0,
+      "f1_delta_from_prefix": 0.0,
+      "answer_changed": false,
+      "model_calls": 3,
+      "intervention_calls": 0
+    },
+    {
+      "repeat": 1,
+      "task_id": "qasper-c0bee6539eb6956a7347daa9d2419b367bd02064",
+      "method": "repair-rewrite",
+      "status": "completed",
+      "prefix_status": "completed",
+      "error": null,
+      "intervention_status": "rewritten",
+      "review": {
+        "support": "insufficient",
+        "adequacy": "unknown",
+        "role": "not_applicable",
+        "stage": "not_applicable"
+      },
+      "extra_read_windows": 0,
+      "read_windows": 0,
+      "f1_delta_from_prefix": 0.0,
+      "answer_changed": false,
+      "model_calls": 5,
+      "intervention_calls": 2
+    },
+    {
+      "repeat": 1,
+      "task_id": "qasper-c0bee6539eb6956a7347daa9d2419b367bd02064",
+      "method": "repair-reread",
+      "status": "completed",
+      "prefix_status": "completed",
+      "error": null,
+      "intervention_status": "rewritten",
+      "review": {
+        "support": "insufficient",
+        "adequacy": "unknown",
+        "role": "not_applicable",
+        "stage": "not_applicable"
+      },
+      "extra_read_windows": 1,
+      "read_windows": 1,
+      "f1_delta_from_prefix": 0.0,
+      "answer_changed": true,
+      "model_calls": 5,
+      "intervention_calls": 2
+    },
+    {
+      "repeat": 1,
+      "task_id": "qasper-c0bee6539eb6956a7347daa9d2419b367bd02064",
+      "method": "repair-keyword",
+      "status": "completed",
+      "prefix_status": "completed",
+      "error": null,
+      "intervention_status": "rewritten",
+      "review": {
+        "support": null,
+        "adequacy": null,
+        "role": null,
+        "stage": null
+      },
+      "extra_read_windows": 1,
+      "read_windows": 1,
+      "f1_delta_from_prefix": 0.0,
+      "answer_changed": true,
+      "model_calls": 4,
+      "intervention_calls": 1
+    },
+    {
+      "repeat": 1,
+      "task_id": "qasper-c0bee6539eb6956a7347daa9d2419b367bd02064",
+      "method": "repair-search",
+      "status": "completed",
+      "prefix_status": "completed",
+      "error": null,
+      "intervention_status": "rewritten",
+      "review": {
+        "support": null,
+        "adequacy": null,
+        "role": null,
+        "stage": null
+      },
+      "extra_read_windows": 1,
+      "read_windows": 1,
+      "f1_delta_from_prefix": 1.0,
+      "answer_changed": true,
+      "model_calls": 5,
+      "intervention_calls": 2
+    },
+    {
+      "repeat": 1,
+      "task_id": "qasper-252a645af9876241fb166e5822992ce17fec6eb6",
+      "method": "repair-baseline",
+      "status": "completed",
+      "prefix_status": "completed",
+      "error": null,
+      "intervention_status": "original",
+      "review": {
+        "support": null,
+        "adequacy": null,
+        "role": null,
+        "stage": null
+      },
+      "extra_read_windows": 0,
+      "read_windows": 1,
+      "f1_delta_from_prefix": 0.0,
+      "answer_changed": false,
+      "model_calls": 2,
+      "intervention_calls": 0
+    },
+    {
+      "repeat": 1,
+      "task_id": "qasper-252a645af9876241fb166e5822992ce17fec6eb6",
+      "method": "repair-rewrite",
+      "status": "completed",
+      "prefix_status": "completed",
+      "error": null,
+      "intervention_status": "rewritten",
+      "review": {
+        "support": "contradicted",
+        "adequacy": "unknown",
+        "role": "not_applicable",
+        "stage": "not_applicable"
+      },
+      "extra_read_windows": 0,
+      "read_windows": 1,
+      "f1_delta_from_prefix": 1.0,
+      "answer_changed": true,
+      "model_calls": 4,
+      "intervention_calls": 2
+    },
+    {
+      "repeat": 1,
+      "task_id": "qasper-252a645af9876241fb166e5822992ce17fec6eb6",
+      "method": "repair-reread",
+      "status": "completed",
+      "prefix_status": "completed",
+      "error": null,
+      "intervention_status": "rewritten",
+      "review": {
+        "support": "contradicted",
+        "adequacy": "unknown",
+        "role": "not_applicable",
+        "stage": "not_applicable"
+      },
+      "extra_read_windows": 1,
+      "read_windows": 2,
+      "f1_delta_from_prefix": 1.0,
+      "answer_changed": true,
+      "model_calls": 4,
+      "intervention_calls": 2
+    },
+    {
+      "repeat": 1,
+      "task_id": "qasper-252a645af9876241fb166e5822992ce17fec6eb6",
+      "method": "repair-keyword",
+      "status": "completed",
+      "prefix_status": "completed",
+      "error": null,
+      "intervention_status": "rewritten",
+      "review": {
+        "support": null,
+        "adequacy": null,
+        "role": null,
+        "stage": null
+      },
+      "extra_read_windows": 1,
+      "read_windows": 2,
+      "f1_delta_from_prefix": 0.0,
+      "answer_changed": false,
+      "model_calls": 3,
+      "intervention_calls": 1
+    },
+    {
+      "repeat": 1,
+      "task_id": "qasper-252a645af9876241fb166e5822992ce17fec6eb6",
+      "method": "repair-search",
+      "status": "completed",
+      "prefix_status": "completed",
+      "error": null,
+      "intervention_status": "rewritten",
+      "review": {
+        "support": null,
+        "adequacy": null,
+        "role": null,
+        "stage": null
+      },
+      "extra_read_windows": 0,
+      "read_windows": 1,
+      "f1_delta_from_prefix": 1.0,
+      "answer_changed": true,
+      "model_calls": 4,
+      "intervention_calls": 2
+    },
+    {
+      "repeat": 1,
+      "task_id": "qasper-ff6c9af28f0e2bb4fb6a69f124665f8ceb966fbc",
+      "method": "repair-baseline",
+      "status": "completed",
+      "prefix_status": "completed",
+      "error": null,
+      "intervention_status": "original",
+      "review": {
+        "support": null,
+        "adequacy": null,
+        "role": null,
+        "stage": null
+      },
+      "extra_read_windows": 0,
+      "read_windows": 1,
+      "f1_delta_from_prefix": 0.0,
+      "answer_changed": false,
+      "model_calls": 3,
+      "intervention_calls": 0
+    },
+    {
+      "repeat": 1,
+      "task_id": "qasper-ff6c9af28f0e2bb4fb6a69f124665f8ceb966fbc",
+      "method": "repair-rewrite",
+      "status": "completed",
+      "prefix_status": "completed",
+      "error": null,
+      "intervention_status": "review_passed",
+      "review": {
+        "support": "supported",
+        "adequacy": "complete",
+        "role": "aligned",
+        "stage": "aligned"
+      },
+      "extra_read_windows": 0,
+      "read_windows": 1,
+      "f1_delta_from_prefix": 0.0,
+      "answer_changed": false,
+      "model_calls": 4,
+      "intervention_calls": 1
+    },
+    {
+      "repeat": 1,
+      "task_id": "qasper-ff6c9af28f0e2bb4fb6a69f124665f8ceb966fbc",
+      "method": "repair-reread",
+      "status": "completed",
+      "prefix_status": "completed",
+      "error": null,
+      "intervention_status": "review_passed",
+      "review": {
+        "support": "supported",
+        "adequacy": "complete",
+        "role": "aligned",
+        "stage": "aligned"
+      },
+      "extra_read_windows": 0,
+      "read_windows": 1,
+      "f1_delta_from_prefix": 0.0,
+      "answer_changed": false,
+      "model_calls": 4,
+      "intervention_calls": 1
+    },
+    {
+      "repeat": 1,
+      "task_id": "qasper-ff6c9af28f0e2bb4fb6a69f124665f8ceb966fbc",
+      "method": "repair-keyword",
+      "status": "completed",
+      "prefix_status": "completed",
+      "error": null,
+      "intervention_status": "rewritten",
+      "review": {
+        "support": null,
+        "adequacy": null,
+        "role": null,
+        "stage": null
+      },
+      "extra_read_windows": 1,
+      "read_windows": 2,
+      "f1_delta_from_prefix": 0.0,
+      "answer_changed": false,
+      "model_calls": 4,
+      "intervention_calls": 1
+    },
+    {
+      "repeat": 1,
+      "task_id": "qasper-ff6c9af28f0e2bb4fb6a69f124665f8ceb966fbc",
+      "method": "repair-search",
+      "status": "completed",
+      "prefix_status": "completed",
+      "error": null,
+      "intervention_status": "rewritten",
+      "review": {
+        "support": null,
+        "adequacy": null,
+        "role": null,
+        "stage": null
+      },
+      "extra_read_windows": 0,
+      "read_windows": 1,
+      "f1_delta_from_prefix": 0.0,
+      "answer_changed": false,
+      "model_calls": 5,
+      "intervention_calls": 2
+    },
+    {
+      "repeat": 1,
+      "task_id": "qasper-fc77d70c305fa80447b191248aba93da63ac3704",
+      "method": "repair-baseline",
+      "status": "completed",
+      "prefix_status": "completed",
+      "error": null,
+      "intervention_status": "original",
+      "review": {
+        "support": null,
+        "adequacy": null,
+        "role": null,
+        "stage": null
+      },
+      "extra_read_windows": 0,
+      "read_windows": 1,
+      "f1_delta_from_prefix": 0.0,
+      "answer_changed": false,
+      "model_calls": 3,
+      "intervention_calls": 0
+    },
+    {
+      "repeat": 1,
+      "task_id": "qasper-fc77d70c305fa80447b191248aba93da63ac3704",
+      "method": "repair-rewrite",
+      "status": "completed",
+      "prefix_status": "completed",
+      "error": null,
+      "intervention_status": "review_passed",
+      "review": {
+        "support": "supported",
+        "adequacy": "complete",
+        "role": "aligned",
+        "stage": "aligned"
+      },
+      "extra_read_windows": 0,
+      "read_windows": 1,
+      "f1_delta_from_prefix": 0.0,
+      "answer_changed": false,
+      "model_calls": 4,
+      "intervention_calls": 1
+    },
+    {
+      "repeat": 1,
+      "task_id": "qasper-fc77d70c305fa80447b191248aba93da63ac3704",
+      "method": "repair-reread",
+      "status": "completed",
+      "prefix_status": "completed",
+      "error": null,
+      "intervention_status": "review_passed",
+      "review": {
+        "support": "supported",
+        "adequacy": "complete",
+        "role": "aligned",
+        "stage": "aligned"
+      },
+      "extra_read_windows": 0,
+      "read_windows": 1,
+      "f1_delta_from_prefix": 0.0,
+      "answer_changed": false,
+      "model_calls": 4,
+      "intervention_calls": 1
+    },
+    {
+      "repeat": 1,
+      "task_id": "qasper-fc77d70c305fa80447b191248aba93da63ac3704",
+      "method": "repair-keyword",
+      "status": "completed",
+      "prefix_status": "completed",
+      "error": null,
+      "intervention_status": "rewritten",
+      "review": {
+        "support": null,
+        "adequacy": null,
+        "role": null,
+        "stage": null
+      },
+      "extra_read_windows": 1,
+      "read_windows": 2,
+      "f1_delta_from_prefix": 0.0,
+      "answer_changed": false,
+      "model_calls": 4,
+      "intervention_calls": 1
+    },
+    {
+      "repeat": 1,
+      "task_id": "qasper-fc77d70c305fa80447b191248aba93da63ac3704",
+      "method": "repair-search",
+      "status": "completed",
+      "prefix_status": "completed",
+      "error": null,
+      "intervention_status": "rewritten",
+      "review": {
+        "support": null,
+        "adequacy": null,
+        "role": null,
+        "stage": null
+      },
+      "extra_read_windows": 1,
+      "read_windows": 2,
+      "f1_delta_from_prefix": 0.0,
+      "answer_changed": false,
+      "model_calls": 5,
+      "intervention_calls": 2
+    },
+    {
+      "repeat": 1,
+      "task_id": "qasper-3941401a182a3d6234894a5c8a75d48c6116c45c",
+      "method": "repair-baseline",
+      "status": "completed",
+      "prefix_status": "completed",
+      "error": null,
+      "intervention_status": "original",
+      "review": {
+        "support": null,
+        "adequacy": null,
+        "role": null,
+        "stage": null
+      },
+      "extra_read_windows": 0,
+      "read_windows": 1,
+      "f1_delta_from_prefix": 0.0,
+      "answer_changed": false,
+      "model_calls": 3,
+      "intervention_calls": 0
+    },
+    {
+      "repeat": 1,
+      "task_id": "qasper-3941401a182a3d6234894a5c8a75d48c6116c45c",
+      "method": "repair-rewrite",
+      "status": "completed",
+      "prefix_status": "completed",
+      "error": null,
+      "intervention_status": "review_passed",
+      "review": {
+        "support": "supported",
+        "adequacy": "complete",
+        "role": "aligned",
+        "stage": "aligned"
+      },
+      "extra_read_windows": 0,
+      "read_windows": 1,
+      "f1_delta_from_prefix": 0.0,
+      "answer_changed": false,
+      "model_calls": 4,
+      "intervention_calls": 1
+    },
+    {
+      "repeat": 1,
+      "task_id": "qasper-3941401a182a3d6234894a5c8a75d48c6116c45c",
+      "method": "repair-reread",
+      "status": "completed",
+      "prefix_status": "completed",
+      "error": null,
+      "intervention_status": "review_passed",
+      "review": {
+        "support": "supported",
+        "adequacy": "complete",
+        "role": "aligned",
+        "stage": "aligned"
+      },
+      "extra_read_windows": 0,
+      "read_windows": 1,
+      "f1_delta_from_prefix": 0.0,
+      "answer_changed": false,
+      "model_calls": 4,
+      "intervention_calls": 1
+    },
+    {
+      "repeat": 1,
+      "task_id": "qasper-3941401a182a3d6234894a5c8a75d48c6116c45c",
+      "method": "repair-keyword",
+      "status": "completed",
+      "prefix_status": "completed",
+      "error": null,
+      "intervention_status": "rewritten",
+      "review": {
+        "support": null,
+        "adequacy": null,
+        "role": null,
+        "stage": null
+      },
+      "extra_read_windows": 1,
+      "read_windows": 2,
+      "f1_delta_from_prefix": 0.0,
+      "answer_changed": true,
+      "model_calls": 4,
+      "intervention_calls": 1
+    },
+    {
+      "repeat": 1,
+      "task_id": "qasper-3941401a182a3d6234894a5c8a75d48c6116c45c",
+      "method": "repair-search",
+      "status": "completed",
+      "prefix_status": "completed",
+      "error": null,
+      "intervention_status": "rewritten",
+      "review": {
+        "support": null,
+        "adequacy": null,
+        "role": null,
+        "stage": null
+      },
+      "extra_read_windows": 1,
+      "read_windows": 2,
+      "f1_delta_from_prefix": 0.0,
+      "answer_changed": false,
+      "model_calls": 5,
+      "intervention_calls": 2
+    },
+    {
+      "repeat": 1,
+      "task_id": "qasper-f161e6d5aecf8fae3a26374dcb3e4e1b40530c95",
+      "method": "repair-baseline",
+      "status": "completed",
+      "prefix_status": "completed",
+      "error": null,
+      "intervention_status": "original",
+      "review": {
+        "support": null,
+        "adequacy": null,
+        "role": null,
+        "stage": null
+      },
+      "extra_read_windows": 0,
+      "read_windows": 1,
+      "f1_delta_from_prefix": 0.0,
+      "answer_changed": false,
+      "model_calls": 3,
+      "intervention_calls": 0
+    },
+    {
+      "repeat": 1,
+      "task_id": "qasper-f161e6d5aecf8fae3a26374dcb3e4e1b40530c95",
+      "method": "repair-rewrite",
+      "status": "completed",
+      "prefix_status": "completed",
+      "error": null,
+      "intervention_status": "review_passed",
+      "review": {
+        "support": "supported",
+        "adequacy": "complete",
+        "role": "aligned",
+        "stage": "aligned"
+      },
+      "extra_read_windows": 0,
+      "read_windows": 1,
+      "f1_delta_from_prefix": 0.0,
+      "answer_changed": false,
+      "model_calls": 4,
+      "intervention_calls": 1
+    },
+    {
+      "repeat": 1,
+      "task_id": "qasper-f161e6d5aecf8fae3a26374dcb3e4e1b40530c95",
+      "method": "repair-reread",
+      "status": "completed",
+      "prefix_status": "completed",
+      "error": null,
+      "intervention_status": "review_passed",
+      "review": {
+        "support": "supported",
+        "adequacy": "complete",
+        "role": "aligned",
+        "stage": "aligned"
+      },
+      "extra_read_windows": 0,
+      "read_windows": 1,
+      "f1_delta_from_prefix": 0.0,
+      "answer_changed": false,
+      "model_calls": 4,
+      "intervention_calls": 1
+    },
+    {
+      "repeat": 1,
+      "task_id": "qasper-f161e6d5aecf8fae3a26374dcb3e4e1b40530c95",
+      "method": "repair-keyword",
+      "status": "completed",
+      "prefix_status": "completed",
+      "error": null,
+      "intervention_status": "rewritten",
+      "review": {
+        "support": null,
+        "adequacy": null,
+        "role": null,
+        "stage": null
+      },
+      "extra_read_windows": 1,
+      "read_windows": 2,
+      "f1_delta_from_prefix": 0.0,
+      "answer_changed": false,
+      "model_calls": 4,
+      "intervention_calls": 1
+    },
+    {
+      "repeat": 1,
+      "task_id": "qasper-f161e6d5aecf8fae3a26374dcb3e4e1b40530c95",
+      "method": "repair-search",
+      "status": "completed",
+      "prefix_status": "completed",
+      "error": null,
+      "intervention_status": "rewritten",
+      "review": {
+        "support": null,
+        "adequacy": null,
+        "role": null,
+        "stage": null
+      },
+      "extra_read_windows": 1,
+      "read_windows": 2,
+      "f1_delta_from_prefix": 0.0,
+      "answer_changed": true,
+      "model_calls": 5,
+      "intervention_calls": 2
+    },
+    {
+      "repeat": 1,
+      "task_id": "qasper-498c0229f831c82a5eb494cdb3547452112a66a0",
+      "method": "repair-baseline",
+      "status": "completed",
+      "prefix_status": "completed",
+      "error": null,
+      "intervention_status": "original",
+      "review": {
+        "support": null,
+        "adequacy": null,
+        "role": null,
+        "stage": null
+      },
+      "extra_read_windows": 0,
+      "read_windows": 0,
+      "f1_delta_from_prefix": 0.0,
+      "answer_changed": false,
+      "model_calls": 3,
+      "intervention_calls": 0
+    },
+    {
+      "repeat": 1,
+      "task_id": "qasper-498c0229f831c82a5eb494cdb3547452112a66a0",
+      "method": "repair-rewrite",
+      "status": "completed",
+      "prefix_status": "completed",
+      "error": null,
+      "intervention_status": "rewritten",
+      "review": {
+        "support": "insufficient",
+        "adequacy": "unknown",
+        "role": "unknown",
+        "stage": "unknown"
+      },
+      "extra_read_windows": 0,
+      "read_windows": 0,
+      "f1_delta_from_prefix": 0.0,
+      "answer_changed": false,
+      "model_calls": 5,
+      "intervention_calls": 2
+    },
+    {
+      "repeat": 1,
+      "task_id": "qasper-498c0229f831c82a5eb494cdb3547452112a66a0",
+      "method": "repair-reread",
+      "status": "completed",
+      "prefix_status": "completed",
+      "error": null,
+      "intervention_status": "rewritten",
+      "review": {
+        "support": "insufficient",
+        "adequacy": "unknown",
+        "role": "unknown",
+        "stage": "unknown"
+      },
+      "extra_read_windows": 1,
+      "read_windows": 1,
+      "f1_delta_from_prefix": 0.0,
+      "answer_changed": false,
+      "model_calls": 5,
+      "intervention_calls": 2
+    },
+    {
+      "repeat": 1,
+      "task_id": "qasper-498c0229f831c82a5eb494cdb3547452112a66a0",
+      "method": "repair-keyword",
+      "status": "completed",
+      "prefix_status": "completed",
+      "error": null,
+      "intervention_status": "rewritten",
+      "review": {
+        "support": null,
+        "adequacy": null,
+        "role": null,
+        "stage": null
+      },
+      "extra_read_windows": 1,
+      "read_windows": 1,
+      "f1_delta_from_prefix": 0.19047619047619047,
+      "answer_changed": true,
+      "model_calls": 4,
+      "intervention_calls": 1
+    },
+    {
+      "repeat": 1,
+      "task_id": "qasper-498c0229f831c82a5eb494cdb3547452112a66a0",
+      "method": "repair-search",
+      "status": "completed",
+      "prefix_status": "completed",
+      "error": null,
+      "intervention_status": "rewritten",
+      "review": {
+        "support": null,
+        "adequacy": null,
+        "role": null,
+        "stage": null
+      },
+      "extra_read_windows": 0,
+      "read_windows": 0,
+      "f1_delta_from_prefix": 0.0,
+      "answer_changed": false,
+      "model_calls": 5,
+      "intervention_calls": 2
+    },
+    {
+      "repeat": 1,
+      "task_id": "qasper-c09a92e25e6a81369fcc4ae6045491f2690ccc10",
+      "method": "repair-baseline",
+      "status": "completed",
+      "prefix_status": "completed",
+      "error": null,
+      "intervention_status": "original",
+      "review": {
+        "support": null,
+        "adequacy": null,
+        "role": null,
+        "stage": null
+      },
+      "extra_read_windows": 0,
+      "read_windows": 0,
+      "f1_delta_from_prefix": 0.0,
+      "answer_changed": false,
+      "model_calls": 3,
+      "intervention_calls": 0
+    },
+    {
+      "repeat": 1,
+      "task_id": "qasper-c09a92e25e6a81369fcc4ae6045491f2690ccc10",
+      "method": "repair-rewrite",
+      "status": "completed",
+      "prefix_status": "completed",
+      "error": null,
+      "intervention_status": "rewritten",
+      "review": {
+        "support": "insufficient",
+        "adequacy": "unknown",
+        "role": "unknown",
+        "stage": "unknown"
+      },
+      "extra_read_windows": 0,
+      "read_windows": 0,
+      "f1_delta_from_prefix": 0.0,
+      "answer_changed": false,
+      "model_calls": 5,
+      "intervention_calls": 2
+    },
+    {
+      "repeat": 1,
+      "task_id": "qasper-c09a92e25e6a81369fcc4ae6045491f2690ccc10",
+      "method": "repair-reread",
+      "status": "completed",
+      "prefix_status": "completed",
+      "error": null,
+      "intervention_status": "rewritten",
+      "review": {
+        "support": "insufficient",
+        "adequacy": "unknown",
+        "role": "unknown",
+        "stage": "unknown"
+      },
+      "extra_read_windows": 1,
+      "read_windows": 1,
+      "f1_delta_from_prefix": 0.26666666666666666,
+      "answer_changed": true,
+      "model_calls": 5,
+      "intervention_calls": 2
+    },
+    {
+      "repeat": 1,
+      "task_id": "qasper-c09a92e25e6a81369fcc4ae6045491f2690ccc10",
+      "method": "repair-keyword",
+      "status": "completed",
+      "prefix_status": "completed",
+      "error": null,
+      "intervention_status": "rewritten",
+      "review": {
+        "support": null,
+        "adequacy": null,
+        "role": null,
+        "stage": null
+      },
+      "extra_read_windows": 1,
+      "read_windows": 1,
+      "f1_delta_from_prefix": 0.26666666666666666,
+      "answer_changed": true,
+      "model_calls": 4,
+      "intervention_calls": 1
+    },
+    {
+      "repeat": 1,
+      "task_id": "qasper-c09a92e25e6a81369fcc4ae6045491f2690ccc10",
+      "method": "repair-search",
+      "status": "completed",
+      "prefix_status": "completed",
+      "error": null,
+      "intervention_status": "rewritten",
+      "review": {
+        "support": null,
+        "adequacy": null,
+        "role": null,
+        "stage": null
+      },
+      "extra_read_windows": 1,
+      "read_windows": 1,
+      "f1_delta_from_prefix": 0.26666666666666666,
+      "answer_changed": true,
+      "model_calls": 5,
+      "intervention_calls": 2
+    },
+    {
+      "repeat": 1,
+      "task_id": "qasper-7ee5c45b127fb284a4a9e72bb9b980a602f7445a",
+      "method": "repair-baseline",
+      "status": "completed",
+      "prefix_status": "completed",
+      "error": null,
+      "intervention_status": "original",
+      "review": {
+        "support": null,
+        "adequacy": null,
+        "role": null,
+        "stage": null
+      },
+      "extra_read_windows": 0,
+      "read_windows": 1,
+      "f1_delta_from_prefix": 0.0,
+      "answer_changed": false,
+      "model_calls": 3,
+      "intervention_calls": 0
+    },
+    {
+      "repeat": 1,
+      "task_id": "qasper-7ee5c45b127fb284a4a9e72bb9b980a602f7445a",
+      "method": "repair-rewrite",
+      "status": "completed",
+      "prefix_status": "completed",
+      "error": null,
+      "intervention_status": "review_passed",
+      "review": {
+        "support": "supported",
+        "adequacy": "complete",
+        "role": "aligned",
+        "stage": "aligned"
+      },
+      "extra_read_windows": 0,
+      "read_windows": 1,
+      "f1_delta_from_prefix": 0.0,
+      "answer_changed": false,
+      "model_calls": 4,
+      "intervention_calls": 1
+    },
+    {
+      "repeat": 1,
+      "task_id": "qasper-7ee5c45b127fb284a4a9e72bb9b980a602f7445a",
+      "method": "repair-reread",
+      "status": "completed",
+      "prefix_status": "completed",
+      "error": null,
+      "intervention_status": "review_passed",
+      "review": {
+        "support": "supported",
+        "adequacy": "complete",
+        "role": "aligned",
+        "stage": "aligned"
+      },
+      "extra_read_windows": 0,
+      "read_windows": 1,
+      "f1_delta_from_prefix": 0.0,
+      "answer_changed": false,
+      "model_calls": 4,
+      "intervention_calls": 1
+    },
+    {
+      "repeat": 1,
+      "task_id": "qasper-7ee5c45b127fb284a4a9e72bb9b980a602f7445a",
+      "method": "repair-keyword",
+      "status": "completed",
+      "prefix_status": "completed",
+      "error": null,
+      "intervention_status": "rewritten",
+      "review": {
+        "support": null,
+        "adequacy": null,
+        "role": null,
+        "stage": null
+      },
+      "extra_read_windows": 1,
+      "read_windows": 2,
+      "f1_delta_from_prefix": 0.0,
+      "answer_changed": false,
+      "model_calls": 4,
+      "intervention_calls": 1
+    },
+    {
+      "repeat": 1,
+      "task_id": "qasper-7ee5c45b127fb284a4a9e72bb9b980a602f7445a",
+      "method": "repair-search",
+      "status": "completed",
+      "prefix_status": "completed",
+      "error": null,
+      "intervention_status": "rewritten",
+      "review": {
+        "support": null,
+        "adequacy": null,
+        "role": null,
+        "stage": null
+      },
+      "extra_read_windows": 1,
+      "read_windows": 2,
+      "f1_delta_from_prefix": 0.0,
+      "answer_changed": false,
+      "model_calls": 5,
+      "intervention_calls": 2
+    },
+    {
+      "repeat": 1,
+      "task_id": "qasper-932b39fd6c47c6a880621a62e6a978491d881d60",
+      "method": "repair-baseline",
+      "status": "completed",
+      "prefix_status": "completed",
+      "error": null,
+      "intervention_status": "original",
+      "review": {
+        "support": null,
+        "adequacy": null,
+        "role": null,
+        "stage": null
+      },
+      "extra_read_windows": 0,
+      "read_windows": 1,
+      "f1_delta_from_prefix": 0.0,
+      "answer_changed": false,
+      "model_calls": 3,
+      "intervention_calls": 0
+    },
+    {
+      "repeat": 1,
+      "task_id": "qasper-932b39fd6c47c6a880621a62e6a978491d881d60",
+      "method": "repair-rewrite",
+      "status": "completed",
+      "prefix_status": "completed",
+      "error": null,
+      "intervention_status": "review_passed",
+      "review": {
+        "support": "supported",
+        "adequacy": "complete",
+        "role": "aligned",
+        "stage": "aligned"
+      },
+      "extra_read_windows": 0,
+      "read_windows": 1,
+      "f1_delta_from_prefix": 0.0,
+      "answer_changed": false,
+      "model_calls": 4,
+      "intervention_calls": 1
+    },
+    {
+      "repeat": 1,
+      "task_id": "qasper-932b39fd6c47c6a880621a62e6a978491d881d60",
+      "method": "repair-reread",
+      "status": "completed",
+      "prefix_status": "completed",
+      "error": null,
+      "intervention_status": "review_passed",
+      "review": {
+        "support": "supported",
+        "adequacy": "complete",
+        "role": "aligned",
+        "stage": "aligned"
+      },
+      "extra_read_windows": 0,
+      "read_windows": 1,
+      "f1_delta_from_prefix": 0.0,
+      "answer_changed": false,
+      "model_calls": 4,
+      "intervention_calls": 1
+    },
+    {
+      "repeat": 1,
+      "task_id": "qasper-932b39fd6c47c6a880621a62e6a978491d881d60",
+      "method": "repair-keyword",
+      "status": "completed",
+      "prefix_status": "completed",
+      "error": null,
+      "intervention_status": "rewritten",
+      "review": {
+        "support": null,
+        "adequacy": null,
+        "role": null,
+        "stage": null
+      },
+      "extra_read_windows": 1,
+      "read_windows": 2,
+      "f1_delta_from_prefix": 0.0,
+      "answer_changed": false,
+      "model_calls": 4,
+      "intervention_calls": 1
+    },
+    {
+      "repeat": 1,
+      "task_id": "qasper-932b39fd6c47c6a880621a62e6a978491d881d60",
+      "method": "repair-search",
+      "status": "completed",
+      "prefix_status": "completed",
+      "error": null,
+      "intervention_status": "rewritten",
+      "review": {
+        "support": null,
+        "adequacy": null,
+        "role": null,
+        "stage": null
+      },
+      "extra_read_windows": 1,
+      "read_windows": 2,
+      "f1_delta_from_prefix": 0.0,
+      "answer_changed": false,
+      "model_calls": 5,
+      "intervention_calls": 2
+    },
+    {
+      "repeat": 1,
+      "task_id": "qasper-2e89ebd2e4008c67bb2413699589ee55f59c4f36",
+      "method": "repair-baseline",
+      "status": "completed",
+      "prefix_status": "completed",
+      "error": null,
+      "intervention_status": "original",
+      "review": {
+        "support": null,
+        "adequacy": null,
+        "role": null,
+        "stage": null
+      },
+      "extra_read_windows": 0,
+      "read_windows": 1,
+      "f1_delta_from_prefix": 0.0,
+      "answer_changed": false,
+      "model_calls": 3,
+      "intervention_calls": 0
+    },
+    {
+      "repeat": 1,
+      "task_id": "qasper-2e89ebd2e4008c67bb2413699589ee55f59c4f36",
+      "method": "repair-rewrite",
+      "status": "completed",
+      "prefix_status": "completed",
+      "error": null,
+      "intervention_status": "review_passed",
+      "review": {
+        "support": "supported",
+        "adequacy": "complete",
+        "role": "aligned",
+        "stage": "aligned"
+      },
+      "extra_read_windows": 0,
+      "read_windows": 1,
+      "f1_delta_from_prefix": 0.0,
+      "answer_changed": false,
+      "model_calls": 4,
+      "intervention_calls": 1
+    },
+    {
+      "repeat": 1,
+      "task_id": "qasper-2e89ebd2e4008c67bb2413699589ee55f59c4f36",
+      "method": "repair-reread",
+      "status": "completed",
+      "prefix_status": "completed",
+      "error": null,
+      "intervention_status": "review_passed",
+      "review": {
+        "support": "supported",
+        "adequacy": "complete",
+        "role": "aligned",
+        "stage": "aligned"
+      },
+      "extra_read_windows": 0,
+      "read_windows": 1,
+      "f1_delta_from_prefix": 0.0,
+      "answer_changed": false,
+      "model_calls": 4,
+      "intervention_calls": 1
+    },
+    {
+      "repeat": 1,
+      "task_id": "qasper-2e89ebd2e4008c67bb2413699589ee55f59c4f36",
+      "method": "repair-keyword",
+      "status": "completed",
+      "prefix_status": "completed",
+      "error": null,
+      "intervention_status": "rewritten",
+      "review": {
+        "support": null,
+        "adequacy": null,
+        "role": null,
+        "stage": null
+      },
+      "extra_read_windows": 1,
+      "read_windows": 2,
+      "f1_delta_from_prefix": -0.03255813953488371,
+      "answer_changed": true,
+      "model_calls": 4,
+      "intervention_calls": 1
+    },
+    {
+      "repeat": 1,
+      "task_id": "qasper-2e89ebd2e4008c67bb2413699589ee55f59c4f36",
+      "method": "repair-search",
+      "status": "completed",
+      "prefix_status": "completed",
+      "error": null,
+      "intervention_status": "rewritten",
+      "review": {
+        "support": null,
+        "adequacy": null,
+        "role": null,
+        "stage": null
+      },
+      "extra_read_windows": 0,
+      "read_windows": 1,
+      "f1_delta_from_prefix": -0.03255813953488371,
+      "answer_changed": true,
+      "model_calls": 5,
+      "intervention_calls": 2
+    },
+    {
+      "repeat": 1,
+      "task_id": "qasper-1beb4a590fa6127a138f4ed1dd13d5d51cc96809",
+      "method": "repair-baseline",
+      "status": "completed",
+      "prefix_status": "completed",
+      "error": null,
+      "intervention_status": "original",
+      "review": {
+        "support": null,
+        "adequacy": null,
+        "role": null,
+        "stage": null
+      },
+      "extra_read_windows": 0,
+      "read_windows": 1,
+      "f1_delta_from_prefix": 0.0,
+      "answer_changed": false,
+      "model_calls": 3,
+      "intervention_calls": 0
+    },
+    {
+      "repeat": 1,
+      "task_id": "qasper-1beb4a590fa6127a138f4ed1dd13d5d51cc96809",
+      "method": "repair-rewrite",
+      "status": "completed",
+      "prefix_status": "completed",
+      "error": null,
+      "intervention_status": "rewritten",
+      "review": {
+        "support": "supported",
+        "adequacy": "partial",
+        "role": "aligned",
+        "stage": "aligned"
+      },
+      "extra_read_windows": 0,
+      "read_windows": 1,
+      "f1_delta_from_prefix": -0.3194444444444444,
+      "answer_changed": true,
+      "model_calls": 5,
+      "intervention_calls": 2
+    },
+    {
+      "repeat": 1,
+      "task_id": "qasper-1beb4a590fa6127a138f4ed1dd13d5d51cc96809",
+      "method": "repair-reread",
+      "status": "completed",
+      "prefix_status": "completed",
+      "error": null,
+      "intervention_status": "rewritten",
+      "review": {
+        "support": "supported",
+        "adequacy": "partial",
+        "role": "aligned",
+        "stage": "aligned"
+      },
+      "extra_read_windows": 1,
+      "read_windows": 2,
+      "f1_delta_from_prefix": 0.017094017094017144,
+      "answer_changed": true,
+      "model_calls": 5,
+      "intervention_calls": 2
+    },
+    {
+      "repeat": 1,
+      "task_id": "qasper-1beb4a590fa6127a138f4ed1dd13d5d51cc96809",
+      "method": "repair-keyword",
+      "status": "completed",
+      "prefix_status": "completed",
+      "error": null,
+      "intervention_status": "rewritten",
+      "review": {
+        "support": null,
+        "adequacy": null,
+        "role": null,
+        "stage": null
+      },
+      "extra_read_windows": 1,
+      "read_windows": 2,
+      "f1_delta_from_prefix": -0.4444444444444444,
+      "answer_changed": true,
+      "model_calls": 4,
+      "intervention_calls": 1
+    },
+    {
+      "repeat": 1,
+      "task_id": "qasper-1beb4a590fa6127a138f4ed1dd13d5d51cc96809",
+      "method": "repair-search",
+      "status": "completed",
+      "prefix_status": "completed",
+      "error": null,
+      "intervention_status": "rewritten",
+      "review": {
+        "support": null,
+        "adequacy": null,
+        "role": null,
+        "stage": null
+      },
+      "extra_read_windows": 0,
+      "read_windows": 1,
+      "f1_delta_from_prefix": -0.09150326797385616,
+      "answer_changed": true,
+      "model_calls": 5,
+      "intervention_calls": 2
+    },
+    {
+      "repeat": 1,
+      "task_id": "qasper-49eb52b3ec0647e165a5e41488088c80a20cc78f",
+      "method": "repair-baseline",
+      "status": "completed",
+      "prefix_status": "completed",
+      "error": null,
+      "intervention_status": "original",
+      "review": {
+        "support": null,
+        "adequacy": null,
+        "role": null,
+        "stage": null
+      },
+      "extra_read_windows": 0,
+      "read_windows": 1,
+      "f1_delta_from_prefix": 0.0,
+      "answer_changed": false,
+      "model_calls": 3,
+      "intervention_calls": 0
+    },
+    {
+      "repeat": 1,
+      "task_id": "qasper-49eb52b3ec0647e165a5e41488088c80a20cc78f",
+      "method": "repair-rewrite",
+      "status": "completed",
+      "prefix_status": "completed",
+      "error": null,
+      "intervention_status": "review_failed:ValidationError",
+      "review": {
+        "support": null,
+        "adequacy": null,
+        "role": null,
+        "stage": null
+      },
+      "extra_read_windows": 0,
+      "read_windows": 1,
+      "f1_delta_from_prefix": 0.0,
+      "answer_changed": false,
+      "model_calls": 4,
+      "intervention_calls": 1
+    },
+    {
+      "repeat": 1,
+      "task_id": "qasper-49eb52b3ec0647e165a5e41488088c80a20cc78f",
+      "method": "repair-reread",
+      "status": "completed",
+      "prefix_status": "completed",
+      "error": null,
+      "intervention_status": "review_failed:ValidationError",
+      "review": {
+        "support": null,
+        "adequacy": null,
+        "role": null,
+        "stage": null
+      },
+      "extra_read_windows": 0,
+      "read_windows": 1,
+      "f1_delta_from_prefix": 0.0,
+      "answer_changed": false,
+      "model_calls": 4,
+      "intervention_calls": 1
+    },
+    {
+      "repeat": 1,
+      "task_id": "qasper-49eb52b3ec0647e165a5e41488088c80a20cc78f",
+      "method": "repair-keyword",
+      "status": "completed",
+      "prefix_status": "completed",
+      "error": null,
+      "intervention_status": "rewritten",
+      "review": {
+        "support": null,
+        "adequacy": null,
+        "role": null,
+        "stage": null
+      },
+      "extra_read_windows": 1,
+      "read_windows": 2,
+      "f1_delta_from_prefix": -0.11764705882352941,
+      "answer_changed": true,
+      "model_calls": 4,
+      "intervention_calls": 1
+    },
+    {
+      "repeat": 1,
+      "task_id": "qasper-49eb52b3ec0647e165a5e41488088c80a20cc78f",
+      "method": "repair-search",
+      "status": "completed",
+      "prefix_status": "completed",
+      "error": null,
+      "intervention_status": "rewritten",
+      "review": {
+        "support": null,
+        "adequacy": null,
+        "role": null,
+        "stage": null
+      },
+      "extra_read_windows": 0,
+      "read_windows": 1,
+      "f1_delta_from_prefix": -0.11764705882352941,
+      "answer_changed": true,
+      "model_calls": 5,
+      "intervention_calls": 2
+    },
+    {
+      "repeat": 1,
+      "task_id": "qasper-c1c44fd96c3fa6e16949ae8fa453e511c6435c68",
+      "method": "repair-baseline",
+      "status": "completed",
+      "prefix_status": "completed",
+      "error": null,
+      "intervention_status": "original",
+      "review": {
+        "support": null,
+        "adequacy": null,
+        "role": null,
+        "stage": null
+      },
+      "extra_read_windows": 0,
+      "read_windows": 1,
+      "f1_delta_from_prefix": 0.0,
+      "answer_changed": false,
+      "model_calls": 3,
+      "intervention_calls": 0
+    },
+    {
+      "repeat": 1,
+      "task_id": "qasper-c1c44fd96c3fa6e16949ae8fa453e511c6435c68",
+      "method": "repair-rewrite",
+      "status": "completed",
+      "prefix_status": "completed",
+      "error": null,
+      "intervention_status": "review_passed",
+      "review": {
+        "support": "supported",
+        "adequacy": "complete",
+        "role": "aligned",
+        "stage": "aligned"
+      },
+      "extra_read_windows": 0,
+      "read_windows": 1,
+      "f1_delta_from_prefix": 0.0,
+      "answer_changed": false,
+      "model_calls": 4,
+      "intervention_calls": 1
+    },
+    {
+      "repeat": 1,
+      "task_id": "qasper-c1c44fd96c3fa6e16949ae8fa453e511c6435c68",
+      "method": "repair-reread",
+      "status": "completed",
+      "prefix_status": "completed",
+      "error": null,
+      "intervention_status": "review_passed",
+      "review": {
+        "support": "supported",
+        "adequacy": "complete",
+        "role": "aligned",
+        "stage": "aligned"
+      },
+      "extra_read_windows": 0,
+      "read_windows": 1,
+      "f1_delta_from_prefix": 0.0,
+      "answer_changed": false,
+      "model_calls": 4,
+      "intervention_calls": 1
+    },
+    {
+      "repeat": 1,
+      "task_id": "qasper-c1c44fd96c3fa6e16949ae8fa453e511c6435c68",
+      "method": "repair-keyword",
+      "status": "completed",
+      "prefix_status": "completed",
+      "error": null,
+      "intervention_status": "rewritten",
+      "review": {
+        "support": null,
+        "adequacy": null,
+        "role": null,
+        "stage": null
+      },
+      "extra_read_windows": 1,
+      "read_windows": 2,
+      "f1_delta_from_prefix": 0.0,
+      "answer_changed": false,
+      "model_calls": 4,
+      "intervention_calls": 1
+    },
+    {
+      "repeat": 1,
+      "task_id": "qasper-c1c44fd96c3fa6e16949ae8fa453e511c6435c68",
+      "method": "repair-search",
+      "status": "completed",
+      "prefix_status": "completed",
+      "error": null,
+      "intervention_status": "rewritten",
+      "review": {
+        "support": null,
+        "adequacy": null,
+        "role": null,
+        "stage": null
+      },
+      "extra_read_windows": 0,
+      "read_windows": 1,
+      "f1_delta_from_prefix": 0.0,
+      "answer_changed": false,
+      "model_calls": 5,
+      "intervention_calls": 2
+    },
+    {
+      "repeat": 1,
+      "task_id": "qasper-e374169ee10f835f660ab8403a5701114586f167",
+      "method": "repair-baseline",
+      "status": "completed",
+      "prefix_status": "completed",
+      "error": null,
+      "intervention_status": "original",
+      "review": {
+        "support": null,
+        "adequacy": null,
+        "role": null,
+        "stage": null
+      },
+      "extra_read_windows": 0,
+      "read_windows": 1,
+      "f1_delta_from_prefix": 0.0,
+      "answer_changed": false,
+      "model_calls": 3,
+      "intervention_calls": 0
+    },
+    {
+      "repeat": 1,
+      "task_id": "qasper-e374169ee10f835f660ab8403a5701114586f167",
+      "method": "repair-rewrite",
+      "status": "completed",
+      "prefix_status": "completed",
+      "error": null,
+      "intervention_status": "review_passed",
+      "review": {
+        "support": "supported",
+        "adequacy": "complete",
+        "role": "aligned",
+        "stage": "aligned"
+      },
+      "extra_read_windows": 0,
+      "read_windows": 1,
+      "f1_delta_from_prefix": 0.0,
+      "answer_changed": false,
+      "model_calls": 4,
+      "intervention_calls": 1
+    },
+    {
+      "repeat": 1,
+      "task_id": "qasper-e374169ee10f835f660ab8403a5701114586f167",
+      "method": "repair-reread",
+      "status": "completed",
+      "prefix_status": "completed",
+      "error": null,
+      "intervention_status": "review_passed",
+      "review": {
+        "support": "supported",
+        "adequacy": "complete",
+        "role": "aligned",
+        "stage": "aligned"
+      },
+      "extra_read_windows": 0,
+      "read_windows": 1,
+      "f1_delta_from_prefix": 0.0,
+      "answer_changed": false,
+      "model_calls": 4,
+      "intervention_calls": 1
+    },
+    {
+      "repeat": 1,
+      "task_id": "qasper-e374169ee10f835f660ab8403a5701114586f167",
+      "method": "repair-keyword",
+      "status": "completed",
+      "prefix_status": "completed",
+      "error": null,
+      "intervention_status": "rewritten",
+      "review": {
+        "support": null,
+        "adequacy": null,
+        "role": null,
+        "stage": null
+      },
+      "extra_read_windows": 1,
+      "read_windows": 2,
+      "f1_delta_from_prefix": 0.0,
+      "answer_changed": false,
+      "model_calls": 4,
+      "intervention_calls": 1
+    },
+    {
+      "repeat": 1,
+      "task_id": "qasper-e374169ee10f835f660ab8403a5701114586f167",
+      "method": "repair-search",
+      "status": "completed",
+      "prefix_status": "completed",
+      "error": null,
+      "intervention_status": "rewritten",
+      "review": {
+        "support": null,
+        "adequacy": null,
+        "role": null,
+        "stage": null
+      },
+      "extra_read_windows": 0,
+      "read_windows": 1,
+      "f1_delta_from_prefix": 0.0,
+      "answer_changed": false,
+      "model_calls": 5,
+      "intervention_calls": 2
+    },
+    {
+      "repeat": 1,
+      "task_id": "qasper-dc2a2c177cd5df6da5d03e6e74262bf424850ec9",
+      "method": "repair-baseline",
+      "status": "completed",
+      "prefix_status": "completed",
+      "error": null,
+      "intervention_status": "original",
+      "review": {
+        "support": null,
+        "adequacy": null,
+        "role": null,
+        "stage": null
+      },
+      "extra_read_windows": 0,
+      "read_windows": 1,
+      "f1_delta_from_prefix": 0.0,
+      "answer_changed": false,
+      "model_calls": 3,
+      "intervention_calls": 0
+    },
+    {
+      "repeat": 1,
+      "task_id": "qasper-dc2a2c177cd5df6da5d03e6e74262bf424850ec9",
+      "method": "repair-rewrite",
+      "status": "completed",
+      "prefix_status": "completed",
+      "error": null,
+      "intervention_status": "rewritten",
+      "review": {
+        "support": "supported",
+        "adequacy": "partial",
+        "role": "aligned",
+        "stage": "aligned"
+      },
+      "extra_read_windows": 0,
+      "read_windows": 1,
+      "f1_delta_from_prefix": 0.10810810810810811,
+      "answer_changed": true,
+      "model_calls": 5,
+      "intervention_calls": 2
+    },
+    {
+      "repeat": 1,
+      "task_id": "qasper-dc2a2c177cd5df6da5d03e6e74262bf424850ec9",
+      "method": "repair-reread",
+      "status": "completed",
+      "prefix_status": "completed",
+      "error": null,
+      "intervention_status": "rewritten",
+      "review": {
+        "support": "supported",
+        "adequacy": "partial",
+        "role": "aligned",
+        "stage": "aligned"
+      },
+      "extra_read_windows": 1,
+      "read_windows": 2,
+      "f1_delta_from_prefix": 0.10810810810810811,
+      "answer_changed": true,
+      "model_calls": 5,
+      "intervention_calls": 2
+    },
+    {
+      "repeat": 1,
+      "task_id": "qasper-dc2a2c177cd5df6da5d03e6e74262bf424850ec9",
+      "method": "repair-keyword",
+      "status": "completed",
+      "prefix_status": "completed",
+      "error": null,
+      "intervention_status": "rewritten",
+      "review": {
+        "support": null,
+        "adequacy": null,
+        "role": null,
+        "stage": null
+      },
+      "extra_read_windows": 1,
+      "read_windows": 2,
+      "f1_delta_from_prefix": -0.08277027027027029,
+      "answer_changed": true,
+      "model_calls": 4,
+      "intervention_calls": 1
+    },
+    {
+      "repeat": 1,
+      "task_id": "qasper-dc2a2c177cd5df6da5d03e6e74262bf424850ec9",
+      "method": "repair-search",
+      "status": "completed",
+      "prefix_status": "completed",
+      "error": null,
+      "intervention_status": "rewritten",
+      "review": {
+        "support": null,
+        "adequacy": null,
+        "role": null,
+        "stage": null
+      },
+      "extra_read_windows": 1,
+      "read_windows": 2,
+      "f1_delta_from_prefix": -0.14123801220575416,
+      "answer_changed": true,
+      "model_calls": 5,
+      "intervention_calls": 2
+    },
+    {
+      "repeat": 1,
+      "task_id": "qasper-0f567251a6566f65170a1329eeeb5105932036b2",
+      "method": "repair-baseline",
+      "status": "completed",
+      "prefix_status": "completed",
+      "error": null,
+      "intervention_status": "original",
+      "review": {
+        "support": null,
+        "adequacy": null,
+        "role": null,
+        "stage": null
+      },
+      "extra_read_windows": 0,
+      "read_windows": 1,
+      "f1_delta_from_prefix": 0.0,
+      "answer_changed": false,
+      "model_calls": 3,
+      "intervention_calls": 0
+    },
+    {
+      "repeat": 1,
+      "task_id": "qasper-0f567251a6566f65170a1329eeeb5105932036b2",
+      "method": "repair-rewrite",
+      "status": "completed",
+      "prefix_status": "completed",
+      "error": null,
+      "intervention_status": "review_passed",
+      "review": {
+        "support": "supported",
+        "adequacy": "complete",
+        "role": "aligned",
+        "stage": "aligned"
+      },
+      "extra_read_windows": 0,
+      "read_windows": 1,
+      "f1_delta_from_prefix": 0.0,
+      "answer_changed": false,
+      "model_calls": 4,
+      "intervention_calls": 1
+    },
+    {
+      "repeat": 1,
+      "task_id": "qasper-0f567251a6566f65170a1329eeeb5105932036b2",
+      "method": "repair-reread",
+      "status": "completed",
+      "prefix_status": "completed",
+      "error": null,
+      "intervention_status": "review_passed",
+      "review": {
+        "support": "supported",
+        "adequacy": "complete",
+        "role": "aligned",
+        "stage": "aligned"
+      },
+      "extra_read_windows": 0,
+      "read_windows": 1,
+      "f1_delta_from_prefix": 0.0,
+      "answer_changed": false,
+      "model_calls": 4,
+      "intervention_calls": 1
+    },
+    {
+      "repeat": 1,
+      "task_id": "qasper-0f567251a6566f65170a1329eeeb5105932036b2",
+      "method": "repair-keyword",
+      "status": "completed",
+      "prefix_status": "completed",
+      "error": null,
+      "intervention_status": "rewritten",
+      "review": {
+        "support": null,
+        "adequacy": null,
+        "role": null,
+        "stage": null
+      },
+      "extra_read_windows": 1,
+      "read_windows": 2,
+      "f1_delta_from_prefix": 0.0,
+      "answer_changed": false,
+      "model_calls": 4,
+      "intervention_calls": 1
+    },
+    {
+      "repeat": 1,
+      "task_id": "qasper-0f567251a6566f65170a1329eeeb5105932036b2",
+      "method": "repair-search",
+      "status": "completed",
+      "prefix_status": "completed",
+      "error": null,
+      "intervention_status": "rewritten",
+      "review": {
+        "support": null,
+        "adequacy": null,
+        "role": null,
+        "stage": null
+      },
+      "extra_read_windows": 0,
+      "read_windows": 1,
+      "f1_delta_from_prefix": 0.0,
+      "answer_changed": false,
+      "model_calls": 5,
+      "intervention_calls": 2
+    },
+    {
+      "repeat": 1,
+      "task_id": "qasper-777bb3dcdbc32e925df0f7ec3adb96f15dd3dc47",
+      "method": "repair-baseline",
+      "status": "completed",
+      "prefix_status": "completed",
+      "error": null,
+      "intervention_status": "original",
+      "review": {
+        "support": null,
+        "adequacy": null,
+        "role": null,
+        "stage": null
+      },
+      "extra_read_windows": 0,
+      "read_windows": 1,
+      "f1_delta_from_prefix": 0.0,
+      "answer_changed": false,
+      "model_calls": 3,
+      "intervention_calls": 0
+    },
+    {
+      "repeat": 1,
+      "task_id": "qasper-777bb3dcdbc32e925df0f7ec3adb96f15dd3dc47",
+      "method": "repair-rewrite",
+      "status": "completed",
+      "prefix_status": "completed",
+      "error": null,
+      "intervention_status": "review_passed",
+      "review": {
+        "support": "supported",
+        "adequacy": "complete",
+        "role": "aligned",
+        "stage": "aligned"
+      },
+      "extra_read_windows": 0,
+      "read_windows": 1,
+      "f1_delta_from_prefix": 0.0,
+      "answer_changed": false,
+      "model_calls": 4,
+      "intervention_calls": 1
+    },
+    {
+      "repeat": 1,
+      "task_id": "qasper-777bb3dcdbc32e925df0f7ec3adb96f15dd3dc47",
+      "method": "repair-reread",
+      "status": "completed",
+      "prefix_status": "completed",
+      "error": null,
+      "intervention_status": "review_passed",
+      "review": {
+        "support": "supported",
+        "adequacy": "complete",
+        "role": "aligned",
+        "stage": "aligned"
+      },
+      "extra_read_windows": 0,
+      "read_windows": 1,
+      "f1_delta_from_prefix": 0.0,
+      "answer_changed": false,
+      "model_calls": 4,
+      "intervention_calls": 1
+    },
+    {
+      "repeat": 1,
+      "task_id": "qasper-777bb3dcdbc32e925df0f7ec3adb96f15dd3dc47",
+      "method": "repair-keyword",
+      "status": "completed",
+      "prefix_status": "completed",
+      "error": null,
+      "intervention_status": "rewritten",
+      "review": {
+        "support": null,
+        "adequacy": null,
+        "role": null,
+        "stage": null
+      },
+      "extra_read_windows": 1,
+      "read_windows": 2,
+      "f1_delta_from_prefix": 0.0,
+      "answer_changed": false,
+      "model_calls": 4,
+      "intervention_calls": 1
+    },
+    {
+      "repeat": 1,
+      "task_id": "qasper-777bb3dcdbc32e925df0f7ec3adb96f15dd3dc47",
+      "method": "repair-search",
+      "status": "completed",
+      "prefix_status": "completed",
+      "error": null,
+      "intervention_status": "rewritten",
+      "review": {
+        "support": null,
+        "adequacy": null,
+        "role": null,
+        "stage": null
+      },
+      "extra_read_windows": 0,
+      "read_windows": 1,
+      "f1_delta_from_prefix": 0.0,
+      "answer_changed": false,
+      "model_calls": 5,
+      "intervention_calls": 2
+    },
+    {
+      "repeat": 1,
+      "task_id": "qasper-67ec8ef85844e01746c13627090dc2706bb2a4f3",
+      "method": "repair-baseline",
+      "status": "completed",
+      "prefix_status": "completed",
+      "error": null,
+      "intervention_status": "original",
+      "review": {
+        "support": null,
+        "adequacy": null,
+        "role": null,
+        "stage": null
+      },
+      "extra_read_windows": 0,
+      "read_windows": 1,
+      "f1_delta_from_prefix": 0.0,
+      "answer_changed": false,
+      "model_calls": 3,
+      "intervention_calls": 0
+    },
+    {
+      "repeat": 1,
+      "task_id": "qasper-67ec8ef85844e01746c13627090dc2706bb2a4f3",
+      "method": "repair-rewrite",
+      "status": "completed",
+      "prefix_status": "completed",
+      "error": null,
+      "intervention_status": "rewritten",
+      "review": {
+        "support": "insufficient",
+        "adequacy": "partial",
+        "role": "aligned",
+        "stage": "aligned"
+      },
+      "extra_read_windows": 0,
+      "read_windows": 1,
+      "f1_delta_from_prefix": 1.0,
+      "answer_changed": true,
+      "model_calls": 5,
+      "intervention_calls": 2
+    },
+    {
+      "repeat": 1,
+      "task_id": "qasper-67ec8ef85844e01746c13627090dc2706bb2a4f3",
+      "method": "repair-reread",
+      "status": "completed",
+      "prefix_status": "completed",
+      "error": null,
+      "intervention_status": "rewritten",
+      "review": {
+        "support": "insufficient",
+        "adequacy": "partial",
+        "role": "aligned",
+        "stage": "aligned"
+      },
+      "extra_read_windows": 1,
+      "read_windows": 2,
+      "f1_delta_from_prefix": 1.0,
+      "answer_changed": true,
+      "model_calls": 5,
+      "intervention_calls": 2
+    },
+    {
+      "repeat": 1,
+      "task_id": "qasper-67ec8ef85844e01746c13627090dc2706bb2a4f3",
+      "method": "repair-keyword",
+      "status": "completed",
+      "prefix_status": "completed",
+      "error": null,
+      "intervention_status": "rewritten",
+      "review": {
+        "support": null,
+        "adequacy": null,
+        "role": null,
+        "stage": null
+      },
+      "extra_read_windows": 1,
+      "read_windows": 2,
+      "f1_delta_from_prefix": 0.0,
+      "answer_changed": false,
+      "model_calls": 4,
+      "intervention_calls": 1
+    },
+    {
+      "repeat": 1,
+      "task_id": "qasper-67ec8ef85844e01746c13627090dc2706bb2a4f3",
+      "method": "repair-search",
+      "status": "completed",
+      "prefix_status": "completed",
+      "error": null,
+      "intervention_status": "rewritten",
+      "review": {
+        "support": null,
+        "adequacy": null,
+        "role": null,
+        "stage": null
+      },
+      "extra_read_windows": 0,
+      "read_windows": 1,
+      "f1_delta_from_prefix": 0.0,
+      "answer_changed": false,
+      "model_calls": 5,
+      "intervention_calls": 2
+    }
+  ],
+  "prior_infrastructure_batch": {
+    "status": "source import infrastructure failure",
+    "planned_policy_outcomes": 200,
+    "failed_policy_outcomes": 200,
+    "model_calls": 0,
+    "known_model_tokens": 0
+  },
+  "prior_failure_summary_sha256": "c62c57d84697c5bad7f0bcce059f1d52163b6419570fedf8c5fb3a0a05077231"
+}
