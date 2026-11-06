@@ -37,6 +37,8 @@ MiniCheck 输出 supported/unsupported，不强行映射成 contradicted/insuffi
 
 正式测试输入与 gold 分文件。训练仅接收 training.json；推理仅打开 inputs，连 gold 哈希也不读取；独立 score 阶段才读取 test gold。公开 dev 可能进入基础模型预训练，本轮仅保证本项目内的论文和观测隔离，不称为无污染隐藏测试。16 条既有合成挑战例与 32 条移除证据诊断单独报告。
 
+在大模型预测前完成的联合长度与重复文本检查得到 128 对、103 个连接组：47 supported、33 contradicted、48 insufficient。ID 清单在 [verifier-scale-test-ids.json](../dataset-manifests/verifier-scale-test-ids.json) 单独冻结；正式准备必须产生完全相同的有序 ID，否则停止。多数类基线仅依据训练标签决定，独立列出，不增加模型运行数。
+
 ## 校准与硬件预检
 
 预检先在最长的训练输入上做两个优化步，并保存/重新加载适配器，再对 3 条校准输入做预测。首选 BF16 LoRA；仅发生 CUDA 显存不足时，记录原失败，改为 NF4 QLoRA 做同样检查。两者均失败则停止。本轮不依据校准 F1 选择精度、提示或 checkpoint。随后对所有五个未训练配置执行同一 65 条校准输入，检查模型加载、原生输出和精度敏感性。预检结果单独保存并在正式运行前冻结。
@@ -61,4 +63,4 @@ MiniCheck 输出 supported/unsupported，不强行映射成 contradicted/insuffi
 
 额外报告各类 precision/recall、混淆矩阵、supported 精确率、非支持样本误判支持率、缺失数，以及所有方法的二分类 balanced accuracy / AUROC。AUROC 遇缺失预测时留空并报告缺失，而不删掉失败样本制造完整排名。延迟按 batch 1 的编码、传输和前向计量；训练记录 allocated/reserved 峰值，均不冒充整卡显存峰值。
 
-候选绝对门槛：三个训练种子的 contradicted recall **各自至少 0.5**，平均 macro F1 至少 0.65，平均 supported precision 至少 0.8，平均非支持样本误判支持率不超过 0.2。训练成功还要求平均差至少 +0.03，且校正区间下界大于 0。这些只表示值得下一阶段校准，不授权生产自动裁决；真实报告仍需独立人工标注和完整 Agent 对照。无论达到门槛与否，完成固定条件、独立评分和错误分析后结束本轮，不追逐正结果。
+候选绝对门槛：三个训练种子的 contradicted recall **各自至少 0.5**，平均 macro F1 至少 0.65，平均 supported precision 至少 0.8，平均非支持样本误判支持率不超过 0.2。训练成功还要求匹配精度的基线与三个训练种子都无缺失、平均差至少 +0.03，且校正区间下界大于 0。这些只表示值得下一阶段校准，不授权生产自动裁决；真实报告仍需独立人工标注和完整 Agent 对照。无论达到门槛与否，完成固定条件、独立评分和错误分析后结束本轮，不追逐正结果。

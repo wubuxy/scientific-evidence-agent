@@ -1,4 +1,5 @@
 import hashlib
+import json
 
 import pytest
 
@@ -74,3 +75,40 @@ def test_generation_plan_check_does_not_open_test_gold(tmp_path, monkeypatch):
     scale.check_plan(tmp_path)
     with pytest.raises(FileNotFoundError):
         scale.check_plan(tmp_path, scoring=True)
+
+
+def test_failed_matching_baseline_cannot_make_training_pass(tmp_path, monkeypatch):
+    monkeypatch.setattr(scale, "CONFIG", dict(scale.CONFIG, bootstrap_draws=12))
+    monkeypatch.setattr(scale, "check_plan", lambda *args, **kwargs: {})
+    plan_dir, run_dir = tmp_path / "plan", tmp_path / "run"
+    plan_dir.mkdir()
+    run_dir.mkdir()
+    write_new(plan_dir / "plan.json", {})
+    labels = dict(a="supported", b="contradicted", c="insufficient")
+    cases = [dict(id=i, group_keys=[i], label=label) for i, label in labels.items()]
+    for split in ["calibration", "test", "challenge"]:
+        write_new(plan_dir / (split + "-inputs.json"), dict(cases=cases))
+        write_new(plan_dir / (split + "-gold.json"), dict(labels=labels))
+    write_new(plan_dir / "training.json", dict(cases=cases))
+    methods = ["small-bf16", "small-nf4", "large-bf16", "large-nf4"]
+    methods += ["large-lora-" + str(s) for s in scale.CONFIG["seeds"]]
+    methods += ["minicheck-bf16"]
+    write_new(run_dir / "protocol.json", dict(plan_sha256=scale.sha(plan_dir / "plan.json"),
+        methods=methods, training_precision="bf16"))
+    records = []
+    for method in methods:
+        if method == "large-bf16":
+            continue  # Planned matching baseline failed completely.
+        for split in ["calibration", "test", "challenge", "empty-evidence"]:
+            for i, label in labels.items():
+                verdict = "insufficient" if split == "empty-evidence" else label
+                if method == "minicheck-bf16" and verdict != "supported":
+                    verdict = "unsupported"
+                records.append(dict(id=i, method=method, split=split, status="completed",
+                                    verdict=verdict, support_score=.9 if verdict == "supported" else .1))
+    (run_dir / "predictions.jsonl").write_text("\n".join(json.dumps(r) for r in records))
+    value = scale.score(plan_dir, run_dir)
+    assert value["absolute_candidate_gate"] is True
+    assert value["primary_contrasts"]["training"]["delta"] == 1
+    assert value["training_comparison_complete"] is False
+    assert value["training_success_gate"] is False

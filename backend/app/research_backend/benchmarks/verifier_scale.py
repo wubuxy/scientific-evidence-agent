@@ -39,7 +39,8 @@ def code_files():
              "backend/app/research_backend/benchmarks/verifier_pilot.py",
              "backend/app/research_backend/benchmarks/trials.py",
              "docs/experiments/SCIFACT_VERIFIER_SCALE_PILOT.md",
-             "docs/dataset-manifests/verifier-scale-model-sources.json"]
+             "docs/dataset-manifests/verifier-scale-model-sources.json",
+             "docs/dataset-manifests/verifier-scale-test-ids.json"]
     return {name: sha(root / name) for name in names}
 
 
@@ -128,6 +129,9 @@ def prepare(raw, old_plan_dir, data_root, out):
         return good
     eligible = [r for r in fresh if fits(r)]
     testing, _ = v1.take_groups(v1.ordered_groups(eligible, CONFIG["seeds"][0]), CONFIG["test_target"])
+    frozen_ids = load(root / "docs/dataset-manifests/verifier-scale-test-ids.json")["case_ids"]
+    if [r["id"] for r in testing] != frozen_ids:
+        raise ValueError("Selection differs from the pre-published fresh test IDs")
     if len(testing) < 64 or set(r["label"] for r in testing) != set(v1.LABELS):
         raise ValueError("Insufficient fresh three-class test data")
     if not all(fits(r) for r in calibration + training):
@@ -533,9 +537,18 @@ def score(plan_dir, run_dir):
                 and sum(r["macro_f1"] for r in trained) / 3 >= .65
                 and sum(r["unsupported_false_supported_rate"] for r in trained) / 3 <= .2
                 and sum(r["per_class"]["supported"]["precision"] or 0 for r in trained) / 3 >= .8)
+    paired_complete = all(results[m]["test"]["three_class"]["missing_predictions"] == 0
+                          for m in [reference] + loras)
+    train_counts = Counter(r["label"] for r in load(Path(plan_dir) / "training.json")["cases"])
+    majority = max(v1.LABELS, key=lambda label: train_counts[label])
+    majority_predictions = {i: majority for i in gold}
     return dict(results=results, primary_contrasts=intervals, independent_test_groups=len(groups),
+                majority_baseline=dict(label_from_training=majority,
+                    test_three_class=v1.classification_metrics(gold, majority_predictions)),
+                training_comparison_complete=paired_complete,
                 absolute_candidate_gate=absolute,
-                training_success_gate=bool(absolute and points["training"] >= .03 and intervals["training"]["bonferroni_98_333"][0] > 0),
+                training_success_gate=bool(paired_complete and absolute and points["training"] >= .03
+                                          and intervals["training"]["bonferroni_98_333"][0] > 0),
                 plan_sha256=sha(Path(plan_dir) / "plan.json"), predictions_sha256=sha(run_dir / "predictions.jsonl"),
                 limitations=["Public SciFact dev; no assertion of absence from pretraining.",
                              "Fresh-paper verifier comparison, not full Agent quality.",
