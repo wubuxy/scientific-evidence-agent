@@ -1,0 +1,53 @@
+{
+  "schema_version": 1,
+  "dataset": "qasper-report-calibration-v1",
+  "split": "dev",
+  "seed": 20261107,
+  "task_count": 8,
+  "document_count": 12,
+  "eligible_count": 8,
+  "exclusions": {
+    "answer_without_evidence": 85,
+    "unmapped_evidence": 70,
+    "requires_figure_or_table": 319
+  },
+  "task_ids": [
+    "report-cal-05",
+    "report-cal-08",
+    "report-cal-06",
+    "report-cal-03",
+    "report-cal-02",
+    "report-cal-01",
+    "report-cal-04",
+    "report-cal-07"
+  ],
+  "document_ids": [
+    "1604.05781",
+    "1610.05243",
+    "1804.10686",
+    "1809.10644",
+    "1908.08593",
+    "1909.05438",
+    "1909.07512",
+    "1909.11833",
+    "1909.12140",
+    "1912.00423",
+    "2001.02214",
+    "2004.01894"
+  ],
+  "inputs_sha256": "5938274d876f20036aaff5b5a84f3d31efc677dfd33453ace694e5c80da9aed5",
+  "gold_sha256": "7697eccf8980a98c5556018d4bf45cb84f2781fce06ee24abf23c704a8813d9d",
+  "preprocessing": "Whitespace-normalized paragraphs wrapped at 120 characters; exact paragraph-to-line map",
+  "provenance": {
+    "official_split": "train",
+    "archive_sha256": "a28fdf966db827bcee3d873107d6b6669864fb7ca8fbf73a192f5e39191bdb5a",
+    "source": "https://qasper-dataset.s3.us-west-2.amazonaws.com/qasper-train-dev-v0.3.tgz",
+    "excluded_manifest_sha256": {
+      "qasper-v1-dev.json": "0eb4814c877b32e43bd8d7dc536abf3f008daf684254da931b5e183ee3051eff",
+      "qasper-v1-test.json": "3fafd941580c3a611f74a69a341abb8e0bb8fdd241f2a234b23f14a76fbcaf11"
+    },
+    "builder_sha256": "1f1283bc306a035add055d719d6de6aeb42f203861d9eec7a3e3338abf0f345d",
+    "eligible_papers": 368,
+    "selection": "SHA256(report-calibration-v1:20261107: + ID), 12 papers with >=3 eligible questions; first 4 single, remaining 8 paired; first 3 hashed questions per paper"
+  }
+}
