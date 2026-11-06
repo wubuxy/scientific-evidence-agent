@@ -266,6 +266,8 @@ def train(model, tokenizer, rows, seed, precision, directory, deadline, steps=No
     parameters = [p for p in model.parameters() if p.requires_grad]
     if not parameters or any("lora_" not in name for name, p in model.named_parameters() if p.requires_grad):
         raise ValueError("Only adapters may be trained")
+    probe = next(p for name, p in model.named_parameters() if p.requires_grad and "lora_B" in name)
+    initial_probe = probe.detach().clone()
     optimizer = torch.optim.AdamW(parameters, lr=CONFIG["lr"], weight_decay=CONFIG["weight_decay"])
     order = list(range(len(rows)))
     rng = random.Random(seed)
@@ -303,11 +305,15 @@ def train(model, tokenizer, rows, seed, precision, directory, deadline, steps=No
         if (step + 1) % 8 == 0:
             print(json.dumps(dict(seed=seed, step=step + 1, loss=value,
                                   elapsed=time.monotonic() - started)), flush=True)
+    adapter_delta = float((probe.detach() - initial_probe).abs().max())
+    if not math.isfinite(adapter_delta) or adapter_delta <= 0:
+        raise ValueError("Adapter did not update")
     directory = Path(directory)
     directory.mkdir(parents=True, exist_ok=False)
     model.save_pretrained(directory, safe_serialization=True)
     info = dict(seed=seed, precision=precision, steps=total, examples_seen=total * CONFIG["accumulation"],
                 trainable_parameters=sum(p.numel() for p in parameters), losses=losses,
+                adapter_max_delta=adapter_delta,
                 seconds=time.monotonic() - started, peak_allocated_mib=torch.cuda.max_memory_allocated() / 2**20,
                 peak_reserved_mib=torch.cuda.max_memory_reserved() / 2**20,
                 adapter_sha256={p.name: sha(p) for p in directory.iterdir() if p.is_file()})
