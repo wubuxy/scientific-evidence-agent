@@ -1,0 +1,31 @@
+{
+  "date": "2026-11-07",
+  "tested_code_commit": "1eea2ed",
+  "offline_tests": {
+    "collected": 204,
+    "passed": 204,
+    "skipped": 0,
+    "failed": 0,
+    "seconds": 51.8,
+    "platform": "Windows",
+    "python": "3.13.13"
+  },
+  "browser_ui": {
+    "engine": "Microsoft Edge via headless Playwright",
+    "desktop": "1450x1000",
+    "mobile": "390x844",
+    "checks": [
+      "verdict selection",
+      "rationale",
+      "evidence-line selection",
+      "JSON export",
+      "JSON import",
+      "reload persistence",
+      "untrusted text escaping",
+      "no horizontal mobile overflow"
+    ],
+    "fixture_only": true,
+    "real_human_labels_written": 0
+  },
+  "aggregate_audit": "python scripts/audit_report_calibration.py: passed"
+}

@@ -1,0 +1,203 @@
+{
+  "date": "2026-11-07",
+  "scope": "natural report generation and blind-review preparation; human calibration pending",
+  "tasks": 8,
+  "papers": 12,
+  "repeats": 2,
+  "planned_reports": 16,
+  "generator_model": "qwen3.5-27b",
+  "generation": {
+    "planned_attempts": 16,
+    "completed": 16,
+    "contract_pass_rate": 1.0,
+    "contract_reliability": {
+      "1": {
+        "pass_at_k": 1.0,
+        "pass_all_k": 1.0
+      },
+      "2": {
+        "pass_at_k": 1.0,
+        "pass_all_k": 1.0
+      }
+    },
+    "field_presence_rate": 0.875,
+    "cited_source_coverage": 1.0,
+    "mean_tokens": 13644.9375,
+    "total_known_tokens": 218319,
+    "unknown_token_attempts": 0,
+    "review_units": 151,
+    "reviewed_units": 0,
+    "candidate_supported_rate": null,
+    "candidate_verdict_counts": {},
+    "semantic_success_rate": null
+  },
+  "natural_report_units": 151,
+  "selected_human_units": 92,
+  "sampling_counts": [
+    {
+      "task_id": "report-cal-01",
+      "repeat": 0,
+      "method": "report-grep",
+      "available": 7,
+      "selected": 6
+    },
+    {
+      "task_id": "report-cal-01",
+      "repeat": 1,
+      "method": "report-grep",
+      "available": 7,
+      "selected": 6
+    },
+    {
+      "task_id": "report-cal-02",
+      "repeat": 0,
+      "method": "report-grep",
+      "available": 5,
+      "selected": 5
+    },
+    {
+      "task_id": "report-cal-02",
+      "repeat": 1,
+      "method": "report-grep",
+      "available": 3,
+      "selected": 3
+    },
+    {
+      "task_id": "report-cal-03",
+      "repeat": 0,
+      "method": "report-grep",
+      "available": 7,
+      "selected": 6
+    },
+    {
+      "task_id": "report-cal-03",
+      "repeat": 1,
+      "method": "report-grep",
+      "available": 8,
+      "selected": 6
+    },
+    {
+      "task_id": "report-cal-04",
+      "repeat": 0,
+      "method": "report-grep",
+      "available": 7,
+      "selected": 6
+    },
+    {
+      "task_id": "report-cal-04",
+      "repeat": 1,
+      "method": "report-grep",
+      "available": 8,
+      "selected": 6
+    },
+    {
+      "task_id": "report-cal-05",
+      "repeat": 0,
+      "method": "report-grep",
+      "available": 14,
+      "selected": 6
+    },
+    {
+      "task_id": "report-cal-05",
+      "repeat": 1,
+      "method": "report-grep",
+      "available": 14,
+      "selected": 6
+    },
+    {
+      "task_id": "report-cal-06",
+      "repeat": 0,
+      "method": "report-grep",
+      "available": 14,
+      "selected": 6
+    },
+    {
+      "task_id": "report-cal-06",
+      "repeat": 1,
+      "method": "report-grep",
+      "available": 14,
+      "selected": 6
+    },
+    {
+      "task_id": "report-cal-07",
+      "repeat": 0,
+      "method": "report-grep",
+      "available": 13,
+      "selected": 6
+    },
+    {
+      "task_id": "report-cal-07",
+      "repeat": 1,
+      "method": "report-grep",
+      "available": 14,
+      "selected": 6
+    },
+    {
+      "task_id": "report-cal-08",
+      "repeat": 0,
+      "method": "report-grep",
+      "available": 8,
+      "selected": 6
+    },
+    {
+      "task_id": "report-cal-08",
+      "repeat": 1,
+      "method": "report-grep",
+      "available": 8,
+      "selected": 6
+    }
+  ],
+  "judges": {
+    "qwen3.5-27b": {
+      "planned": 92,
+      "recorded": 92,
+      "completed": 82,
+      "failures": {
+        "ValidationError": 10
+      },
+      "returned_usage_tokens": 195941,
+      "known_returned_usage_tokens": 195941,
+      "logical_model_calls": 92,
+      "reviews_sha256": "7d376e9bbfb1d120399507c1dbb151e046f3681f2407e065f3e5926ed8832bdd"
+    },
+    "qwen3.5-397b-a17b": {
+      "planned": 92,
+      "recorded": 92,
+      "completed": 86,
+      "failures": {
+        "ValidationError": 6
+      },
+      "returned_usage_tokens": 196664,
+      "known_returned_usage_tokens": 196664,
+      "logical_model_calls": 92,
+      "reviews_sha256": "f1641bf111dbefd86b1b1bd15f65c07e513f0f6de2201b8de5c377c431737410"
+    }
+  },
+  "known_judge_returned_usage_tokens": 392605,
+  "any_judge_unknown_usage": false,
+  "preflight_returned_usage_tokens": 621,
+  "human_labels_completed": 0,
+  "human_accuracy": null,
+  "cohen_kappa": null,
+  "model_agreement_public": null,
+  "withheld_until_human_labels": "Candidate verdicts, model agreement and item-level results stay with the coordinator to protect independent annotation.",
+  "usage_boundary": "Provider-returned logical-call usage, not independently audited wire retries or invoice billing; see transport-policy-note.json",
+  "original_plan_sha256": "812e14acfa2c173b6506b9393245071f7d6af3fb2865856d2faf9f14662626d9",
+  "judge_plan_sha256": "55ab6f46bab9f947056f317e7e542391e8b44f14b940abc7acbf2d03fbcb0df0",
+  "cases_sha256": "c310b83adf4e4952b9f6f077db74dfd3b0fb7d305c9972dafdd80f735f3be5e7",
+  "annotation_packets": {
+    "annotator-a.zip": {
+      "bytes": 209905,
+      "sha256": "2bdeae2305fe08b42ad42439d1202fdb85f44562d803037a8e8bdb07b3f50f89"
+    },
+    "annotator-b.zip": {
+      "bytes": 209905,
+      "sha256": "9e452d23f2a77e4fc336ef5b31848baf0faeb7b5f3c4ea0270c8aeb21b436fdb"
+    }
+  },
+  "limitations": [
+    "Contract and field presence are not semantic support or answer adequacy.",
+    "The human sample is generated-report units, not independent papers; partial reports are not replaced.",
+    "27B is also the generator; 397B is a same-family larger comparator, not established ground truth."
+  ]
+}
