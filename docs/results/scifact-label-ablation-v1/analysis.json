@@ -1,0 +1,5834 @@
+{
+  "scope": "Observed SciFact v2 development data; exploratory label intervention, no new human gold",
+  "complete": true,
+  "results": {
+    "original": {
+      "raw-20261106": {
+        "calibration": {
+          "binary": {
+            "cases": 65,
+            "supported_precision": 0.8260869565217391,
+            "supported_recall": 0.8636363636363636,
+            "unsupported_false_supported_rate": 0.09302325581395349,
+            "balanced_accuracy": 0.885306553911205,
+            "accuracy": 0.8923076923076924,
+            "auroc": 0.9439746300211417,
+            "missing_predictions": 0,
+            "acceptance_rate": 0.35384615384615387
+          },
+          "three_class": {
+            "cases": 65,
+            "accuracy": 0.8769230769230769,
+            "macro_f1": 0.8610870610870611,
+            "per_class": {
+              "supported": {
+                "precision": 0.8260869565217391,
+                "recall": 0.8636363636363636,
+                "f1": 0.8444444444444444,
+                "support": 22
+              },
+              "contradicted": {
+                "precision": 0.9,
+                "recall": 0.75,
+                "f1": 0.8181818181818182,
+                "support": 12
+              },
+              "insufficient": {
+                "precision": 0.90625,
+                "recall": 0.9354838709677419,
+                "f1": 0.9206349206349206,
+                "support": 31
+              }
+            },
+            "missing_predictions": 0,
+            "unsupported_false_supported_rate": 0.09302325581395349,
+            "confusion": {
+              "supported": {
+                "supported": 19,
+                "insufficient": 3
+              },
+              "contradicted": {
+                "contradicted": 9,
+                "supported": 3
+              },
+              "insufficient": {
+                "insufficient": 29,
+                "supported": 1,
+                "contradicted": 1
+              }
+            }
+          },
+          "threshold_binary": {
+            "cases": 65,
+            "supported_precision": 0.8947368421052632,
+            "supported_recall": 0.7727272727272727,
+            "unsupported_false_supported_rate": 0.046511627906976744,
+            "balanced_accuracy": 0.863107822410148,
+            "accuracy": 0.8923076923076924,
+            "auroc": 0.9439746300211417,
+            "missing_predictions": 0,
+            "acceptance_rate": 0.2923076923076923
+          }
+        },
+        "test": {
+          "binary": {
+            "cases": 128,
+            "supported_precision": 0.7407407407407407,
+            "supported_recall": 0.851063829787234,
+            "unsupported_false_supported_rate": 0.1728395061728395,
+            "balanced_accuracy": 0.8391121618071973,
+            "accuracy": 0.8359375,
+            "auroc": 0.9125295508274232,
+            "missing_predictions": 0,
+            "acceptance_rate": 0.421875
+          },
+          "three_class": {
+            "cases": 128,
+            "accuracy": 0.7578125,
+            "macro_f1": 0.7426045570658761,
+            "per_class": {
+              "supported": {
+                "precision": 0.7407407407407407,
+                "recall": 0.851063829787234,
+                "f1": 0.7920792079207921,
+                "support": 47
+              },
+              "contradicted": {
+                "precision": 0.7307692307692307,
+                "recall": 0.5757575757575758,
+                "f1": 0.6440677966101694,
+                "support": 33
+              },
+              "insufficient": {
+                "precision": 0.7916666666666666,
+                "recall": 0.7916666666666666,
+                "f1": 0.7916666666666666,
+                "support": 48
+              }
+            },
+            "missing_predictions": 0,
+            "unsupported_false_supported_rate": 0.1728395061728395,
+            "confusion": {
+              "supported": {
+                "supported": 40,
+                "insufficient": 3,
+                "contradicted": 4
+              },
+              "contradicted": {
+                "contradicted": 19,
+                "insufficient": 7,
+                "supported": 7
+              },
+              "insufficient": {
+                "supported": 7,
+                "insufficient": 38,
+                "contradicted": 3
+              }
+            }
+          },
+          "threshold_binary": {
+            "cases": 128,
+            "supported_precision": 0.7916666666666666,
+            "supported_recall": 0.8085106382978723,
+            "unsupported_false_supported_rate": 0.12345679012345678,
+            "balanced_accuracy": 0.8425269240872078,
+            "accuracy": 0.8515625,
+            "auroc": 0.9125295508274232,
+            "missing_predictions": 0,
+            "acceptance_rate": 0.375
+          }
+        },
+        "challenge": {
+          "binary": {
+            "cases": 16,
+            "supported_precision": 0.875,
+            "supported_recall": 0.875,
+            "unsupported_false_supported_rate": 0.125,
+            "balanced_accuracy": 0.875,
+            "accuracy": 0.875,
+            "auroc": 0.90625,
+            "missing_predictions": 0,
+            "acceptance_rate": 0.5
+          },
+          "three_class": {
+            "cases": 16,
+            "accuracy": 0.875,
+            "macro_f1": 0.8215811965811967,
+            "per_class": {
+              "supported": {
+                "precision": 0.875,
+                "recall": 0.875,
+                "f1": 0.875,
+                "support": 8
+              },
+              "contradicted": {
+                "precision": 0.8571428571428571,
+                "recall": 1.0,
+                "f1": 0.9230769230769231,
+                "support": 6
+              },
+              "insufficient": {
+                "precision": 1.0,
+                "recall": 0.5,
+                "f1": 0.6666666666666666,
+                "support": 2
+              }
+            },
+            "missing_predictions": 0,
+            "unsupported_false_supported_rate": 0.125,
+            "confusion": {
+              "supported": {
+                "supported": 7,
+                "contradicted": 1
+              },
+              "contradicted": {
+                "contradicted": 6
+              },
+              "insufficient": {
+                "supported": 1,
+                "insufficient": 1
+              }
+            }
+          },
+          "threshold_binary": {
+            "cases": 16,
+            "supported_precision": 0.875,
+            "supported_recall": 0.875,
+            "unsupported_false_supported_rate": 0.125,
+            "balanced_accuracy": 0.875,
+            "accuracy": 0.875,
+            "auroc": 0.90625,
+            "missing_predictions": 0,
+            "acceptance_rate": 0.5
+          }
+        },
+        "empty-evidence": {
+          "binary": {
+            "cases": 32,
+            "supported_precision": null,
+            "supported_recall": null,
+            "unsupported_false_supported_rate": 0.0,
+            "balanced_accuracy": null,
+            "accuracy": 1.0,
+            "auroc": null,
+            "missing_predictions": 0,
+            "acceptance_rate": 0.0
+          },
+          "three_class": {
+            "cases": 32,
+            "accuracy": 1.0,
+            "macro_f1": 0.3333333333333333,
+            "per_class": {
+              "supported": {
+                "precision": null,
+                "recall": null,
+                "f1": 0,
+                "support": 0
+              },
+              "contradicted": {
+                "precision": null,
+                "recall": null,
+                "f1": 0,
+                "support": 0
+              },
+              "insufficient": {
+                "precision": 1.0,
+                "recall": 1.0,
+                "f1": 1.0,
+                "support": 32
+              }
+            },
+            "missing_predictions": 0,
+            "unsupported_false_supported_rate": 0.0,
+            "confusion": {
+              "supported": {},
+              "contradicted": {},
+              "insufficient": {
+                "insufficient": 32
+              }
+            }
+          },
+          "threshold_binary": {
+            "cases": 32,
+            "supported_precision": null,
+            "supported_recall": null,
+            "unsupported_false_supported_rate": 0.0,
+            "balanced_accuracy": null,
+            "accuracy": 1.0,
+            "auroc": null,
+            "missing_predictions": 0,
+            "acceptance_rate": 0.0
+          }
+        },
+        "support_threshold": 0.6624118089675903
+      },
+      "proposed-20261106": {
+        "calibration": {
+          "binary": {
+            "cases": 65,
+            "supported_precision": 0.8181818181818182,
+            "supported_recall": 0.8181818181818182,
+            "unsupported_false_supported_rate": 0.09302325581395349,
+            "balanced_accuracy": 0.8625792811839323,
+            "accuracy": 0.8769230769230769,
+            "auroc": 0.9429175475687104,
+            "missing_predictions": 0,
+            "acceptance_rate": 0.3384615384615385
+          },
+          "three_class": {
+            "cases": 65,
+            "accuracy": 0.8615384615384616,
+            "macro_f1": 0.8475378787878789,
+            "per_class": {
+              "supported": {
+                "precision": 0.8181818181818182,
+                "recall": 0.8181818181818182,
+                "f1": 0.8181818181818182,
+                "support": 22
+              },
+              "contradicted": {
+                "precision": 0.9,
+                "recall": 0.75,
+                "f1": 0.8181818181818182,
+                "support": 12
+              },
+              "insufficient": {
+                "precision": 0.8787878787878788,
+                "recall": 0.9354838709677419,
+                "f1": 0.90625,
+                "support": 31
+              }
+            },
+            "missing_predictions": 0,
+            "unsupported_false_supported_rate": 0.09302325581395349,
+            "confusion": {
+              "supported": {
+                "supported": 18,
+                "insufficient": 4
+              },
+              "contradicted": {
+                "contradicted": 9,
+                "supported": 3
+              },
+              "insufficient": {
+                "insufficient": 29,
+                "supported": 1,
+                "contradicted": 1
+              }
+            }
+          },
+          "threshold_binary": {
+            "cases": 65,
+            "supported_precision": 0.8947368421052632,
+            "supported_recall": 0.7727272727272727,
+            "unsupported_false_supported_rate": 0.046511627906976744,
+            "balanced_accuracy": 0.863107822410148,
+            "accuracy": 0.8923076923076924,
+            "auroc": 0.9429175475687104,
+            "missing_predictions": 0,
+            "acceptance_rate": 0.2923076923076923
+          }
+        },
+        "test": {
+          "binary": {
+            "cases": 128,
+            "supported_precision": 0.7407407407407407,
+            "supported_recall": 0.851063829787234,
+            "unsupported_false_supported_rate": 0.1728395061728395,
+            "balanced_accuracy": 0.8391121618071973,
+            "accuracy": 0.8359375,
+            "auroc": 0.9125295508274232,
+            "missing_predictions": 0,
+            "acceptance_rate": 0.421875
+          },
+          "three_class": {
+            "cases": 128,
+            "accuracy": 0.7578125,
+            "macro_f1": 0.7426045570658761,
+            "per_class": {
+              "supported": {
+                "precision": 0.7407407407407407,
+                "recall": 0.851063829787234,
+                "f1": 0.7920792079207921,
+                "support": 47
+              },
+              "contradicted": {
+                "precision": 0.7307692307692307,
+                "recall": 0.5757575757575758,
+                "f1": 0.6440677966101694,
+                "support": 33
+              },
+              "insufficient": {
+                "precision": 0.7916666666666666,
+                "recall": 0.7916666666666666,
+                "f1": 0.7916666666666666,
+                "support": 48
+              }
+            },
+            "missing_predictions": 0,
+            "unsupported_false_supported_rate": 0.1728395061728395,
+            "confusion": {
+              "supported": {
+                "supported": 40,
+                "insufficient": 3,
+                "contradicted": 4
+              },
+              "contradicted": {
+                "contradicted": 19,
+                "insufficient": 7,
+                "supported": 7
+              },
+              "insufficient": {
+                "supported": 7,
+                "insufficient": 38,
+                "contradicted": 3
+              }
+            }
+          },
+          "threshold_binary": {
+            "cases": 128,
+            "supported_precision": 0.7872340425531915,
+            "supported_recall": 0.7872340425531915,
+            "unsupported_false_supported_rate": 0.12345679012345678,
+            "balanced_accuracy": 0.8318886262148674,
+            "accuracy": 0.84375,
+            "auroc": 0.9125295508274232,
+            "missing_predictions": 0,
+            "acceptance_rate": 0.3671875
+          }
+        },
+        "challenge": {
+          "binary": {
+            "cases": 16,
+            "supported_precision": 0.875,
+            "supported_recall": 0.875,
+            "unsupported_false_supported_rate": 0.125,
+            "balanced_accuracy": 0.875,
+            "accuracy": 0.875,
+            "auroc": 0.90625,
+            "missing_predictions": 0,
+            "acceptance_rate": 0.5
+          },
+          "three_class": {
+            "cases": 16,
+            "accuracy": 0.875,
+            "macro_f1": 0.8215811965811967,
+            "per_class": {
+              "supported": {
+                "precision": 0.875,
+                "recall": 0.875,
+                "f1": 0.875,
+                "support": 8
+              },
+              "contradicted": {
+                "precision": 0.8571428571428571,
+                "recall": 1.0,
+                "f1": 0.9230769230769231,
+                "support": 6
+              },
+              "insufficient": {
+                "precision": 1.0,
+                "recall": 0.5,
+                "f1": 0.6666666666666666,
+                "support": 2
+              }
+            },
+            "missing_predictions": 0,
+            "unsupported_false_supported_rate": 0.125,
+            "confusion": {
+              "supported": {
+                "supported": 7,
+                "contradicted": 1
+              },
+              "contradicted": {
+                "contradicted": 6
+              },
+              "insufficient": {
+                "supported": 1,
+                "insufficient": 1
+              }
+            }
+          },
+          "threshold_binary": {
+            "cases": 16,
+            "supported_precision": 0.875,
+            "supported_recall": 0.875,
+            "unsupported_false_supported_rate": 0.125,
+            "balanced_accuracy": 0.875,
+            "accuracy": 0.875,
+            "auroc": 0.90625,
+            "missing_predictions": 0,
+            "acceptance_rate": 0.5
+          }
+        },
+        "empty-evidence": {
+          "binary": {
+            "cases": 32,
+            "supported_precision": null,
+            "supported_recall": null,
+            "unsupported_false_supported_rate": 0.0,
+            "balanced_accuracy": null,
+            "accuracy": 1.0,
+            "auroc": null,
+            "missing_predictions": 0,
+            "acceptance_rate": 0.0
+          },
+          "three_class": {
+            "cases": 32,
+            "accuracy": 1.0,
+            "macro_f1": 0.3333333333333333,
+            "per_class": {
+              "supported": {
+                "precision": null,
+                "recall": null,
+                "f1": 0,
+                "support": 0
+              },
+              "contradicted": {
+                "precision": null,
+                "recall": null,
+                "f1": 0,
+                "support": 0
+              },
+              "insufficient": {
+                "precision": 1.0,
+                "recall": 1.0,
+                "f1": 1.0,
+                "support": 32
+              }
+            },
+            "missing_predictions": 0,
+            "unsupported_false_supported_rate": 0.0,
+            "confusion": {
+              "supported": {},
+              "contradicted": {},
+              "insufficient": {
+                "insufficient": 32
+              }
+            }
+          },
+          "threshold_binary": {
+            "cases": 32,
+            "supported_precision": null,
+            "supported_recall": null,
+            "unsupported_false_supported_rate": 0.0,
+            "balanced_accuracy": null,
+            "accuracy": 1.0,
+            "auroc": null,
+            "missing_predictions": 0,
+            "acceptance_rate": 0.0
+          }
+        },
+        "support_threshold": 0.6496272683143616
+      },
+      "proposed-20261107": {
+        "calibration": {
+          "binary": {
+            "cases": 65,
+            "supported_precision": 0.8636363636363636,
+            "supported_recall": 0.8636363636363636,
+            "unsupported_false_supported_rate": 0.06976744186046512,
+            "balanced_accuracy": 0.8969344608879493,
+            "accuracy": 0.9076923076923077,
+            "auroc": 0.952431289640592,
+            "missing_predictions": 0,
+            "acceptance_rate": 0.3384615384615385
+          },
+          "three_class": {
+            "cases": 65,
+            "accuracy": 0.8923076923076924,
+            "macro_f1": 0.8846121672208628,
+            "per_class": {
+              "supported": {
+                "precision": 0.8636363636363636,
+                "recall": 0.8636363636363636,
+                "f1": 0.8636363636363636,
+                "support": 22
+              },
+              "contradicted": {
+                "precision": 0.9090909090909091,
+                "recall": 0.8333333333333334,
+                "f1": 0.8695652173913043,
+                "support": 12
+              },
+              "insufficient": {
+                "precision": 0.90625,
+                "recall": 0.9354838709677419,
+                "f1": 0.9206349206349206,
+                "support": 31
+              }
+            },
+            "missing_predictions": 0,
+            "unsupported_false_supported_rate": 0.06976744186046512,
+            "confusion": {
+              "supported": {
+                "supported": 19,
+                "insufficient": 3
+              },
+              "contradicted": {
+                "contradicted": 10,
+                "supported": 2
+              },
+              "insufficient": {
+                "insufficient": 29,
+                "supported": 1,
+                "contradicted": 1
+              }
+            }
+          },
+          "threshold_binary": {
+            "cases": 65,
+            "supported_precision": 0.9047619047619048,
+            "supported_recall": 0.8636363636363636,
+            "unsupported_false_supported_rate": 0.046511627906976744,
+            "balanced_accuracy": 0.9085623678646935,
+            "accuracy": 0.9230769230769231,
+            "auroc": 0.952431289640592,
+            "missing_predictions": 0,
+            "acceptance_rate": 0.3230769230769231
+          }
+        },
+        "test": {
+          "binary": {
+            "cases": 128,
+            "supported_precision": 0.7450980392156863,
+            "supported_recall": 0.8085106382978723,
+            "unsupported_false_supported_rate": 0.16049382716049382,
+            "balanced_accuracy": 0.8240084055686892,
+            "accuracy": 0.828125,
+            "auroc": 0.9109535066981875,
+            "missing_predictions": 0,
+            "acceptance_rate": 0.3984375
+          },
+          "three_class": {
+            "cases": 128,
+            "accuracy": 0.75,
+            "macro_f1": 0.7312004573909335,
+            "per_class": {
+              "supported": {
+                "precision": 0.7450980392156863,
+                "recall": 0.8085106382978723,
+                "f1": 0.7755102040816326,
+                "support": 47
+              },
+              "contradicted": {
+                "precision": 0.8095238095238095,
+                "recall": 0.5151515151515151,
+                "f1": 0.6296296296296297,
+                "support": 33
+              },
+              "insufficient": {
+                "precision": 0.7321428571428571,
+                "recall": 0.8541666666666666,
+                "f1": 0.7884615384615384,
+                "support": 48
+              }
+            },
+            "missing_predictions": 0,
+            "unsupported_false_supported_rate": 0.16049382716049382,
+            "confusion": {
+              "supported": {
+                "supported": 38,
+                "insufficient": 6,
+                "contradicted": 3
+              },
+              "contradicted": {
+                "contradicted": 17,
+                "insufficient": 9,
+                "supported": 7
+              },
+              "insufficient": {
+                "supported": 6,
+                "insufficient": 41,
+                "contradicted": 1
+              }
+            }
+          },
+          "threshold_binary": {
+            "cases": 128,
+            "supported_precision": 0.7551020408163265,
+            "supported_recall": 0.7872340425531915,
+            "unsupported_false_supported_rate": 0.14814814814814814,
+            "balanced_accuracy": 0.8195429472025217,
+            "accuracy": 0.828125,
+            "auroc": 0.9109535066981875,
+            "missing_predictions": 0,
+            "acceptance_rate": 0.3828125
+          }
+        },
+        "challenge": {
+          "binary": {
+            "cases": 16,
+            "supported_precision": 0.875,
+            "supported_recall": 0.875,
+            "unsupported_false_supported_rate": 0.125,
+            "balanced_accuracy": 0.875,
+            "accuracy": 0.875,
+            "auroc": 0.90625,
+            "missing_predictions": 0,
+            "acceptance_rate": 0.5
+          },
+          "three_class": {
+            "cases": 16,
+            "accuracy": 0.875,
+            "macro_f1": 0.8215811965811967,
+            "per_class": {
+              "supported": {
+                "precision": 0.875,
+                "recall": 0.875,
+                "f1": 0.875,
+                "support": 8
+              },
+              "contradicted": {
+                "precision": 0.8571428571428571,
+                "recall": 1.0,
+                "f1": 0.9230769230769231,
+                "support": 6
+              },
+              "insufficient": {
+                "precision": 1.0,
+                "recall": 0.5,
+                "f1": 0.6666666666666666,
+                "support": 2
+              }
+            },
+            "missing_predictions": 0,
+            "unsupported_false_supported_rate": 0.125,
+            "confusion": {
+              "supported": {
+                "supported": 7,
+                "contradicted": 1
+              },
+              "contradicted": {
+                "contradicted": 6
+              },
+              "insufficient": {
+                "supported": 1,
+                "insufficient": 1
+              }
+            }
+          },
+          "threshold_binary": {
+            "cases": 16,
+            "supported_precision": 0.875,
+            "supported_recall": 0.875,
+            "unsupported_false_supported_rate": 0.125,
+            "balanced_accuracy": 0.875,
+            "accuracy": 0.875,
+            "auroc": 0.90625,
+            "missing_predictions": 0,
+            "acceptance_rate": 0.5
+          }
+        },
+        "empty-evidence": {
+          "binary": {
+            "cases": 32,
+            "supported_precision": null,
+            "supported_recall": null,
+            "unsupported_false_supported_rate": 0.0,
+            "balanced_accuracy": null,
+            "accuracy": 1.0,
+            "auroc": null,
+            "missing_predictions": 0,
+            "acceptance_rate": 0.0
+          },
+          "three_class": {
+            "cases": 32,
+            "accuracy": 1.0,
+            "macro_f1": 0.3333333333333333,
+            "per_class": {
+              "supported": {
+                "precision": null,
+                "recall": null,
+                "f1": 0,
+                "support": 0
+              },
+              "contradicted": {
+                "precision": null,
+                "recall": null,
+                "f1": 0,
+                "support": 0
+              },
+              "insufficient": {
+                "precision": 1.0,
+                "recall": 1.0,
+                "f1": 1.0,
+                "support": 32
+              }
+            },
+            "missing_predictions": 0,
+            "unsupported_false_supported_rate": 0.0,
+            "confusion": {
+              "supported": {},
+              "contradicted": {},
+              "insufficient": {
+                "insufficient": 32
+              }
+            }
+          },
+          "threshold_binary": {
+            "cases": 32,
+            "supported_precision": null,
+            "supported_recall": null,
+            "unsupported_false_supported_rate": 0.0,
+            "balanced_accuracy": null,
+            "accuracy": 1.0,
+            "auroc": null,
+            "missing_predictions": 0,
+            "acceptance_rate": 0.0
+          }
+        },
+        "support_threshold": 0.5061465501785278
+      },
+      "raw-20261107": {
+        "calibration": {
+          "binary": {
+            "cases": 65,
+            "supported_precision": 0.8571428571428571,
+            "supported_recall": 0.8181818181818182,
+            "unsupported_false_supported_rate": 0.06976744186046512,
+            "balanced_accuracy": 0.8742071881606766,
+            "accuracy": 0.8923076923076924,
+            "auroc": 0.9503171247357294,
+            "missing_predictions": 0,
+            "acceptance_rate": 0.3230769230769231
+          },
+          "three_class": {
+            "cases": 65,
+            "accuracy": 0.8615384615384616,
+            "macro_f1": 0.8492329376050307,
+            "per_class": {
+              "supported": {
+                "precision": 0.8571428571428571,
+                "recall": 0.8181818181818182,
+                "f1": 0.8372093023255814,
+                "support": 22
+              },
+              "contradicted": {
+                "precision": 0.9,
+                "recall": 0.75,
+                "f1": 0.8181818181818182,
+                "support": 12
+              },
+              "insufficient": {
+                "precision": 0.8529411764705882,
+                "recall": 0.9354838709677419,
+                "f1": 0.8923076923076924,
+                "support": 31
+              }
+            },
+            "missing_predictions": 0,
+            "unsupported_false_supported_rate": 0.06976744186046512,
+            "confusion": {
+              "supported": {
+                "supported": 18,
+                "insufficient": 4
+              },
+              "contradicted": {
+                "contradicted": 9,
+                "insufficient": 1,
+                "supported": 2
+              },
+              "insufficient": {
+                "insufficient": 29,
+                "supported": 1,
+                "contradicted": 1
+              }
+            }
+          },
+          "threshold_binary": {
+            "cases": 65,
+            "supported_precision": 0.9,
+            "supported_recall": 0.8181818181818182,
+            "unsupported_false_supported_rate": 0.046511627906976744,
+            "balanced_accuracy": 0.8858350951374208,
+            "accuracy": 0.9076923076923077,
+            "auroc": 0.9503171247357294,
+            "missing_predictions": 0,
+            "acceptance_rate": 0.3076923076923077
+          }
+        },
+        "test": {
+          "binary": {
+            "cases": 128,
+            "supported_precision": 0.7454545454545455,
+            "supported_recall": 0.8723404255319149,
+            "unsupported_false_supported_rate": 0.1728395061728395,
+            "balanced_accuracy": 0.8497504596795378,
+            "accuracy": 0.84375,
+            "auroc": 0.9141055949566588,
+            "missing_predictions": 0,
+            "acceptance_rate": 0.4296875
+          },
+          "three_class": {
+            "cases": 128,
+            "accuracy": 0.765625,
+            "macro_f1": 0.7458367368368357,
+            "per_class": {
+              "supported": {
+                "precision": 0.7454545454545455,
+                "recall": 0.8723404255319149,
+                "f1": 0.803921568627451,
+                "support": 47
+              },
+              "contradicted": {
+                "precision": 0.85,
+                "recall": 0.5151515151515151,
+                "f1": 0.6415094339622641,
+                "support": 33
+              },
+              "insufficient": {
+                "precision": 0.7547169811320755,
+                "recall": 0.8333333333333334,
+                "f1": 0.7920792079207921,
+                "support": 48
+              }
+            },
+            "missing_predictions": 0,
+            "unsupported_false_supported_rate": 0.1728395061728395,
+            "confusion": {
+              "supported": {
+                "supported": 41,
+                "insufficient": 4,
+                "contradicted": 2
+              },
+              "contradicted": {
+                "contradicted": 17,
+                "insufficient": 9,
+                "supported": 7
+              },
+              "insufficient": {
+                "supported": 7,
+                "insufficient": 40,
+                "contradicted": 1
+              }
+            }
+          },
+          "threshold_binary": {
+            "cases": 128,
+            "supported_precision": 0.7647058823529411,
+            "supported_recall": 0.8297872340425532,
+            "unsupported_false_supported_rate": 0.14814814814814814,
+            "balanced_accuracy": 0.8408195429472025,
+            "accuracy": 0.84375,
+            "auroc": 0.9141055949566588,
+            "missing_predictions": 0,
+            "acceptance_rate": 0.3984375
+          }
+        },
+        "challenge": {
+          "binary": {
+            "cases": 16,
+            "supported_precision": 0.875,
+            "supported_recall": 0.875,
+            "unsupported_false_supported_rate": 0.125,
+            "balanced_accuracy": 0.875,
+            "accuracy": 0.875,
+            "auroc": 0.90625,
+            "missing_predictions": 0,
+            "acceptance_rate": 0.5
+          },
+          "three_class": {
+            "cases": 16,
+            "accuracy": 0.875,
+            "macro_f1": 0.8215811965811967,
+            "per_class": {
+              "supported": {
+                "precision": 0.875,
+                "recall": 0.875,
+                "f1": 0.875,
+                "support": 8
+              },
+              "contradicted": {
+                "precision": 0.8571428571428571,
+                "recall": 1.0,
+                "f1": 0.9230769230769231,
+                "support": 6
+              },
+              "insufficient": {
+                "precision": 1.0,
+                "recall": 0.5,
+                "f1": 0.6666666666666666,
+                "support": 2
+              }
+            },
+            "missing_predictions": 0,
+            "unsupported_false_supported_rate": 0.125,
+            "confusion": {
+              "supported": {
+                "supported": 7,
+                "contradicted": 1
+              },
+              "contradicted": {
+                "contradicted": 6
+              },
+              "insufficient": {
+                "supported": 1,
+                "insufficient": 1
+              }
+            }
+          },
+          "threshold_binary": {
+            "cases": 16,
+            "supported_precision": 0.875,
+            "supported_recall": 0.875,
+            "unsupported_false_supported_rate": 0.125,
+            "balanced_accuracy": 0.875,
+            "accuracy": 0.875,
+            "auroc": 0.90625,
+            "missing_predictions": 0,
+            "acceptance_rate": 0.5
+          }
+        },
+        "empty-evidence": {
+          "binary": {
+            "cases": 32,
+            "supported_precision": null,
+            "supported_recall": null,
+            "unsupported_false_supported_rate": 0.0,
+            "balanced_accuracy": null,
+            "accuracy": 1.0,
+            "auroc": null,
+            "missing_predictions": 0,
+            "acceptance_rate": 0.0
+          },
+          "three_class": {
+            "cases": 32,
+            "accuracy": 1.0,
+            "macro_f1": 0.3333333333333333,
+            "per_class": {
+              "supported": {
+                "precision": null,
+                "recall": null,
+                "f1": 0,
+                "support": 0
+              },
+              "contradicted": {
+                "precision": null,
+                "recall": null,
+                "f1": 0,
+                "support": 0
+              },
+              "insufficient": {
+                "precision": 1.0,
+                "recall": 1.0,
+                "f1": 1.0,
+                "support": 32
+              }
+            },
+            "missing_predictions": 0,
+            "unsupported_false_supported_rate": 0.0,
+            "confusion": {
+              "supported": {},
+              "contradicted": {},
+              "insufficient": {
+                "insufficient": 32
+              }
+            }
+          },
+          "threshold_binary": {
+            "cases": 32,
+            "supported_precision": null,
+            "supported_recall": null,
+            "unsupported_false_supported_rate": 0.0,
+            "balanced_accuracy": null,
+            "accuracy": 1.0,
+            "auroc": null,
+            "missing_predictions": 0,
+            "acceptance_rate": 0.0
+          }
+        },
+        "support_threshold": 0.4995177388191223
+      },
+      "raw-20261108": {
+        "calibration": {
+          "binary": {
+            "cases": 65,
+            "supported_precision": 0.9,
+            "supported_recall": 0.8181818181818182,
+            "unsupported_false_supported_rate": 0.046511627906976744,
+            "balanced_accuracy": 0.8858350951374208,
+            "accuracy": 0.9076923076923077,
+            "auroc": 0.952431289640592,
+            "missing_predictions": 0,
+            "acceptance_rate": 0.3076923076923077
+          },
+          "three_class": {
+            "cases": 65,
+            "accuracy": 0.8769230769230769,
+            "macro_f1": 0.8699360341151386,
+            "per_class": {
+              "supported": {
+                "precision": 0.9,
+                "recall": 0.8181818181818182,
+                "f1": 0.8571428571428571,
+                "support": 22
+              },
+              "contradicted": {
+                "precision": 1.0,
+                "recall": 0.75,
+                "f1": 0.8571428571428571,
+                "support": 12
+              },
+              "insufficient": {
+                "precision": 0.8333333333333334,
+                "recall": 0.967741935483871,
+                "f1": 0.8955223880597015,
+                "support": 31
+              }
+            },
+            "missing_predictions": 0,
+            "unsupported_false_supported_rate": 0.046511627906976744,
+            "confusion": {
+              "supported": {
+                "supported": 18,
+                "insufficient": 4
+              },
+              "contradicted": {
+                "contradicted": 9,
+                "insufficient": 2,
+                "supported": 1
+              },
+              "insufficient": {
+                "insufficient": 30,
+                "supported": 1
+              }
+            }
+          },
+          "threshold_binary": {
+            "cases": 65,
+            "supported_precision": 0.9473684210526315,
+            "supported_recall": 0.8181818181818182,
+            "unsupported_false_supported_rate": 0.023255813953488372,
+            "balanced_accuracy": 0.897463002114165,
+            "accuracy": 0.9230769230769231,
+            "auroc": 0.952431289640592,
+            "missing_predictions": 0,
+            "acceptance_rate": 0.2923076923076923
+          }
+        },
+        "test": {
+          "binary": {
+            "cases": 128,
+            "supported_precision": 0.803921568627451,
+            "supported_recall": 0.8723404255319149,
+            "unsupported_false_supported_rate": 0.12345679012345678,
+            "balanced_accuracy": 0.874441817704229,
+            "accuracy": 0.875,
+            "auroc": 0.9179143682689782,
+            "missing_predictions": 0,
+            "acceptance_rate": 0.3984375
+          },
+          "three_class": {
+            "cases": 128,
+            "accuracy": 0.78125,
+            "macro_f1": 0.7559746640089058,
+            "per_class": {
+              "supported": {
+                "precision": 0.803921568627451,
+                "recall": 0.8723404255319149,
+                "f1": 0.8367346938775511,
+                "support": 47
+              },
+              "contradicted": {
+                "precision": 0.8888888888888888,
+                "recall": 0.48484848484848486,
+                "f1": 0.6274509803921569,
+                "support": 33
+              },
+              "insufficient": {
+                "precision": 0.7288135593220338,
+                "recall": 0.8958333333333334,
+                "f1": 0.8037383177570093,
+                "support": 48
+              }
+            },
+            "missing_predictions": 0,
+            "unsupported_false_supported_rate": 0.12345679012345678,
+            "confusion": {
+              "supported": {
+                "supported": 41,
+                "insufficient": 4,
+                "contradicted": 2
+              },
+              "contradicted": {
+                "contradicted": 16,
+                "insufficient": 12,
+                "supported": 5
+              },
+              "insufficient": {
+                "supported": 5,
+                "insufficient": 43
+              }
+            }
+          },
+          "threshold_binary": {
+            "cases": 128,
+            "supported_precision": 0.8297872340425532,
+            "supported_recall": 0.8297872340425532,
+            "unsupported_false_supported_rate": 0.09876543209876543,
+            "balanced_accuracy": 0.8655109009718939,
+            "accuracy": 0.875,
+            "auroc": 0.9179143682689782,
+            "missing_predictions": 0,
+            "acceptance_rate": 0.3671875
+          }
+        },
+        "challenge": {
+          "binary": {
+            "cases": 16,
+            "supported_precision": 0.875,
+            "supported_recall": 0.875,
+            "unsupported_false_supported_rate": 0.125,
+            "balanced_accuracy": 0.875,
+            "accuracy": 0.875,
+            "auroc": 0.875,
+            "missing_predictions": 0,
+            "acceptance_rate": 0.5
+          },
+          "three_class": {
+            "cases": 16,
+            "accuracy": 0.875,
+            "macro_f1": 0.8215811965811967,
+            "per_class": {
+              "supported": {
+                "precision": 0.875,
+                "recall": 0.875,
+                "f1": 0.875,
+                "support": 8
+              },
+              "contradicted": {
+                "precision": 0.8571428571428571,
+                "recall": 1.0,
+                "f1": 0.9230769230769231,
+                "support": 6
+              },
+              "insufficient": {
+                "precision": 1.0,
+                "recall": 0.5,
+                "f1": 0.6666666666666666,
+                "support": 2
+              }
+            },
+            "missing_predictions": 0,
+            "unsupported_false_supported_rate": 0.125,
+            "confusion": {
+              "supported": {
+                "supported": 7,
+                "contradicted": 1
+              },
+              "contradicted": {
+                "contradicted": 6
+              },
+              "insufficient": {
+                "supported": 1,
+                "insufficient": 1
+              }
+            }
+          },
+          "threshold_binary": {
+            "cases": 16,
+            "supported_precision": 0.875,
+            "supported_recall": 0.875,
+            "unsupported_false_supported_rate": 0.125,
+            "balanced_accuracy": 0.875,
+            "accuracy": 0.875,
+            "auroc": 0.875,
+            "missing_predictions": 0,
+            "acceptance_rate": 0.5
+          }
+        },
+        "empty-evidence": {
+          "binary": {
+            "cases": 32,
+            "supported_precision": null,
+            "supported_recall": null,
+            "unsupported_false_supported_rate": 0.0,
+            "balanced_accuracy": null,
+            "accuracy": 1.0,
+            "auroc": null,
+            "missing_predictions": 0,
+            "acceptance_rate": 0.0
+          },
+          "three_class": {
+            "cases": 32,
+            "accuracy": 1.0,
+            "macro_f1": 0.3333333333333333,
+            "per_class": {
+              "supported": {
+                "precision": null,
+                "recall": null,
+                "f1": 0,
+                "support": 0
+              },
+              "contradicted": {
+                "precision": null,
+                "recall": null,
+                "f1": 0,
+                "support": 0
+              },
+              "insufficient": {
+                "precision": 1.0,
+                "recall": 1.0,
+                "f1": 1.0,
+                "support": 32
+              }
+            },
+            "missing_predictions": 0,
+            "unsupported_false_supported_rate": 0.0,
+            "confusion": {
+              "supported": {},
+              "contradicted": {},
+              "insufficient": {
+                "insufficient": 32
+              }
+            }
+          },
+          "threshold_binary": {
+            "cases": 32,
+            "supported_precision": null,
+            "supported_recall": null,
+            "unsupported_false_supported_rate": 0.0,
+            "balanced_accuracy": null,
+            "accuracy": 1.0,
+            "auroc": null,
+            "missing_predictions": 0,
+            "acceptance_rate": 0.0
+          }
+        },
+        "support_threshold": 0.6623058319091797
+      },
+      "proposed-20261108": {
+        "calibration": {
+          "binary": {
+            "cases": 65,
+            "supported_precision": 0.85,
+            "supported_recall": 0.7727272727272727,
+            "unsupported_false_supported_rate": 0.06976744186046512,
+            "balanced_accuracy": 0.8514799154334038,
+            "accuracy": 0.8769230769230769,
+            "auroc": 0.9534883720930233,
+            "missing_predictions": 0,
+            "acceptance_rate": 0.3076923076923077
+          },
+          "three_class": {
+            "cases": 65,
+            "accuracy": 0.8615384615384616,
+            "macro_f1": 0.8540630182421228,
+            "per_class": {
+              "supported": {
+                "precision": 0.85,
+                "recall": 0.7727272727272727,
+                "f1": 0.8095238095238095,
+                "support": 22
+              },
+              "contradicted": {
+                "precision": 1.0,
+                "recall": 0.75,
+                "f1": 0.8571428571428571,
+                "support": 12
+              },
+              "insufficient": {
+                "precision": 0.8333333333333334,
+                "recall": 0.967741935483871,
+                "f1": 0.8955223880597015,
+                "support": 31
+              }
+            },
+            "missing_predictions": 0,
+            "unsupported_false_supported_rate": 0.06976744186046512,
+            "confusion": {
+              "supported": {
+                "supported": 17,
+                "insufficient": 5
+              },
+              "contradicted": {
+                "contradicted": 9,
+                "insufficient": 1,
+                "supported": 2
+              },
+              "insufficient": {
+                "insufficient": 30,
+                "supported": 1
+              }
+            }
+          },
+          "threshold_binary": {
+            "cases": 65,
+            "supported_precision": 0.8947368421052632,
+            "supported_recall": 0.7727272727272727,
+            "unsupported_false_supported_rate": 0.046511627906976744,
+            "balanced_accuracy": 0.863107822410148,
+            "accuracy": 0.8923076923076924,
+            "auroc": 0.9534883720930233,
+            "missing_predictions": 0,
+            "acceptance_rate": 0.2923076923076923
+          }
+        },
+        "test": {
+          "binary": {
+            "cases": 128,
+            "supported_precision": 0.7959183673469388,
+            "supported_recall": 0.8297872340425532,
+            "unsupported_false_supported_rate": 0.12345679012345678,
+            "balanced_accuracy": 0.8531652219595482,
+            "accuracy": 0.859375,
+            "auroc": 0.916206987128973,
+            "missing_predictions": 0,
+            "acceptance_rate": 0.3828125
+          },
+          "three_class": {
+            "cases": 128,
+            "accuracy": 0.7734375,
+            "macro_f1": 0.7556818181818182,
+            "per_class": {
+              "supported": {
+                "precision": 0.7959183673469388,
+                "recall": 0.8297872340425532,
+                "f1": 0.8125,
+                "support": 47
+              },
+              "contradicted": {
+                "precision": 0.8181818181818182,
+                "recall": 0.5454545454545454,
+                "f1": 0.6545454545454545,
+                "support": 33
+              },
+              "insufficient": {
+                "precision": 0.7368421052631579,
+                "recall": 0.875,
+                "f1": 0.8,
+                "support": 48
+              }
+            },
+            "missing_predictions": 0,
+            "unsupported_false_supported_rate": 0.12345679012345678,
+            "confusion": {
+              "supported": {
+                "supported": 39,
+                "insufficient": 5,
+                "contradicted": 3
+              },
+              "contradicted": {
+                "contradicted": 18,
+                "supported": 5,
+                "insufficient": 10
+              },
+              "insufficient": {
+                "supported": 5,
+                "insufficient": 42,
+                "contradicted": 1
+              }
+            }
+          },
+          "threshold_binary": {
+            "cases": 128,
+            "supported_precision": 0.8444444444444444,
+            "supported_recall": 0.8085106382978723,
+            "unsupported_false_supported_rate": 0.08641975308641975,
+            "balanced_accuracy": 0.8610454426057262,
+            "accuracy": 0.875,
+            "auroc": 0.916206987128973,
+            "missing_predictions": 0,
+            "acceptance_rate": 0.3515625
+          }
+        },
+        "challenge": {
+          "binary": {
+            "cases": 16,
+            "supported_precision": 0.875,
+            "supported_recall": 0.875,
+            "unsupported_false_supported_rate": 0.125,
+            "balanced_accuracy": 0.875,
+            "accuracy": 0.875,
+            "auroc": 0.875,
+            "missing_predictions": 0,
+            "acceptance_rate": 0.5
+          },
+          "three_class": {
+            "cases": 16,
+            "accuracy": 0.875,
+            "macro_f1": 0.8215811965811967,
+            "per_class": {
+              "supported": {
+                "precision": 0.875,
+                "recall": 0.875,
+                "f1": 0.875,
+                "support": 8
+              },
+              "contradicted": {
+                "precision": 0.8571428571428571,
+                "recall": 1.0,
+                "f1": 0.9230769230769231,
+                "support": 6
+              },
+              "insufficient": {
+                "precision": 1.0,
+                "recall": 0.5,
+                "f1": 0.6666666666666666,
+                "support": 2
+              }
+            },
+            "missing_predictions": 0,
+            "unsupported_false_supported_rate": 0.125,
+            "confusion": {
+              "supported": {
+                "supported": 7,
+                "contradicted": 1
+              },
+              "contradicted": {
+                "contradicted": 6
+              },
+              "insufficient": {
+                "supported": 1,
+                "insufficient": 1
+              }
+            }
+          },
+          "threshold_binary": {
+            "cases": 16,
+            "supported_precision": 0.875,
+            "supported_recall": 0.875,
+            "unsupported_false_supported_rate": 0.125,
+            "balanced_accuracy": 0.875,
+            "accuracy": 0.875,
+            "auroc": 0.875,
+            "missing_predictions": 0,
+            "acceptance_rate": 0.5
+          }
+        },
+        "empty-evidence": {
+          "binary": {
+            "cases": 32,
+            "supported_precision": null,
+            "supported_recall": null,
+            "unsupported_false_supported_rate": 0.0,
+            "balanced_accuracy": null,
+            "accuracy": 1.0,
+            "auroc": null,
+            "missing_predictions": 0,
+            "acceptance_rate": 0.0
+          },
+          "three_class": {
+            "cases": 32,
+            "accuracy": 1.0,
+            "macro_f1": 0.3333333333333333,
+            "per_class": {
+              "supported": {
+                "precision": null,
+                "recall": null,
+                "f1": 0,
+                "support": 0
+              },
+              "contradicted": {
+                "precision": null,
+                "recall": null,
+                "f1": 0,
+                "support": 0
+              },
+              "insufficient": {
+                "precision": 1.0,
+                "recall": 1.0,
+                "f1": 1.0,
+                "support": 32
+              }
+            },
+            "missing_predictions": 0,
+            "unsupported_false_supported_rate": 0.0,
+            "confusion": {
+              "supported": {},
+              "contradicted": {},
+              "insufficient": {
+                "insufficient": 32
+              }
+            }
+          },
+          "threshold_binary": {
+            "cases": 32,
+            "supported_precision": null,
+            "supported_recall": null,
+            "unsupported_false_supported_rate": 0.0,
+            "balanced_accuracy": null,
+            "accuracy": 1.0,
+            "auroc": null,
+            "missing_predictions": 0,
+            "acceptance_rate": 0.0
+          }
+        },
+        "support_threshold": 0.6849372386932373
+      },
+      "large-bf16": {
+        "calibration": {
+          "binary": {
+            "cases": 65,
+            "supported_precision": 0.8888888888888888,
+            "supported_recall": 0.7272727272727273,
+            "unsupported_false_supported_rate": 0.046511627906976744,
+            "balanced_accuracy": 0.8403805496828753,
+            "accuracy": 0.8769230769230769,
+            "auroc": 0.9334038054968288,
+            "missing_predictions": 0,
+            "acceptance_rate": 0.27692307692307694
+          },
+          "three_class": {
+            "cases": 65,
+            "accuracy": 0.7076923076923077,
+            "macro_f1": 0.5230769230769231,
+            "per_class": {
+              "supported": {
+                "precision": 0.8888888888888888,
+                "recall": 0.7272727272727273,
+                "f1": 0.8,
+                "support": 22
+              },
+              "contradicted": {
+                "precision": null,
+                "recall": 0.0,
+                "f1": 0.0,
+                "support": 12
+              },
+              "insufficient": {
+                "precision": 0.6382978723404256,
+                "recall": 0.967741935483871,
+                "f1": 0.7692307692307693,
+                "support": 31
+              }
+            },
+            "missing_predictions": 0,
+            "unsupported_false_supported_rate": 0.046511627906976744,
+            "confusion": {
+              "supported": {
+                "supported": 16,
+                "insufficient": 6
+              },
+              "contradicted": {
+                "insufficient": 11,
+                "supported": 1
+              },
+              "insufficient": {
+                "insufficient": 30,
+                "supported": 1
+              }
+            }
+          },
+          "threshold_binary": {
+            "cases": 65,
+            "supported_precision": 0.8947368421052632,
+            "supported_recall": 0.7727272727272727,
+            "unsupported_false_supported_rate": 0.046511627906976744,
+            "balanced_accuracy": 0.863107822410148,
+            "accuracy": 0.8923076923076924,
+            "auroc": 0.9334038054968288,
+            "missing_predictions": 0,
+            "acceptance_rate": 0.2923076923076923
+          }
+        },
+        "test": {
+          "binary": {
+            "cases": 128,
+            "supported_precision": 0.8,
+            "supported_recall": 0.7659574468085106,
+            "unsupported_false_supported_rate": 0.1111111111111111,
+            "balanced_accuracy": 0.8274231678486997,
+            "accuracy": 0.84375,
+            "auroc": 0.8940110323089047,
+            "missing_predictions": 0,
+            "acceptance_rate": 0.3515625
+          },
+          "three_class": {
+            "cases": 128,
+            "accuracy": 0.6640625,
+            "macro_f1": 0.5813930962672381,
+            "per_class": {
+              "supported": {
+                "precision": 0.8,
+                "recall": 0.7659574468085106,
+                "f1": 0.782608695652174,
+                "support": 47
+              },
+              "contradicted": {
+                "precision": 1.0,
+                "recall": 0.15151515151515152,
+                "f1": 0.2631578947368421,
+                "support": 33
+              },
+              "insufficient": {
+                "precision": 0.5641025641025641,
+                "recall": 0.9166666666666666,
+                "f1": 0.6984126984126984,
+                "support": 48
+              }
+            },
+            "missing_predictions": 0,
+            "unsupported_false_supported_rate": 0.1111111111111111,
+            "confusion": {
+              "supported": {
+                "supported": 36,
+                "insufficient": 11
+              },
+              "contradicted": {
+                "insufficient": 23,
+                "supported": 5,
+                "contradicted": 5
+              },
+              "insufficient": {
+                "supported": 4,
+                "insufficient": 44
+              }
+            }
+          },
+          "threshold_binary": {
+            "cases": 128,
+            "supported_precision": 0.8043478260869565,
+            "supported_recall": 0.7872340425531915,
+            "unsupported_false_supported_rate": 0.1111111111111111,
+            "balanced_accuracy": 0.8380614657210401,
+            "accuracy": 0.8515625,
+            "auroc": 0.8940110323089047,
+            "missing_predictions": 0,
+            "acceptance_rate": 0.359375
+          }
+        },
+        "challenge": {
+          "binary": {
+            "cases": 16,
+            "supported_precision": 0.875,
+            "supported_recall": 0.875,
+            "unsupported_false_supported_rate": 0.125,
+            "balanced_accuracy": 0.875,
+            "accuracy": 0.875,
+            "auroc": 0.8984375,
+            "missing_predictions": 0,
+            "acceptance_rate": 0.5
+          },
+          "three_class": {
+            "cases": 16,
+            "accuracy": 0.5625,
+            "macro_f1": 0.4583333333333333,
+            "per_class": {
+              "supported": {
+                "precision": 0.875,
+                "recall": 0.875,
+                "f1": 0.875,
+                "support": 8
+              },
+              "contradicted": {
+                "precision": 0.5,
+                "recall": 0.16666666666666666,
+                "f1": 0.25,
+                "support": 6
+              },
+              "insufficient": {
+                "precision": 0.16666666666666666,
+                "recall": 0.5,
+                "f1": 0.25,
+                "support": 2
+              }
+            },
+            "missing_predictions": 0,
+            "unsupported_false_supported_rate": 0.125,
+            "confusion": {
+              "supported": {
+                "supported": 7,
+                "contradicted": 1
+              },
+              "contradicted": {
+                "insufficient": 5,
+                "contradicted": 1
+              },
+              "insufficient": {
+                "supported": 1,
+                "insufficient": 1
+              }
+            }
+          },
+          "threshold_binary": {
+            "cases": 16,
+            "supported_precision": 0.875,
+            "supported_recall": 0.875,
+            "unsupported_false_supported_rate": 0.125,
+            "balanced_accuracy": 0.875,
+            "accuracy": 0.875,
+            "auroc": 0.8984375,
+            "missing_predictions": 0,
+            "acceptance_rate": 0.5
+          }
+        },
+        "empty-evidence": {
+          "binary": {
+            "cases": 32,
+            "supported_precision": null,
+            "supported_recall": null,
+            "unsupported_false_supported_rate": 0.0,
+            "balanced_accuracy": null,
+            "accuracy": 1.0,
+            "auroc": null,
+            "missing_predictions": 0,
+            "acceptance_rate": 0.0
+          },
+          "three_class": {
+            "cases": 32,
+            "accuracy": 1.0,
+            "macro_f1": 0.3333333333333333,
+            "per_class": {
+              "supported": {
+                "precision": null,
+                "recall": null,
+                "f1": 0,
+                "support": 0
+              },
+              "contradicted": {
+                "precision": null,
+                "recall": null,
+                "f1": 0,
+                "support": 0
+              },
+              "insufficient": {
+                "precision": 1.0,
+                "recall": 1.0,
+                "f1": 1.0,
+                "support": 32
+              }
+            },
+            "missing_predictions": 0,
+            "unsupported_false_supported_rate": 0.0,
+            "confusion": {
+              "supported": {},
+              "contradicted": {},
+              "insufficient": {
+                "insufficient": 32
+              }
+            }
+          },
+          "threshold_binary": {
+            "cases": 32,
+            "supported_precision": null,
+            "supported_recall": null,
+            "unsupported_false_supported_rate": 0.0,
+            "balanced_accuracy": null,
+            "accuracy": 1.0,
+            "auroc": null,
+            "missing_predictions": 0,
+            "acceptance_rate": 0.0
+          }
+        },
+        "support_threshold": 0.14720219373703003
+      },
+      "minicheck-bf16": {
+        "calibration": {
+          "binary": {
+            "cases": 65,
+            "supported_precision": 0.9375,
+            "supported_recall": 0.6818181818181818,
+            "unsupported_false_supported_rate": 0.023255813953488372,
+            "balanced_accuracy": 0.8292811839323466,
+            "accuracy": 0.8769230769230769,
+            "auroc": 0.9217758985200846,
+            "missing_predictions": 0,
+            "acceptance_rate": 0.24615384615384617
+          },
+          "threshold_binary": {
+            "cases": 65,
+            "supported_precision": 0.8888888888888888,
+            "supported_recall": 0.7272727272727273,
+            "unsupported_false_supported_rate": 0.046511627906976744,
+            "balanced_accuracy": 0.8403805496828753,
+            "accuracy": 0.8769230769230769,
+            "auroc": 0.9217758985200846,
+            "missing_predictions": 0,
+            "acceptance_rate": 0.27692307692307694
+          }
+        },
+        "test": {
+          "binary": {
+            "cases": 128,
+            "supported_precision": 0.918918918918919,
+            "supported_recall": 0.723404255319149,
+            "unsupported_false_supported_rate": 0.037037037037037035,
+            "balanced_accuracy": 0.843183609141056,
+            "accuracy": 0.875,
+            "auroc": 0.9382716049382716,
+            "missing_predictions": 0,
+            "acceptance_rate": 0.2890625
+          },
+          "threshold_binary": {
+            "cases": 128,
+            "supported_precision": 0.8974358974358975,
+            "supported_recall": 0.7446808510638298,
+            "unsupported_false_supported_rate": 0.04938271604938271,
+            "balanced_accuracy": 0.8476490675072235,
+            "accuracy": 0.875,
+            "auroc": 0.9382716049382716,
+            "missing_predictions": 0,
+            "acceptance_rate": 0.3046875
+          }
+        },
+        "challenge": {
+          "binary": {
+            "cases": 16,
+            "supported_precision": 0.8888888888888888,
+            "supported_recall": 1.0,
+            "unsupported_false_supported_rate": 0.125,
+            "balanced_accuracy": 0.9375,
+            "accuracy": 0.9375,
+            "auroc": 1.0,
+            "missing_predictions": 0,
+            "acceptance_rate": 0.5625
+          },
+          "threshold_binary": {
+            "cases": 16,
+            "supported_precision": 0.8888888888888888,
+            "supported_recall": 1.0,
+            "unsupported_false_supported_rate": 0.125,
+            "balanced_accuracy": 0.9375,
+            "accuracy": 0.9375,
+            "auroc": 1.0,
+            "missing_predictions": 0,
+            "acceptance_rate": 0.5625
+          }
+        },
+        "empty-evidence": {
+          "binary": {
+            "cases": 32,
+            "supported_precision": 0.0,
+            "supported_recall": null,
+            "unsupported_false_supported_rate": 0.0625,
+            "balanced_accuracy": null,
+            "accuracy": 0.9375,
+            "auroc": null,
+            "missing_predictions": 0,
+            "acceptance_rate": 0.0625
+          },
+          "threshold_binary": {
+            "cases": 32,
+            "supported_precision": 0.0,
+            "supported_recall": null,
+            "unsupported_false_supported_rate": 0.0625,
+            "balanced_accuracy": null,
+            "accuracy": 0.9375,
+            "auroc": null,
+            "missing_predictions": 0,
+            "acceptance_rate": 0.0625
+          }
+        },
+        "support_threshold": 0.4375976026058197
+      }
+    },
+    "published": {
+      "raw-20261106": {
+        "calibration": {
+          "binary": {
+            "cases": 65,
+            "supported_precision": 0.8260869565217391,
+            "supported_recall": 0.9047619047619048,
+            "unsupported_false_supported_rate": 0.09090909090909091,
+            "balanced_accuracy": 0.9069264069264069,
+            "accuracy": 0.9076923076923077,
+            "auroc": 0.9502164502164502,
+            "missing_predictions": 0,
+            "acceptance_rate": 0.35384615384615387
+          },
+          "three_class": {
+            "cases": 65,
+            "accuracy": 0.8923076923076924,
+            "macro_f1": 0.8731060606060606,
+            "per_class": {
+              "supported": {
+                "precision": 0.8260869565217391,
+                "recall": 0.9047619047619048,
+                "f1": 0.8636363636363636,
+                "support": 21
+              },
+              "contradicted": {
+                "precision": 0.9,
+                "recall": 0.75,
+                "f1": 0.8181818181818182,
+                "support": 12
+              },
+              "insufficient": {
+                "precision": 0.9375,
+                "recall": 0.9375,
+                "f1": 0.9375,
+                "support": 32
+              }
+            },
+            "missing_predictions": 0,
+            "unsupported_false_supported_rate": 0.09090909090909091,
+            "confusion": {
+              "supported": {
+                "supported": 19,
+                "insufficient": 2
+              },
+              "contradicted": {
+                "contradicted": 9,
+                "supported": 3
+              },
+              "insufficient": {
+                "insufficient": 30,
+                "supported": 1,
+                "contradicted": 1
+              }
+            }
+          },
+          "threshold_binary": {
+            "cases": 65,
+            "supported_precision": 0.8947368421052632,
+            "supported_recall": 0.8095238095238095,
+            "unsupported_false_supported_rate": 0.045454545454545456,
+            "balanced_accuracy": 0.8820346320346321,
+            "accuracy": 0.9076923076923077,
+            "auroc": 0.9502164502164502,
+            "missing_predictions": 0,
+            "acceptance_rate": 0.2923076923076923
+          }
+        },
+        "test": {
+          "binary": {
+            "cases": 128,
+            "supported_precision": 0.7037037037037037,
+            "supported_recall": 0.926829268292683,
+            "unsupported_false_supported_rate": 0.1839080459770115,
+            "balanced_accuracy": 0.8714606111578358,
+            "accuracy": 0.8515625,
+            "auroc": 0.9308943089430894,
+            "missing_predictions": 0,
+            "acceptance_rate": 0.421875
+          },
+          "three_class": {
+            "cases": 128,
+            "accuracy": 0.7578125,
+            "macro_f1": 0.7483653741718257,
+            "per_class": {
+              "supported": {
+                "precision": 0.7037037037037037,
+                "recall": 0.926829268292683,
+                "f1": 0.8,
+                "support": 41
+              },
+              "contradicted": {
+                "precision": 0.8076923076923077,
+                "recall": 0.5833333333333334,
+                "f1": 0.6774193548387096,
+                "support": 36
+              },
+              "insufficient": {
+                "precision": 0.7916666666666666,
+                "recall": 0.7450980392156863,
+                "f1": 0.7676767676767676,
+                "support": 51
+              }
+            },
+            "missing_predictions": 0,
+            "unsupported_false_supported_rate": 0.1839080459770115,
+            "confusion": {
+              "supported": {
+                "supported": 38,
+                "insufficient": 2,
+                "contradicted": 1
+              },
+              "contradicted": {
+                "contradicted": 21,
+                "insufficient": 8,
+                "supported": 7
+              },
+              "insufficient": {
+                "supported": 9,
+                "insufficient": 38,
+                "contradicted": 4
+              }
+            }
+          },
+          "threshold_binary": {
+            "cases": 128,
+            "supported_precision": 0.75,
+            "supported_recall": 0.8780487804878049,
+            "unsupported_false_supported_rate": 0.13793103448275862,
+            "balanced_accuracy": 0.8700588730025232,
+            "accuracy": 0.8671875,
+            "auroc": 0.9308943089430894,
+            "missing_predictions": 0,
+            "acceptance_rate": 0.375
+          }
+        },
+        "challenge": {
+          "binary": {
+            "cases": 16,
+            "supported_precision": 0.875,
+            "supported_recall": 0.875,
+            "unsupported_false_supported_rate": 0.125,
+            "balanced_accuracy": 0.875,
+            "accuracy": 0.875,
+            "auroc": 0.90625,
+            "missing_predictions": 0,
+            "acceptance_rate": 0.5
+          },
+          "three_class": {
+            "cases": 16,
+            "accuracy": 0.875,
+            "macro_f1": 0.8215811965811967,
+            "per_class": {
+              "supported": {
+                "precision": 0.875,
+                "recall": 0.875,
+                "f1": 0.875,
+                "support": 8
+              },
+              "contradicted": {
+                "precision": 0.8571428571428571,
+                "recall": 1.0,
+                "f1": 0.9230769230769231,
+                "support": 6
+              },
+              "insufficient": {
+                "precision": 1.0,
+                "recall": 0.5,
+                "f1": 0.6666666666666666,
+                "support": 2
+              }
+            },
+            "missing_predictions": 0,
+            "unsupported_false_supported_rate": 0.125,
+            "confusion": {
+              "supported": {
+                "supported": 7,
+                "contradicted": 1
+              },
+              "contradicted": {
+                "contradicted": 6
+              },
+              "insufficient": {
+                "supported": 1,
+                "insufficient": 1
+              }
+            }
+          },
+          "threshold_binary": {
+            "cases": 16,
+            "supported_precision": 0.875,
+            "supported_recall": 0.875,
+            "unsupported_false_supported_rate": 0.125,
+            "balanced_accuracy": 0.875,
+            "accuracy": 0.875,
+            "auroc": 0.90625,
+            "missing_predictions": 0,
+            "acceptance_rate": 0.5
+          }
+        },
+        "empty-evidence": {
+          "binary": {
+            "cases": 32,
+            "supported_precision": null,
+            "supported_recall": null,
+            "unsupported_false_supported_rate": 0.0,
+            "balanced_accuracy": null,
+            "accuracy": 1.0,
+            "auroc": null,
+            "missing_predictions": 0,
+            "acceptance_rate": 0.0
+          },
+          "three_class": {
+            "cases": 32,
+            "accuracy": 1.0,
+            "macro_f1": 0.3333333333333333,
+            "per_class": {
+              "supported": {
+                "precision": null,
+                "recall": null,
+                "f1": 0,
+                "support": 0
+              },
+              "contradicted": {
+                "precision": null,
+                "recall": null,
+                "f1": 0,
+                "support": 0
+              },
+              "insufficient": {
+                "precision": 1.0,
+                "recall": 1.0,
+                "f1": 1.0,
+                "support": 32
+              }
+            },
+            "missing_predictions": 0,
+            "unsupported_false_supported_rate": 0.0,
+            "confusion": {
+              "supported": {},
+              "contradicted": {},
+              "insufficient": {
+                "insufficient": 32
+              }
+            }
+          },
+          "threshold_binary": {
+            "cases": 32,
+            "supported_precision": null,
+            "supported_recall": null,
+            "unsupported_false_supported_rate": 0.0,
+            "balanced_accuracy": null,
+            "accuracy": 1.0,
+            "auroc": null,
+            "missing_predictions": 0,
+            "acceptance_rate": 0.0
+          }
+        },
+        "support_threshold": 0.6624118089675903
+      },
+      "proposed-20261106": {
+        "calibration": {
+          "binary": {
+            "cases": 65,
+            "supported_precision": 0.8181818181818182,
+            "supported_recall": 0.8571428571428571,
+            "unsupported_false_supported_rate": 0.09090909090909091,
+            "balanced_accuracy": 0.8831168831168831,
+            "accuracy": 0.8923076923076924,
+            "auroc": 0.948051948051948,
+            "missing_predictions": 0,
+            "acceptance_rate": 0.3384615384615385
+          },
+          "three_class": {
+            "cases": 65,
+            "accuracy": 0.8769230769230769,
+            "macro_f1": 0.8594893478614409,
+            "per_class": {
+              "supported": {
+                "precision": 0.8181818181818182,
+                "recall": 0.8571428571428571,
+                "f1": 0.8372093023255814,
+                "support": 21
+              },
+              "contradicted": {
+                "precision": 0.9,
+                "recall": 0.75,
+                "f1": 0.8181818181818182,
+                "support": 12
+              },
+              "insufficient": {
+                "precision": 0.9090909090909091,
+                "recall": 0.9375,
+                "f1": 0.9230769230769231,
+                "support": 32
+              }
+            },
+            "missing_predictions": 0,
+            "unsupported_false_supported_rate": 0.09090909090909091,
+            "confusion": {
+              "supported": {
+                "supported": 18,
+                "insufficient": 3
+              },
+              "contradicted": {
+                "contradicted": 9,
+                "supported": 3
+              },
+              "insufficient": {
+                "insufficient": 30,
+                "supported": 1,
+                "contradicted": 1
+              }
+            }
+          },
+          "threshold_binary": {
+            "cases": 65,
+            "supported_precision": 0.8947368421052632,
+            "supported_recall": 0.8095238095238095,
+            "unsupported_false_supported_rate": 0.045454545454545456,
+            "balanced_accuracy": 0.8820346320346321,
+            "accuracy": 0.9076923076923077,
+            "auroc": 0.948051948051948,
+            "missing_predictions": 0,
+            "acceptance_rate": 0.2923076923076923
+          }
+        },
+        "test": {
+          "binary": {
+            "cases": 128,
+            "supported_precision": 0.7037037037037037,
+            "supported_recall": 0.926829268292683,
+            "unsupported_false_supported_rate": 0.1839080459770115,
+            "balanced_accuracy": 0.8714606111578358,
+            "accuracy": 0.8515625,
+            "auroc": 0.9307541351275582,
+            "missing_predictions": 0,
+            "acceptance_rate": 0.421875
+          },
+          "three_class": {
+            "cases": 128,
+            "accuracy": 0.7578125,
+            "macro_f1": 0.7483653741718257,
+            "per_class": {
+              "supported": {
+                "precision": 0.7037037037037037,
+                "recall": 0.926829268292683,
+                "f1": 0.8,
+                "support": 41
+              },
+              "contradicted": {
+                "precision": 0.8076923076923077,
+                "recall": 0.5833333333333334,
+                "f1": 0.6774193548387096,
+                "support": 36
+              },
+              "insufficient": {
+                "precision": 0.7916666666666666,
+                "recall": 0.7450980392156863,
+                "f1": 0.7676767676767676,
+                "support": 51
+              }
+            },
+            "missing_predictions": 0,
+            "unsupported_false_supported_rate": 0.1839080459770115,
+            "confusion": {
+              "supported": {
+                "supported": 38,
+                "insufficient": 2,
+                "contradicted": 1
+              },
+              "contradicted": {
+                "contradicted": 21,
+                "insufficient": 8,
+                "supported": 7
+              },
+              "insufficient": {
+                "supported": 9,
+                "insufficient": 38,
+                "contradicted": 4
+              }
+            }
+          },
+          "threshold_binary": {
+            "cases": 128,
+            "supported_precision": 0.7446808510638298,
+            "supported_recall": 0.8536585365853658,
+            "unsupported_false_supported_rate": 0.13793103448275862,
+            "balanced_accuracy": 0.8578637510513036,
+            "accuracy": 0.859375,
+            "auroc": 0.9307541351275582,
+            "missing_predictions": 0,
+            "acceptance_rate": 0.3671875
+          }
+        },
+        "challenge": {
+          "binary": {
+            "cases": 16,
+            "supported_precision": 0.875,
+            "supported_recall": 0.875,
+            "unsupported_false_supported_rate": 0.125,
+            "balanced_accuracy": 0.875,
+            "accuracy": 0.875,
+            "auroc": 0.90625,
+            "missing_predictions": 0,
+            "acceptance_rate": 0.5
+          },
+          "three_class": {
+            "cases": 16,
+            "accuracy": 0.875,
+            "macro_f1": 0.8215811965811967,
+            "per_class": {
+              "supported": {
+                "precision": 0.875,
+                "recall": 0.875,
+                "f1": 0.875,
+                "support": 8
+              },
+              "contradicted": {
+                "precision": 0.8571428571428571,
+                "recall": 1.0,
+                "f1": 0.9230769230769231,
+                "support": 6
+              },
+              "insufficient": {
+                "precision": 1.0,
+                "recall": 0.5,
+                "f1": 0.6666666666666666,
+                "support": 2
+              }
+            },
+            "missing_predictions": 0,
+            "unsupported_false_supported_rate": 0.125,
+            "confusion": {
+              "supported": {
+                "supported": 7,
+                "contradicted": 1
+              },
+              "contradicted": {
+                "contradicted": 6
+              },
+              "insufficient": {
+                "supported": 1,
+                "insufficient": 1
+              }
+            }
+          },
+          "threshold_binary": {
+            "cases": 16,
+            "supported_precision": 0.875,
+            "supported_recall": 0.875,
+            "unsupported_false_supported_rate": 0.125,
+            "balanced_accuracy": 0.875,
+            "accuracy": 0.875,
+            "auroc": 0.90625,
+            "missing_predictions": 0,
+            "acceptance_rate": 0.5
+          }
+        },
+        "empty-evidence": {
+          "binary": {
+            "cases": 32,
+            "supported_precision": null,
+            "supported_recall": null,
+            "unsupported_false_supported_rate": 0.0,
+            "balanced_accuracy": null,
+            "accuracy": 1.0,
+            "auroc": null,
+            "missing_predictions": 0,
+            "acceptance_rate": 0.0
+          },
+          "three_class": {
+            "cases": 32,
+            "accuracy": 1.0,
+            "macro_f1": 0.3333333333333333,
+            "per_class": {
+              "supported": {
+                "precision": null,
+                "recall": null,
+                "f1": 0,
+                "support": 0
+              },
+              "contradicted": {
+                "precision": null,
+                "recall": null,
+                "f1": 0,
+                "support": 0
+              },
+              "insufficient": {
+                "precision": 1.0,
+                "recall": 1.0,
+                "f1": 1.0,
+                "support": 32
+              }
+            },
+            "missing_predictions": 0,
+            "unsupported_false_supported_rate": 0.0,
+            "confusion": {
+              "supported": {},
+              "contradicted": {},
+              "insufficient": {
+                "insufficient": 32
+              }
+            }
+          },
+          "threshold_binary": {
+            "cases": 32,
+            "supported_precision": null,
+            "supported_recall": null,
+            "unsupported_false_supported_rate": 0.0,
+            "balanced_accuracy": null,
+            "accuracy": 1.0,
+            "auroc": null,
+            "missing_predictions": 0,
+            "acceptance_rate": 0.0
+          }
+        },
+        "support_threshold": 0.6496272683143616
+      },
+      "proposed-20261107": {
+        "calibration": {
+          "binary": {
+            "cases": 65,
+            "supported_precision": 0.8636363636363636,
+            "supported_recall": 0.9047619047619048,
+            "unsupported_false_supported_rate": 0.06818181818181818,
+            "balanced_accuracy": 0.9182900432900433,
+            "accuracy": 0.9230769230769231,
+            "auroc": 0.9588744588744589,
+            "missing_predictions": 0,
+            "acceptance_rate": 0.3384615384615385
+          },
+          "three_class": {
+            "cases": 65,
+            "accuracy": 0.9076923076923077,
+            "macro_f1": 0.8969287158746209,
+            "per_class": {
+              "supported": {
+                "precision": 0.8636363636363636,
+                "recall": 0.9047619047619048,
+                "f1": 0.8837209302325582,
+                "support": 21
+              },
+              "contradicted": {
+                "precision": 0.9090909090909091,
+                "recall": 0.8333333333333334,
+                "f1": 0.8695652173913043,
+                "support": 12
+              },
+              "insufficient": {
+                "precision": 0.9375,
+                "recall": 0.9375,
+                "f1": 0.9375,
+                "support": 32
+              }
+            },
+            "missing_predictions": 0,
+            "unsupported_false_supported_rate": 0.06818181818181818,
+            "confusion": {
+              "supported": {
+                "supported": 19,
+                "insufficient": 2
+              },
+              "contradicted": {
+                "contradicted": 10,
+                "supported": 2
+              },
+              "insufficient": {
+                "insufficient": 30,
+                "supported": 1,
+                "contradicted": 1
+              }
+            }
+          },
+          "threshold_binary": {
+            "cases": 65,
+            "supported_precision": 0.9047619047619048,
+            "supported_recall": 0.9047619047619048,
+            "unsupported_false_supported_rate": 0.045454545454545456,
+            "balanced_accuracy": 0.9296536796536796,
+            "accuracy": 0.9384615384615385,
+            "auroc": 0.9588744588744589,
+            "missing_predictions": 0,
+            "acceptance_rate": 0.3230769230769231
+          }
+        },
+        "test": {
+          "binary": {
+            "cases": 128,
+            "supported_precision": 0.7058823529411765,
+            "supported_recall": 0.8780487804878049,
+            "unsupported_false_supported_rate": 0.1724137931034483,
+            "balanced_accuracy": 0.8528174936921783,
+            "accuracy": 0.84375,
+            "auroc": 0.9280908326324643,
+            "missing_predictions": 0,
+            "acceptance_rate": 0.3984375
+          },
+          "three_class": {
+            "cases": 128,
+            "accuracy": 0.75,
+            "macro_f1": 0.7385435008352522,
+            "per_class": {
+              "supported": {
+                "precision": 0.7058823529411765,
+                "recall": 0.8780487804878049,
+                "f1": 0.782608695652174,
+                "support": 41
+              },
+              "contradicted": {
+                "precision": 0.9047619047619048,
+                "recall": 0.5277777777777778,
+                "f1": 0.6666666666666666,
+                "support": 36
+              },
+              "insufficient": {
+                "precision": 0.7321428571428571,
+                "recall": 0.803921568627451,
+                "f1": 0.7663551401869159,
+                "support": 51
+              }
+            },
+            "missing_predictions": 0,
+            "unsupported_false_supported_rate": 0.1724137931034483,
+            "confusion": {
+              "supported": {
+                "supported": 36,
+                "insufficient": 5
+              },
+              "contradicted": {
+                "contradicted": 19,
+                "insufficient": 10,
+                "supported": 7
+              },
+              "insufficient": {
+                "supported": 8,
+                "insufficient": 41,
+                "contradicted": 2
+              }
+            }
+          },
+          "threshold_binary": {
+            "cases": 128,
+            "supported_precision": 0.7142857142857143,
+            "supported_recall": 0.8536585365853658,
+            "unsupported_false_supported_rate": 0.16091954022988506,
+            "balanced_accuracy": 0.8463694981777403,
+            "accuracy": 0.84375,
+            "auroc": 0.9280908326324643,
+            "missing_predictions": 0,
+            "acceptance_rate": 0.3828125
+          }
+        },
+        "challenge": {
+          "binary": {
+            "cases": 16,
+            "supported_precision": 0.875,
+            "supported_recall": 0.875,
+            "unsupported_false_supported_rate": 0.125,
+            "balanced_accuracy": 0.875,
+            "accuracy": 0.875,
+            "auroc": 0.90625,
+            "missing_predictions": 0,
+            "acceptance_rate": 0.5
+          },
+          "three_class": {
+            "cases": 16,
+            "accuracy": 0.875,
+            "macro_f1": 0.8215811965811967,
+            "per_class": {
+              "supported": {
+                "precision": 0.875,
+                "recall": 0.875,
+                "f1": 0.875,
+                "support": 8
+              },
+              "contradicted": {
+                "precision": 0.8571428571428571,
+                "recall": 1.0,
+                "f1": 0.9230769230769231,
+                "support": 6
+              },
+              "insufficient": {
+                "precision": 1.0,
+                "recall": 0.5,
+                "f1": 0.6666666666666666,
+                "support": 2
+              }
+            },
+            "missing_predictions": 0,
+            "unsupported_false_supported_rate": 0.125,
+            "confusion": {
+              "supported": {
+                "supported": 7,
+                "contradicted": 1
+              },
+              "contradicted": {
+                "contradicted": 6
+              },
+              "insufficient": {
+                "supported": 1,
+                "insufficient": 1
+              }
+            }
+          },
+          "threshold_binary": {
+            "cases": 16,
+            "supported_precision": 0.875,
+            "supported_recall": 0.875,
+            "unsupported_false_supported_rate": 0.125,
+            "balanced_accuracy": 0.875,
+            "accuracy": 0.875,
+            "auroc": 0.90625,
+            "missing_predictions": 0,
+            "acceptance_rate": 0.5
+          }
+        },
+        "empty-evidence": {
+          "binary": {
+            "cases": 32,
+            "supported_precision": null,
+            "supported_recall": null,
+            "unsupported_false_supported_rate": 0.0,
+            "balanced_accuracy": null,
+            "accuracy": 1.0,
+            "auroc": null,
+            "missing_predictions": 0,
+            "acceptance_rate": 0.0
+          },
+          "three_class": {
+            "cases": 32,
+            "accuracy": 1.0,
+            "macro_f1": 0.3333333333333333,
+            "per_class": {
+              "supported": {
+                "precision": null,
+                "recall": null,
+                "f1": 0,
+                "support": 0
+              },
+              "contradicted": {
+                "precision": null,
+                "recall": null,
+                "f1": 0,
+                "support": 0
+              },
+              "insufficient": {
+                "precision": 1.0,
+                "recall": 1.0,
+                "f1": 1.0,
+                "support": 32
+              }
+            },
+            "missing_predictions": 0,
+            "unsupported_false_supported_rate": 0.0,
+            "confusion": {
+              "supported": {},
+              "contradicted": {},
+              "insufficient": {
+                "insufficient": 32
+              }
+            }
+          },
+          "threshold_binary": {
+            "cases": 32,
+            "supported_precision": null,
+            "supported_recall": null,
+            "unsupported_false_supported_rate": 0.0,
+            "balanced_accuracy": null,
+            "accuracy": 1.0,
+            "auroc": null,
+            "missing_predictions": 0,
+            "acceptance_rate": 0.0
+          }
+        },
+        "support_threshold": 0.5061465501785278
+      },
+      "raw-20261107": {
+        "calibration": {
+          "binary": {
+            "cases": 65,
+            "supported_precision": 0.8571428571428571,
+            "supported_recall": 0.8571428571428571,
+            "unsupported_false_supported_rate": 0.06818181818181818,
+            "balanced_accuracy": 0.8944805194805194,
+            "accuracy": 0.9076923076923077,
+            "auroc": 0.9577922077922078,
+            "missing_predictions": 0,
+            "acceptance_rate": 0.3230769230769231
+          },
+          "three_class": {
+            "cases": 65,
+            "accuracy": 0.8769230769230769,
+            "macro_f1": 0.8614718614718614,
+            "per_class": {
+              "supported": {
+                "precision": 0.8571428571428571,
+                "recall": 0.8571428571428571,
+                "f1": 0.8571428571428571,
+                "support": 21
+              },
+              "contradicted": {
+                "precision": 0.9,
+                "recall": 0.75,
+                "f1": 0.8181818181818182,
+                "support": 12
+              },
+              "insufficient": {
+                "precision": 0.8823529411764706,
+                "recall": 0.9375,
+                "f1": 0.9090909090909091,
+                "support": 32
+              }
+            },
+            "missing_predictions": 0,
+            "unsupported_false_supported_rate": 0.06818181818181818,
+            "confusion": {
+              "supported": {
+                "supported": 18,
+                "insufficient": 3
+              },
+              "contradicted": {
+                "contradicted": 9,
+                "insufficient": 1,
+                "supported": 2
+              },
+              "insufficient": {
+                "insufficient": 30,
+                "supported": 1,
+                "contradicted": 1
+              }
+            }
+          },
+          "threshold_binary": {
+            "cases": 65,
+            "supported_precision": 0.9,
+            "supported_recall": 0.8571428571428571,
+            "unsupported_false_supported_rate": 0.045454545454545456,
+            "balanced_accuracy": 0.9058441558441559,
+            "accuracy": 0.9230769230769231,
+            "auroc": 0.9577922077922078,
+            "missing_predictions": 0,
+            "acceptance_rate": 0.3076923076923077
+          }
+        },
+        "test": {
+          "binary": {
+            "cases": 128,
+            "supported_precision": 0.6909090909090909,
+            "supported_recall": 0.926829268292683,
+            "unsupported_false_supported_rate": 0.19540229885057472,
+            "balanced_accuracy": 0.8657134847210541,
+            "accuracy": 0.84375,
+            "auroc": 0.9372021306419961,
+            "missing_predictions": 0,
+            "acceptance_rate": 0.4296875
+          },
+          "three_class": {
+            "cases": 128,
+            "accuracy": 0.7578125,
+            "macro_f1": 0.7464896214896215,
+            "per_class": {
+              "supported": {
+                "precision": 0.6909090909090909,
+                "recall": 0.926829268292683,
+                "f1": 0.7916666666666666,
+                "support": 41
+              },
+              "contradicted": {
+                "precision": 0.95,
+                "recall": 0.5277777777777778,
+                "f1": 0.6785714285714286,
+                "support": 36
+              },
+              "insufficient": {
+                "precision": 0.7547169811320755,
+                "recall": 0.7843137254901961,
+                "f1": 0.7692307692307693,
+                "support": 51
+              }
+            },
+            "missing_predictions": 0,
+            "unsupported_false_supported_rate": 0.19540229885057472,
+            "confusion": {
+              "supported": {
+                "supported": 38,
+                "insufficient": 3
+              },
+              "contradicted": {
+                "contradicted": 19,
+                "insufficient": 10,
+                "supported": 7
+              },
+              "insufficient": {
+                "supported": 10,
+                "insufficient": 40,
+                "contradicted": 1
+              }
+            }
+          },
+          "threshold_binary": {
+            "cases": 128,
+            "supported_precision": 0.7254901960784313,
+            "supported_recall": 0.9024390243902439,
+            "unsupported_false_supported_rate": 0.16091954022988506,
+            "balanced_accuracy": 0.8707597420801794,
+            "accuracy": 0.859375,
+            "auroc": 0.9372021306419961,
+            "missing_predictions": 0,
+            "acceptance_rate": 0.3984375
+          }
+        },
+        "challenge": {
+          "binary": {
+            "cases": 16,
+            "supported_precision": 0.875,
+            "supported_recall": 0.875,
+            "unsupported_false_supported_rate": 0.125,
+            "balanced_accuracy": 0.875,
+            "accuracy": 0.875,
+            "auroc": 0.90625,
+            "missing_predictions": 0,
+            "acceptance_rate": 0.5
+          },
+          "three_class": {
+            "cases": 16,
+            "accuracy": 0.875,
+            "macro_f1": 0.8215811965811967,
+            "per_class": {
+              "supported": {
+                "precision": 0.875,
+                "recall": 0.875,
+                "f1": 0.875,
+                "support": 8
+              },
+              "contradicted": {
+                "precision": 0.8571428571428571,
+                "recall": 1.0,
+                "f1": 0.9230769230769231,
+                "support": 6
+              },
+              "insufficient": {
+                "precision": 1.0,
+                "recall": 0.5,
+                "f1": 0.6666666666666666,
+                "support": 2
+              }
+            },
+            "missing_predictions": 0,
+            "unsupported_false_supported_rate": 0.125,
+            "confusion": {
+              "supported": {
+                "supported": 7,
+                "contradicted": 1
+              },
+              "contradicted": {
+                "contradicted": 6
+              },
+              "insufficient": {
+                "supported": 1,
+                "insufficient": 1
+              }
+            }
+          },
+          "threshold_binary": {
+            "cases": 16,
+            "supported_precision": 0.875,
+            "supported_recall": 0.875,
+            "unsupported_false_supported_rate": 0.125,
+            "balanced_accuracy": 0.875,
+            "accuracy": 0.875,
+            "auroc": 0.90625,
+            "missing_predictions": 0,
+            "acceptance_rate": 0.5
+          }
+        },
+        "empty-evidence": {
+          "binary": {
+            "cases": 32,
+            "supported_precision": null,
+            "supported_recall": null,
+            "unsupported_false_supported_rate": 0.0,
+            "balanced_accuracy": null,
+            "accuracy": 1.0,
+            "auroc": null,
+            "missing_predictions": 0,
+            "acceptance_rate": 0.0
+          },
+          "three_class": {
+            "cases": 32,
+            "accuracy": 1.0,
+            "macro_f1": 0.3333333333333333,
+            "per_class": {
+              "supported": {
+                "precision": null,
+                "recall": null,
+                "f1": 0,
+                "support": 0
+              },
+              "contradicted": {
+                "precision": null,
+                "recall": null,
+                "f1": 0,
+                "support": 0
+              },
+              "insufficient": {
+                "precision": 1.0,
+                "recall": 1.0,
+                "f1": 1.0,
+                "support": 32
+              }
+            },
+            "missing_predictions": 0,
+            "unsupported_false_supported_rate": 0.0,
+            "confusion": {
+              "supported": {},
+              "contradicted": {},
+              "insufficient": {
+                "insufficient": 32
+              }
+            }
+          },
+          "threshold_binary": {
+            "cases": 32,
+            "supported_precision": null,
+            "supported_recall": null,
+            "unsupported_false_supported_rate": 0.0,
+            "balanced_accuracy": null,
+            "accuracy": 1.0,
+            "auroc": null,
+            "missing_predictions": 0,
+            "acceptance_rate": 0.0
+          }
+        },
+        "support_threshold": 0.4995177388191223
+      },
+      "raw-20261108": {
+        "calibration": {
+          "binary": {
+            "cases": 65,
+            "supported_precision": 0.9,
+            "supported_recall": 0.8571428571428571,
+            "unsupported_false_supported_rate": 0.045454545454545456,
+            "balanced_accuracy": 0.9058441558441559,
+            "accuracy": 0.9230769230769231,
+            "auroc": 0.9534632034632035,
+            "missing_predictions": 0,
+            "acceptance_rate": 0.3076923076923077
+          },
+          "three_class": {
+            "cases": 65,
+            "accuracy": 0.8923076923076924,
+            "macro_f1": 0.8823187811710049,
+            "per_class": {
+              "supported": {
+                "precision": 0.9,
+                "recall": 0.8571428571428571,
+                "f1": 0.8780487804878049,
+                "support": 21
+              },
+              "contradicted": {
+                "precision": 1.0,
+                "recall": 0.75,
+                "f1": 0.8571428571428571,
+                "support": 12
+              },
+              "insufficient": {
+                "precision": 0.8611111111111112,
+                "recall": 0.96875,
+                "f1": 0.9117647058823529,
+                "support": 32
+              }
+            },
+            "missing_predictions": 0,
+            "unsupported_false_supported_rate": 0.045454545454545456,
+            "confusion": {
+              "supported": {
+                "supported": 18,
+                "insufficient": 3
+              },
+              "contradicted": {
+                "contradicted": 9,
+                "insufficient": 2,
+                "supported": 1
+              },
+              "insufficient": {
+                "insufficient": 31,
+                "supported": 1
+              }
+            }
+          },
+          "threshold_binary": {
+            "cases": 65,
+            "supported_precision": 0.9473684210526315,
+            "supported_recall": 0.8571428571428571,
+            "unsupported_false_supported_rate": 0.022727272727272728,
+            "balanced_accuracy": 0.9172077922077921,
+            "accuracy": 0.9384615384615385,
+            "auroc": 0.9534632034632035,
+            "missing_predictions": 0,
+            "acceptance_rate": 0.2923076923076923
+          }
+        },
+        "test": {
+          "binary": {
+            "cases": 128,
+            "supported_precision": 0.7450980392156863,
+            "supported_recall": 0.926829268292683,
+            "unsupported_false_supported_rate": 0.14942528735632185,
+            "balanced_accuracy": 0.8887019904681805,
+            "accuracy": 0.875,
+            "auroc": 0.9359405663022148,
+            "missing_predictions": 0,
+            "acceptance_rate": 0.3984375
+          },
+          "three_class": {
+            "cases": 128,
+            "accuracy": 0.7734375,
+            "macro_f1": 0.7581906016688625,
+            "per_class": {
+              "supported": {
+                "precision": 0.7450980392156863,
+                "recall": 0.926829268292683,
+                "f1": 0.8260869565217391,
+                "support": 41
+              },
+              "contradicted": {
+                "precision": 1.0,
+                "recall": 0.5,
+                "f1": 0.6666666666666666,
+                "support": 36
+              },
+              "insufficient": {
+                "precision": 0.7288135593220338,
+                "recall": 0.8431372549019608,
+                "f1": 0.7818181818181819,
+                "support": 51
+              }
+            },
+            "missing_predictions": 0,
+            "unsupported_false_supported_rate": 0.14942528735632185,
+            "confusion": {
+              "supported": {
+                "supported": 38,
+                "insufficient": 3
+              },
+              "contradicted": {
+                "contradicted": 18,
+                "insufficient": 13,
+                "supported": 5
+              },
+              "insufficient": {
+                "supported": 8,
+                "insufficient": 43
+              }
+            }
+          },
+          "threshold_binary": {
+            "cases": 128,
+            "supported_precision": 0.7872340425531915,
+            "supported_recall": 0.9024390243902439,
+            "unsupported_false_supported_rate": 0.11494252873563218,
+            "balanced_accuracy": 0.8937482478273059,
+            "accuracy": 0.890625,
+            "auroc": 0.9359405663022148,
+            "missing_predictions": 0,
+            "acceptance_rate": 0.3671875
+          }
+        },
+        "challenge": {
+          "binary": {
+            "cases": 16,
+            "supported_precision": 0.875,
+            "supported_recall": 0.875,
+            "unsupported_false_supported_rate": 0.125,
+            "balanced_accuracy": 0.875,
+            "accuracy": 0.875,
+            "auroc": 0.875,
+            "missing_predictions": 0,
+            "acceptance_rate": 0.5
+          },
+          "three_class": {
+            "cases": 16,
+            "accuracy": 0.875,
+            "macro_f1": 0.8215811965811967,
+            "per_class": {
+              "supported": {
+                "precision": 0.875,
+                "recall": 0.875,
+                "f1": 0.875,
+                "support": 8
+              },
+              "contradicted": {
+                "precision": 0.8571428571428571,
+                "recall": 1.0,
+                "f1": 0.9230769230769231,
+                "support": 6
+              },
+              "insufficient": {
+                "precision": 1.0,
+                "recall": 0.5,
+                "f1": 0.6666666666666666,
+                "support": 2
+              }
+            },
+            "missing_predictions": 0,
+            "unsupported_false_supported_rate": 0.125,
+            "confusion": {
+              "supported": {
+                "supported": 7,
+                "contradicted": 1
+              },
+              "contradicted": {
+                "contradicted": 6
+              },
+              "insufficient": {
+                "supported": 1,
+                "insufficient": 1
+              }
+            }
+          },
+          "threshold_binary": {
+            "cases": 16,
+            "supported_precision": 0.875,
+            "supported_recall": 0.875,
+            "unsupported_false_supported_rate": 0.125,
+            "balanced_accuracy": 0.875,
+            "accuracy": 0.875,
+            "auroc": 0.875,
+            "missing_predictions": 0,
+            "acceptance_rate": 0.5
+          }
+        },
+        "empty-evidence": {
+          "binary": {
+            "cases": 32,
+            "supported_precision": null,
+            "supported_recall": null,
+            "unsupported_false_supported_rate": 0.0,
+            "balanced_accuracy": null,
+            "accuracy": 1.0,
+            "auroc": null,
+            "missing_predictions": 0,
+            "acceptance_rate": 0.0
+          },
+          "three_class": {
+            "cases": 32,
+            "accuracy": 1.0,
+            "macro_f1": 0.3333333333333333,
+            "per_class": {
+              "supported": {
+                "precision": null,
+                "recall": null,
+                "f1": 0,
+                "support": 0
+              },
+              "contradicted": {
+                "precision": null,
+                "recall": null,
+                "f1": 0,
+                "support": 0
+              },
+              "insufficient": {
+                "precision": 1.0,
+                "recall": 1.0,
+                "f1": 1.0,
+                "support": 32
+              }
+            },
+            "missing_predictions": 0,
+            "unsupported_false_supported_rate": 0.0,
+            "confusion": {
+              "supported": {},
+              "contradicted": {},
+              "insufficient": {
+                "insufficient": 32
+              }
+            }
+          },
+          "threshold_binary": {
+            "cases": 32,
+            "supported_precision": null,
+            "supported_recall": null,
+            "unsupported_false_supported_rate": 0.0,
+            "balanced_accuracy": null,
+            "accuracy": 1.0,
+            "auroc": null,
+            "missing_predictions": 0,
+            "acceptance_rate": 0.0
+          }
+        },
+        "support_threshold": 0.6623058319091797
+      },
+      "proposed-20261108": {
+        "calibration": {
+          "binary": {
+            "cases": 65,
+            "supported_precision": 0.85,
+            "supported_recall": 0.8095238095238095,
+            "unsupported_false_supported_rate": 0.06818181818181818,
+            "balanced_accuracy": 0.8706709956709957,
+            "accuracy": 0.8923076923076924,
+            "auroc": 0.9545454545454546,
+            "missing_predictions": 0,
+            "acceptance_rate": 0.3076923076923077
+          },
+          "three_class": {
+            "cases": 65,
+            "accuracy": 0.8769230769230769,
+            "macro_f1": 0.8660586185693789,
+            "per_class": {
+              "supported": {
+                "precision": 0.85,
+                "recall": 0.8095238095238095,
+                "f1": 0.8292682926829268,
+                "support": 21
+              },
+              "contradicted": {
+                "precision": 1.0,
+                "recall": 0.75,
+                "f1": 0.8571428571428571,
+                "support": 12
+              },
+              "insufficient": {
+                "precision": 0.8611111111111112,
+                "recall": 0.96875,
+                "f1": 0.9117647058823529,
+                "support": 32
+              }
+            },
+            "missing_predictions": 0,
+            "unsupported_false_supported_rate": 0.06818181818181818,
+            "confusion": {
+              "supported": {
+                "supported": 17,
+                "insufficient": 4
+              },
+              "contradicted": {
+                "contradicted": 9,
+                "insufficient": 1,
+                "supported": 2
+              },
+              "insufficient": {
+                "insufficient": 31,
+                "supported": 1
+              }
+            }
+          },
+          "threshold_binary": {
+            "cases": 65,
+            "supported_precision": 0.8947368421052632,
+            "supported_recall": 0.8095238095238095,
+            "unsupported_false_supported_rate": 0.045454545454545456,
+            "balanced_accuracy": 0.8820346320346321,
+            "accuracy": 0.9076923076923077,
+            "auroc": 0.9545454545454546,
+            "missing_predictions": 0,
+            "acceptance_rate": 0.2923076923076923
+          }
+        },
+        "test": {
+          "binary": {
+            "cases": 128,
+            "supported_precision": 0.7551020408163265,
+            "supported_recall": 0.9024390243902439,
+            "unsupported_false_supported_rate": 0.13793103448275862,
+            "balanced_accuracy": 0.8822539949537427,
+            "accuracy": 0.875,
+            "auroc": 0.9343986543313709,
+            "missing_predictions": 0,
+            "acceptance_rate": 0.3828125
+          },
+          "three_class": {
+            "cases": 128,
+            "accuracy": 0.7734375,
+            "macro_f1": 0.7632183908045977,
+            "per_class": {
+              "supported": {
+                "precision": 0.7551020408163265,
+                "recall": 0.9024390243902439,
+                "f1": 0.8222222222222222,
+                "support": 41
+              },
+              "contradicted": {
+                "precision": 0.9090909090909091,
+                "recall": 0.5555555555555556,
+                "f1": 0.6896551724137931,
+                "support": 36
+              },
+              "insufficient": {
+                "precision": 0.7368421052631579,
+                "recall": 0.8235294117647058,
+                "f1": 0.7777777777777778,
+                "support": 51
+              }
+            },
+            "missing_predictions": 0,
+            "unsupported_false_supported_rate": 0.13793103448275862,
+            "confusion": {
+              "supported": {
+                "supported": 37,
+                "insufficient": 4
+              },
+              "contradicted": {
+                "contradicted": 20,
+                "insufficient": 11,
+                "supported": 5
+              },
+              "insufficient": {
+                "supported": 7,
+                "insufficient": 42,
+                "contradicted": 2
+              }
+            }
+          },
+          "threshold_binary": {
+            "cases": 128,
+            "supported_precision": 0.8,
+            "supported_recall": 0.8780487804878049,
+            "unsupported_false_supported_rate": 0.10344827586206896,
+            "balanced_accuracy": 0.8873002523128679,
+            "accuracy": 0.890625,
+            "auroc": 0.9343986543313709,
+            "missing_predictions": 0,
+            "acceptance_rate": 0.3515625
+          }
+        },
+        "challenge": {
+          "binary": {
+            "cases": 16,
+            "supported_precision": 0.875,
+            "supported_recall": 0.875,
+            "unsupported_false_supported_rate": 0.125,
+            "balanced_accuracy": 0.875,
+            "accuracy": 0.875,
+            "auroc": 0.875,
+            "missing_predictions": 0,
+            "acceptance_rate": 0.5
+          },
+          "three_class": {
+            "cases": 16,
+            "accuracy": 0.875,
+            "macro_f1": 0.8215811965811967,
+            "per_class": {
+              "supported": {
+                "precision": 0.875,
+                "recall": 0.875,
+                "f1": 0.875,
+                "support": 8
+              },
+              "contradicted": {
+                "precision": 0.8571428571428571,
+                "recall": 1.0,
+                "f1": 0.9230769230769231,
+                "support": 6
+              },
+              "insufficient": {
+                "precision": 1.0,
+                "recall": 0.5,
+                "f1": 0.6666666666666666,
+                "support": 2
+              }
+            },
+            "missing_predictions": 0,
+            "unsupported_false_supported_rate": 0.125,
+            "confusion": {
+              "supported": {
+                "supported": 7,
+                "contradicted": 1
+              },
+              "contradicted": {
+                "contradicted": 6
+              },
+              "insufficient": {
+                "supported": 1,
+                "insufficient": 1
+              }
+            }
+          },
+          "threshold_binary": {
+            "cases": 16,
+            "supported_precision": 0.875,
+            "supported_recall": 0.875,
+            "unsupported_false_supported_rate": 0.125,
+            "balanced_accuracy": 0.875,
+            "accuracy": 0.875,
+            "auroc": 0.875,
+            "missing_predictions": 0,
+            "acceptance_rate": 0.5
+          }
+        },
+        "empty-evidence": {
+          "binary": {
+            "cases": 32,
+            "supported_precision": null,
+            "supported_recall": null,
+            "unsupported_false_supported_rate": 0.0,
+            "balanced_accuracy": null,
+            "accuracy": 1.0,
+            "auroc": null,
+            "missing_predictions": 0,
+            "acceptance_rate": 0.0
+          },
+          "three_class": {
+            "cases": 32,
+            "accuracy": 1.0,
+            "macro_f1": 0.3333333333333333,
+            "per_class": {
+              "supported": {
+                "precision": null,
+                "recall": null,
+                "f1": 0,
+                "support": 0
+              },
+              "contradicted": {
+                "precision": null,
+                "recall": null,
+                "f1": 0,
+                "support": 0
+              },
+              "insufficient": {
+                "precision": 1.0,
+                "recall": 1.0,
+                "f1": 1.0,
+                "support": 32
+              }
+            },
+            "missing_predictions": 0,
+            "unsupported_false_supported_rate": 0.0,
+            "confusion": {
+              "supported": {},
+              "contradicted": {},
+              "insufficient": {
+                "insufficient": 32
+              }
+            }
+          },
+          "threshold_binary": {
+            "cases": 32,
+            "supported_precision": null,
+            "supported_recall": null,
+            "unsupported_false_supported_rate": 0.0,
+            "balanced_accuracy": null,
+            "accuracy": 1.0,
+            "auroc": null,
+            "missing_predictions": 0,
+            "acceptance_rate": 0.0
+          }
+        },
+        "support_threshold": 0.6849372386932373
+      },
+      "large-bf16": {
+        "calibration": {
+          "binary": {
+            "cases": 65,
+            "supported_precision": 0.8888888888888888,
+            "supported_recall": 0.7619047619047619,
+            "unsupported_false_supported_rate": 0.045454545454545456,
+            "balanced_accuracy": 0.8582251082251082,
+            "accuracy": 0.8923076923076924,
+            "auroc": 0.9437229437229437,
+            "missing_predictions": 0,
+            "acceptance_rate": 0.27692307692307694
+          },
+          "three_class": {
+            "cases": 65,
+            "accuracy": 0.7230769230769231,
+            "macro_f1": 0.5351076490316996,
+            "per_class": {
+              "supported": {
+                "precision": 0.8888888888888888,
+                "recall": 0.7619047619047619,
+                "f1": 0.8205128205128205,
+                "support": 21
+              },
+              "contradicted": {
+                "precision": null,
+                "recall": 0.0,
+                "f1": 0.0,
+                "support": 12
+              },
+              "insufficient": {
+                "precision": 0.6595744680851063,
+                "recall": 0.96875,
+                "f1": 0.7848101265822784,
+                "support": 32
+              }
+            },
+            "missing_predictions": 0,
+            "unsupported_false_supported_rate": 0.045454545454545456,
+            "confusion": {
+              "supported": {
+                "supported": 16,
+                "insufficient": 5
+              },
+              "contradicted": {
+                "insufficient": 11,
+                "supported": 1
+              },
+              "insufficient": {
+                "insufficient": 31,
+                "supported": 1
+              }
+            }
+          },
+          "threshold_binary": {
+            "cases": 65,
+            "supported_precision": 0.8947368421052632,
+            "supported_recall": 0.8095238095238095,
+            "unsupported_false_supported_rate": 0.045454545454545456,
+            "balanced_accuracy": 0.8820346320346321,
+            "accuracy": 0.9076923076923077,
+            "auroc": 0.9437229437229437,
+            "missing_predictions": 0,
+            "acceptance_rate": 0.2923076923076923
+          }
+        },
+        "test": {
+          "binary": {
+            "cases": 128,
+            "supported_precision": 0.7333333333333333,
+            "supported_recall": 0.8048780487804879,
+            "unsupported_false_supported_rate": 0.13793103448275862,
+            "balanced_accuracy": 0.8334735071488646,
+            "accuracy": 0.84375,
+            "auroc": 0.9112699747687132,
+            "missing_predictions": 0,
+            "acceptance_rate": 0.3515625
+          },
+          "three_class": {
+            "cases": 128,
+            "accuracy": 0.6484375,
+            "macro_f1": 0.569672906031386,
+            "per_class": {
+              "supported": {
+                "precision": 0.7333333333333333,
+                "recall": 0.8048780487804879,
+                "f1": 0.7674418604651163,
+                "support": 41
+              },
+              "contradicted": {
+                "precision": 1.0,
+                "recall": 0.1388888888888889,
+                "f1": 0.24390243902439024,
+                "support": 36
+              },
+              "insufficient": {
+                "precision": 0.5769230769230769,
+                "recall": 0.8823529411764706,
+                "f1": 0.6976744186046512,
+                "support": 51
+              }
+            },
+            "missing_predictions": 0,
+            "unsupported_false_supported_rate": 0.13793103448275862,
+            "confusion": {
+              "supported": {
+                "supported": 33,
+                "insufficient": 8
+              },
+              "contradicted": {
+                "insufficient": 25,
+                "supported": 6,
+                "contradicted": 5
+              },
+              "insufficient": {
+                "supported": 6,
+                "insufficient": 45
+              }
+            }
+          },
+          "threshold_binary": {
+            "cases": 128,
+            "supported_precision": 0.7391304347826086,
+            "supported_recall": 0.8292682926829268,
+            "unsupported_false_supported_rate": 0.13793103448275862,
+            "balanced_accuracy": 0.8456686291000841,
+            "accuracy": 0.8515625,
+            "auroc": 0.9112699747687132,
+            "missing_predictions": 0,
+            "acceptance_rate": 0.359375
+          }
+        },
+        "challenge": {
+          "binary": {
+            "cases": 16,
+            "supported_precision": 0.875,
+            "supported_recall": 0.875,
+            "unsupported_false_supported_rate": 0.125,
+            "balanced_accuracy": 0.875,
+            "accuracy": 0.875,
+            "auroc": 0.8984375,
+            "missing_predictions": 0,
+            "acceptance_rate": 0.5
+          },
+          "three_class": {
+            "cases": 16,
+            "accuracy": 0.5625,
+            "macro_f1": 0.4583333333333333,
+            "per_class": {
+              "supported": {
+                "precision": 0.875,
+                "recall": 0.875,
+                "f1": 0.875,
+                "support": 8
+              },
+              "contradicted": {
+                "precision": 0.5,
+                "recall": 0.16666666666666666,
+                "f1": 0.25,
+                "support": 6
+              },
+              "insufficient": {
+                "precision": 0.16666666666666666,
+                "recall": 0.5,
+                "f1": 0.25,
+                "support": 2
+              }
+            },
+            "missing_predictions": 0,
+            "unsupported_false_supported_rate": 0.125,
+            "confusion": {
+              "supported": {
+                "supported": 7,
+                "contradicted": 1
+              },
+              "contradicted": {
+                "insufficient": 5,
+                "contradicted": 1
+              },
+              "insufficient": {
+                "supported": 1,
+                "insufficient": 1
+              }
+            }
+          },
+          "threshold_binary": {
+            "cases": 16,
+            "supported_precision": 0.875,
+            "supported_recall": 0.875,
+            "unsupported_false_supported_rate": 0.125,
+            "balanced_accuracy": 0.875,
+            "accuracy": 0.875,
+            "auroc": 0.8984375,
+            "missing_predictions": 0,
+            "acceptance_rate": 0.5
+          }
+        },
+        "empty-evidence": {
+          "binary": {
+            "cases": 32,
+            "supported_precision": null,
+            "supported_recall": null,
+            "unsupported_false_supported_rate": 0.0,
+            "balanced_accuracy": null,
+            "accuracy": 1.0,
+            "auroc": null,
+            "missing_predictions": 0,
+            "acceptance_rate": 0.0
+          },
+          "three_class": {
+            "cases": 32,
+            "accuracy": 1.0,
+            "macro_f1": 0.3333333333333333,
+            "per_class": {
+              "supported": {
+                "precision": null,
+                "recall": null,
+                "f1": 0,
+                "support": 0
+              },
+              "contradicted": {
+                "precision": null,
+                "recall": null,
+                "f1": 0,
+                "support": 0
+              },
+              "insufficient": {
+                "precision": 1.0,
+                "recall": 1.0,
+                "f1": 1.0,
+                "support": 32
+              }
+            },
+            "missing_predictions": 0,
+            "unsupported_false_supported_rate": 0.0,
+            "confusion": {
+              "supported": {},
+              "contradicted": {},
+              "insufficient": {
+                "insufficient": 32
+              }
+            }
+          },
+          "threshold_binary": {
+            "cases": 32,
+            "supported_precision": null,
+            "supported_recall": null,
+            "unsupported_false_supported_rate": 0.0,
+            "balanced_accuracy": null,
+            "accuracy": 1.0,
+            "auroc": null,
+            "missing_predictions": 0,
+            "acceptance_rate": 0.0
+          }
+        },
+        "support_threshold": 0.14720219373703003
+      },
+      "minicheck-bf16": {
+        "calibration": {
+          "binary": {
+            "cases": 65,
+            "supported_precision": 0.9375,
+            "supported_recall": 0.7142857142857143,
+            "unsupported_false_supported_rate": 0.022727272727272728,
+            "balanced_accuracy": 0.8457792207792207,
+            "accuracy": 0.8923076923076924,
+            "auroc": 0.9329004329004329,
+            "missing_predictions": 0,
+            "acceptance_rate": 0.24615384615384617
+          },
+          "threshold_binary": {
+            "cases": 65,
+            "supported_precision": 0.8888888888888888,
+            "supported_recall": 0.7619047619047619,
+            "unsupported_false_supported_rate": 0.045454545454545456,
+            "balanced_accuracy": 0.8582251082251082,
+            "accuracy": 0.8923076923076924,
+            "auroc": 0.9329004329004329,
+            "missing_predictions": 0,
+            "acceptance_rate": 0.27692307692307694
+          }
+        },
+        "test": {
+          "binary": {
+            "cases": 128,
+            "supported_precision": 0.8918918918918919,
+            "supported_recall": 0.8048780487804879,
+            "unsupported_false_supported_rate": 0.04597701149425287,
+            "balanced_accuracy": 0.8794505186431174,
+            "accuracy": 0.90625,
+            "auroc": 0.9571068124474348,
+            "missing_predictions": 0,
+            "acceptance_rate": 0.2890625
+          },
+          "threshold_binary": {
+            "cases": 128,
+            "supported_precision": 0.8717948717948718,
+            "supported_recall": 0.8292682926829268,
+            "unsupported_false_supported_rate": 0.05747126436781609,
+            "balanced_accuracy": 0.8858985141575553,
+            "accuracy": 0.90625,
+            "auroc": 0.9571068124474348,
+            "missing_predictions": 0,
+            "acceptance_rate": 0.3046875
+          }
+        },
+        "challenge": {
+          "binary": {
+            "cases": 16,
+            "supported_precision": 0.8888888888888888,
+            "supported_recall": 1.0,
+            "unsupported_false_supported_rate": 0.125,
+            "balanced_accuracy": 0.9375,
+            "accuracy": 0.9375,
+            "auroc": 1.0,
+            "missing_predictions": 0,
+            "acceptance_rate": 0.5625
+          },
+          "threshold_binary": {
+            "cases": 16,
+            "supported_precision": 0.8888888888888888,
+            "supported_recall": 1.0,
+            "unsupported_false_supported_rate": 0.125,
+            "balanced_accuracy": 0.9375,
+            "accuracy": 0.9375,
+            "auroc": 1.0,
+            "missing_predictions": 0,
+            "acceptance_rate": 0.5625
+          }
+        },
+        "empty-evidence": {
+          "binary": {
+            "cases": 32,
+            "supported_precision": 0.0,
+            "supported_recall": null,
+            "unsupported_false_supported_rate": 0.0625,
+            "balanced_accuracy": null,
+            "accuracy": 0.9375,
+            "auroc": null,
+            "missing_predictions": 0,
+            "acceptance_rate": 0.0625
+          },
+          "threshold_binary": {
+            "cases": 32,
+            "supported_precision": 0.0,
+            "supported_recall": null,
+            "unsupported_false_supported_rate": 0.0625,
+            "balanced_accuracy": null,
+            "accuracy": 0.9375,
+            "auroc": null,
+            "missing_predictions": 0,
+            "acceptance_rate": 0.0625
+          }
+        },
+        "support_threshold": 0.4375976026058197
+      }
+    },
+    "doc597": {
+      "raw-20261106": {
+        "calibration": {
+          "binary": {
+            "cases": 65,
+            "supported_precision": 0.8260869565217391,
+            "supported_recall": 0.9047619047619048,
+            "unsupported_false_supported_rate": 0.09090909090909091,
+            "balanced_accuracy": 0.9069264069264069,
+            "accuracy": 0.9076923076923077,
+            "auroc": 0.9502164502164502,
+            "missing_predictions": 0,
+            "acceptance_rate": 0.35384615384615387
+          },
+          "three_class": {
+            "cases": 65,
+            "accuracy": 0.8923076923076924,
+            "macro_f1": 0.8731060606060606,
+            "per_class": {
+              "supported": {
+                "precision": 0.8260869565217391,
+                "recall": 0.9047619047619048,
+                "f1": 0.8636363636363636,
+                "support": 21
+              },
+              "contradicted": {
+                "precision": 0.9,
+                "recall": 0.75,
+                "f1": 0.8181818181818182,
+                "support": 12
+              },
+              "insufficient": {
+                "precision": 0.9375,
+                "recall": 0.9375,
+                "f1": 0.9375,
+                "support": 32
+              }
+            },
+            "missing_predictions": 0,
+            "unsupported_false_supported_rate": 0.09090909090909091,
+            "confusion": {
+              "supported": {
+                "supported": 19,
+                "insufficient": 2
+              },
+              "contradicted": {
+                "contradicted": 9,
+                "supported": 3
+              },
+              "insufficient": {
+                "insufficient": 30,
+                "supported": 1,
+                "contradicted": 1
+              }
+            }
+          },
+          "threshold_binary": {
+            "cases": 65,
+            "supported_precision": 0.8947368421052632,
+            "supported_recall": 0.8095238095238095,
+            "unsupported_false_supported_rate": 0.045454545454545456,
+            "balanced_accuracy": 0.8820346320346321,
+            "accuracy": 0.9076923076923077,
+            "auroc": 0.9502164502164502,
+            "missing_predictions": 0,
+            "acceptance_rate": 0.2923076923076923
+          }
+        },
+        "test": {
+          "binary": {
+            "cases": 128,
+            "supported_precision": 0.6851851851851852,
+            "supported_recall": 0.925,
+            "unsupported_false_supported_rate": 0.19318181818181818,
+            "balanced_accuracy": 0.865909090909091,
+            "accuracy": 0.84375,
+            "auroc": 0.9252840909090909,
+            "missing_predictions": 0,
+            "acceptance_rate": 0.421875
+          },
+          "three_class": {
+            "cases": 128,
+            "accuracy": 0.75,
+            "macro_f1": 0.7415511324639671,
+            "per_class": {
+              "supported": {
+                "precision": 0.6851851851851852,
+                "recall": 0.925,
+                "f1": 0.7872340425531915,
+                "support": 40
+              },
+              "contradicted": {
+                "precision": 0.8076923076923077,
+                "recall": 0.5833333333333334,
+                "f1": 0.6774193548387096,
+                "support": 36
+              },
+              "insufficient": {
+                "precision": 0.7916666666666666,
+                "recall": 0.7307692307692307,
+                "f1": 0.76,
+                "support": 52
+              }
+            },
+            "missing_predictions": 0,
+            "unsupported_false_supported_rate": 0.19318181818181818,
+            "confusion": {
+              "supported": {
+                "supported": 37,
+                "insufficient": 2,
+                "contradicted": 1
+              },
+              "contradicted": {
+                "contradicted": 21,
+                "insufficient": 8,
+                "supported": 7
+              },
+              "insufficient": {
+                "supported": 10,
+                "insufficient": 38,
+                "contradicted": 4
+              }
+            }
+          },
+          "threshold_binary": {
+            "cases": 128,
+            "supported_precision": 0.7291666666666666,
+            "supported_recall": 0.875,
+            "unsupported_false_supported_rate": 0.14772727272727273,
+            "balanced_accuracy": 0.8636363636363636,
+            "accuracy": 0.859375,
+            "auroc": 0.9252840909090909,
+            "missing_predictions": 0,
+            "acceptance_rate": 0.375
+          }
+        },
+        "challenge": {
+          "binary": {
+            "cases": 16,
+            "supported_precision": 0.875,
+            "supported_recall": 0.875,
+            "unsupported_false_supported_rate": 0.125,
+            "balanced_accuracy": 0.875,
+            "accuracy": 0.875,
+            "auroc": 0.90625,
+            "missing_predictions": 0,
+            "acceptance_rate": 0.5
+          },
+          "three_class": {
+            "cases": 16,
+            "accuracy": 0.875,
+            "macro_f1": 0.8215811965811967,
+            "per_class": {
+              "supported": {
+                "precision": 0.875,
+                "recall": 0.875,
+                "f1": 0.875,
+                "support": 8
+              },
+              "contradicted": {
+                "precision": 0.8571428571428571,
+                "recall": 1.0,
+                "f1": 0.9230769230769231,
+                "support": 6
+              },
+              "insufficient": {
+                "precision": 1.0,
+                "recall": 0.5,
+                "f1": 0.6666666666666666,
+                "support": 2
+              }
+            },
+            "missing_predictions": 0,
+            "unsupported_false_supported_rate": 0.125,
+            "confusion": {
+              "supported": {
+                "supported": 7,
+                "contradicted": 1
+              },
+              "contradicted": {
+                "contradicted": 6
+              },
+              "insufficient": {
+                "supported": 1,
+                "insufficient": 1
+              }
+            }
+          },
+          "threshold_binary": {
+            "cases": 16,
+            "supported_precision": 0.875,
+            "supported_recall": 0.875,
+            "unsupported_false_supported_rate": 0.125,
+            "balanced_accuracy": 0.875,
+            "accuracy": 0.875,
+            "auroc": 0.90625,
+            "missing_predictions": 0,
+            "acceptance_rate": 0.5
+          }
+        },
+        "empty-evidence": {
+          "binary": {
+            "cases": 32,
+            "supported_precision": null,
+            "supported_recall": null,
+            "unsupported_false_supported_rate": 0.0,
+            "balanced_accuracy": null,
+            "accuracy": 1.0,
+            "auroc": null,
+            "missing_predictions": 0,
+            "acceptance_rate": 0.0
+          },
+          "three_class": {
+            "cases": 32,
+            "accuracy": 1.0,
+            "macro_f1": 0.3333333333333333,
+            "per_class": {
+              "supported": {
+                "precision": null,
+                "recall": null,
+                "f1": 0,
+                "support": 0
+              },
+              "contradicted": {
+                "precision": null,
+                "recall": null,
+                "f1": 0,
+                "support": 0
+              },
+              "insufficient": {
+                "precision": 1.0,
+                "recall": 1.0,
+                "f1": 1.0,
+                "support": 32
+              }
+            },
+            "missing_predictions": 0,
+            "unsupported_false_supported_rate": 0.0,
+            "confusion": {
+              "supported": {},
+              "contradicted": {},
+              "insufficient": {
+                "insufficient": 32
+              }
+            }
+          },
+          "threshold_binary": {
+            "cases": 32,
+            "supported_precision": null,
+            "supported_recall": null,
+            "unsupported_false_supported_rate": 0.0,
+            "balanced_accuracy": null,
+            "accuracy": 1.0,
+            "auroc": null,
+            "missing_predictions": 0,
+            "acceptance_rate": 0.0
+          }
+        },
+        "support_threshold": 0.6624118089675903
+      },
+      "proposed-20261106": {
+        "calibration": {
+          "binary": {
+            "cases": 65,
+            "supported_precision": 0.8181818181818182,
+            "supported_recall": 0.8571428571428571,
+            "unsupported_false_supported_rate": 0.09090909090909091,
+            "balanced_accuracy": 0.8831168831168831,
+            "accuracy": 0.8923076923076924,
+            "auroc": 0.948051948051948,
+            "missing_predictions": 0,
+            "acceptance_rate": 0.3384615384615385
+          },
+          "three_class": {
+            "cases": 65,
+            "accuracy": 0.8769230769230769,
+            "macro_f1": 0.8594893478614409,
+            "per_class": {
+              "supported": {
+                "precision": 0.8181818181818182,
+                "recall": 0.8571428571428571,
+                "f1": 0.8372093023255814,
+                "support": 21
+              },
+              "contradicted": {
+                "precision": 0.9,
+                "recall": 0.75,
+                "f1": 0.8181818181818182,
+                "support": 12
+              },
+              "insufficient": {
+                "precision": 0.9090909090909091,
+                "recall": 0.9375,
+                "f1": 0.9230769230769231,
+                "support": 32
+              }
+            },
+            "missing_predictions": 0,
+            "unsupported_false_supported_rate": 0.09090909090909091,
+            "confusion": {
+              "supported": {
+                "supported": 18,
+                "insufficient": 3
+              },
+              "contradicted": {
+                "contradicted": 9,
+                "supported": 3
+              },
+              "insufficient": {
+                "insufficient": 30,
+                "supported": 1,
+                "contradicted": 1
+              }
+            }
+          },
+          "threshold_binary": {
+            "cases": 65,
+            "supported_precision": 0.8947368421052632,
+            "supported_recall": 0.8095238095238095,
+            "unsupported_false_supported_rate": 0.045454545454545456,
+            "balanced_accuracy": 0.8820346320346321,
+            "accuracy": 0.9076923076923077,
+            "auroc": 0.948051948051948,
+            "missing_predictions": 0,
+            "acceptance_rate": 0.2923076923076923
+          }
+        },
+        "test": {
+          "binary": {
+            "cases": 128,
+            "supported_precision": 0.6851851851851852,
+            "supported_recall": 0.925,
+            "unsupported_false_supported_rate": 0.19318181818181818,
+            "balanced_accuracy": 0.865909090909091,
+            "accuracy": 0.84375,
+            "auroc": 0.9258522727272728,
+            "missing_predictions": 0,
+            "acceptance_rate": 0.421875
+          },
+          "three_class": {
+            "cases": 128,
+            "accuracy": 0.75,
+            "macro_f1": 0.7415511324639671,
+            "per_class": {
+              "supported": {
+                "precision": 0.6851851851851852,
+                "recall": 0.925,
+                "f1": 0.7872340425531915,
+                "support": 40
+              },
+              "contradicted": {
+                "precision": 0.8076923076923077,
+                "recall": 0.5833333333333334,
+                "f1": 0.6774193548387096,
+                "support": 36
+              },
+              "insufficient": {
+                "precision": 0.7916666666666666,
+                "recall": 0.7307692307692307,
+                "f1": 0.76,
+                "support": 52
+              }
+            },
+            "missing_predictions": 0,
+            "unsupported_false_supported_rate": 0.19318181818181818,
+            "confusion": {
+              "supported": {
+                "supported": 37,
+                "insufficient": 2,
+                "contradicted": 1
+              },
+              "contradicted": {
+                "contradicted": 21,
+                "insufficient": 8,
+                "supported": 7
+              },
+              "insufficient": {
+                "supported": 10,
+                "insufficient": 38,
+                "contradicted": 4
+              }
+            }
+          },
+          "threshold_binary": {
+            "cases": 128,
+            "supported_precision": 0.723404255319149,
+            "supported_recall": 0.85,
+            "unsupported_false_supported_rate": 0.14772727272727273,
+            "balanced_accuracy": 0.8511363636363636,
+            "accuracy": 0.8515625,
+            "auroc": 0.9258522727272728,
+            "missing_predictions": 0,
+            "acceptance_rate": 0.3671875
+          }
+        },
+        "challenge": {
+          "binary": {
+            "cases": 16,
+            "supported_precision": 0.875,
+            "supported_recall": 0.875,
+            "unsupported_false_supported_rate": 0.125,
+            "balanced_accuracy": 0.875,
+            "accuracy": 0.875,
+            "auroc": 0.90625,
+            "missing_predictions": 0,
+            "acceptance_rate": 0.5
+          },
+          "three_class": {
+            "cases": 16,
+            "accuracy": 0.875,
+            "macro_f1": 0.8215811965811967,
+            "per_class": {
+              "supported": {
+                "precision": 0.875,
+                "recall": 0.875,
+                "f1": 0.875,
+                "support": 8
+              },
+              "contradicted": {
+                "precision": 0.8571428571428571,
+                "recall": 1.0,
+                "f1": 0.9230769230769231,
+                "support": 6
+              },
+              "insufficient": {
+                "precision": 1.0,
+                "recall": 0.5,
+                "f1": 0.6666666666666666,
+                "support": 2
+              }
+            },
+            "missing_predictions": 0,
+            "unsupported_false_supported_rate": 0.125,
+            "confusion": {
+              "supported": {
+                "supported": 7,
+                "contradicted": 1
+              },
+              "contradicted": {
+                "contradicted": 6
+              },
+              "insufficient": {
+                "supported": 1,
+                "insufficient": 1
+              }
+            }
+          },
+          "threshold_binary": {
+            "cases": 16,
+            "supported_precision": 0.875,
+            "supported_recall": 0.875,
+            "unsupported_false_supported_rate": 0.125,
+            "balanced_accuracy": 0.875,
+            "accuracy": 0.875,
+            "auroc": 0.90625,
+            "missing_predictions": 0,
+            "acceptance_rate": 0.5
+          }
+        },
+        "empty-evidence": {
+          "binary": {
+            "cases": 32,
+            "supported_precision": null,
+            "supported_recall": null,
+            "unsupported_false_supported_rate": 0.0,
+            "balanced_accuracy": null,
+            "accuracy": 1.0,
+            "auroc": null,
+            "missing_predictions": 0,
+            "acceptance_rate": 0.0
+          },
+          "three_class": {
+            "cases": 32,
+            "accuracy": 1.0,
+            "macro_f1": 0.3333333333333333,
+            "per_class": {
+              "supported": {
+                "precision": null,
+                "recall": null,
+                "f1": 0,
+                "support": 0
+              },
+              "contradicted": {
+                "precision": null,
+                "recall": null,
+                "f1": 0,
+                "support": 0
+              },
+              "insufficient": {
+                "precision": 1.0,
+                "recall": 1.0,
+                "f1": 1.0,
+                "support": 32
+              }
+            },
+            "missing_predictions": 0,
+            "unsupported_false_supported_rate": 0.0,
+            "confusion": {
+              "supported": {},
+              "contradicted": {},
+              "insufficient": {
+                "insufficient": 32
+              }
+            }
+          },
+          "threshold_binary": {
+            "cases": 32,
+            "supported_precision": null,
+            "supported_recall": null,
+            "unsupported_false_supported_rate": 0.0,
+            "balanced_accuracy": null,
+            "accuracy": 1.0,
+            "auroc": null,
+            "missing_predictions": 0,
+            "acceptance_rate": 0.0
+          }
+        },
+        "support_threshold": 0.6496272683143616
+      },
+      "proposed-20261107": {
+        "calibration": {
+          "binary": {
+            "cases": 65,
+            "supported_precision": 0.8636363636363636,
+            "supported_recall": 0.9047619047619048,
+            "unsupported_false_supported_rate": 0.06818181818181818,
+            "balanced_accuracy": 0.9182900432900433,
+            "accuracy": 0.9230769230769231,
+            "auroc": 0.9588744588744589,
+            "missing_predictions": 0,
+            "acceptance_rate": 0.3384615384615385
+          },
+          "three_class": {
+            "cases": 65,
+            "accuracy": 0.9076923076923077,
+            "macro_f1": 0.8969287158746209,
+            "per_class": {
+              "supported": {
+                "precision": 0.8636363636363636,
+                "recall": 0.9047619047619048,
+                "f1": 0.8837209302325582,
+                "support": 21
+              },
+              "contradicted": {
+                "precision": 0.9090909090909091,
+                "recall": 0.8333333333333334,
+                "f1": 0.8695652173913043,
+                "support": 12
+              },
+              "insufficient": {
+                "precision": 0.9375,
+                "recall": 0.9375,
+                "f1": 0.9375,
+                "support": 32
+              }
+            },
+            "missing_predictions": 0,
+            "unsupported_false_supported_rate": 0.06818181818181818,
+            "confusion": {
+              "supported": {
+                "supported": 19,
+                "insufficient": 2
+              },
+              "contradicted": {
+                "contradicted": 10,
+                "supported": 2
+              },
+              "insufficient": {
+                "insufficient": 30,
+                "supported": 1,
+                "contradicted": 1
+              }
+            }
+          },
+          "threshold_binary": {
+            "cases": 65,
+            "supported_precision": 0.9047619047619048,
+            "supported_recall": 0.9047619047619048,
+            "unsupported_false_supported_rate": 0.045454545454545456,
+            "balanced_accuracy": 0.9296536796536796,
+            "accuracy": 0.9384615384615385,
+            "auroc": 0.9588744588744589,
+            "missing_predictions": 0,
+            "acceptance_rate": 0.3230769230769231
+          }
+        },
+        "test": {
+          "binary": {
+            "cases": 128,
+            "supported_precision": 0.6862745098039216,
+            "supported_recall": 0.875,
+            "unsupported_false_supported_rate": 0.18181818181818182,
+            "balanced_accuracy": 0.8465909090909092,
+            "accuracy": 0.8359375,
+            "auroc": 0.9223011363636363,
+            "missing_predictions": 0,
+            "acceptance_rate": 0.3984375
+          },
+          "three_class": {
+            "cases": 128,
+            "accuracy": 0.7421875,
+            "macro_f1": 0.731718898385565,
+            "per_class": {
+              "supported": {
+                "precision": 0.6862745098039216,
+                "recall": 0.875,
+                "f1": 0.7692307692307693,
+                "support": 40
+              },
+              "contradicted": {
+                "precision": 0.9047619047619048,
+                "recall": 0.5277777777777778,
+                "f1": 0.6666666666666666,
+                "support": 36
+              },
+              "insufficient": {
+                "precision": 0.7321428571428571,
+                "recall": 0.7884615384615384,
+                "f1": 0.7592592592592593,
+                "support": 52
+              }
+            },
+            "missing_predictions": 0,
+            "unsupported_false_supported_rate": 0.18181818181818182,
+            "confusion": {
+              "supported": {
+                "supported": 35,
+                "insufficient": 5
+              },
+              "contradicted": {
+                "contradicted": 19,
+                "insufficient": 10,
+                "supported": 7
+              },
+              "insufficient": {
+                "supported": 9,
+                "insufficient": 41,
+                "contradicted": 2
+              }
+            }
+          },
+          "threshold_binary": {
+            "cases": 128,
+            "supported_precision": 0.6938775510204082,
+            "supported_recall": 0.85,
+            "unsupported_false_supported_rate": 0.17045454545454544,
+            "balanced_accuracy": 0.8397727272727273,
+            "accuracy": 0.8359375,
+            "auroc": 0.9223011363636363,
+            "missing_predictions": 0,
+            "acceptance_rate": 0.3828125
+          }
+        },
+        "challenge": {
+          "binary": {
+            "cases": 16,
+            "supported_precision": 0.875,
+            "supported_recall": 0.875,
+            "unsupported_false_supported_rate": 0.125,
+            "balanced_accuracy": 0.875,
+            "accuracy": 0.875,
+            "auroc": 0.90625,
+            "missing_predictions": 0,
+            "acceptance_rate": 0.5
+          },
+          "three_class": {
+            "cases": 16,
+            "accuracy": 0.875,
+            "macro_f1": 0.8215811965811967,
+            "per_class": {
+              "supported": {
+                "precision": 0.875,
+                "recall": 0.875,
+                "f1": 0.875,
+                "support": 8
+              },
+              "contradicted": {
+                "precision": 0.8571428571428571,
+                "recall": 1.0,
+                "f1": 0.9230769230769231,
+                "support": 6
+              },
+              "insufficient": {
+                "precision": 1.0,
+                "recall": 0.5,
+                "f1": 0.6666666666666666,
+                "support": 2
+              }
+            },
+            "missing_predictions": 0,
+            "unsupported_false_supported_rate": 0.125,
+            "confusion": {
+              "supported": {
+                "supported": 7,
+                "contradicted": 1
+              },
+              "contradicted": {
+                "contradicted": 6
+              },
+              "insufficient": {
+                "supported": 1,
+                "insufficient": 1
+              }
+            }
+          },
+          "threshold_binary": {
+            "cases": 16,
+            "supported_precision": 0.875,
+            "supported_recall": 0.875,
+            "unsupported_false_supported_rate": 0.125,
+            "balanced_accuracy": 0.875,
+            "accuracy": 0.875,
+            "auroc": 0.90625,
+            "missing_predictions": 0,
+            "acceptance_rate": 0.5
+          }
+        },
+        "empty-evidence": {
+          "binary": {
+            "cases": 32,
+            "supported_precision": null,
+            "supported_recall": null,
+            "unsupported_false_supported_rate": 0.0,
+            "balanced_accuracy": null,
+            "accuracy": 1.0,
+            "auroc": null,
+            "missing_predictions": 0,
+            "acceptance_rate": 0.0
+          },
+          "three_class": {
+            "cases": 32,
+            "accuracy": 1.0,
+            "macro_f1": 0.3333333333333333,
+            "per_class": {
+              "supported": {
+                "precision": null,
+                "recall": null,
+                "f1": 0,
+                "support": 0
+              },
+              "contradicted": {
+                "precision": null,
+                "recall": null,
+                "f1": 0,
+                "support": 0
+              },
+              "insufficient": {
+                "precision": 1.0,
+                "recall": 1.0,
+                "f1": 1.0,
+                "support": 32
+              }
+            },
+            "missing_predictions": 0,
+            "unsupported_false_supported_rate": 0.0,
+            "confusion": {
+              "supported": {},
+              "contradicted": {},
+              "insufficient": {
+                "insufficient": 32
+              }
+            }
+          },
+          "threshold_binary": {
+            "cases": 32,
+            "supported_precision": null,
+            "supported_recall": null,
+            "unsupported_false_supported_rate": 0.0,
+            "balanced_accuracy": null,
+            "accuracy": 1.0,
+            "auroc": null,
+            "missing_predictions": 0,
+            "acceptance_rate": 0.0
+          }
+        },
+        "support_threshold": 0.5061465501785278
+      },
+      "raw-20261107": {
+        "calibration": {
+          "binary": {
+            "cases": 65,
+            "supported_precision": 0.8571428571428571,
+            "supported_recall": 0.8571428571428571,
+            "unsupported_false_supported_rate": 0.06818181818181818,
+            "balanced_accuracy": 0.8944805194805194,
+            "accuracy": 0.9076923076923077,
+            "auroc": 0.9577922077922078,
+            "missing_predictions": 0,
+            "acceptance_rate": 0.3230769230769231
+          },
+          "three_class": {
+            "cases": 65,
+            "accuracy": 0.8769230769230769,
+            "macro_f1": 0.8614718614718614,
+            "per_class": {
+              "supported": {
+                "precision": 0.8571428571428571,
+                "recall": 0.8571428571428571,
+                "f1": 0.8571428571428571,
+                "support": 21
+              },
+              "contradicted": {
+                "precision": 0.9,
+                "recall": 0.75,
+                "f1": 0.8181818181818182,
+                "support": 12
+              },
+              "insufficient": {
+                "precision": 0.8823529411764706,
+                "recall": 0.9375,
+                "f1": 0.9090909090909091,
+                "support": 32
+              }
+            },
+            "missing_predictions": 0,
+            "unsupported_false_supported_rate": 0.06818181818181818,
+            "confusion": {
+              "supported": {
+                "supported": 18,
+                "insufficient": 3
+              },
+              "contradicted": {
+                "contradicted": 9,
+                "insufficient": 1,
+                "supported": 2
+              },
+              "insufficient": {
+                "insufficient": 30,
+                "supported": 1,
+                "contradicted": 1
+              }
+            }
+          },
+          "threshold_binary": {
+            "cases": 65,
+            "supported_precision": 0.9,
+            "supported_recall": 0.8571428571428571,
+            "unsupported_false_supported_rate": 0.045454545454545456,
+            "balanced_accuracy": 0.9058441558441559,
+            "accuracy": 0.9230769230769231,
+            "auroc": 0.9577922077922078,
+            "missing_predictions": 0,
+            "acceptance_rate": 0.3076923076923077
+          }
+        },
+        "test": {
+          "binary": {
+            "cases": 128,
+            "supported_precision": 0.6727272727272727,
+            "supported_recall": 0.925,
+            "unsupported_false_supported_rate": 0.20454545454545456,
+            "balanced_accuracy": 0.8602272727272727,
+            "accuracy": 0.8359375,
+            "auroc": 0.9315340909090909,
+            "missing_predictions": 0,
+            "acceptance_rate": 0.4296875
+          },
+          "three_class": {
+            "cases": 128,
+            "accuracy": 0.75,
+            "macro_f1": 0.7398078529657477,
+            "per_class": {
+              "supported": {
+                "precision": 0.6727272727272727,
+                "recall": 0.925,
+                "f1": 0.7789473684210526,
+                "support": 40
+              },
+              "contradicted": {
+                "precision": 0.95,
+                "recall": 0.5277777777777778,
+                "f1": 0.6785714285714286,
+                "support": 36
+              },
+              "insufficient": {
+                "precision": 0.7547169811320755,
+                "recall": 0.7692307692307693,
+                "f1": 0.7619047619047619,
+                "support": 52
+              }
+            },
+            "missing_predictions": 0,
+            "unsupported_false_supported_rate": 0.20454545454545456,
+            "confusion": {
+              "supported": {
+                "supported": 37,
+                "insufficient": 3
+              },
+              "contradicted": {
+                "contradicted": 19,
+                "insufficient": 10,
+                "supported": 7
+              },
+              "insufficient": {
+                "supported": 11,
+                "insufficient": 40,
+                "contradicted": 1
+              }
+            }
+          },
+          "threshold_binary": {
+            "cases": 128,
+            "supported_precision": 0.7058823529411765,
+            "supported_recall": 0.9,
+            "unsupported_false_supported_rate": 0.17045454545454544,
+            "balanced_accuracy": 0.8647727272727272,
+            "accuracy": 0.8515625,
+            "auroc": 0.9315340909090909,
+            "missing_predictions": 0,
+            "acceptance_rate": 0.3984375
+          }
+        },
+        "challenge": {
+          "binary": {
+            "cases": 16,
+            "supported_precision": 0.875,
+            "supported_recall": 0.875,
+            "unsupported_false_supported_rate": 0.125,
+            "balanced_accuracy": 0.875,
+            "accuracy": 0.875,
+            "auroc": 0.90625,
+            "missing_predictions": 0,
+            "acceptance_rate": 0.5
+          },
+          "three_class": {
+            "cases": 16,
+            "accuracy": 0.875,
+            "macro_f1": 0.8215811965811967,
+            "per_class": {
+              "supported": {
+                "precision": 0.875,
+                "recall": 0.875,
+                "f1": 0.875,
+                "support": 8
+              },
+              "contradicted": {
+                "precision": 0.8571428571428571,
+                "recall": 1.0,
+                "f1": 0.9230769230769231,
+                "support": 6
+              },
+              "insufficient": {
+                "precision": 1.0,
+                "recall": 0.5,
+                "f1": 0.6666666666666666,
+                "support": 2
+              }
+            },
+            "missing_predictions": 0,
+            "unsupported_false_supported_rate": 0.125,
+            "confusion": {
+              "supported": {
+                "supported": 7,
+                "contradicted": 1
+              },
+              "contradicted": {
+                "contradicted": 6
+              },
+              "insufficient": {
+                "supported": 1,
+                "insufficient": 1
+              }
+            }
+          },
+          "threshold_binary": {
+            "cases": 16,
+            "supported_precision": 0.875,
+            "supported_recall": 0.875,
+            "unsupported_false_supported_rate": 0.125,
+            "balanced_accuracy": 0.875,
+            "accuracy": 0.875,
+            "auroc": 0.90625,
+            "missing_predictions": 0,
+            "acceptance_rate": 0.5
+          }
+        },
+        "empty-evidence": {
+          "binary": {
+            "cases": 32,
+            "supported_precision": null,
+            "supported_recall": null,
+            "unsupported_false_supported_rate": 0.0,
+            "balanced_accuracy": null,
+            "accuracy": 1.0,
+            "auroc": null,
+            "missing_predictions": 0,
+            "acceptance_rate": 0.0
+          },
+          "three_class": {
+            "cases": 32,
+            "accuracy": 1.0,
+            "macro_f1": 0.3333333333333333,
+            "per_class": {
+              "supported": {
+                "precision": null,
+                "recall": null,
+                "f1": 0,
+                "support": 0
+              },
+              "contradicted": {
+                "precision": null,
+                "recall": null,
+                "f1": 0,
+                "support": 0
+              },
+              "insufficient": {
+                "precision": 1.0,
+                "recall": 1.0,
+                "f1": 1.0,
+                "support": 32
+              }
+            },
+            "missing_predictions": 0,
+            "unsupported_false_supported_rate": 0.0,
+            "confusion": {
+              "supported": {},
+              "contradicted": {},
+              "insufficient": {
+                "insufficient": 32
+              }
+            }
+          },
+          "threshold_binary": {
+            "cases": 32,
+            "supported_precision": null,
+            "supported_recall": null,
+            "unsupported_false_supported_rate": 0.0,
+            "balanced_accuracy": null,
+            "accuracy": 1.0,
+            "auroc": null,
+            "missing_predictions": 0,
+            "acceptance_rate": 0.0
+          }
+        },
+        "support_threshold": 0.4995177388191223
+      },
+      "raw-20261108": {
+        "calibration": {
+          "binary": {
+            "cases": 65,
+            "supported_precision": 0.9,
+            "supported_recall": 0.8571428571428571,
+            "unsupported_false_supported_rate": 0.045454545454545456,
+            "balanced_accuracy": 0.9058441558441559,
+            "accuracy": 0.9230769230769231,
+            "auroc": 0.9534632034632035,
+            "missing_predictions": 0,
+            "acceptance_rate": 0.3076923076923077
+          },
+          "three_class": {
+            "cases": 65,
+            "accuracy": 0.8923076923076924,
+            "macro_f1": 0.8823187811710049,
+            "per_class": {
+              "supported": {
+                "precision": 0.9,
+                "recall": 0.8571428571428571,
+                "f1": 0.8780487804878049,
+                "support": 21
+              },
+              "contradicted": {
+                "precision": 1.0,
+                "recall": 0.75,
+                "f1": 0.8571428571428571,
+                "support": 12
+              },
+              "insufficient": {
+                "precision": 0.8611111111111112,
+                "recall": 0.96875,
+                "f1": 0.9117647058823529,
+                "support": 32
+              }
+            },
+            "missing_predictions": 0,
+            "unsupported_false_supported_rate": 0.045454545454545456,
+            "confusion": {
+              "supported": {
+                "supported": 18,
+                "insufficient": 3
+              },
+              "contradicted": {
+                "contradicted": 9,
+                "insufficient": 2,
+                "supported": 1
+              },
+              "insufficient": {
+                "insufficient": 31,
+                "supported": 1
+              }
+            }
+          },
+          "threshold_binary": {
+            "cases": 65,
+            "supported_precision": 0.9473684210526315,
+            "supported_recall": 0.8571428571428571,
+            "unsupported_false_supported_rate": 0.022727272727272728,
+            "balanced_accuracy": 0.9172077922077921,
+            "accuracy": 0.9384615384615385,
+            "auroc": 0.9534632034632035,
+            "missing_predictions": 0,
+            "acceptance_rate": 0.2923076923076923
+          }
+        },
+        "test": {
+          "binary": {
+            "cases": 128,
+            "supported_precision": 0.7254901960784313,
+            "supported_recall": 0.925,
+            "unsupported_false_supported_rate": 0.1590909090909091,
+            "balanced_accuracy": 0.8829545454545455,
+            "accuracy": 0.8671875,
+            "auroc": 0.9316761363636363,
+            "missing_predictions": 0,
+            "acceptance_rate": 0.3984375
+          },
+          "three_class": {
+            "cases": 128,
+            "accuracy": 0.765625,
+            "macro_f1": 0.7515427515427516,
+            "per_class": {
+              "supported": {
+                "precision": 0.7254901960784313,
+                "recall": 0.925,
+                "f1": 0.8131868131868132,
+                "support": 40
+              },
+              "contradicted": {
+                "precision": 1.0,
+                "recall": 0.5,
+                "f1": 0.6666666666666666,
+                "support": 36
+              },
+              "insufficient": {
+                "precision": 0.7288135593220338,
+                "recall": 0.8269230769230769,
+                "f1": 0.7747747747747747,
+                "support": 52
+              }
+            },
+            "missing_predictions": 0,
+            "unsupported_false_supported_rate": 0.1590909090909091,
+            "confusion": {
+              "supported": {
+                "supported": 37,
+                "insufficient": 3
+              },
+              "contradicted": {
+                "contradicted": 18,
+                "insufficient": 13,
+                "supported": 5
+              },
+              "insufficient": {
+                "supported": 9,
+                "insufficient": 43
+              }
+            }
+          },
+          "threshold_binary": {
+            "cases": 128,
+            "supported_precision": 0.7659574468085106,
+            "supported_recall": 0.9,
+            "unsupported_false_supported_rate": 0.125,
+            "balanced_accuracy": 0.8875,
+            "accuracy": 0.8828125,
+            "auroc": 0.9316761363636363,
+            "missing_predictions": 0,
+            "acceptance_rate": 0.3671875
+          }
+        },
+        "challenge": {
+          "binary": {
+            "cases": 16,
+            "supported_precision": 0.875,
+            "supported_recall": 0.875,
+            "unsupported_false_supported_rate": 0.125,
+            "balanced_accuracy": 0.875,
+            "accuracy": 0.875,
+            "auroc": 0.875,
+            "missing_predictions": 0,
+            "acceptance_rate": 0.5
+          },
+          "three_class": {
+            "cases": 16,
+            "accuracy": 0.875,
+            "macro_f1": 0.8215811965811967,
+            "per_class": {
+              "supported": {
+                "precision": 0.875,
+                "recall": 0.875,
+                "f1": 0.875,
+                "support": 8
+              },
+              "contradicted": {
+                "precision": 0.8571428571428571,
+                "recall": 1.0,
+                "f1": 0.9230769230769231,
+                "support": 6
+              },
+              "insufficient": {
+                "precision": 1.0,
+                "recall": 0.5,
+                "f1": 0.6666666666666666,
+                "support": 2
+              }
+            },
+            "missing_predictions": 0,
+            "unsupported_false_supported_rate": 0.125,
+            "confusion": {
+              "supported": {
+                "supported": 7,
+                "contradicted": 1
+              },
+              "contradicted": {
+                "contradicted": 6
+              },
+              "insufficient": {
+                "supported": 1,
+                "insufficient": 1
+              }
+            }
+          },
+          "threshold_binary": {
+            "cases": 16,
+            "supported_precision": 0.875,
+            "supported_recall": 0.875,
+            "unsupported_false_supported_rate": 0.125,
+            "balanced_accuracy": 0.875,
+            "accuracy": 0.875,
+            "auroc": 0.875,
+            "missing_predictions": 0,
+            "acceptance_rate": 0.5
+          }
+        },
+        "empty-evidence": {
+          "binary": {
+            "cases": 32,
+            "supported_precision": null,
+            "supported_recall": null,
+            "unsupported_false_supported_rate": 0.0,
+            "balanced_accuracy": null,
+            "accuracy": 1.0,
+            "auroc": null,
+            "missing_predictions": 0,
+            "acceptance_rate": 0.0
+          },
+          "three_class": {
+            "cases": 32,
+            "accuracy": 1.0,
+            "macro_f1": 0.3333333333333333,
+            "per_class": {
+              "supported": {
+                "precision": null,
+                "recall": null,
+                "f1": 0,
+                "support": 0
+              },
+              "contradicted": {
+                "precision": null,
+                "recall": null,
+                "f1": 0,
+                "support": 0
+              },
+              "insufficient": {
+                "precision": 1.0,
+                "recall": 1.0,
+                "f1": 1.0,
+                "support": 32
+              }
+            },
+            "missing_predictions": 0,
+            "unsupported_false_supported_rate": 0.0,
+            "confusion": {
+              "supported": {},
+              "contradicted": {},
+              "insufficient": {
+                "insufficient": 32
+              }
+            }
+          },
+          "threshold_binary": {
+            "cases": 32,
+            "supported_precision": null,
+            "supported_recall": null,
+            "unsupported_false_supported_rate": 0.0,
+            "balanced_accuracy": null,
+            "accuracy": 1.0,
+            "auroc": null,
+            "missing_predictions": 0,
+            "acceptance_rate": 0.0
+          }
+        },
+        "support_threshold": 0.6623058319091797
+      },
+      "proposed-20261108": {
+        "calibration": {
+          "binary": {
+            "cases": 65,
+            "supported_precision": 0.85,
+            "supported_recall": 0.8095238095238095,
+            "unsupported_false_supported_rate": 0.06818181818181818,
+            "balanced_accuracy": 0.8706709956709957,
+            "accuracy": 0.8923076923076924,
+            "auroc": 0.9545454545454546,
+            "missing_predictions": 0,
+            "acceptance_rate": 0.3076923076923077
+          },
+          "three_class": {
+            "cases": 65,
+            "accuracy": 0.8769230769230769,
+            "macro_f1": 0.8660586185693789,
+            "per_class": {
+              "supported": {
+                "precision": 0.85,
+                "recall": 0.8095238095238095,
+                "f1": 0.8292682926829268,
+                "support": 21
+              },
+              "contradicted": {
+                "precision": 1.0,
+                "recall": 0.75,
+                "f1": 0.8571428571428571,
+                "support": 12
+              },
+              "insufficient": {
+                "precision": 0.8611111111111112,
+                "recall": 0.96875,
+                "f1": 0.9117647058823529,
+                "support": 32
+              }
+            },
+            "missing_predictions": 0,
+            "unsupported_false_supported_rate": 0.06818181818181818,
+            "confusion": {
+              "supported": {
+                "supported": 17,
+                "insufficient": 4
+              },
+              "contradicted": {
+                "contradicted": 9,
+                "insufficient": 1,
+                "supported": 2
+              },
+              "insufficient": {
+                "insufficient": 31,
+                "supported": 1
+              }
+            }
+          },
+          "threshold_binary": {
+            "cases": 65,
+            "supported_precision": 0.8947368421052632,
+            "supported_recall": 0.8095238095238095,
+            "unsupported_false_supported_rate": 0.045454545454545456,
+            "balanced_accuracy": 0.8820346320346321,
+            "accuracy": 0.9076923076923077,
+            "auroc": 0.9545454545454546,
+            "missing_predictions": 0,
+            "acceptance_rate": 0.2923076923076923
+          }
+        },
+        "test": {
+          "binary": {
+            "cases": 128,
+            "supported_precision": 0.7346938775510204,
+            "supported_recall": 0.9,
+            "unsupported_false_supported_rate": 0.14772727272727273,
+            "balanced_accuracy": 0.8761363636363637,
+            "accuracy": 0.8671875,
+            "auroc": 0.9295454545454546,
+            "missing_predictions": 0,
+            "acceptance_rate": 0.3828125
+          },
+          "three_class": {
+            "cases": 128,
+            "accuracy": 0.765625,
+            "macro_f1": 0.7564287127645332,
+            "per_class": {
+              "supported": {
+                "precision": 0.7346938775510204,
+                "recall": 0.9,
+                "f1": 0.8089887640449438,
+                "support": 40
+              },
+              "contradicted": {
+                "precision": 0.9090909090909091,
+                "recall": 0.5555555555555556,
+                "f1": 0.6896551724137931,
+                "support": 36
+              },
+              "insufficient": {
+                "precision": 0.7368421052631579,
+                "recall": 0.8076923076923077,
+                "f1": 0.7706422018348624,
+                "support": 52
+              }
+            },
+            "missing_predictions": 0,
+            "unsupported_false_supported_rate": 0.14772727272727273,
+            "confusion": {
+              "supported": {
+                "supported": 36,
+                "insufficient": 4
+              },
+              "contradicted": {
+                "contradicted": 20,
+                "insufficient": 11,
+                "supported": 5
+              },
+              "insufficient": {
+                "supported": 8,
+                "insufficient": 42,
+                "contradicted": 2
+              }
+            }
+          },
+          "threshold_binary": {
+            "cases": 128,
+            "supported_precision": 0.7777777777777778,
+            "supported_recall": 0.875,
+            "unsupported_false_supported_rate": 0.11363636363636363,
+            "balanced_accuracy": 0.8806818181818181,
+            "accuracy": 0.8828125,
+            "auroc": 0.9295454545454546,
+            "missing_predictions": 0,
+            "acceptance_rate": 0.3515625
+          }
+        },
+        "challenge": {
+          "binary": {
+            "cases": 16,
+            "supported_precision": 0.875,
+            "supported_recall": 0.875,
+            "unsupported_false_supported_rate": 0.125,
+            "balanced_accuracy": 0.875,
+            "accuracy": 0.875,
+            "auroc": 0.875,
+            "missing_predictions": 0,
+            "acceptance_rate": 0.5
+          },
+          "three_class": {
+            "cases": 16,
+            "accuracy": 0.875,
+            "macro_f1": 0.8215811965811967,
+            "per_class": {
+              "supported": {
+                "precision": 0.875,
+                "recall": 0.875,
+                "f1": 0.875,
+                "support": 8
+              },
+              "contradicted": {
+                "precision": 0.8571428571428571,
+                "recall": 1.0,
+                "f1": 0.9230769230769231,
+                "support": 6
+              },
+              "insufficient": {
+                "precision": 1.0,
+                "recall": 0.5,
+                "f1": 0.6666666666666666,
+                "support": 2
+              }
+            },
+            "missing_predictions": 0,
+            "unsupported_false_supported_rate": 0.125,
+            "confusion": {
+              "supported": {
+                "supported": 7,
+                "contradicted": 1
+              },
+              "contradicted": {
+                "contradicted": 6
+              },
+              "insufficient": {
+                "supported": 1,
+                "insufficient": 1
+              }
+            }
+          },
+          "threshold_binary": {
+            "cases": 16,
+            "supported_precision": 0.875,
+            "supported_recall": 0.875,
+            "unsupported_false_supported_rate": 0.125,
+            "balanced_accuracy": 0.875,
+            "accuracy": 0.875,
+            "auroc": 0.875,
+            "missing_predictions": 0,
+            "acceptance_rate": 0.5
+          }
+        },
+        "empty-evidence": {
+          "binary": {
+            "cases": 32,
+            "supported_precision": null,
+            "supported_recall": null,
+            "unsupported_false_supported_rate": 0.0,
+            "balanced_accuracy": null,
+            "accuracy": 1.0,
+            "auroc": null,
+            "missing_predictions": 0,
+            "acceptance_rate": 0.0
+          },
+          "three_class": {
+            "cases": 32,
+            "accuracy": 1.0,
+            "macro_f1": 0.3333333333333333,
+            "per_class": {
+              "supported": {
+                "precision": null,
+                "recall": null,
+                "f1": 0,
+                "support": 0
+              },
+              "contradicted": {
+                "precision": null,
+                "recall": null,
+                "f1": 0,
+                "support": 0
+              },
+              "insufficient": {
+                "precision": 1.0,
+                "recall": 1.0,
+                "f1": 1.0,
+                "support": 32
+              }
+            },
+            "missing_predictions": 0,
+            "unsupported_false_supported_rate": 0.0,
+            "confusion": {
+              "supported": {},
+              "contradicted": {},
+              "insufficient": {
+                "insufficient": 32
+              }
+            }
+          },
+          "threshold_binary": {
+            "cases": 32,
+            "supported_precision": null,
+            "supported_recall": null,
+            "unsupported_false_supported_rate": 0.0,
+            "balanced_accuracy": null,
+            "accuracy": 1.0,
+            "auroc": null,
+            "missing_predictions": 0,
+            "acceptance_rate": 0.0
+          }
+        },
+        "support_threshold": 0.6849372386932373
+      },
+      "large-bf16": {
+        "calibration": {
+          "binary": {
+            "cases": 65,
+            "supported_precision": 0.8888888888888888,
+            "supported_recall": 0.7619047619047619,
+            "unsupported_false_supported_rate": 0.045454545454545456,
+            "balanced_accuracy": 0.8582251082251082,
+            "accuracy": 0.8923076923076924,
+            "auroc": 0.9437229437229437,
+            "missing_predictions": 0,
+            "acceptance_rate": 0.27692307692307694
+          },
+          "three_class": {
+            "cases": 65,
+            "accuracy": 0.7230769230769231,
+            "macro_f1": 0.5351076490316996,
+            "per_class": {
+              "supported": {
+                "precision": 0.8888888888888888,
+                "recall": 0.7619047619047619,
+                "f1": 0.8205128205128205,
+                "support": 21
+              },
+              "contradicted": {
+                "precision": null,
+                "recall": 0.0,
+                "f1": 0.0,
+                "support": 12
+              },
+              "insufficient": {
+                "precision": 0.6595744680851063,
+                "recall": 0.96875,
+                "f1": 0.7848101265822784,
+                "support": 32
+              }
+            },
+            "missing_predictions": 0,
+            "unsupported_false_supported_rate": 0.045454545454545456,
+            "confusion": {
+              "supported": {
+                "supported": 16,
+                "insufficient": 5
+              },
+              "contradicted": {
+                "insufficient": 11,
+                "supported": 1
+              },
+              "insufficient": {
+                "insufficient": 31,
+                "supported": 1
+              }
+            }
+          },
+          "threshold_binary": {
+            "cases": 65,
+            "supported_precision": 0.8947368421052632,
+            "supported_recall": 0.8095238095238095,
+            "unsupported_false_supported_rate": 0.045454545454545456,
+            "balanced_accuracy": 0.8820346320346321,
+            "accuracy": 0.9076923076923077,
+            "auroc": 0.9437229437229437,
+            "missing_predictions": 0,
+            "acceptance_rate": 0.2923076923076923
+          }
+        },
+        "test": {
+          "binary": {
+            "cases": 128,
+            "supported_precision": 0.7111111111111111,
+            "supported_recall": 0.8,
+            "unsupported_false_supported_rate": 0.14772727272727273,
+            "balanced_accuracy": 0.8261363636363637,
+            "accuracy": 0.8359375,
+            "auroc": 0.9066761363636363,
+            "missing_predictions": 0,
+            "acceptance_rate": 0.3515625
+          },
+          "three_class": {
+            "cases": 128,
+            "accuracy": 0.640625,
+            "macro_f1": 0.5630504359342235,
+            "per_class": {
+              "supported": {
+                "precision": 0.7111111111111111,
+                "recall": 0.8,
+                "f1": 0.7529411764705882,
+                "support": 40
+              },
+              "contradicted": {
+                "precision": 1.0,
+                "recall": 0.1388888888888889,
+                "f1": 0.24390243902439024,
+                "support": 36
+              },
+              "insufficient": {
+                "precision": 0.5769230769230769,
+                "recall": 0.8653846153846154,
+                "f1": 0.6923076923076923,
+                "support": 52
+              }
+            },
+            "missing_predictions": 0,
+            "unsupported_false_supported_rate": 0.14772727272727273,
+            "confusion": {
+              "supported": {
+                "supported": 32,
+                "insufficient": 8
+              },
+              "contradicted": {
+                "insufficient": 25,
+                "supported": 6,
+                "contradicted": 5
+              },
+              "insufficient": {
+                "supported": 7,
+                "insufficient": 45
+              }
+            }
+          },
+          "threshold_binary": {
+            "cases": 128,
+            "supported_precision": 0.717391304347826,
+            "supported_recall": 0.825,
+            "unsupported_false_supported_rate": 0.14772727272727273,
+            "balanced_accuracy": 0.8386363636363636,
+            "accuracy": 0.84375,
+            "auroc": 0.9066761363636363,
+            "missing_predictions": 0,
+            "acceptance_rate": 0.359375
+          }
+        },
+        "challenge": {
+          "binary": {
+            "cases": 16,
+            "supported_precision": 0.875,
+            "supported_recall": 0.875,
+            "unsupported_false_supported_rate": 0.125,
+            "balanced_accuracy": 0.875,
+            "accuracy": 0.875,
+            "auroc": 0.8984375,
+            "missing_predictions": 0,
+            "acceptance_rate": 0.5
+          },
+          "three_class": {
+            "cases": 16,
+            "accuracy": 0.5625,
+            "macro_f1": 0.4583333333333333,
+            "per_class": {
+              "supported": {
+                "precision": 0.875,
+                "recall": 0.875,
+                "f1": 0.875,
+                "support": 8
+              },
+              "contradicted": {
+                "precision": 0.5,
+                "recall": 0.16666666666666666,
+                "f1": 0.25,
+                "support": 6
+              },
+              "insufficient": {
+                "precision": 0.16666666666666666,
+                "recall": 0.5,
+                "f1": 0.25,
+                "support": 2
+              }
+            },
+            "missing_predictions": 0,
+            "unsupported_false_supported_rate": 0.125,
+            "confusion": {
+              "supported": {
+                "supported": 7,
+                "contradicted": 1
+              },
+              "contradicted": {
+                "insufficient": 5,
+                "contradicted": 1
+              },
+              "insufficient": {
+                "supported": 1,
+                "insufficient": 1
+              }
+            }
+          },
+          "threshold_binary": {
+            "cases": 16,
+            "supported_precision": 0.875,
+            "supported_recall": 0.875,
+            "unsupported_false_supported_rate": 0.125,
+            "balanced_accuracy": 0.875,
+            "accuracy": 0.875,
+            "auroc": 0.8984375,
+            "missing_predictions": 0,
+            "acceptance_rate": 0.5
+          }
+        },
+        "empty-evidence": {
+          "binary": {
+            "cases": 32,
+            "supported_precision": null,
+            "supported_recall": null,
+            "unsupported_false_supported_rate": 0.0,
+            "balanced_accuracy": null,
+            "accuracy": 1.0,
+            "auroc": null,
+            "missing_predictions": 0,
+            "acceptance_rate": 0.0
+          },
+          "three_class": {
+            "cases": 32,
+            "accuracy": 1.0,
+            "macro_f1": 0.3333333333333333,
+            "per_class": {
+              "supported": {
+                "precision": null,
+                "recall": null,
+                "f1": 0,
+                "support": 0
+              },
+              "contradicted": {
+                "precision": null,
+                "recall": null,
+                "f1": 0,
+                "support": 0
+              },
+              "insufficient": {
+                "precision": 1.0,
+                "recall": 1.0,
+                "f1": 1.0,
+                "support": 32
+              }
+            },
+            "missing_predictions": 0,
+            "unsupported_false_supported_rate": 0.0,
+            "confusion": {
+              "supported": {},
+              "contradicted": {},
+              "insufficient": {
+                "insufficient": 32
+              }
+            }
+          },
+          "threshold_binary": {
+            "cases": 32,
+            "supported_precision": null,
+            "supported_recall": null,
+            "unsupported_false_supported_rate": 0.0,
+            "balanced_accuracy": null,
+            "accuracy": 1.0,
+            "auroc": null,
+            "missing_predictions": 0,
+            "acceptance_rate": 0.0
+          }
+        },
+        "support_threshold": 0.14720219373703003
+      },
+      "minicheck-bf16": {
+        "calibration": {
+          "binary": {
+            "cases": 65,
+            "supported_precision": 0.9375,
+            "supported_recall": 0.7142857142857143,
+            "unsupported_false_supported_rate": 0.022727272727272728,
+            "balanced_accuracy": 0.8457792207792207,
+            "accuracy": 0.8923076923076924,
+            "auroc": 0.9329004329004329,
+            "missing_predictions": 0,
+            "acceptance_rate": 0.24615384615384617
+          },
+          "threshold_binary": {
+            "cases": 65,
+            "supported_precision": 0.8888888888888888,
+            "supported_recall": 0.7619047619047619,
+            "unsupported_false_supported_rate": 0.045454545454545456,
+            "balanced_accuracy": 0.8582251082251082,
+            "accuracy": 0.8923076923076924,
+            "auroc": 0.9329004329004329,
+            "missing_predictions": 0,
+            "acceptance_rate": 0.27692307692307694
+          }
+        },
+        "test": {
+          "binary": {
+            "cases": 128,
+            "supported_precision": 0.8648648648648649,
+            "supported_recall": 0.8,
+            "unsupported_false_supported_rate": 0.056818181818181816,
+            "balanced_accuracy": 0.8715909090909091,
+            "accuracy": 0.8984375,
+            "auroc": 0.9545454545454546,
+            "missing_predictions": 0,
+            "acceptance_rate": 0.2890625
+          },
+          "threshold_binary": {
+            "cases": 128,
+            "supported_precision": 0.8461538461538461,
+            "supported_recall": 0.825,
+            "unsupported_false_supported_rate": 0.06818181818181818,
+            "balanced_accuracy": 0.8784090909090909,
+            "accuracy": 0.8984375,
+            "auroc": 0.9545454545454546,
+            "missing_predictions": 0,
+            "acceptance_rate": 0.3046875
+          }
+        },
+        "challenge": {
+          "binary": {
+            "cases": 16,
+            "supported_precision": 0.8888888888888888,
+            "supported_recall": 1.0,
+            "unsupported_false_supported_rate": 0.125,
+            "balanced_accuracy": 0.9375,
+            "accuracy": 0.9375,
+            "auroc": 1.0,
+            "missing_predictions": 0,
+            "acceptance_rate": 0.5625
+          },
+          "threshold_binary": {
+            "cases": 16,
+            "supported_precision": 0.8888888888888888,
+            "supported_recall": 1.0,
+            "unsupported_false_supported_rate": 0.125,
+            "balanced_accuracy": 0.9375,
+            "accuracy": 0.9375,
+            "auroc": 1.0,
+            "missing_predictions": 0,
+            "acceptance_rate": 0.5625
+          }
+        },
+        "empty-evidence": {
+          "binary": {
+            "cases": 32,
+            "supported_precision": 0.0,
+            "supported_recall": null,
+            "unsupported_false_supported_rate": 0.0625,
+            "balanced_accuracy": null,
+            "accuracy": 0.9375,
+            "auroc": null,
+            "missing_predictions": 0,
+            "acceptance_rate": 0.0625
+          },
+          "threshold_binary": {
+            "cases": 32,
+            "supported_precision": 0.0,
+            "supported_recall": null,
+            "unsupported_false_supported_rate": 0.0625,
+            "balanced_accuracy": null,
+            "accuracy": 0.9375,
+            "auroc": null,
+            "missing_predictions": 0,
+            "acceptance_rate": 0.0625
+          }
+        },
+        "support_threshold": 0.4375976026058197
+      }
+    }
+  },
+  "paired_contrasts": {
+    "original": {
+      "delta": {
+        "macro_f1": -0.0049763750909965765,
+        "false_support_rate": -0.004115226337448541,
+        "support_recall": -0.03546099290780147
+      },
+      "intervals": {
+        "macro_f1": {
+          "ci95": [
+            -0.02433885556508816,
+            0.014238854609583613
+          ],
+          "simultaneous_ci9875": [
+            -0.029610677447859328,
+            0.02013641958575756
+          ],
+          "valid_draws": 5000
+        },
+        "false_support_rate": {
+          "ci95": [
+            -0.019323671497584544,
+            0.00889189189189185
+          ],
+          "simultaneous_ci9875": [
+            -0.023809523809523808,
+            0.012987012987012984
+          ],
+          "valid_draws": 5000
+        },
+        "support_recall": {
+          "ci95": [
+            -0.08024691358024683,
+            0.0
+          ],
+          "simultaneous_ci9875": null,
+          "valid_draws": 5000
+        }
+      }
+    },
+    "published": {
+      "delta": {
+        "macro_f1": -0.0009727771728780255,
+        "false_support_rate": -0.011494252873563232,
+        "support_recall": -0.024390243902439046
+      },
+      "intervals": {
+        "macro_f1": {
+          "ci95": [
+            -0.016017052662183805,
+            0.014724441041369083
+          ],
+          "simultaneous_ci9875": [
+            -0.020906514198390954,
+            0.020322346215563846
+          ],
+          "valid_draws": 5000
+        },
+        "false_support_rate": {
+          "ci95": [
+            -0.032921810699588494,
+            0.006872852233676979
+          ],
+          "simultaneous_ci9875": [
+            -0.04029304029304031,
+            0.010038265306122682
+          ],
+          "valid_draws": 5000
+        },
+        "support_recall": {
+          "ci95": [
+            -0.06504506892895018,
+            0.0
+          ],
+          "simultaneous_ci9875": null,
+          "valid_draws": 5000
+        }
+      }
+    },
+    "doc597": {
+      "delta": {
+        "macro_f1": -0.0010676644528003765,
+        "false_support_rate": -0.011363636363636354,
+        "support_recall": -0.025000000000000022
+      }
+    }
+  },
+  "bootstrap_groups": 103,
+  "bootstrap_draws": 5000,
+  "planned_new_predictions": 1446,
+  "actual_new_predictions": 1446,
+  "archived_reference_predictions": 482,
+  "plan_sha256": "ff82cc1016edaf2526bb119dd8b7fb5ca3765c0fe607f070d3d6871c581f79e6",
+  "predictions_sha256": "7e5ee183fd81dc1f3e4549e087cbd44b6e18f118f00c9643db8fb72b92e4cdc4",
+  "limitations": [
+    "Published correction proposals are not new independently adjudicated gold.",
+    "Observed development data; intervals are exploratory and conditional on the three trained seeds.",
+    "Four primary contrasts: two metrics across original/published gold; Bonferroni 98.75% intervals.",
+    "No production adoption claim or complete-Agent effect is tested."
+  ]
+}

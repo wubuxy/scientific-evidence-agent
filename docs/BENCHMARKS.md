@@ -98,3 +98,13 @@ python -m research_backend.benchmarks.score --inputs ../benchmark-data/qasper-v1
 `--prior` 必须来自同模型、同 token 上限的 Grep 运行；试验限定单论文、单目标。一次定位最多取 50 个匹配，优先未读位置，再按距离已有锚点排序；最多补读 40 行。输出记录触发、回退、用量与各组实际可见证据，评分保留全部任务。
 
 增加 `--control-only` 并使用新的输出目录，可运行不调用核验模型的规则对照：仅原始回读为空时，由问题生成关键词查询并补读一次。`usage.json` 记录物理上实际新增的调用，分支预测中的成本则包含共享上游费用；两者分别计量。
+
+## 本地核验器标签干预的离线复算
+
+在仓库根目录运行，无需 GPU、模型权重或网络：
+
+```powershell
+python scripts/audit_verifier_labels.py --bootstrap
+```
+
+复核范围包括六次新训练的 1,446 条预测、两组归档参考、三种标签口径、校准阈值与主要配对区间。完整 GPU 复现需要冻结代码与 v2 原始数据，具体命令、数据位置及未观察到稳定收益的结论见[第三轮结果](results/SCIFACT_LABEL_ABLATION_V1.md)。

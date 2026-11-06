@@ -51,18 +51,20 @@ scipy 和 openpyxl 的检查发生在对应测试中。缺少 scipy 不会跳过
 
 ## 本地验证记录
 
-截至 2026-11-06，加入规模对照、缺失基线与跨种子模型释放检查后，最新验证如下，均收集 177 项：
+截至 2026-11-06，加入标签干预的文档范围、评分隔离、失败分母、阈值与六次训练模型释放检查后，最新验证如下，均收集 186 项：
 
 | 环境 | 通过 | 跳过 | 失败 |
 |---|---:|---:|---:|
-| Windows / Python 3.13，干净完整环境，含 rg 和 CPU torch 2.15.0 | 177 | 0 | 0 |
-| A5000 主机 Ubuntu / Python 3.12，核心依赖环境，含 rg | 164 | 13（统计、XLSX、LSTM） | 0 |
+| Windows / Python 3.13，干净完整环境，含 rg 和 CPU torch 2.15.0 | 186 | 0 | 0 |
+| A5000 主机 Ubuntu / Python 3.12，核心依赖环境，含 rg | 173 | 13（统计、XLSX、LSTM） | 0 |
 
-干净环境的核心和分析依赖按提交的约束文件安装，CPU torch 从官方索引补齐。140、142、152、163、168 项的历史矩阵分别保存在机器记录的 `offline_test_profiles_before_demo`、`offline_test_profiles_before_agent_evals`、`offline_test_profiles_before_eval_completion`、`offline_test_profiles_before_verifier_pilot`、`offline_test_profiles_before_verifier_scale` 中；最新结果和包版本见 [validation-summary.json](results/validation-summary.json) 的 `checks`。历史 163 项时 Windows 核心环境为 150 passed / 13 skipped，缺 rg 为 145 passed / 18 skipped；这些历史数值不冒充最新运行。
+干净环境的核心和分析依赖按提交的约束文件安装，CPU torch 从官方索引补齐。140、142、152、163、168、177 项的历史矩阵分别保存在机器记录的 `offline_test_profiles_before_demo`、`offline_test_profiles_before_agent_evals`、`offline_test_profiles_before_eval_completion`、`offline_test_profiles_before_verifier_pilot`、`offline_test_profiles_before_verifier_scale`、`offline_test_profiles_before_verifier_labels` 中；最新结果和包版本见 [validation-summary.json](results/validation-summary.json) 的 `checks`。历史 163 项时 Windows 核心环境为 150 passed / 13 skipped，缺 rg 为 145 passed / 18 skipped；这些历史数值不冒充最新运行。
 
 端到端 Agent CLI 使用本地假模型端点，覆盖两轮五组分支、两次生产报告、六个声明／单元格和显式合成标注校准，不产生云模型费用。新增的真实单卡核验器训练与 Agent 效果分开统计，完整环境、适配器、评分与局限见 [A5000 pilot 结果](results/SCIFACT_VERIFIER_PILOT_V1.md)。在仓库根目录执行 `python scripts/audit_verifier_pilot.py` 可复查已发布的原始预测和测试分数，无需下载模型。
 
 第二轮增加了 1.5B/7B 双精度、三种子 7B BF16 LoRA 与 MiniCheck 外部基线；结果与显存口径见[规模对照](results/SCIFACT_VERIFIER_SCALE_V2.md)。`python scripts/audit_verifier_scale.py --bootstrap` 无需权重即可独立复算固定分母、二分类/三分类点估计及三项校正区间；中断版本也可单独审计。GPU 训练环境使用独立的 `requirements-verifier-gpu.txt`，不混入应用或 CI 的核心依赖。
+
+第三轮完成六次 7B BF16 LoRA 标签干预对照与 1,446 条新预测。运行 `python scripts/audit_verifier_labels.py --bootstrap` 可无 GPU 重算三种标签口径、校准阈值和主要配对区间。数据与代码在运行前冻结，模型和语料保存在服务器 `D:\Ding`，仓库保留预测与评分元数据，见[标签干预报告](results/SCIFACT_LABEL_ABLATION_V1.md)。
 
 ## 持续集成
 
@@ -76,7 +78,7 @@ scipy 和 openpyxl 的检查发生在对应测试中。缺少 scipy 不会跳过
 | 前端 | Node 24；`npm ci`、类型检查、生产构建 |
 | Docker demo | 构建与健康启动、无模型的论文导入 / 检索检查、配置初始化幂等性、重启持久化 |
 
-后端作业先安装并检查真实 `rg`，再运行回归、已发布 pilot 及规模对照的完整/中断版本审计；完整环境还独立复算主要置信区间。每次保存 JUnit XML 和已安装版本，作为保留 14 天的 Actions artifact。配置完成与 GitHub 托管运行通过分别记录；本地结果不能替代尚未执行的远端 CI 状态。
+后端作业先安装并检查真实 `rg`，再运行回归、已发布 pilot、规模对照的完整/中断版本与标签干预审计；完整环境还独立复算主要置信区间。每次保存 JUnit XML 和已安装版本，作为保留 14 天的 Actions artifact。配置完成与 GitHub 托管运行通过分别记录；本地结果不能替代尚未执行的远端 CI 状态。
 
 提交 `4c36c8f` 的三项后端、前端与 Docker demo 共五个 GitHub 作业已通过：[运行记录](https://github.com/wubuxy/scientific-evidence-agent/actions/runs/42060005247)。后续提交的状态以对应 Actions 运行记录为准。Docker 启动与回放边界见 [演示说明](DEMO.md)。
 

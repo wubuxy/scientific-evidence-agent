@@ -78,6 +78,11 @@ jobs:
       - name: Independently reproduce scale study intervals
         if: matrix.profile == 'full'
         run: python ../scripts/audit_verifier_scale.py --bootstrap
+      - name: Audit label intervention, frozen gold views and calibration thresholds
+        run: python ../scripts/audit_verifier_labels.py
+      - name: Independently reproduce label intervention intervals
+        if: matrix.profile == 'full'
+        run: python ../scripts/audit_verifier_labels.py --bootstrap
       - name: Test missing-ripgrep fallback
         if: matrix.profile == 'core' && runner.os == 'Linux'
         run: python -m pytest tests -q --without-rg --junitxml=test-results/without-rg.xml

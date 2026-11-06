@@ -3,19 +3,19 @@
   "model": "qwen3.5-27b",
   "scope": "Agent development runs, engineering validation, and separately reported local verifier studies; QASPER frozen test set reserved",
   "checks": {
-    "offline_tests_passed": 177,
+    "offline_tests_passed": 186,
     "frontend_typecheck": "passed",
     "frontend_production_build": "passed",
     "live_report_api": "completed",
-    "offline_tests_collected": 177,
+    "offline_tests_collected": 186,
     "offline_test_profiles": [
       {
         "profile": "full-locked",
         "platform": "Windows",
         "python": "3.13.13",
         "dependencies": "core + analysis under constraints-ci.txt; CPU torch from the official index",
-        "collected": 177,
-        "passed": 177,
+        "collected": 186,
+        "passed": 186,
         "skipped": 0,
         "failed": 0,
         "errors": 0,
@@ -30,19 +30,19 @@
           "pytest-asyncio": "1.4.1.post1",
           "openai": "3.46.0"
         },
-        "evidence": "docs/results/scifact-verifier-scale-v2/windows-full.xml"
+        "evidence": "docs/results/scifact-label-ablation-v1/windows-full.xml"
       },
       {
         "profile": "core",
         "platform": "Ubuntu 24.04 / WSL2",
         "python": "3.12.3",
         "dependencies": "requirements-research.txt + constraints-ci.txt; rg installed",
-        "collected": 177,
-        "passed": 164,
+        "collected": 186,
+        "passed": 173,
         "skipped": 13,
         "failed": 0,
         "errors": 0,
-        "evidence": "docs/results/scifact-verifier-scale-v2/ubuntu-core.xml"
+        "evidence": "docs/results/scifact-label-ablation-v1/ubuntu-core.xml"
       }
     ],
     "ci_workflow": ".github/workflows/ci.yml",
@@ -51,7 +51,7 @@
     "reproducibility_guide": "docs/REPRODUCIBILITY.md",
     "frontend_build_note": "npm ci, explicit TypeScript check, and production build passed; 558.01 kB analysis chunk warning remains",
     "dependency_constraints_sha256": "f2e946c20ebb1c80ab79be44342d045f6ff55236bb364a515fae6a63e254a1a2",
-    "reproducibility_note": "Latest Windows full and server Ubuntu core suites passed. Larger-model lifecycle regression checks Python 3.12 retention; public result audits preserve missing denominators and reproduce corrected intervals without models.",
+    "reproducibility_note": "Windows full: 186 passed; Ubuntu core: 173 passed, 13 optional-dependency skips. Label intervention tests cover correction scope, gold isolation, missing denominators, thresholds, repeated bootstrap groups and six training/reload model lifecycles.",
     "offline_test_profiles_before_demo": [
       {
         "profile": "core",
@@ -344,6 +344,43 @@
         "conclusion": "success",
         "jobs": 5,
         "url": "https://github.com/wubuxy/scientific-evidence-agent/actions/runs/42060005247"
+      }
+    ],
+    "offline_test_profiles_before_verifier_labels": [
+      {
+        "profile": "full-locked",
+        "platform": "Windows",
+        "python": "3.13.13",
+        "dependencies": "core + analysis under constraints-ci.txt; CPU torch from the official index",
+        "collected": 177,
+        "passed": 177,
+        "skipped": 0,
+        "failed": 0,
+        "errors": 0,
+        "packages": {
+          "fastapi": "0.162.0",
+          "numpy": "2.5.4",
+          "scipy": "1.18.1",
+          "openpyxl": "3.1.5",
+          "torch": "2.15.0+cpu",
+          "pydantic": "2.14.3",
+          "pytest": "9.2.0",
+          "pytest-asyncio": "1.4.1.post1",
+          "openai": "3.46.0"
+        },
+        "evidence": "docs/results/scifact-verifier-scale-v2/windows-full.xml"
+      },
+      {
+        "profile": "core",
+        "platform": "Ubuntu 24.04 / WSL2",
+        "python": "3.12.3",
+        "dependencies": "requirements-research.txt + constraints-ci.txt; rg installed",
+        "collected": 177,
+        "passed": 164,
+        "skipped": 13,
+        "failed": 0,
+        "errors": 0,
+        "evidence": "docs/results/scifact-verifier-scale-v2/ubuntu-core.xml"
       }
     ]
   },
@@ -647,5 +684,108 @@
       "reason": "Prior base model retained through Python 3.12 locals() frame dictionary; superseded with explicit handle release and complete same-protocol rerun; old missing predictions remain in denominator."
     },
     "report": "docs/results/SCIFACT_VERIFIER_SCALE_V2.md"
+  },
+  "local_verifier_label_ablation": {
+    "completed": true,
+    "scope": "Observed SciFact v2 development data; exploratory label intervention, no new human gold",
+    "new_trainings": 6,
+    "new_predictions": 1446,
+    "archived_reference_predictions": 482,
+    "changed_training_labels": 7,
+    "training_cases": 535,
+    "human_adjudication_completed": false,
+    "stable_benefit_observed": false,
+    "paired_contrasts": {
+      "original": {
+        "delta": {
+          "macro_f1": -0.0049763750909965765,
+          "false_support_rate": -0.004115226337448541,
+          "support_recall": -0.03546099290780147
+        },
+        "intervals": {
+          "macro_f1": {
+            "ci95": [
+              -0.02433885556508816,
+              0.014238854609583613
+            ],
+            "simultaneous_ci9875": [
+              -0.029610677447859328,
+              0.02013641958575756
+            ],
+            "valid_draws": 5000
+          },
+          "false_support_rate": {
+            "ci95": [
+              -0.019323671497584544,
+              0.00889189189189185
+            ],
+            "simultaneous_ci9875": [
+              -0.023809523809523808,
+              0.012987012987012984
+            ],
+            "valid_draws": 5000
+          },
+          "support_recall": {
+            "ci95": [
+              -0.08024691358024683,
+              0.0
+            ],
+            "simultaneous_ci9875": null,
+            "valid_draws": 5000
+          }
+        }
+      },
+      "published": {
+        "delta": {
+          "macro_f1": -0.0009727771728780255,
+          "false_support_rate": -0.011494252873563232,
+          "support_recall": -0.024390243902439046
+        },
+        "intervals": {
+          "macro_f1": {
+            "ci95": [
+              -0.016017052662183805,
+              0.014724441041369083
+            ],
+            "simultaneous_ci9875": [
+              -0.020906514198390954,
+              0.020322346215563846
+            ],
+            "valid_draws": 5000
+          },
+          "false_support_rate": {
+            "ci95": [
+              -0.032921810699588494,
+              0.006872852233676979
+            ],
+            "simultaneous_ci9875": [
+              -0.04029304029304031,
+              0.010038265306122682
+            ],
+            "valid_draws": 5000
+          },
+          "support_recall": {
+            "ci95": [
+              -0.06504506892895018,
+              0.0
+            ],
+            "simultaneous_ci9875": null,
+            "valid_draws": 5000
+          }
+        }
+      },
+      "doc597": {
+        "delta": {
+          "macro_f1": -0.0010676644528003765,
+          "false_support_rate": -0.011363636363636354,
+          "support_recall": -0.025000000000000022
+        }
+      }
+    },
+    "report": "docs/results/SCIFACT_LABEL_ABLATION_V1.md",
+    "independent_audit": "passed including 5000 paired group resamples",
+    "source_commit": "e3d4108181568881824e2e6fdc9021c8f974e778",
+    "plan_sha256": "ff82cc1016edaf2526bb119dd8b7fb5ca3765c0fe607f070d3d6871c581f79e6",
+    "wall_seconds": 2024.0
   }
 }
