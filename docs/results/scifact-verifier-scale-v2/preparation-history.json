@@ -1,0 +1,41 @@
+{
+  "reason": "001 predates adapter-update verification; 002 was used by the interrupted run-001 and retained a base model via Python 3.12 locals(); 003 fixes lifetime cleanup and is used by the complete corrected run-002. Test IDs and hyperparameters are identical; no test labels were used for the fix.",
+  "history": [
+    {
+      "version": "001",
+      "plan_sha256": "5182080b5cf196e594af5fe31ebe77f2c135acf8836c1df4ee3a3eb67cb167a1",
+      "preflight": {
+        "complete": true,
+        "selected_training_precision": "bf16",
+        "errors": [],
+        "plan_sha256": "5182080b5cf196e594af5fe31ebe77f2c135acf8836c1df4ee3a3eb67cb167a1",
+        "predictions_sha256": "cf0705a3c1faaaa148be369c7457948af2748692f35c8111215669f6fef9f0b6"
+      },
+      "selected_for_formal": false
+    },
+    {
+      "version": "002",
+      "plan_sha256": "8aa7e42807d343709dd8924d3c89e40befffa4d6702923b381627a208a428883",
+      "preflight": {
+        "complete": true,
+        "selected_training_precision": "bf16",
+        "errors": [],
+        "plan_sha256": "8aa7e42807d343709dd8924d3c89e40befffa4d6702923b381627a208a428883",
+        "predictions_sha256": "31523b52029651c3756eded7268a05101e03d4623141f574601d452c4f30afd5"
+      },
+      "selected_for_formal": false
+    },
+    {
+      "version": "003",
+      "plan_sha256": "9620b12ed6dccef49d1fd42238d1cd1667f2ec9e99befc79ba7b6cd669028a2f",
+      "preflight": {
+        "complete": true,
+        "selected_training_precision": "bf16",
+        "errors": [],
+        "plan_sha256": "9620b12ed6dccef49d1fd42238d1cd1667f2ec9e99befc79ba7b6cd669028a2f",
+        "predictions_sha256": "97c803dde30d9aa4a7339d3106dc552ce95f7d9ab83db6888e6e59478e4283ac"
+      },
+      "selected_for_formal": true
+    }
+  ]
+}

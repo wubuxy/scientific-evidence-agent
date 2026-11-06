@@ -1,0 +1,173 @@
+{
+  "selection": "First three in frozen test order for each post-hoc descriptive category; no significance claims from selected cases.",
+  "categories": {
+    "all_models_false_support": [
+      {
+        "id": "official-dev-759-1805641",
+        "claim": "Mathematical models predict that using Artemisinin-based combination therapy over nongametocytocidal drugs have a dramatic impact in reducing malaria transmission.",
+        "paper_id": "1805641",
+        "gold": "contradicted",
+        "predictions": {
+          "small-bf16": "supported",
+          "small-nf4": "supported",
+          "large-bf16": "supported",
+          "large-nf4": "supported",
+          "large-lora-20261106": "supported",
+          "large-lora-20261107": "supported",
+          "large-lora-20261108": "supported",
+          "minicheck-bf16": "supported"
+        }
+      },
+      {
+        "id": "official-dev-1207-18909530",
+        "claim": "The composition of myosin-II isoform switches from the polarizable B isoform to the more homogenous A isoform during hematopoietic differentiation.",
+        "paper_id": "18909530",
+        "gold": "insufficient",
+        "predictions": {
+          "small-bf16": "supported",
+          "small-nf4": "supported",
+          "large-bf16": "supported",
+          "large-nf4": "supported",
+          "large-lora-20261106": "supported",
+          "large-lora-20261107": "supported",
+          "large-lora-20261108": "supported",
+          "minicheck-bf16": "supported"
+        }
+      }
+    ],
+    "all_trained_miss_contradiction": [
+      {
+        "id": "official-dev-993-16472469",
+        "claim": "Pyridostatin destabilizes the G - quadruplex in the telomeric region.",
+        "paper_id": "16472469",
+        "gold": "contradicted",
+        "predictions": {
+          "small-bf16": "supported",
+          "small-nf4": "supported",
+          "large-bf16": "insufficient",
+          "large-nf4": "insufficient",
+          "large-lora-20261106": "insufficient",
+          "large-lora-20261107": "insufficient",
+          "large-lora-20261108": "supported",
+          "minicheck-bf16": "unsupported"
+        }
+      },
+      {
+        "id": "official-dev-1041-25254425",
+        "claim": "Replacement of histone H2A with H2A.Z slows gene activation in yeasts by stabilizing +1 nucleosomes.",
+        "paper_id": "25254425",
+        "gold": "contradicted",
+        "predictions": {
+          "small-bf16": "supported",
+          "small-nf4": "supported",
+          "large-bf16": "insufficient",
+          "large-nf4": "insufficient",
+          "large-lora-20261106": "insufficient",
+          "large-lora-20261107": "insufficient",
+          "large-lora-20261108": "insufficient",
+          "minicheck-bf16": "unsupported"
+        }
+      },
+      {
+        "id": "official-dev-718-17587795",
+        "claim": "Low nucleosome occupancy correlates with low methylation levels across species.",
+        "paper_id": "17587795",
+        "gold": "contradicted",
+        "predictions": {
+          "small-bf16": "supported",
+          "small-nf4": "supported",
+          "large-bf16": "insufficient",
+          "large-nf4": "insufficient",
+          "large-lora-20261106": "supported",
+          "large-lora-20261107": "supported",
+          "large-lora-20261108": "insufficient",
+          "minicheck-bf16": "unsupported"
+        }
+      }
+    ],
+    "training_regression": [
+      {
+        "id": "official-dev-72-6076903",
+        "claim": "Activator-inhibitor pairs are provided dorsally by Admpchordin.",
+        "paper_id": "6076903",
+        "gold": "insufficient",
+        "predictions": {
+          "small-bf16": "supported",
+          "small-nf4": "supported",
+          "large-bf16": "insufficient",
+          "large-nf4": "supported",
+          "large-lora-20261106": "supported",
+          "large-lora-20261107": "supported",
+          "large-lora-20261108": "supported",
+          "minicheck-bf16": "unsupported"
+        }
+      },
+      {
+        "id": "official-dev-1385-306006",
+        "claim": "cSMAC formation enhances weak ligand signalling.",
+        "paper_id": "306006",
+        "gold": "supported",
+        "predictions": {
+          "small-bf16": "supported",
+          "small-nf4": "supported",
+          "large-bf16": "supported",
+          "large-nf4": "supported",
+          "large-lora-20261106": "contradicted",
+          "large-lora-20261107": "contradicted",
+          "large-lora-20261108": "contradicted",
+          "minicheck-bf16": "supported"
+        }
+      }
+    ],
+    "training_repairs_contradiction": [
+      {
+        "id": "official-dev-185-18340282",
+        "claim": "Breast cancer development is determined exclusively by genetic factors.",
+        "paper_id": "18340282",
+        "gold": "contradicted",
+        "predictions": {
+          "small-bf16": "contradicted",
+          "small-nf4": "supported",
+          "large-bf16": "insufficient",
+          "large-nf4": "insufficient",
+          "large-lora-20261106": "contradicted",
+          "large-lora-20261107": "contradicted",
+          "large-lora-20261108": "contradicted",
+          "minicheck-bf16": "unsupported"
+        }
+      },
+      {
+        "id": "official-dev-882-14803797",
+        "claim": "Omnivores produce less trimethylamine N-oxide from dietary I-carnitine than vegetarians.",
+        "paper_id": "14803797",
+        "gold": "contradicted",
+        "predictions": {
+          "small-bf16": "supported",
+          "small-nf4": "supported",
+          "large-bf16": "insufficient",
+          "large-nf4": "insufficient",
+          "large-lora-20261106": "contradicted",
+          "large-lora-20261107": "contradicted",
+          "large-lora-20261108": "contradicted",
+          "minicheck-bf16": "unsupported"
+        }
+      },
+      {
+        "id": "official-dev-873-1180972",
+        "claim": "Obesity is determined solely by environmental factors.",
+        "paper_id": "1180972",
+        "gold": "contradicted",
+        "predictions": {
+          "small-bf16": "contradicted",
+          "small-nf4": "supported",
+          "large-bf16": "insufficient",
+          "large-nf4": "insufficient",
+          "large-lora-20261106": "contradicted",
+          "large-lora-20261107": "contradicted",
+          "large-lora-20261108": "contradicted",
+          "minicheck-bf16": "unsupported"
+        }
+      }
+    ]
+  }
+}

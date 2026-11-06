@@ -71,6 +71,13 @@ jobs:
         run: python -m pytest tests -q --junitxml=test-results/pytest.xml
       - name: Audit published verifier pilot
         run: python ../scripts/audit_verifier_pilot.py
+      - name: Audit scale study and interrupted attempt
+        run: |
+          python ../scripts/audit_verifier_scale.py
+          python ../scripts/audit_verifier_scale.py --root ../docs/results/scifact-verifier-scale-v2/interrupted-run-001
+      - name: Independently reproduce scale study intervals
+        if: matrix.profile == 'full'
+        run: python ../scripts/audit_verifier_scale.py --bootstrap
       - name: Test missing-ripgrep fallback
         if: matrix.profile == 'core' && runner.os == 'Linux'
         run: python -m pytest tests -q --without-rg --junitxml=test-results/without-rg.xml

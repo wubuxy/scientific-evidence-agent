@@ -1,0 +1,23 @@
+{
+  "scope": "Observed repeatability only. Same seed/config did not produce bit-identical trained weights; deterministic algorithms were not enforced. No test outcome used to select the corrected implementation or seed.",
+  "differences": [
+    {
+      "method": "large-lora-20261106",
+      "split": "test",
+      "id": "official-dev-649-12789595",
+      "old_verdict": "insufficient",
+      "new_verdict": "contradicted"
+    },
+    {
+      "method": "large-lora-20261106",
+      "split": "test",
+      "id": "official-dev-1272-17081238",
+      "old_verdict": "insufficient",
+      "new_verdict": "contradicted"
+    }
+  ],
+  "completed_seed_adapter_hash_equal": false,
+  "old_adapter_sha256": "80c770f9a278907abf92d779008cc6d8e3094ee57a6781502652d0860ceaf8b8",
+  "new_adapter_sha256": "0aa3007ec73e50e74fb4d97a1e86c235548fcfd46b11083013d2f14d9a0db7f6",
+  "max_training_loss_difference": 0.5399549002177082
+}

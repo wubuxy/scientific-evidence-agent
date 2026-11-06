@@ -1,0 +1,23 @@
+{
+  "plan_sha256": "8aa7e42807d343709dd8924d3c89e40befffa4d6702923b381627a208a428883",
+  "preflight_sha256": "f5d22fecaf750c80a5da90860b7782e2bf950131ef4d965ea96aaf1b686e4852",
+  "training_precision": "bf16",
+  "methods": [
+    "small-bf16",
+    "small-nf4",
+    "large-bf16",
+    "large-nf4",
+    "large-lora-20261106",
+    "large-lora-20261107",
+    "large-lora-20261108",
+    "minicheck-bf16"
+  ],
+  "gpu": "NVIDIA RTX A5000",
+  "runtime_cuda": "11.8",
+  "packages": {
+    "torch": "2.7.1+cu118",
+    "transformers": "4.51.3",
+    "peft": "0.15.2",
+    "bitsandbytes": "0.45.5"
+  }
+}

@@ -1,21 +1,21 @@
 {
   "updated": "2026-11-06",
   "model": "qwen3.5-27b",
-  "scope": "Agent development runs, engineering validation, and separately reported local verifier pilot; QASPER frozen test set reserved",
+  "scope": "Agent development runs, engineering validation, and separately reported local verifier studies; QASPER frozen test set reserved",
   "checks": {
-    "offline_tests_passed": 168,
+    "offline_tests_passed": 177,
     "frontend_typecheck": "passed",
     "frontend_production_build": "passed",
     "live_report_api": "completed",
-    "offline_tests_collected": 168,
+    "offline_tests_collected": 177,
     "offline_test_profiles": [
       {
         "profile": "full-locked",
         "platform": "Windows",
         "python": "3.13.13",
         "dependencies": "core + analysis under constraints-ci.txt; CPU torch from the official index",
-        "collected": 168,
-        "passed": 168,
+        "collected": 177,
+        "passed": 177,
         "skipped": 0,
         "failed": 0,
         "errors": 0,
@@ -30,28 +30,28 @@
           "pytest-asyncio": "1.4.1.post1",
           "openai": "3.46.0"
         },
-        "evidence": "docs/results/scifact-verifier-pilot-v1/windows-full.xml"
+        "evidence": "docs/results/scifact-verifier-scale-v2/windows-full.xml"
       },
       {
         "profile": "core",
         "platform": "Ubuntu 24.04 / WSL2",
         "python": "3.12.3",
         "dependencies": "requirements-research.txt + constraints-ci.txt; rg installed",
-        "collected": 168,
-        "passed": 155,
+        "collected": 177,
+        "passed": 164,
         "skipped": 13,
         "failed": 0,
         "errors": 0,
-        "evidence": "docs/results/scifact-verifier-pilot-v1/ubuntu-core.xml"
+        "evidence": "docs/results/scifact-verifier-scale-v2/ubuntu-core.xml"
       }
     ],
     "ci_workflow": ".github/workflows/ci.yml",
-    "ci_status": "Five hosted jobs passed for 4c36c8f; final results/audit commit status is published by GitHub Actions.",
+    "ci_status": "Hosted result is recorded per commit by GitHub Actions; final publication adds CPU-only artifact and interval audits.",
     "workflow_actionlint": "passed locally; actionlint 1.7.12 official Docker image",
     "reproducibility_guide": "docs/REPRODUCIBILITY.md",
     "frontend_build_note": "npm ci, explicit TypeScript check, and production build passed; 558.01 kB analysis chunk warning remains",
     "dependency_constraints_sha256": "f2e946c20ebb1c80ab79be44342d045f6ff55236bb364a515fae6a63e254a1a2",
-    "reproducibility_note": "Latest Windows full and server Ubuntu core suites passed. Prior Windows core/no-rg counts are archived rather than extrapolated. Published pilot audit independently recomputes fixed test macro F1 without a GPU.",
+    "reproducibility_note": "Latest Windows full and server Ubuntu core suites passed. Larger-model lifecycle regression checks Python 3.12 retention; public result audits preserve missing denominators and reproduce corrected intervals without models.",
     "offline_test_profiles_before_demo": [
       {
         "profile": "core",
@@ -121,10 +121,10 @@
       }
     ],
     "ci_previous_run": {
-      "commit": "4c36c8fbd1cf521795524c9c8cd72e53acf278b0",
+      "commit": "b267574ec2dbcfec371cc07706eb68850916abb8",
       "conclusion": "success",
       "jobs": 5,
-      "url": "https://github.com/wubuxy/scientific-evidence-agent/actions/runs/42060005247"
+      "url": "https://github.com/wubuxy/scientific-evidence-agent/actions/runs/42167893244"
     },
     "docker_demo": {
       "build": "passed",
@@ -292,6 +292,59 @@
           "openai": "3.46.0"
         }
       }
+    ],
+    "offline_test_profiles_before_verifier_scale": [
+      {
+        "profile": "full-locked",
+        "platform": "Windows",
+        "python": "3.13.13",
+        "dependencies": "core + analysis under constraints-ci.txt; CPU torch from the official index",
+        "collected": 168,
+        "passed": 168,
+        "skipped": 0,
+        "failed": 0,
+        "errors": 0,
+        "packages": {
+          "fastapi": "0.162.0",
+          "numpy": "2.5.4",
+          "scipy": "1.18.1",
+          "openpyxl": "3.1.5",
+          "torch": "2.15.0+cpu",
+          "pydantic": "2.14.3",
+          "pytest": "9.2.0",
+          "pytest-asyncio": "1.4.1.post1",
+          "openai": "3.46.0"
+        },
+        "evidence": "docs/results/scifact-verifier-pilot-v1/windows-full.xml"
+      },
+      {
+        "profile": "core",
+        "platform": "Ubuntu 24.04 / WSL2",
+        "python": "3.12.3",
+        "dependencies": "requirements-research.txt + constraints-ci.txt; rg installed",
+        "collected": 168,
+        "passed": 155,
+        "skipped": 13,
+        "failed": 0,
+        "errors": 0,
+        "evidence": "docs/results/scifact-verifier-pilot-v1/ubuntu-core.xml"
+      }
+    ],
+    "verifier_scale_artifact_audit": {
+      "corrected": "passed",
+      "interrupted": "passed",
+      "point_estimates": "independently recomputed",
+      "bootstrap": "both versions independently reproduced",
+      "requires_gpu": false,
+      "script": "scripts/audit_verifier_scale.py"
+    },
+    "ci_history": [
+      {
+        "commit": "4c36c8fbd1cf521795524c9c8cd72e53acf278b0",
+        "conclusion": "success",
+        "jobs": 5,
+        "url": "https://github.com/wubuxy/scientific-evidence-agent/actions/runs/42060005247"
+      }
     ]
   },
   "datasets": {
@@ -306,6 +359,14 @@
       "dev_tasks": 10,
       "test_tasks": 40,
       "purpose": "data adaptation and annotation workflow"
+    },
+    "scifact": {
+      "source_archive_sha256": "11c621288d41ac144d29b13b0f8503b3820b7d6e8b1f6ff24dff335c196d76be",
+      "training_pairs": 535,
+      "calibration_pairs": 65,
+      "pilot_v1_test_pairs": 129,
+      "scale_v2_project_unseen_test_pairs": 128,
+      "note": "The two local test selections are paper/claim/text disjoint within the project; data is public and pretraining contamination is not excluded."
     }
   },
   "experiments": [
@@ -480,5 +541,111 @@
     "reason": "Base NF4 predicts all test cases supported; contradiction recall after tuning is 0/19, 1/19 and 0/19. Calibration-only BF16 diagnostic reveals precision sensitivity. No evidence of full Agent quality improvement.",
     "report": "docs/results/SCIFACT_VERIFIER_PILOT_V1.md",
     "predictions_sha256": "c7be93b4dad42f99720ce67a82d8745b44acc8fdfdc9997549ac9daea4493db9"
+  },
+  "local_verifier_scale": {
+    "name": "scifact-verifier-scale-v2",
+    "scope": "oracle cited abstract module; prospective project-unseen papers from public SciFact dev; not full Agent quality",
+    "source_commit": "e52ae9597db5e47de4e8be710708981c5ba72962",
+    "freeze_commit": "b267574ec2dbcfec371cc07706eb68850916abb8",
+    "train_pairs": 535,
+    "calibration_pairs": 65,
+    "test_pairs": 128,
+    "test_groups": 103,
+    "conditions": [
+      "small-bf16",
+      "small-nf4",
+      "large-bf16",
+      "large-nf4",
+      "large-lora-20261106",
+      "large-lora-20261107",
+      "large-lora-20261108",
+      "minicheck-bf16"
+    ],
+    "training_precision": "bf16",
+    "trainable_adapter_parameters": 2523136,
+    "formal_complete_training_seeds": [
+      20261106,
+      20261107,
+      20261108
+    ],
+    "new_cloud_model_calls": 0,
+    "planned_records": 1928,
+    "completed_records": 1928,
+    "test_macro_f1": {
+      "small-bf16": 0.2809269162210339,
+      "small-nf4": 0.18111753371868977,
+      "large-bf16": 0.5813930962672381,
+      "large-nf4": 0.5688557141646386,
+      "large-lora-20261106": 0.7426045570658761,
+      "large-lora-20261107": 0.7473472888737716,
+      "large-lora-20261108": 0.7479550670609539,
+      "minicheck-bf16": null
+    },
+    "mean_trained_macro_f1": 0.7459689710002005,
+    "primary_contrasts": {
+      "scale": {
+        "delta": 0.30046618004620423,
+        "pointwise_95": [
+          0.2202987428621211,
+          0.38220817243071536
+        ],
+        "bonferroni_98_333": [
+          0.2020683279801751,
+          0.403500818138675
+        ]
+      },
+      "quantization": {
+        "delta": -0.01253738210259947,
+        "pointwise_95": [
+          -0.03244664400876218,
+          0.0
+        ],
+        "bonferroni_98_333": [
+          -0.038440988064688764,
+          0.0
+        ]
+      },
+      "training": {
+        "delta": 0.16457587473296242,
+        "pointwise_95": [
+          0.0929240559590584,
+          0.24326087916270578
+        ],
+        "bonferroni_98_333": [
+          0.07668717300278438,
+          0.2602427697398303
+        ]
+      }
+    },
+    "mean_trained_supported_precision": 0.7604938271604939,
+    "contradicted_recall_by_seed": [
+      0.5757575757575758,
+      0.5151515151515151,
+      0.48484848484848486
+    ],
+    "absolute_candidate_gate": false,
+    "training_success_gate": false,
+    "production_adoption": false,
+    "reason": "Mean supported precision 76.0% below 80%; one contradiction recall 16/33 below 50%. Macro F1 improvement does not imply lower false-support risk.",
+    "predictions_sha256": "5e035d122bfdf88abfc4e192ab1c29365f7c4516837980f56832fbe1e47e1826",
+    "interrupted_attempt": {
+      "planned_records": 1928,
+      "completed_records": 1205,
+      "training_success_gate": false,
+      "mean_training_delta": -0.32860727346727103,
+      "completed_training_seeds": [
+        20261106
+      ],
+      "interrupted_training_seeds": [
+        20261107
+      ],
+      "missing_model_conditions": [
+        "large-lora-20261107",
+        "large-lora-20261108",
+        "minicheck-bf16"
+      ],
+      "reason": "Prior base model retained through Python 3.12 locals() frame dictionary; superseded with explicit handle release and complete same-protocol rerun; old missing predictions remain in denominator."
+    },
+    "report": "docs/results/SCIFACT_VERIFIER_SCALE_V2.md"
   }
 }
