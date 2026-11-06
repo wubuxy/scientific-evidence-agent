@@ -333,7 +333,7 @@ def preflight(plan_dir, out):
     deadline = time.monotonic() + CONFIG["wall_seconds"]
     errors, precision = [], None
     for candidate in ("bf16", "nf4"):
-        model = None
+        model, base = None, None
         try:
             tokenizer = tokenizer_for(plan["model_dirs"]["large"])
             # Stress the longest training input; only training labels are supervised.
@@ -354,10 +354,9 @@ def preflight(plan_dir, out):
         except torch.OutOfMemoryError as error:
             errors.append(dict(precision=candidate, error=type(error).__name__, message=str(error)[:500]))
         finally:
-            if model is not None:
-                del model
-            if "base" in locals():
-                del base
+            # locals() caches a frame dictionary on Python 3.12. Looking up a
+            # handle there before del keeps that model alive into the next arm.
+            model, base = None, None
             gc.collect()
             torch.cuda.empty_cache()
     if precision is None:
@@ -407,7 +406,7 @@ def run(plan_dir, preflight_path, out):
     errors = []
     with (out / "predictions.jsonl").open("x") as output:
         for method, key, dtype, seed in methods:
-            model = None
+            model, base = None, None
             try:
                 if time.monotonic() > deadline:
                     raise TimeoutError("Frozen wall-time budget")
@@ -431,10 +430,7 @@ def run(plan_dir, preflight_path, out):
                 errors.append(dict(method=method, error=type(error).__name__, message=str(error)[:1000]))
                 print(json.dumps(errors[-1]), flush=True)
             finally:
-                if model is not None:
-                    del model
-                if "base" in locals():
-                    del base
+                model, base = None, None
                 gc.collect()
                 torch.cuda.empty_cache()
     result = dict(complete=not errors, errors=errors)

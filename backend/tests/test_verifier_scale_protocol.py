@@ -1,5 +1,9 @@
 import hashlib
 import json
+import importlib.metadata
+import sys
+from types import ModuleType, SimpleNamespace
+import weakref
 
 import pytest
 
@@ -112,3 +116,44 @@ def test_failed_matching_baseline_cannot_make_training_pass(tmp_path, monkeypatc
     assert value["primary_contrasts"]["training"]["delta"] == 1
     assert value["training_comparison_complete"] is False
     assert value["training_success_gate"] is False
+
+
+def test_all_model_handles_are_released_before_loading_next_arm(tmp_path, monkeypatch):
+    """Exercise the complete arm loop without torch/weights, including reloads."""
+    fake_torch = ModuleType("torch")
+    fake_torch.set_num_threads = lambda n: None
+    fake_torch.cuda = SimpleNamespace(empty_cache=lambda: None, get_device_name=lambda: "fixture")
+    fake_torch.version = SimpleNamespace(cuda="fixture")
+    fake_peft = ModuleType("peft")
+    class Base:
+        pass
+    class Adapter:
+        def __init__(self, base):
+            self.base = base
+    fake_peft.PeftModel = SimpleNamespace(from_pretrained=lambda base, *args, **kwargs: Adapter(base))
+    monkeypatch.setitem(sys.modules, "torch", fake_torch)
+    monkeypatch.setitem(sys.modules, "peft", fake_peft)
+    monkeypatch.setattr(importlib.metadata, "version", lambda name: "fixture")
+    monkeypatch.setattr(scale, "check_plan", lambda *args, **kwargs: dict(model_dirs={k: k for k in scale.MODEL_IDS}))
+    live, loads = weakref.WeakSet(), []
+    def loader(plan, key, precision):
+        assert not live, "previous base model is still strongly referenced"
+        model = Base()
+        live.add(model)
+        loads.append((key, precision))
+        return model
+    monkeypatch.setattr(scale, "load_model", loader)
+    monkeypatch.setattr(scale, "tokenizer_for", lambda *args: None)
+    monkeypatch.setattr(scale, "train", lambda model, *args, **kwargs: Adapter(model))
+    monkeypatch.setattr(scale, "infer", lambda *args, **kwargs: None)
+    plan_dir = tmp_path / "plan"
+    write_new(plan_dir / "plan.json", {})
+    for split in ["calibration", "test", "challenge", "training"]:
+        write_new(plan_dir / (split + (".json" if split == "training" else "-inputs.json")), dict(cases=[]))
+    preflight = tmp_path / "preflight.json"
+    write_new(preflight, dict(complete=True, plan_sha256=scale.sha(plan_dir / "plan.json"),
+                             selected_training_precision="bf16"))
+    result = scale.run(plan_dir, preflight, tmp_path / "run")
+    assert result == dict(complete=True, errors=[])
+    assert len(loads) == 11
+    assert not live
