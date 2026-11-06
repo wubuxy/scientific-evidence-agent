@@ -1,0 +1,26 @@
+{
+  "format": 1,
+  "purpose": "natural report candidate judge comparison; human calibration pending",
+  "cases": 92,
+  "cases_sha256": "c310b83adf4e4952b9f6f077db74dfd3b0fb7d305c9972dafdd80f735f3be5e7",
+  "models": [
+    "qwen3.5-27b",
+    "qwen3.5-397b-a17b"
+  ],
+  "max_tokens_per_model": 750000,
+  "temperature": 0.1,
+  "extra_body": {
+    "enable_thinking": false
+  },
+  "runner_sha256": "023822f453212335a95b7a46c7709c8968d1b8aa011f2d6a35f0f62843d03358",
+  "selector_sha256": "856299b2ea2a2369bae32f7fe8f6608d64e2dca29c98491d2b694f932ad08f9e",
+  "judge_dependencies_sha256": {
+    "backend/app/research_backend/benchmarks/claim_labels.py": "6a1484a8d536635e5c56f267b8633b3d6e3a4fceb18b3edd65570205810b0771",
+    "backend/app/research_backend/benchmarks/support_review.py": "5338e28200bc12a80f375c7c5b0c21f7c6bf5178b4721117f7e39d83d6d41ff9",
+    "backend/app/research_backend/benchmarks/measurement.py": "7cc8462dce27227de1914489596b112089744b1937b8dcfdbe643c1f4bc90cae",
+    "backend/app/research_backend/providers.py": "80396ea3d4884e6e88cd9b098253000cbe6ac9cea893999ec354f8648ac011b1",
+    "backend/app/research_backend/runtime.py": "29d50909f43483e01ff34257a12596a18fb2966a1c11b9aafde5c41c57afb18b"
+  },
+  "retries": 0,
+  "raw_outputs": "separate per-case checkpoints; candidate opinions never enter blind human packets"
+}

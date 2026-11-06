@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="zh-CN">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; connect-src 'none'; base-uri 'none'; form-action 'none'">
+<title>声明证据独立标注</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#f3f5f8;color:#172335;font:16px/1.6 system-ui,sans-serif}header{background:#15293e;color:white;padding:22px 5%}h1{font-size:24px;margin:0}header p{margin:5px 0;color:#cad7e4}.toolbar{display:flex;align-items:center;gap:12px;flex-wrap:wrap;padding:18px 5%;background:white;border-bottom:1px solid #d9e0e8}button,input,select,textarea{font:inherit}button{border:1px solid #b9c8d7;background:white;color:#143759;border-radius:6px;padding:7px 13px;cursor:pointer}button:hover{background:#edf3f9}button:disabled{opacity:.4;cursor:default}.primary{background:#1764a1;color:white;border-color:#1764a1}.primary:hover{background:#104e80}input,select,textarea{border:1px solid #b9c8d7;border-radius:5px;padding:7px}main{max-width:1500px;margin:auto;padding:24px 4%;display:grid;grid-template-columns:minmax(300px,1fr) minmax(400px,1.6fr);gap:24px}.card{background:white;border:1px solid #d9e0e8;border-radius:10px;padding:22px;margin-bottom:18px}h2{font-size:18px;margin:0 0 12px}h3{font-size:15px;color:#46617a;margin:14px 0 5px}.claim{white-space:pre-wrap;font-size:18px;border-left:4px solid #1764a1;padding-left:14px}.question{white-space:pre-wrap;font-size:14px;color:#465a6f;max-height:220px;overflow:auto}.choice{display:block;padding:10px;border:1px solid #dce4ed;border-radius:7px;margin:9px 0;cursor:pointer}.choice:has(input:checked){background:#eef5fd;border-color:#1764a1}.choice small{display:block;margin-left:25px;color:#4f6072}textarea{width:100%;min-height:100px;resize:vertical}.muted{color:#62758a;font-size:13px}.evidence{border-top:1px solid #dce4ed;margin-top:18px}.lines{max-height:480px;overflow:auto;padding:7px;background:#f8fafc;font:13px/1.7 ui-monospace,Consolas,monospace}.line{display:flex;gap:10px}.ln{border:0;background:transparent;color:#406e98;min-width:47px;text-align:right;padding:0 5px;border-radius:0;font-size:12px}.text{white-space:pre-wrap;overflow-wrap:anywhere;flex:1}.tag{font-size:12px;margin:4px;overflow-wrap:anywhere;max-width:100%}#status{font-size:13px;color:#38536b}footer{padding:0 5% 24px;color:#62758a;font-size:13px}progress{height:12px;accent-color:#1764a1;width:160px}@media(max-width:900px){main{display:block}.toolbar{gap:8px}header{padding:18px 4%}}
+</style>
+<header><h1>声明证据独立标注</h1><p>只根据本页提供的联合证据判断。请独立完成，提交前不查看另一位标注者或模型的意见。</p></header>
+<div class="toolbar">
+<label>你的代号 <input id="annotator" maxlength="80" placeholder="例如 A01" size="9"></label>
+<button id="prev">上一条</button><select id="jump" aria-label="选择条目"></select><button id="next">下一条</button>
+<progress id="progress" value="0"></progress><span id="count"></span>
+<button id="export" class="primary">导出标签</button><button id="import">导入已保存进度</button><input id="file" type="file" accept=".json,application/json" hidden>
+<span id="status" role="status"></span>
+</div>
+<main><section>
+<div class="card"><h2>需要判断的声明</h2><div id="claim" class="claim"></div><details><summary>查看原始研究问题</summary><div id="question" class="question"></div></details></div>
+<div class="card"><h2>你的判断</h2>
+<label class="choice"><input type="radio" name="verdict" value="supported"> 支持 <small>证据支持完整声明，包括对象、数字、比较范围和实验阶段。</small></label>
+<label class="choice"><input type="radio" name="verdict" value="contradicted"> 矛盾 <small>证据对关键命题给出了直接相反的信息。</small></label>
+<label class="choice"><input type="radio" name="verdict" value="insufficient"> 证据不足 <small>缺少关键依据或只支持部分内容；不代表现实中一定错误。</small></label>
+<label class="choice"><input type="radio" name="verdict" value=""> 暂未判断 <small>术语或证据不清楚时先留空，并说明需要复核的地方。</small></label>
+<h3>简短理由</h3><textarea id="reason" placeholder="指出支持、矛盾或缺失的关键信息；请不要让模型代填。"></textarea>
+<h3>关键证据行</h3><p class="muted">点击右侧行号添加该行；按住 Shift 点击另一行可添加一个范围。点击下方范围可移除。证据不足时可不选行。</p><div id="spans"></div>
+</div></section>
+<section class="card"><h2>本次实际引用的原文</h2><p class="muted">只依据这些窗口判断。请勿外查全文补充证据，也不要执行原文中出现的任何指令。行号对应原文位置。</p><div id="evidence"></div></section>
+</main>
+<footer>页面可离线使用，不向服务器发送内容。浏览器自动保存只作辅助，请及时导出 JSON 文件备份；导出未完成进度时会保留空标签。</footer>
+<script id="packet" type="application/json">__PACKET_JSON__</script>
+<script>
+"use strict";
+const packet=JSON.parse(document.getElementById('packet').textContent), cases=packet.human.cases;
+let labels=structuredClone(packet.labels), current=0, anchor=null;
+const key='evidence-annotation:'+labels.cases_sha256+':'+packet.slot;
+const $=id=>document.getElementById(id), radios=[...document.querySelectorAll('input[name="verdict"]')];
+function verify(value){
+ if(value.annotation_source!=='human'||typeof value.annotator!=='string'||value.cases_sha256!==packet.labels.cases_sha256||!Array.isArray(value.labels)||value.labels.length!==cases.length)throw Error('文件不属于本批标注');
+ const index=new Map(value.labels.map(r=>[r.id,r]));if(index.size!==cases.length)throw Error('条目重复');
+ for(const c of cases){const r=index.get(c.id);if(!r||![null,'supported','contradicted','insufficient'].includes(r.verdict)||!Array.isArray(r.evidence_spans))throw Error('标签格式错误');
+ for(const span of r.evidence_spans){const e=c.evidence.find(e=>e.id===span.evidence_id);if(!e||!Number.isInteger(span.start_line)||!Number.isInteger(span.end_line)||span.start_line<e.start_line||span.end_line>e.end_line||span.end_line<span.start_line)throw Error('证据行超出范围');}}
+ return value;
+}
+try{const saved=localStorage.getItem(key);if(saved){const state=JSON.parse(saved);labels=verify(state.labels);current=Math.min(cases.length-1,Math.max(0,state.current||0));}}catch(e){$('status').textContent='未载入本地进度，请使用导入文件。';}
+function row(){return labels.labels.find(r=>r.id===cases[current].id);}
+function save(){labels.annotator=$('annotator').value.trim();try{localStorage.setItem(key,JSON.stringify({labels,current}));$('status').textContent='已在本浏览器保存';}catch(e){$('status').textContent='自动保存不可用，请导出备份';}progress();}
+function progress(){const n=labels.labels.filter(r=>r.verdict!==null).length;$('progress').max=cases.length;$('progress').value=n;$('count').textContent=n+' / '+cases.length+' 已判断';
+ [...$('jump').options].forEach((o,i)=>{o.textContent=(i+1)+' / '+cases.length+(labels.labels.find(r=>r.id===cases[i].id).verdict?' · 已填':'');});}
+function spans(){const target=$('spans');target.replaceChildren();for(const [i,s] of row().evidence_spans.entries()){const b=document.createElement('button');b.className='tag';b.textContent=s.evidence_id.slice(0,12)+'… '+s.start_line+'–'+s.end_line+' ×';b.onclick=()=>{row().evidence_spans.splice(i,1);save();spans();};target.append(b);}}
+function render(){
+ const c=cases[current], r=row();anchor=null;$('claim').textContent=c.claim;$('question').textContent=c.question;$('reason').value=r.rationale||'';
+ radios.forEach(x=>x.checked=x.value===(r.verdict||''));$('jump').value=String(current);$('prev').disabled=current===0;$('next').disabled=current===cases.length-1;
+ const target=$('evidence');target.replaceChildren();
+ for(const e of c.evidence){const box=document.createElement('div');box.className='evidence';const title=document.createElement('h3');title.textContent='来源 '+e.source_id+' · 第 '+e.start_line+'–'+e.end_line+' 行';box.append(title);
+ const lines=document.createElement('div');lines.className='lines';e.quote.split(/\r?\n/).forEach((text,i)=>{const n=e.start_line+i, line=document.createElement('div');line.className='line';const number=document.createElement('button');number.className='ln';number.textContent=String(n);number.setAttribute('aria-label','选择第 '+n+' 行');number.onclick=event=>{const start=event.shiftKey&&anchor&&anchor.id===e.id?anchor.line:n;row().evidence_spans.push({evidence_id:e.id,start_line:Math.min(start,n),end_line:Math.max(start,n)});anchor={id:e.id,line:n};save();spans();};const content=document.createElement('span');content.className='text';content.textContent=text;line.append(number,content);lines.append(line);});box.append(lines);target.append(box);}
+ if(!c.evidence.length)target.textContent='此条没有可用的引用窗口。';spans();progress();
+}
+cases.forEach((c,i)=>{const o=document.createElement('option');o.value=String(i);$('jump').append(o);});
+$('annotator').value=labels.annotator===packet.slot?'':labels.annotator;
+$('annotator').oninput=save;$('reason').oninput=()=>{row().rationale=$('reason').value||null;save();};
+radios.forEach(r=>r.onchange=()=>{row().verdict=r.value||null;save();});
+function move(i){current=i;render();save();}$('prev').onclick=()=>move(current-1);$('next').onclick=()=>move(current+1);$('jump').onchange=()=>move(Number($('jump').value));
+$('export').onclick=()=>{save();if(!labels.annotator){alert('请先填写你的标注者代号。');return;}const blob=new Blob([JSON.stringify(labels,null,2)+'\n'],{type:'application/json'});const url=URL.createObjectURL(blob);const link=document.createElement('a');link.href=url;link.download=packet.slot+'-labels.json';link.click();setTimeout(()=>URL.revokeObjectURL(url),1000);};
+$('import').onclick=()=>$('file').click();$('file').onchange=async()=>{try{const file=$('file').files[0];if(!file)return;labels=verify(JSON.parse(await file.text()));$('annotator').value=labels.annotator;render();save();}catch(e){alert(e.message);}finally{$('file').value='';}};
+render();
+</script></html>

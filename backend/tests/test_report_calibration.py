@@ -1,5 +1,9 @@
 import importlib.util
+import json
 from pathlib import Path
+import zipfile
+
+import pytest
 
 
 def script(name):
@@ -45,3 +49,42 @@ def test_natural_annotation_sampling_covers_claims_fields_and_keeps_short_report
     ids=[c["id"] for c in selected["cases"]]
     for c in cases:c["candidate_verdict"]="supported" if c["id"] not in ids else "contradicted"
     assert [c["id"] for c in module.select(dict(cases=cases),tasks)["cases"]]==ids
+
+
+def test_annotation_page_does_not_execute_paper_text_or_disclose_candidate_metadata(tmp_path):
+    module=script("package_report_annotations")
+    human=dict(cases=[dict(id="one",question="q",claim="</script><img src=x onerror=alert(1)>",
+        method="hidden-method",candidate_verdict="hidden-verdict",evidence=[dict(id="e",source_id="p",start_line=2,
+            end_line=2,quote="quote",model="hidden-model")])])
+    (tmp_path/"human-cases.json").write_text(json.dumps(human))
+    for slot in ("annotator-a","annotator-b"):
+        (tmp_path/(slot+".json")).write_text(json.dumps(dict(annotation_source="human",annotator=slot,
+            cases_sha256="frozen",labels=[dict(id="one",verdict=None,rationale=None,evidence_spans=[])])))
+    module.package(tmp_path)
+    for slot in ("annotator-a","annotator-b"):
+        content=(tmp_path/(slot+".html")).read_text(encoding="utf-8")
+        assert "</script><img" not in content and "hidden-method" not in content
+        assert "hidden-verdict" not in content and "hidden-model" not in content
+        assert "\\u003c/script\\u003e" in content
+        with zipfile.ZipFile(tmp_path/(slot+".zip")) as z:
+            assert set(z.namelist())=={"start.html","human-cases.json",slot+".json","instructions.md"}
+            assert b"hidden-" not in z.read("human-cases.json")
+        assert ("annotator-b" if slot=="annotator-a" else "annotator-a") not in content
+
+
+@pytest.mark.asyncio
+async def test_judge_checkpoint_preserves_unknown_usage_and_stops_further_calls(tmp_path):
+    module=script("run_report_judges")
+    case=lambda i:dict(id=str(i),question="q",claim="alpha",source_ids=["p"],citation_contract_valid=True,
+        evidence=[dict(id="e",source_id="p",start_line=1,end_line=1,quote="alpha")])
+    class Model:
+        calls=0
+        async def complete(self,messages,tools,limit):
+            self.calls+=1
+            return dict(tokens=None,message={})
+    model=Model()
+    result=await module.evaluate(dict(cases=[case(i) for i in range(3)]),model,tmp_path/"judge",20000,"fixture")
+    assert model.calls==1 and result["tokens_used"] is None
+    assert len(result["records"])==3 and all(r["status"]=="failed" for r in result["records"])
+    assert len(list((tmp_path/"judge").glob("case-*.json")))==3
+    assert result["records"][-1]["error"]=="prior_unknown_usage"
