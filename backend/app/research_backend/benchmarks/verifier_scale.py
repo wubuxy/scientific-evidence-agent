@@ -85,6 +85,20 @@ def verify_official(directory, spec, mini=False):
             raise ValueError("Official source hash mismatch: " + str(path))
 
 
+def augment_groups(rows):
+    """Also isolate duplicate abstracts with different titles/IDs and text casing."""
+    result = []
+    for row in rows:
+        keys = set(row["group_keys"])
+        keys.add("normalized-claim:" + v1.text_hash(row["claim"].lower()))
+        for evidence in row["evidence"]:
+            keys.add("paper-id:" + str(evidence["source_id"]))
+            abstract = " ".join(evidence["quote"].splitlines()[1:])
+            keys.add("normalized-abstract:" + v1.text_hash(abstract.lower()))
+        result.append(dict(row, group_keys=sorted(keys)))
+    return result
+
+
 def prepare(raw, old_plan_dir, data_root, out):
     root = Path(__file__).resolve().parents[4]
     sources = load(root / "docs/dataset-manifests/verifier-scale-model-sources.json")
@@ -94,13 +108,13 @@ def prepare(raw, old_plan_dir, data_root, out):
         verify_official(directory, sources["models"][MODEL_IDS[key]], mini=key == "minicheck")
         fingerprints[key] = model_files(directory)
     tokenizers = {key: tokenizer_for(directory, key == "minicheck") for key, directory in directories.items()}
-    training = load(Path(old_plan_dir) / "training.json")["cases"]
-    calibration = load(Path(old_plan_dir) / "calibration-inputs.json")["cases"]
+    training = augment_groups(load(Path(old_plan_dir) / "training.json")["cases"])
+    calibration = augment_groups(load(Path(old_plan_dir) / "calibration-inputs.json")["cases"])
     calibration_gold = load(Path(old_plan_dir) / "calibration-gold.json")["labels"]
-    old_test = load(Path(old_plan_dir) / "test-inputs.json")["cases"]
+    old_test = augment_groups(load(Path(old_plan_dir) / "test-inputs.json")["cases"])
     data = v1.read_archive(raw)
     corpus = {str(r["doc_id"]): r for r in data["corpus"]}
-    candidates = v1.scientific_pairs(data["claims_dev"], corpus, "official-dev")
+    candidates = augment_groups(v1.scientific_pairs(data["claims_dev"], corpus, "official-dev"))
     observed = {k for r in old_test + calibration + training for k in r["group_keys"]}
     fresh = [r for group in v1.connected_groups(candidates)
              if not any(k in observed for r in group for k in r["group_keys"]) for r in group]

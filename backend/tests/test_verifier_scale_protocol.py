@@ -43,6 +43,17 @@ def test_native_minicheck_projection_excludes_gold_and_metadata():
     assert all(text not in rendered for text in ["gold sentinel", "question sentinel", "secret group", "private metadata"])
 
 
+def test_duplicate_abstracts_are_grouped_despite_different_titles_and_ids():
+    rows = [dict(claim="One claim", group_keys=["original-a"],
+                 evidence=[dict(source_id="1", quote="Title one\n1: The SAME abstract.")]),
+            dict(claim="Another claim", group_keys=["original-b"],
+                 evidence=[dict(source_id="2", quote="Different title\n1: the same   abstract.")])]
+    a, b = scale.augment_groups(rows)
+    shared = set(a["group_keys"]) & set(b["group_keys"])
+    assert len(shared) == 1 and next(iter(shared)).startswith("normalized-abstract:")
+    assert rows[0]["group_keys"] == ["original-a"]
+
+
 def test_custom_python_is_checked_without_executing(tmp_path):
     path = tmp_path / "modeling.py"
     content = b'raise RuntimeError("must not execute")\n'

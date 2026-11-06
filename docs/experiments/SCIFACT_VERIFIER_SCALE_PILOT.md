@@ -14,6 +14,8 @@
 
 MiniCheck 权重标注 CC BY-NC 4.0，本轮用于研究比较。各模型实际权重分片必须匹配官方 Hugging Face LFS SHA256；下载可用 ModelScope 镜像。MiniCheck 的自定义 Python 已按固定版本审阅，执行前核对代码 git blob 哈希，只从本地加载，不执行跨仓库 AutoModel 映射。模型、数据、缓存和结果均保存在 `D:\Ding`。
 
+GPU 环境与应用环境分开，使用 Python 3.12、官方 cu118 索引的 torch 2.7.1，以及 [requirements-verifier-gpu.txt](../../backend/requirements-verifier-gpu.txt)。NLTK 的 `punkt_tab` 存在 `/mnt/d/Ding/cache/nltk`，通过 `NLTK_DATA` 指定；自定义模型代码缓存通过 `HF_MODULES_CACHE` 指向 D 盘。安装失败可使用清华或阿里 PyPI 镜像，不改变实际权重哈希。
+
 ## 实验条件
 
 | 条件 | 模型与处理 | 可回答的问题 |
@@ -31,7 +33,7 @@ MiniCheck 输出 supported/unsupported，不强行映射成 contradicted/insuffi
 
 ## 数据与隔离
 
-沿用 v1 的 535 对训练样本、65 对校准样本，且不改训练标签。官方 SciFact dev 按共享论文、重复文本和 claim 的完整连接组处理；排除与 v1 已预测的 129 对、训练和校准输入有任一组键交集的整组。再按所有候选模型的完整 token 长度联合过滤，不截断原文；按固定散列顺序选满目标 128 对，并保留跨目标的整组。若不足 64 对或缺失某一类，则停止，不换成已观察论文补数。实际 ID、数量、分组与排除原因写入 plan。
+沿用 v1 的 535 对训练样本、65 对校准样本，且不改训练标签或模型可见内容。分组在原有连接键上增加论文 ID、忽略标题且转小写/合并空白的摘要哈希，以及同样归一化的 claim 哈希。官方 SciFact dev 按这些键的完整连接组处理；排除与 v1 已预测的 129 对、训练和校准输入有任一组键交集的整组。再按所有候选模型的完整 token 长度联合过滤，不截断原文；按固定散列顺序选满目标 128 对，并保留跨目标的整组。若不足 64 对或缺失某一类，则停止，不换成已观察论文补数。实际 ID、数量、分组与排除原因写入 plan。
 
 正式测试输入与 gold 分文件。训练仅接收 training.json；推理仅打开 inputs，连 gold 哈希也不读取；独立 score 阶段才读取 test gold。公开 dev 可能进入基础模型预训练，本轮仅保证本项目内的论文和观测隔离，不称为无污染隐藏测试。16 条既有合成挑战例与 32 条移除证据诊断单独报告。
 
