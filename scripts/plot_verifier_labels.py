@@ -42,6 +42,9 @@ def main():
     fig.savefig(root / "paired-effects.png", dpi=180, facecolor="white")
     fig.savefig(root / "paired-effects.svg", facecolor="white")
     plt.close(fig)
+    svg = root / "paired-effects.svg"
+    svg.write_text("\n".join(line.rstrip() for line in svg.read_text(encoding="utf-8").splitlines()) + "\n",
+                   encoding="utf-8", newline="\n")
 
 
 if __name__ == "__main__":
