@@ -1,0 +1,186 @@
+{
+  "schema_version": 1,
+  "synthetic": true,
+  "scope": "Actual model call on invented text; fixed replay, not an accuracy evaluation",
+  "recording": {
+    "id": "4f13267f-aaa0-4a7d-87fc-6cd4464d4765",
+    "created_at": "2026-11-07T08:24:32.137648+00:00",
+    "model": "qwen3.5-27b",
+    "tokens_used": 15814,
+    "tokens_estimated": false,
+    "step": 5,
+    "question": "只基于提供的合成资料，回答训练数据、训练初始化、额外训练数据。使用这三个字段名；无法确认时值严格写本次未核实。请阅读原文后引用。",
+    "field_state": {
+      "version": "field-ledger-v1",
+      "requirement_origin": "request",
+      "fields": [
+        {
+          "source_id": "bcd9d783-8311-4acd-923d-ff86be001a6d",
+          "name": "训练数据",
+          "criterion": "完整回答该字段，保留对象、实验阶段和适用条件",
+          "id": "field-348f91434024dfb9",
+          "activity": "candidate",
+          "answer": "Train-X",
+          "evidence_ids": [
+            "ev_7a234291c9aef8746766f398d7402b38"
+          ],
+          "candidate_hash": "100d25704fe5a4e590aeebcdc6749739ddd09aa7d793b4940dbee1c47f8e80e0",
+          "revision": 2,
+          "coverage": "present",
+          "review": {
+            "field_id": "field-348f91434024dfb9",
+            "candidate_hash": "100d25704fe5a4e590aeebcdc6749739ddd09aa7d793b4940dbee1c47f8e80e0",
+            "support": "supported",
+            "adequacy": "complete",
+            "role": "aligned",
+            "stage": "aligned",
+            "rationale": "证据明确说明'Atlas is trained on dataset Train-X'，直接支持候选答案'Train-X'。该陈述位于训练阶段，对象为Atlas，适用条件清晰。",
+            "evidence_spans": [
+              {
+                "evidence_id": "ev_7a234291c9aef8746766f398d7402b38",
+                "start_line": 3,
+                "end_line": 3
+              }
+            ],
+            "reviewer": "qwen3.5-27b",
+            "prompt_hash": "1bf9fc2772216c7210b0d0971479720977611b4578d25e257eae45ce6e4130d9",
+            "authority": "model_candidate",
+            "needs_human_review": true
+          },
+          "attempts": 0
+        },
+        {
+          "source_id": "bcd9d783-8311-4acd-923d-ff86be001a6d",
+          "name": "训练初始化",
+          "criterion": "完整回答该字段，保留对象、实验阶段和适用条件",
+          "id": "field-ca96f1bb2ef91774",
+          "activity": "candidate",
+          "answer": "Seed-A 检查点",
+          "evidence_ids": [
+            "ev_7a234291c9aef8746766f398d7402b38"
+          ],
+          "candidate_hash": "061690d36b835cd44cae0bf57bb7e0177a3a091ca2d78020830b16a68a81425a",
+          "revision": 2,
+          "coverage": "present",
+          "review": {
+            "field_id": "field-ca96f1bb2ef91774",
+            "candidate_hash": "061690d36b835cd44cae0bf57bb7e0177a3a091ca2d78020830b16a68a81425a",
+            "support": "supported",
+            "adequacy": "complete",
+            "role": "aligned",
+            "stage": "aligned",
+            "rationale": "证据明确指出'Atlas is initialized from checkpoint Seed-A before training'，完全支持候选答案'Seed-A 检查点'。该陈述属于训练初始化阶段，对象和条件均明确。",
+            "evidence_spans": [
+              {
+                "evidence_id": "ev_7a234291c9aef8746766f398d7402b38",
+                "start_line": 2,
+                "end_line": 2
+              }
+            ],
+            "reviewer": "qwen3.5-27b",
+            "prompt_hash": "1bf9fc2772216c7210b0d0971479720977611b4578d25e257eae45ce6e4130d9",
+            "authority": "model_candidate",
+            "needs_human_review": true
+          },
+          "attempts": 0
+        },
+        {
+          "source_id": "bcd9d783-8311-4acd-923d-ff86be001a6d",
+          "name": "额外训练数据",
+          "criterion": "完整回答该字段，保留对象、实验阶段和适用条件",
+          "id": "field-3a2b289353bcf1a9",
+          "activity": "unresolved",
+          "answer": "本次未核实",
+          "evidence_ids": [
+            "ev_7a234291c9aef8746766f398d7402b38"
+          ],
+          "candidate_hash": "abd87824b5d400ffa3f63ec3aeada96020117789fb14ae7cbe13d122e3cfb9f6",
+          "revision": 2,
+          "coverage": "abstained",
+          "review": null,
+          "attempts": 0
+        }
+      ],
+      "total": 3,
+      "present": 2,
+      "unresolved": 1,
+      "reviewed": 2,
+      "semantic_success": null,
+      "review_status": "recorded",
+      "repair_rounds": 0,
+      "stop_reason": "final_reserve",
+      "previous_versions": [
+        {
+          "field_id": "field-348f91434024dfb9",
+          "revision": 1,
+          "candidate_hash": "8a69088d94a9d9ed7d44c355c6b0dfd38a13400af0077a4ba595ab7bf9c3113b",
+          "answer": "dataset Train-X",
+          "evidence_ids": [
+            "ev_7a234291c9aef8746766f398d7402b38"
+          ],
+          "review": null
+        },
+        {
+          "field_id": "field-ca96f1bb2ef91774",
+          "revision": 1,
+          "candidate_hash": "7814b68b8aad003a9ed9ede60b089a9b5f3d1c720aee3e4ce47133ce66dd8ee6",
+          "answer": "从 checkpoint Seed-A 初始化",
+          "evidence_ids": [
+            "ev_7a234291c9aef8746766f398d7402b38"
+          ],
+          "review": null
+        },
+        {
+          "field_id": "field-3a2b289353bcf1a9",
+          "revision": 1,
+          "candidate_hash": "6591ca01bb1d9553b45eac599c60b8f359e7d7882d395f967a5b674eec97455d",
+          "answer": "本次未核实（原文明示：This excerpt contains no statement about use of additional training data）",
+          "evidence_ids": [
+            "ev_7a234291c9aef8746766f398d7402b38"
+          ],
+          "review": null
+        }
+      ]
+    }
+  },
+  "source": {
+    "id": "bcd9d783-8311-4acd-923d-ff86be001a6d",
+    "title": "Synthetic Paper A (not a real study)",
+    "kind": "document",
+    "uri": null,
+    "version": "1",
+    "source_hash": "10b0284c5adce9bd86340ea4fe0a560a9f5aa3ce40184acb2d876b997254ee24",
+    "line_count": 5,
+    "rag_indexed": false,
+    "created_at": "2026-11-07T08:24:32.122995+00:00",
+    "blocks": [
+      {
+        "text": "Synthetic fixture. No real experimental result is claimed.\nMethod: Atlas is initialized from checkpoint Seed-A before training.\nTraining: Atlas is trained on dataset Train-X.\nEvaluation: We use dataset Eval-Y and the last training checkpoint.\nThis excerpt contains no statement about use of additional training data.",
+        "page": null,
+        "start_seconds": null,
+        "end_seconds": null,
+        "block_type": "text"
+      }
+    ],
+    "text": "Synthetic fixture. No real experimental result is claimed.\nMethod: Atlas is initialized from checkpoint Seed-A before training.\nTraining: Atlas is trained on dataset Train-X.\nEvaluation: We use dataset Eval-Y and the last training checkpoint.\nThis excerpt contains no statement about use of additional training data.",
+    "content_sha256": "0071314fdfd0057558c95d68833c1b938ca68786303e6c4f5183397409b42577"
+  },
+  "evidence": [
+    {
+      "id": "ev_7a234291c9aef8746766f398d7402b38",
+      "source_id": "bcd9d783-8311-4acd-923d-ff86be001a6d",
+      "source_hash": "10b0284c5adce9bd86340ea4fe0a560a9f5aa3ce40184acb2d876b997254ee24",
+      "start_line": 1,
+      "end_line": 5,
+      "quote": "Synthetic fixture. No real experimental result is claimed.\nMethod: Atlas is initialized from checkpoint Seed-A before training.\nTraining: Atlas is trained on dataset Train-X.\nEvaluation: We use dataset Eval-Y and the last training checkpoint.\nThis excerpt contains no statement about use of additional training data."
+    }
+  ],
+  "provenance": {
+    "script": "scripts/smoke_field_state.py",
+    "generator": "scripts/export_field_demo.py",
+    "original_run_sha256": "7571026005a78f4de18b022e7c69423c5c20758fd89bfe6b1aeb150f60649900",
+    "generation_calls": 4,
+    "review_calls": 1
+  },
+  "human_labels": 0
+}

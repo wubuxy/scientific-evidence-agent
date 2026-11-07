@@ -3,19 +3,19 @@
   "model": "qwen3.5-27b",
   "scope": "Agent development runs, engineering validation, and separately reported local verifier studies; QASPER frozen test set reserved",
   "checks": {
-    "offline_tests_passed": 228,
+    "offline_tests_passed": 230,
     "frontend_typecheck": "passed",
     "frontend_production_build": "passed",
     "live_report_api": "completed",
-    "offline_tests_collected": 228,
+    "offline_tests_collected": 230,
     "offline_test_profiles": [
       {
         "profile": "full-locked",
         "platform": "Windows",
         "python": "3.13.13",
         "dependencies": "core + analysis under constraints-ci.txt; CPU torch from the official index",
-        "collected": 228,
-        "passed": 228,
+        "collected": 230,
+        "passed": 230,
         "skipped": 0,
         "failed": 0,
         "errors": 0,
@@ -30,7 +30,7 @@
           "pytest-asyncio": "1.4.1.post1",
           "openai": "3.46.0"
         },
-        "evidence": "docs/results/field-state-v1/validation.json"
+        "evidence": "docs/results/showcase-v1/validation.json"
       }
     ],
     "ci_workflow": ".github/workflows/ci.yml",
@@ -39,7 +39,7 @@
     "reproducibility_guide": "docs/REPRODUCIBILITY.md",
     "frontend_build_note": "npm ci, explicit TypeScript check, and production build passed; 558.01 kB analysis chunk warning remains",
     "dependency_constraints_sha256": "f2e946c20ebb1c80ab79be44342d045f6ff55236bb364a515fae6a63e254a1a2",
-    "reproducibility_note": "Windows full: 228 passed, zero skips. Earlier profiles retained separately. Added field ledger, version-bound review, scoped repair, budget termination and checkpoint fallback validation.",
+    "reproducibility_note": "Windows full: 230 passed, zero skips. Added public field replay source, candidate-version and cost integrity checks. Earlier profiles retained separately.",
     "offline_test_profiles_before_demo": [
       {
         "profile": "core",
@@ -487,6 +487,31 @@
           "openai": "3.46.0"
         },
         "evidence": "docs/results/report-calibration-v1/validation.json"
+      }
+    ],
+    "offline_test_profiles_before_showcase": [
+      {
+        "profile": "full-locked",
+        "platform": "Windows",
+        "python": "3.13.13",
+        "dependencies": "core + analysis under constraints-ci.txt; CPU torch from the official index",
+        "collected": 228,
+        "passed": 228,
+        "skipped": 0,
+        "failed": 0,
+        "errors": 0,
+        "packages": {
+          "fastapi": "0.162.0",
+          "numpy": "2.5.4",
+          "scipy": "1.18.1",
+          "openpyxl": "3.1.5",
+          "torch": "2.15.0+cpu",
+          "pydantic": "2.14.3",
+          "pytest": "9.2.0",
+          "pytest-asyncio": "1.4.1.post1",
+          "openai": "3.46.0"
+        },
+        "evidence": "docs/results/field-state-v1/validation.json"
       }
     ]
   },
@@ -940,5 +965,12 @@
     "real_human_labels": 0,
     "semantic_accuracy": null,
     "new_training_runs": 0
+  },
+  "showcase_v1": {
+    "validation": "docs/results/showcase-v1/validation.json",
+    "route": "/demo/fields",
+    "new_model_calls": 0,
+    "real_human_labels": 0,
+    "semantic_accuracy": null
   }
 }

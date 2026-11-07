@@ -66,7 +66,7 @@ export default function DemoReplay() {
 
   const source = data?.sources.find(item => item.id === focus?.source_id)
   return <div className="demo-shell">
-    <header className="demo-topbar"><a className="demo-brand" href="/"><BrandMark/><strong>研序<span> / EVIDENCE AGENT</span></strong></a><span className="demo-offline"><span/>真实运行回放 · 无需 API 密钥</span><a className="button compact" href="/">进入工作台<Icon name="arrow" size={15}/></a></header>
+    <header className="demo-topbar"><a className="demo-brand" href="/"><BrandMark/><strong>研序<span> / EVIDENCE AGENT</span></strong></a><span className="demo-offline"><span/>真实运行回放 · 无需 API 密钥</span><a className="button compact" href="/demo/fields">字段状态回放<Icon name="arrow" size={15}/></a><a className="button compact" href="/">进入工作台<Icon name="arrow" size={15}/></a></header>
     <main className="demo-main">
       <section className="demo-intro"><div><span className="eyebrow">FOLLOW THE EVIDENCE</span><h1>每条结论，都能回到原文。</h1><p>用一份真实报告，看模型读了什么、引用了哪里，以及一条看似合理的断言为什么会出错。</p></div><div className="demo-start"><button className="button primary" disabled={!data || busy} onClick={() => void openExample()}>{busy ? '正在导入两篇示例论文…' : '用示例论文开始研究'}<Icon name="arrow" size={16}/></button><small>导入与检索无需密钥；新生成需配置模型。</small></div></section>
       {error && <div className="error-box" role="alert">{error}</div>}
@@ -93,7 +93,7 @@ export default function DemoReplay() {
               <div className="demo-insight demo-amber"><Icon name="warning" size={20}/><p>这是人工事后定位，不是原运行自动修复。证据 ID、来源归属和回读校验不能替代语义支持判断。</p></div>
             </>}
             {view === 'experiment' && <>
-              <span className="eyebrow">SEPARATE OFFLINE EXPERIMENT</span><h2>核验后补读：有一个有效案例。</h2><p className="demo-description">另一组 6 篇新论文的短答案实验，使用 {data.experiment.model}。它与上面的跨论文报告来自不同任务，尚未接入默认工作台。</p>
+              <span className="eyebrow">HISTORICAL PILOT · SEPARATE EXPERIMENT</span><h2>历史先导：一次补读改善了答案。</h2><p className="demo-description">这组 6 篇论文的历史短答案实验使用 {data.experiment.model}，与上面的跨论文报告、当前字段补救属于不同任务。后续 20 题五组对照尚未确认定向补读优于普通补搜。<a href="https://github.com/wubuxy/scientific-evidence-agent/blob/main/docs/results/REPAIR_FIVE_ARM_DEV20_V1.md" target="_blank" rel="noreferrer"> 查看后续结果 ↗</a></p>
               <div className="demo-experiment-results">{Object.entries(data.experiment.summaries).map(([method, value]) => <div key={method}><div><strong>{{ baseline: '原始 Grep', 'review-rewrite': '核验后仅重答', 'review-reread': '核验后补读重答' }[method]}</strong><b>{(value.answer_token_f1 * 100).toFixed(2)}</b></div><div className="demo-bar"><span style={{ width: `${value.answer_token_f1 * 100}%` }}/></div><small>平均总 tokens · {Math.round(value.tokens_used).toLocaleString()}</small></div>)}</div><p className="demo-description">数值为 Answer token F1 × 100，并非答案正确率。</p><div className="demo-insight demo-amber"><Icon name="warning" size={20}/><p>{data.experiment.note}</p></div>
             </>}
           </section>

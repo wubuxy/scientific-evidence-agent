@@ -21,6 +21,10 @@ def main():
             return json.loads(content) if "application/json" in response.headers.get("Content-Type", "") else content
 
     assert b'root' in request("/demo")
+    assert b'root' in request("/demo/fields")
+    field_replay = request("/demo/field-recording.json")
+    assert field_replay["synthetic"] and field_replay["human_labels"] == 0
+    assert field_replay["recording"]["field_state"]["semantic_success"] is None
     request("/research-health")
     recording = request("/demo/recording.json")
     if args.verify_state:

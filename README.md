@@ -11,7 +11,7 @@
 
 <p align="center">
   <a href="#快速开始">快速开始</a> ·
-  <a href="docs/DEMO.md">五分钟演示</a> ·
+  <a href="#演示">动态演示</a> ·
   <a href="docs/FIELD_STATE.md">字段状态设计</a> ·
   <a href="docs/DEEP_RESEARCH_READING_GUIDE.md">Deep Research 阅读路线</a> ·
   <a href="docs/EVALUATION.md">实验与局限</a>
@@ -21,11 +21,42 @@
 
 > 比较这些论文的训练数据、初始化方式和评测条件。每项结论给出原文依据；找不到的部分保留缺口。
 
-## 看见 Agent 的工作
+## 演示
 
-![工作台中的字段进度、候选答案与证据入口](docs/assets/field-progress.png)
+[![字段台账、原文证据、版本记录与停止成本的真实界面回放](docs/assets/field-demo.gif)](docs/DEMO.md#字段状态回放)
 
-<sub>真实工作台组件，展示一次真实模型调用的合成资料接通检查。用于说明交互，不是科研准确率结果。</sub>
+<sub>16 秒交互节选，停留时间经过压缩。来自合成资料上的真实模型接通记录；回放不调用模型，不代表准确率或补救收益。点击动图查看使用方法。</sub>
+
+**字段台账 → 点击原文 → 对比候选版本 → 检查停止与成本。** 同一条记录，可以从四个视角检查。
+
+<details>
+<summary>查看静态截图：浅色 / 深色</summary>
+
+| 浅色工作台 | 深色工作台 |
+|---|---|
+| [![浅色回放](docs/assets/field-demo-light.png)](docs/assets/field-demo-light.png) | [![深色回放](docs/assets/field-demo-dark.png)](docs/assets/field-demo-dark.png) |
+
+</details>
+
+## 快速开始
+
+```bash
+git clone https://github.com/wubuxy/scientific-evidence-agent.git
+cd scientific-evidence-agent
+docker compose up --build -d --wait
+```
+
+需要 Docker Compose 2.24+。已有仓库时直接在根目录执行最后一行。
+
+| 打开哪里 | 可以体验什么 | 模型密钥 |
+|---|---|---|
+| [字段状态回放](http://127.0.0.1:5183/demo/fields) | 查看字段缺口、原文、答案版本与预算收尾 | 不需要 |
+| [论文证据回放](http://127.0.0.1:5183/demo) | 从真实论文报告追到原文，再检查一个失败案例 | 不需要 |
+| [研究工作台](http://127.0.0.1:5183/) | 导入自己的论文并发起新研究 | 新生成需要配置 |
+
+以上为本机地址。[完整演示与配置说明 →](docs/DEMO.md)
+
+## Agent 如何工作
 
 | 问题变成要求 | 行动留下依据 | 缺口有明确去向 |
 |---|---|---|
@@ -60,14 +91,14 @@ Grep、BM25＋向量 RRF、SQLite 证据存储和 React 工作台复用同一组
 | 五组修复对照 | 20 题 × 2 次上游 × 5 策略；定向补读相对普通补搜 **+3.91pp F1，95% CI [−6.01, +16.27]pp**，尚未确认优势 |
 | 可复现交付 | Linux / Windows 后端、前端类型检查与构建、Docker 导入与持久化均由 CI 验证 |
 
-我们目前能展示可审计的执行和评测工具链。字段控制器的质量收益、运行时 skill 和经验更新仍需新论文上的对照，不能从工具调用成功或模型自评推出。
+我们目前能展示可审计的执行和评测工具链。字段控制器的质量收益仍需新论文上的对照；运行时 skill 和经验更新尚未实现。工具调用成功或模型自评不能证明语义正确。
 
 <details>
 <summary><strong>展开历史实验、训练结果与复现范围</strong></summary>
 
 | 验证项目 | 已完成内容 |
 |---|---|
-| 自动化回归 | **完整依赖环境下 228 项离线测试通过**，覆盖科研流程、五组对照、缓存回放、完整报告、字段版本与补救、盲审页面、数据隔离与模型生命周期；依赖与跳过口径见[复现说明](docs/REPRODUCIBILITY.md) |
+| 自动化回归 | **完整依赖环境下 230 项离线测试通过**，覆盖科研流程、五组对照、缓存回放、完整报告、字段版本与补救、公开回放完整性、盲审页面、数据隔离与模型生命周期；依赖与跳过口径见[复现说明](docs/REPRODUCIBILITY.md) |
 | 应用交付 | TypeScript 检查与前端构建通过，真实模型完整报告接口验证完成 |
 | 数据准备 | QASPER 开发 50 题、留出测试 200 题，版本与哈希固定，论文划分隔离 |
 | 方法对照 | **36 道独立开发题、96 次完整上游任务运行**，覆盖四种检索配置与新论文检查 |
@@ -80,18 +111,6 @@ Grep、BM25＋向量 RRF、SQLite 证据存储和 React 工作台复用同一组
 | 标签干预对照 | **六次新训练、1,446 条预测**：仅改 7/535 条训练标签，原始口径平均 F1 0.748→0.743；两种评分口径均未观察到稳定收益，见[全部结果与配对区间](docs/results/SCIFACT_LABEL_ABLATION_V1.md) |
 
 </details>
-
-## 快速开始
-
-**无需模型密钥，先看历史真实轨迹回放：**
-
-```bash
-docker compose up --build -d --wait
-```
-
-打开[本地演示 http://127.0.0.1:5183/demo](http://127.0.0.1:5183/demo)，从结论点进 evidence ID、原文行号和工具轨迹，再查看一个失败案例。示例论文可以导入工作台。`/demo` 回放不调用模型；`/` 新研究需要配置自己的模型服务。Docker Compose 需要 2.24+。
-
-[演示脚本、配置与数据持久化 →](docs/DEMO.md)
 
 <details>
 <summary><strong>本机开发：Python / Node / 模型配置</strong></summary>
@@ -168,6 +187,7 @@ GitHub Actions 配置覆盖 Linux / Windows、Python 3.10 / 3.13、核心与完�
 | 检索、回读、证据和上下文如何协作 | [技术设计](docs/ARCHITECTURE.md) |
 | 哪些实验支持结论，哪些仍未验证 | [验证成果](docs/EVALUATION.md) · [报告校准](docs/results/REPORT_CALIBRATION_V1.md) |
 | 如何复算结果和运行对照 | [复现环境](docs/REPRODUCIBILITY.md) · [评测命令](docs/BENCHMARKS.md) |
+| 接下来哪些工作可以直接推进 | [下一步优先级与前提](docs/NEXT_STEPS.md) |
 | Skill / 经验更新为什么还需要可信反馈 | [后续路线](docs/AGENT_SKILLS_AND_EVOLUTION.md) |
 
 ```text
