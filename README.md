@@ -93,7 +93,7 @@ Grep、BM25＋向量 RRF、SQLite 证据存储和 React 工作台复用同一组
 docker compose up --build -d --wait
 ```
 
-打开 **http://127.0.0.1:5183/demo**，从结论点进 evidence ID、原文行号和工具轨迹，再查看一个失败案例。示例论文可以导入工作台。`/demo` 回放不调用模型；`/` 新研究需要配置自己的模型服务。Docker Compose 需要 2.24+。
+打开[本地演示 http://127.0.0.1:5183/demo](http://127.0.0.1:5183/demo)，从结论点进 evidence ID、原文行号和工具轨迹，再查看一个失败案例。示例论文可以导入工作台。`/demo` 回放不调用模型；`/` 新研究需要配置自己的模型服务。Docker Compose 需要 2.24+。
 
 [演示脚本、配置与数据持久化 →](docs/DEMO.md)
 
@@ -139,7 +139,7 @@ npm ci
 npm run dev
 ```
 
-打开 **http://127.0.0.1:5183**，创建工作区、导入论文并提出研究问题。默认启动方式面向本机使用；开发网关在 Node 进程内签发访问令牌，密钥保存在后端配置中。
+打开[本地工作台 http://127.0.0.1:5183](http://127.0.0.1:5183)，创建工作区、导入论文并提出研究问题。默认启动方式面向本机使用；开发网关在 Node 进程内签发访问令牌，密钥保存在后端配置中。
 
 Linux/macOS 对应使用 `source .venv/bin/activate` 和 `export PYTHONPATH=app`。Grep 与原文阅读可独立使用；模型和 embedding 调用使用云端 API。
 
