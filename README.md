@@ -1,51 +1,77 @@
 <p align="center">
-  <img src="docs/assets/project-cover.png" alt="Scientific Evidence Agent — 从论文检索到带引用的研究报告" width="100%">
+  <img src="docs/assets/evidence-agent-cover.svg" alt="Scientific Evidence Agent — 每个研究问题，都有证据与去向" width="100%">
 </p>
 
 <p align="center">
+  <a href="https://github.com/wubuxy/scientific-evidence-agent/actions/workflows/ci.yml"><img src="https://github.com/wubuxy/scientific-evidence-agent/actions/workflows/ci.yml/badge.svg" alt="CI"></a>
   <img src="https://img.shields.io/badge/Python-3.10%2B-3776AB?style=flat-square" alt="Python 3.10+">
-  <img src="https://img.shields.io/badge/API-FastAPI-009688?style=flat-square" alt="FastAPI">
-  <img src="https://img.shields.io/badge/Workbench-React%20%2B%20TypeScript-3178C6?style=flat-square" alt="React and TypeScript">
-  <img src="https://img.shields.io/badge/Model-Qwen3.5--27B-6C5CE7?style=flat-square" alt="Qwen3.5-27B">
+  <img src="https://img.shields.io/badge/FastAPI-%2B%20React-176956?style=flat-square" alt="FastAPI and React">
+  <img src="https://img.shields.io/badge/Research-Evidence%20first-D7C78B?style=flat-square" alt="Evidence first">
 </p>
 
 <p align="center">
   <a href="#快速开始">快速开始</a> ·
   <a href="docs/DEMO.md">五分钟演示</a> ·
-  <a href="docs/ARCHITECTURE.md">技术设计</a> ·
-  <a href="docs/EVALUATION.md">验证成果</a> ·
-  <a href="docs/BENCHMARKS.md">复现实验</a>
+  <a href="docs/FIELD_STATE.md">字段状态设计</a> ·
+  <a href="docs/DEEP_RESEARCH_READING_GUIDE.md">Deep Research 阅读路线</a> ·
+  <a href="docs/EVALUATION.md">实验与局限</a>
 </p>
 
-**Scientific Evidence Agent** 是面向科研文献调研的证据驱动助手。它围绕问题主动检索论文、按行阅读上下文，组织原文证据并生成带引用的结论与对照表。
+**一个为科研文献调研设计的证据 Agent。** 从用户要求拆出论文字段，自主搜索、按行阅读，保存带版本的候选答案；在预算内补齐缺项，交付能追溯原文、明确标注未核实内容的报告。
 
-> “比较这些论文的训练数据、模型训练方式和实验条件，并给出对应的原文依据。”
+> 比较这些论文的训练数据、初始化方式和评测条件。每项结论给出原文依据；找不到的部分保留缺口。
 
-项目同时提供 **React 文献工作台、FastAPI 科研服务和独立评测工具链**，使用百炼 Qwen3.5-27B API 完成推理。
+## 看见 Agent 的工作
 
-## 核心能力
+![工作台中的字段进度、候选答案与证据入口](docs/assets/field-progress.png)
 
-| 🔎 主动检索 | 📖 精确回读 | 🔗 引用交付 |
+<sub>真实工作台组件，展示一次真实模型调用的合成资料接通检查。用于说明交互，不是科研准确率结果。</sub>
+
+| 问题变成要求 | 行动留下依据 | 缺口有明确去向 |
 |---|---|---|
-| Grep 正则定位、多轮查询与分页；支持 BM25＋向量混合检索 | 按来源与行号读取原文，保留页码、证据 ID 和完整工具轨迹 | 输出结构化结论、论文对照表、原文引用与任务覆盖情况 |
+| 固定论文与字段，计划不能删除已有要求 | 搜索负责定位，实际回读产生本次可用 evidence ID | 区分未填写、未核实、候选答案与模型核验意见 |
+| 候选答案与原文版本绑定 | 每条引用可追到来源、行号与工具记录 | 有限补读只补缺项，保留已有内容与失败记录 |
 
-| 🧠 证据上下文 | 🗂️ 文献工作区 | 🧪 可复现实验 |
-|---|---|---|
-| 已读窗口保留、字段摘录、按问题选择片段；支持独立策略对照 | PDF、TXT、Markdown、PPTX 导入；SQLite 持久化与工作区隔离 | 数据冻结、生成与参考答案隔离、独立评分、配对分析和用量记录 |
+工作台新任务默认启用字段跟踪和有界补读，可在研究设置切换为仅观察或关闭。**填写进度不代表正确率；语义核验仍待人工校准。** [完整状态、预算和接口说明 →](docs/FIELD_STATE.md)
 
-## 系统设计
+## 一个受约束的研究循环
 
-[![科研问答与离线评测流程](docs/assets/research-workflow.png)](docs/assets/research-workflow.svg)
+```mermaid
+flowchart LR
+  Q[研究问题] --> P[固定论文与字段]
+  P --> A[Agent 选择下一步]
+  A --> S[搜索定位]
+  S --> R[按行回读]
+  R --> L[版本化字段台账]
+  L --> A
+  L --> G{检查缺项与预算}
+  G -->|可继续补读| A
+  G -->|交付并说明缺口| O[报告 + 引用 + 核验候选]
+```
 
-研究流程以 **Search → Read → Synthesize** 为核心。检索返回可回读地址，阅读产生本次运行的证据记录，报告校验引用归属后交付。模型运行受 token、步数和时间预算约束。
+- **模型选择行动**：查询词、阅读范围、候选答案与交付时机。
+- **程序守住约束**：本次回读引用、要求保留、字段版本、修复范围及 token / 步数 / 时间预算。
+- **独立评测检查效果**：生产 Runtime 生成报告，参考答案只进入评分；失败保留在分母，核验调用计入成本。
 
-评测流程复用同一套检索与阅读组件，支持单次混合 RAG、多轮 RAG、多轮 Grep 和字段证据策略。参考答案仅进入独立评分程序。实现映射见 [技术设计](docs/ARCHITECTURE.md)。
+Grep、BM25＋向量 RRF、SQLite 证据存储和 React 工作台复用同一组服务。[架构与代码映射 →](docs/ARCHITECTURE.md)
 
-## 验证成果
+## 已验证什么
+
+| 证据 | 当前结论 |
+|---|---|
+| 字段状态与局部补救 | 生产循环测试覆盖版本失效、缺项补救、保留已有内容、预算与访问隔离；附[真实模型接通与验证记录](docs/results/FIELD_STATE_V1.md) |
+| 完整报告评测 | 12 篇新开发论文、16 份真实报告、184 条双模型核验记录；92 条自然声明等待两人独立标注 |
+| 五组修复对照 | 20 题 × 2 次上游 × 5 策略；定向补读相对普通补搜 **+3.91pp F1，95% CI [−6.01, +16.27]pp**，尚未确认优势 |
+| 可复现交付 | Linux / Windows 后端、前端类型检查与构建、Docker 导入与持久化均由 CI 验证 |
+
+我们目前能展示可审计的执行和评测工具链。字段控制器的质量收益、运行时 skill 和经验更新仍需新论文上的对照，不能从工具调用成功或模型自评推出。
+
+<details>
+<summary><strong>展开历史实验、训练结果与复现范围</strong></summary>
 
 | 验证项目 | 已完成内容 |
 |---|---|
-| 自动化回归 | **完整依赖环境下 204 项离线测试通过**，覆盖科研流程、五组对照、缓存回放、完整报告、盲审页面、核验格式恢复、数据隔离与模型生命周期；依赖与跳过口径见[复现说明](docs/REPRODUCIBILITY.md) |
+| 自动化回归 | **完整依赖环境下 228 项离线测试通过**，覆盖科研流程、五组对照、缓存回放、完整报告、字段版本与补救、盲审页面、数据隔离与模型生命周期；依赖与跳过口径见[复现说明](docs/REPRODUCIBILITY.md) |
 | 应用交付 | TypeScript 检查与前端构建通过，真实模型完整报告接口验证完成 |
 | 数据准备 | QASPER 开发 50 题、留出测试 200 题，版本与哈希固定，论文划分隔离 |
 | 方法对照 | **36 道独立开发题、96 次完整上游任务运行**，覆盖四种检索配置与新论文检查 |
@@ -57,32 +83,22 @@
 | 单卡核验器研究 | A5000 上完成 **1.5B/7B 双精度、三种子 BF16 LoRA 与 MiniCheck** 对照；原始 gold 的新 128 对测试上 7B macro F1 0.581→平均 0.746，但支持精确率门槛未通过，见[完整结果](docs/results/SCIFACT_VERIFIER_SCALE_V2.md)及后续[标签与误判诊断](docs/results/VERIFIER_DATA_DIAGNOSIS.md) |
 | 标签干预对照 | **六次新训练、1,446 条预测**：仅改 7/535 条训练标签，原始口径平均 F1 0.748→0.743；两种评分口径均未观察到稳定收益，见[全部结果与配对区间](docs/results/SCIFACT_LABEL_ABLATION_V1.md) |
 
-验证覆盖科研工作流、检索问答与证据上下文三个层次。数据范围、指标定义及实验配置见 [验证成果](docs/EVALUATION.md)，运行命令见 [复现实验](docs/BENCHMARKS.md)。
-
-自动评测支持固定计划、完整轨迹重复、五组补读对照、工作台实际 Runtime、联合证据判定和双人标注校准；失败保留在分母，实际共享费用与策略独立成本分别记录。运行命令、评分边界与小模型训练条件见 [Agent 自动评测与训练路线](docs/AGENT_EVAL_AND_TRAINING.md)。
-
-后续方向及论文依据见 [评测、Skill 与经验更新路线](docs/AGENT_SKILLS_AND_EVOLUTION.md)：先校准语义评测，再比较静态指南与按需加载，最后验证离线经验更新。运行时 skill 和自进化收益目前属于待验证方案。
-
-**研究闭环：发现证据缺口 → 定向搜索 → 一次原文回读 → 带引用重答。** 离线实验同时保留仅重答和关键词补读对照，便于区分新增证据与额外模型调用的作用。
-
-<details>
-<summary><strong>查看核验回读实验设计</strong></summary>
-
-![核验驱动回读实验](docs/assets/review-reread.png)
-
 </details>
 
 ## 快速开始
 
-**Docker 本地演示（无需模型密钥）**
+**无需模型密钥，先看历史真实轨迹回放：**
 
-```powershell
+```bash
 docker compose up --build -d --wait
 ```
 
-打开 **http://127.0.0.1:5183/demo**，查看一份真实报告的结论、原始工具轨迹、证据 ID 与原文，再检查一个真实失败案例。点击“用示例论文开始研究”可将两篇 CC BY 4.0 论文导入工作台。回放不调用模型；新生成需配置自己的模型服务。
+打开 **http://127.0.0.1:5183/demo**，从结论点进 evidence ID、原文行号和工具轨迹，再查看一个失败案例。示例论文可以导入工作台。`/demo` 回放不调用模型；`/` 新研究需要配置自己的模型服务。Docker Compose 需要 2.24+。
 
-启动、模型配置、数据保存与五分钟讲解脚本见 [演示说明](docs/DEMO.md)。Docker Compose 需要 2.24+，本机手动开发方式如下。
+[演示脚本、配置与数据持久化 →](docs/DEMO.md)
+
+<details>
+<summary><strong>本机开发：Python / Node / 模型配置</strong></summary>
 
 需要 **Python 3.10+、Node.js 20.19+ 或 22.12+**，以及加入 PATH 的 [ripgrep](https://github.com/BurntSushi/ripgrep)。以下以 PowerShell 为例。
 
@@ -145,25 +161,28 @@ GitHub Actions 配置覆盖 Linux / Windows、Python 3.10 / 3.13、核心与完�
 
 </details>
 
-## 技术参考
+</details>
 
-项目将文件式主动检索、结果交付、上下文选择和分层证据评测思想应用于科研文献场景：
+## 沿着问题读代码和论文
 
-- [Coding Agents are Effective Long-Context Processors](https://arxiv.org/html/2603.20432v1)：可导航资料与迭代处理。
-- [Is Grep All You Need?](https://arxiv.org/html/2605.15184v1)：检索方式与 Agent 执行框架的配合。
-- [HiEviDR-Bench](https://arxiv.org/html/2607.25151)：证据、断言与结论的分层检查。
-- [Context Engineering Starts with Retrieval](https://www.langchain.com/blog/context-engineering-starts-with-retrieval)：按需读取和上下文组织。
-
-## 项目结构
+| 想了解什么 | 从这里开始 |
+|---|---|
+| Deep Research 大家在做什么，做到哪了 | [阅读路线与评测地图](docs/DEEP_RESEARCH_READING_GUIDE.md) |
+| Agent 如何判断缺项、控制修复和停止 | [字段状态与有界补救](docs/FIELD_STATE.md) |
+| 检索、回读、证据和上下文如何协作 | [技术设计](docs/ARCHITECTURE.md) |
+| 哪些实验支持结论，哪些仍未验证 | [验证成果](docs/EVALUATION.md) · [报告校准](docs/results/REPORT_CALIBRATION_V1.md) |
+| 如何复算结果和运行对照 | [复现环境](docs/REPRODUCIBILITY.md) · [评测命令](docs/BENCHMARKS.md) |
+| Skill / 经验更新为什么还需要可信反馈 | [后续路线](docs/AGENT_SKILLS_AND_EVOLUTION.md) |
 
 ```text
-backend/app/research_backend/             科研服务、检索、证据与报告
-backend/app/research_backend/benchmarks/  数据准备、受控实验与独立评分
-backend/tests/                           离线回归测试
-frontend/src/research/                   文献工作台
-docs/ARCHITECTURE.md                     设计与实现映射
-docs/EVALUATION.md                       验证成果与实验范围
-docs/BENCHMARKS.md                       数据协议与复现命令
+backend/app/research_backend/
+  runtime.py          模型工具循环、预算、报告交付
+  field_state.py      字段要求、候选版本、局部补救与核验记录
+  tools.py            检索与阅读接口
+  benchmarks/         冻结数据、完整轨迹、独立评分与训练对照
+frontend/src/research/ 文献工作台、字段进度、原文检查与回放
+backend/tests/        离线回归与完整执行场景
+docs/                 设计、阅读指南、协议与实验结果
 ```
 
-源码、最小依赖、测试及复现说明随仓库发布。运行配置、数据库、下载语料和详细实验记录由本地工作目录管理。
+运行配置、密钥、原始语料与本地数据库不进入仓库。历史回放与合成界面展示均明确标注来源；研究效果以对应实验协议和结果为准。

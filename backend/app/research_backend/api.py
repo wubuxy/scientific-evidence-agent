@@ -237,6 +237,8 @@ def create_app(settings: Optional[Settings] = None, *, model=None, discovery=Non
     @router.post("/workspaces/{wid}/runs", status_code=202, response_model=RunView, tags=["研究任务与报告"])
     async def create_run(wid: str, body: RunCreate, owner: str = Depends(current_owner)):
         store.get(owner, wid, "session", body.session_id)
+        for field in body.required_fields:
+            store.get(owner, wid, "source", field.source_id)
         if model is None and not settings.llm_api_key:
             raise Unavailable("请先配置模型 API key")
         run = store.put(owner, wid, "run", dict(**body.model_dump(), status="queued",
@@ -259,6 +261,11 @@ def create_app(settings: Optional[Settings] = None, *, model=None, discovery=Non
         store.get(owner, wid, "run", run_id)
         records = store.list(owner, wid, "research_memory", parent_id=run_id, limit=1)
         return records[0] if records else dict(mode="unavailable", evidence=[], sources=[])
+
+    @router.get("/workspaces/{wid}/runs/{run_id}/field-reviews", tags=["研究任务与报告"])
+    def field_reviews(wid: str, run_id: str, owner: str = Depends(current_owner)):
+        store.get(owner, wid, "run", run_id)
+        return dict(items=store.list(owner, wid, "field_review", parent_id=run_id, limit=10))
 
     @router.post("/workspaces/{wid}/runs/{run_id}/cancel", response_model=RunView, tags=["研究任务与报告"])
     async def cancel_run(wid: str, run_id: str, owner: str = Depends(current_owner)):

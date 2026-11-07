@@ -7,11 +7,18 @@ import time
 import re
 from .memory import EvidenceMemory
 from .providers import decode_tool_arguments
-from .schemas import Report, ComparisonRow
+from .schemas import Report, ComparisonRow, FieldCandidate, ResearchPlanRequest
+from .field_state import FieldLedger, FieldReviews, REVIEW_SYSTEM, digest
 from .store import NotFound, Unavailable
 
 logger = logging.getLogger(__name__)
 TERMINAL = {"completed", "failed", "cancelled", "interrupted"}
+
+
+class BudgetExceeded(RuntimeError):
+    """A terminal budget failure must not enter the recoverable tool-error loop."""
+
+
 SYSTEM = """你是面向 AI/NLP 研究生的科研证据助手，任务是组会调研、跨论文实验条件对齐和结论核验。
 先查看资料列表，再用 sources_search 查找与用户问题相关的证据，随后按行回读相邻上下文。
 sources_search 的检索策略由服务端固定，混合策略必定调用 Grep 与 RAG；不要自行改策略。
@@ -255,7 +262,26 @@ class Runtime:
             current = self.store.get(owner, workspace_id, "run", run_id)
             if current["status"] == "cancelled":
                 return
-            message = str(exc) if isinstance(exc, (Unavailable, ValueError)) else "研究任务执行失败；请检查配置与服务端日志"
+            checkpoints = self.store.list(owner, workspace_id, "field_checkpoint", parent_id=run_id, limit=1, descending=True)
+            if checkpoints and not isinstance(exc, BudgetExceeded) and current.get("tokens_used", 0) <= run["max_tokens"]:
+                checkpoint = checkpoints[0]
+                report, state = checkpoint["report"], checkpoint["field_state"]
+                report["limitations"] = report["limitations"][:49] + ["补救未完成，保留此前报告；未解决字段仍待核实。"]
+                state.update(stop_reason="repair_failed", review_status="not_run")
+                coverage = dict(current.get("source_coverage", {}), status="partial", stop_reason="repair_failed",
+                    field_verification="not_automatically_verified")
+                markdown = render_report(report)
+                self.store.update(owner, workspace_id, "run", run_id, status="completed", report=report,
+                    markdown=markdown, field_state=state, source_coverage=coverage,
+                    tokens_estimated=current.get("tokens_estimated", False) or not isinstance(exc, ValueError))
+                self.store.put(owner, workspace_id, "message", dict(role="assistant", content=markdown,
+                    run_id=run_id), parent_id=run["session_id"])
+                self.store.event(owner, workspace_id, run_id, "field_repair_failed", dict(error=type(exc).__name__,
+                    fallback="last_valid_report", checkpoint_id=checkpoint["id"]))
+                self.store.event(owner, workspace_id, run_id, "report_ready", dict(
+                    verification_status="needs_human_review", source_coverage=coverage))
+                return
+            message = str(exc) if isinstance(exc, (Unavailable, ValueError, BudgetExceeded)) else "研究任务执行失败；请检查配置与服务端日志"
             logger.exception("Research run failed: %s", run_id)
             self.store.update(owner, workspace_id, "run", run_id, status="failed", error=message)
             self.store.event(owner, workspace_id, run_id, "run_failed", {"error": message})
@@ -274,7 +300,19 @@ class Runtime:
         memory = EvidenceMemory(run["question"])
         memory_mode = run.get("memory_mode", "legacy")
         memory_record = None
+        field_mode = run.get("field_mode", "off")
+        ledger = FieldLedger(run.get("required_fields", [])) if field_mode != "off" else None
+        repair_base, repair_scope = None, []
+        deadline = time.monotonic() + run["max_seconds"]
+        if ledger:
+            for field in ledger.fields.values():
+                self.store.get(owner, workspace_id, "source", field["source_id"])
+            self._save_fields(owner, workspace_id, run_id, ledger)
         definitions = self.tools.definitions(run["retrieval_strategy"], run["allow_network"])
+        if ledger is not None:
+            definitions.append(dict(type="function", function=dict(name="record_field",
+                description="登记已规划论文字段的候选答案和本次回读证据；不是核实完成。最终仍须写入报告同名 attributes。",
+                parameters=FieldCandidate.model_json_schema())))
         allowed = {d["function"]["name"] for d in definitions}
         definitions.append(dict(type="function", function=dict(name="finish_report",
             description="交付带真实证据 ID 的结构化科研报告；列出限制，报告待人工审核", parameters=Report.model_json_schema())))
@@ -296,6 +334,12 @@ class Runtime:
                 pending_read_sources=[sid for sid in plan["source_ids"] if sid not in read_sources] if plan else [],
                 read_evidence_ids=sorted(read_ids))
             progress_note = "\n本次覆盖进度（仅表示原文回读，不等于字段事实已全部核实）：" + json.dumps(progress, ensure_ascii=False)
+            if ledger is not None:
+                progress_note += ("\n字段要求与操作状态：" + json.dumps(ledger.prompt(), ensure_ascii=False)
+                    + "\n报告 comparison_rows.attributes 必须逐字使用计划字段名。未找到时写本次未核实。"
+                    "可用 record_field 保存中间候选，读取论文不等于字段已解决。")
+                if repair_scope:
+                    progress_note += "\n正在补齐缺项：只补以下字段，其他已有内容将由程序保留：" + json.dumps(repair_scope)
             messages[0]["content"] = SYSTEM + progress_note
             # The report schema is costly on every research turn. Offer it after
             # the planned papers have been read, or at a forced budget handoff.
@@ -306,6 +350,7 @@ class Runtime:
             minimum_final = final_context(SYSTEM + progress_note, question_text, read_evidence, char_budget=3500)
             final_reserve = math.ceil(estimate_prompt_tokens(minimum_final, definitions[-1:]) * calibration * 1.1)
             stop_reason = ("max_steps" if step == run["max_steps"] - 1 else
+                "time_reserve" if ledger is not None and deadline-time.monotonic() < min(20, run["max_seconds"]*.15) else
                 "final_reserve" if used_tokens + full_reserve + 700 + final_reserve + 1800 > run["max_tokens"] else None)
             finishing = stop_reason is not None
             active_definitions = definitions[-1:] if finishing else research_definitions
@@ -368,9 +413,40 @@ class Runtime:
                         normalized, moved = normalize_report_columns(arguments)
                         self.store.update(owner, workspace_id, "report_draft", draft["id"], normalized_columns=moved)
                         report = Report.model_validate(normalized).model_dump()
+                        if ledger is not None and repair_base is not None:
+                            report = Report.model_validate(ledger.merge_patch(repair_base, report, repair_scope)).model_dump()
                         if not plan and not finishing:
                             raise ValueError("请先 plan_research 明确用户要求的论文与字段，再检索、sources_read 后交付")
                         self.validate_report(owner, workspace_id, report, read_ids=read_ids)
+                        if ledger is not None:
+                            ledger.report(report, read_evidence)
+                            gap_ids = [f["id"] for f in ledger.gaps()]
+                            no_progress = bool(repair_scope) and set(gap_ids) == set(repair_scope)
+                            can_repair = (field_mode == "bounded" and gap_ids and not finishing
+                                and not no_progress and ledger.repair_rounds < run.get("max_field_repairs", 1)
+                                and step + 2 < run["max_steps"])
+                            if can_repair:
+                                repair_base = report
+                                repair_scope = ledger.request_repair()
+                                self.store.put(owner, workspace_id, "field_checkpoint",
+                                    dict(report=report, field_state=ledger.snapshot()), parent_id=run_id)
+                                self._save_fields(owner, workspace_id, run_id, ledger)
+                                self.store.event(owner, workspace_id, run_id, "field_repair_requested",
+                                    dict(field_ids=repair_scope, round=ledger.repair_rounds,
+                                        reason="missing_or_abstained_fields", semantic_trigger=False))
+                                raise ValueError("字段仍缺失或未核实；在剩余预算内补读后再次提交报告。只补缺项，保留已有内容。字段："+
+                                    json.dumps([dict(source_id=f["source_id"], name=f["name"]) for f in ledger.gaps()], ensure_ascii=False))
+                            ledger.stop_reason = stop_reason or ("no_progress" if no_progress else
+                                "repair_limit" if gap_ids and ledger.repair_rounds else "unresolved_fields" if gap_ids else
+                                "coverage_complete_review_pending" if ledger.fields else "no_requirements")
+                            used_tokens, estimated_tokens = await self._review_fields(owner, workspace_id, run_id,
+                                ledger, read_evidence, run, used_tokens, estimated_tokens, step, deadline)
+                            if self.store.get(owner, workspace_id, "run", run_id)["status"] == "cancelled":
+                                return
+                            self._save_fields(owner, workspace_id, run_id, ledger)
+                            if ledger.gaps():
+                                report["limitations"] = report["limitations"][:49] + ["字段仍待核实：" +
+                                    "、".join(dict.fromkeys(f["name"] for f in ledger.gaps()))]
                         self.store.update(owner, workspace_id, "report_draft", draft["id"], validation_status="accepted")
                         cited_sources = {self.store.get(owner, workspace_id, "evidence", eid)["source_id"]
                             for item in report["claims"] + report["comparison_rows"] for eid in item["evidence_ids"]}
@@ -382,8 +458,8 @@ class Runtime:
                             uncited_source_ids=missing_report, field_verification="not_automatically_verified",
                             stop_reason=stop_reason or "model_finished")
                         if coverage["status"] == "partial":
-                            report["limitations"].append("计划文献覆盖不足；仍有未回读或未纳入报告的资料，本次未核实：" +
-                                ", ".join(dict.fromkeys(missing_read + missing_report)) if plan else "未建立必读论文计划，资料覆盖完整性本次未核实")
+                            report["limitations"] = report["limitations"][:49] + ["计划文献覆盖不足；仍有未回读或未纳入报告的资料，本次未核实：" +
+                                ", ".join(dict.fromkeys(missing_read + missing_report)) if plan else "未建立必读论文计划，资料覆盖完整性本次未核实"]
                         markdown = render_report(report)
                         self.store.update(owner, workspace_id, "run", run_id,
                                           status="completed", report=report, markdown=markdown, source_coverage=coverage)
@@ -394,14 +470,29 @@ class Runtime:
                         return
                     if name not in allowed or finishing:
                         raise ValueError("当前任务未授权该工具")
+                    if ledger is not None and name == "record_field":
+                        ledger.record(arguments, read_evidence)
+                        self._save_fields(owner, workspace_id, run_id, ledger)
+                        observation = {"data": ledger.prompt()}
+                        messages.append(dict(role="tool", tool_call_id=call["id"],
+                            content=json.dumps(observation, ensure_ascii=False)))
+                        continue
+                    if ledger is not None and name == "plan_research":
+                        ledger.check_plan(ResearchPlanRequest.model_validate(arguments).model_dump())
                     result = await self.tools.execute(owner, workspace_id, name, arguments, run_id,
                                                      retrieval_strategy=run["retrieval_strategy"])
                     if name == "plan_research":
                         plan = result["data"]
+                        if ledger is not None:
+                            ledger.plan(plan)
                     elif name == "sources_read":
                         read_ids.add(result["data"]["id"])
                         read_sources.add(result["data"]["source_id"])
                         read_evidence[result["data"]["id"]] = result["data"]
+                        if ledger is not None:
+                            ledger.read(result["data"]["source_id"])
+                    if ledger is not None:
+                        self._save_fields(owner, workspace_id, run_id, ledger)
                     if name in {"plan_research", "sources_read"}:
                         self.store.update(owner, workspace_id, "run", run_id, source_coverage=dict(status="partial",
                             planned_source_ids=(plan or {}).get("source_ids", []), fields=(plan or {}).get("fields", []),
@@ -426,6 +517,68 @@ class Runtime:
                 else:
                     self.store.update(owner, workspace_id, "research_memory", memory_record["id"], **payload)
         raise ValueError("已达到最大研究步数，尚未生成有效报告")
+
+    def _save_fields(self, owner, workspace_id, run_id, ledger):
+        snapshot = ledger.snapshot()
+        self.store.update(owner, workspace_id, "run", run_id, field_state=snapshot)
+        self.store.event(owner, workspace_id, run_id, "field_state_updated", dict(
+            total=snapshot["total"], present=snapshot["present"], unresolved=snapshot["unresolved"],
+            stop_reason=snapshot["stop_reason"], semantic_success=None))
+
+    async def _review_fields(self, owner, workspace_id, run_id, ledger, reads, run, used, estimated, step, deadline):
+        cases = ledger.review_cases(reads)
+        definition = dict(type="function", function=dict(name="review_fields",
+            description="记录独立调用的字段核验候选意见，不宣称人工验证", parameters=FieldReviews.model_json_schema()))
+        messages = [dict(role="system", content=REVIEW_SYSTEM), dict(role="user", content=json.dumps(
+            dict(question=run["question"], fields=cases), ensure_ascii=False))]
+        reserve = math.ceil(estimate_prompt_tokens(messages, [definition])*1.2)
+        remaining = run["max_tokens"]-used-reserve
+        if not cases or step+1 >= run["max_steps"] or remaining < 1800 or estimated or deadline-time.monotonic() < 15:
+            ledger.review_status = "skipped_budget_or_no_candidates"
+            return used, estimated
+        record = dict(messages=messages, assistant=None, status="started", tokens_used=None,
+            scope=[c["field_id"] for c in cases], model=run.get("model"), prompt_hash=digest(REVIEW_SYSTEM))
+        response = None
+        started = time.monotonic()
+        try:
+            response = await asyncio.wait_for(self.model.complete(messages, [definition], min(2400, remaining)),
+                timeout=max(1, deadline-time.monotonic()-3))
+            record["assistant"] = {k:v for k,v in response["message"].items() if k in {"role", "content", "tool_calls"}}
+            actual = response.get("tokens")
+            record.update(tokens_used=actual, response_model=response.get("response_model"))
+            used += actual if actual is not None else reserve+len(json.dumps(record["assistant"], ensure_ascii=False))//2
+            estimated = estimated or actual is None
+            calls = response["message"].get("tool_calls", [])
+            if used > run["max_tokens"]:
+                raise ValueError("核验返回用量超出预算")
+            if len(calls) != 1 or calls[0]["function"]["name"] != "review_fields":
+                raise ValueError("需要一次 review_fields 调用")
+            payload, _ = decode_tool_arguments(calls[0], [definition])
+            ledger.apply_reviews(payload, cases, response.get("response_model") or run.get("model"))
+            record["status"] = "recorded"
+        except asyncio.CancelledError:
+            record["status"] = "cancelled"
+            ledger.review_status = "cancelled"
+            ledger.stop_reason = "cancelled_or_interrupted"
+            estimated = estimated or response is None
+            raise
+        except Exception as exc:
+            record.update(status="failed", error=type(exc).__name__)
+            ledger.review_status = "failed"
+            estimated = estimated or response is None
+        finally:
+            record["elapsed_ms"] = round((time.monotonic()-started)*1000, 2)
+            saved = self.store.put(owner, workspace_id, "field_review", record, parent_id=run_id)
+            self.store.event(owner, workspace_id, run_id, "field_review_recorded", dict(
+                review_id=saved["id"], status=record["status"], tokens_used=record["tokens_used"],
+                authority="model_candidate"))
+            self.store.update(owner, workspace_id, "run", run_id,
+                tokens_used=used, tokens_estimated=estimated, step=step+2, field_state=ledger.snapshot())
+        if used > run["max_tokens"]:
+            ledger.stop_reason = "token_budget_exceeded"
+            self._save_fields(owner, workspace_id, run_id, ledger)
+            raise BudgetExceeded("核验返回用量超出任务 token 预算")
+        return used, estimated
 
     def validate_report(self, owner, workspace_id, report, *, read_ids=None):
         for item in report["claims"] + report["comparison_rows"]:

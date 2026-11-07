@@ -1,0 +1,58 @@
+{
+  "date": "2026-11-07",
+  "scope": "Engineering acceptance, not a quality experiment",
+  "base_commit": "bbd1aa5665bfb622a5be6b38b6bb941ce1819da0",
+  "tested_working_tree_sha256": {
+    "backend/app/research_backend/field_state.py": "02c1d20e29e29ea27793ed3ca4e9dae90c2f4232c39672cc663230233c2644ee",
+    "backend/app/research_backend/runtime.py": "f6da9a41c526bdb0f777182786d9ae60c584cbf6624a6b9dab11ce8a835e724f",
+    "backend/app/research_backend/schemas.py": "24b00864872745643acf4083c11c5b9709bcd327f262889e69f51d1aafedbbaf",
+    "backend/app/research_backend/api.py": "9eb0665965164a02b354140216612fe68d25a1d919d101033ff9ac8cfa6dcbfa",
+    "backend/tests/test_field_state.py": "7dd78f4270a32338593908e2341af65e601bb0dfda788a44bcfed1a3f547e412",
+    "frontend/src/research/FieldProgress.tsx": "5752bfdb2e59f8296297f6b9f9b0e9106d567b0aa121a628c5e825a8c76bc47e",
+    "frontend/src/research/field-progress.css": "b4faaa0c97ef543932c0b1d4d3402cb0cac72ef7a455dc747b279c420a11da1a",
+    "frontend/src/research/ResearchWorkbench.tsx": "87db5e5870c1d1aae9ba2c6ea07f0bac434d6db2d4d1aadd9429f0e718a8e289",
+    "frontend/src/research/types.ts": "3a8e9b84d86b0e655ba55bdd9183f65837cc6f3b1cec4144c526d8238114370e",
+    "scripts/smoke_field_state.py": "5499f4e1a95a3498bb499bef5a0db973f8dbba661cd03ee6d4f6fada9d04d5a1"
+  },
+  "offline_tests": {
+    "collected": 228,
+    "passed": 228,
+    "skipped": 0,
+    "failed": 0,
+    "errors": 0,
+    "seconds": 59.261,
+    "platform": "Windows",
+    "python": "3.13.13",
+    "junit_sha256": "4037f00f860b3c6cc1f73ba0e423236fcb1b490c143d7777a34e08cba1c1b56f"
+  },
+  "frontend": {
+    "typecheck": "passed",
+    "build": "passed",
+    "existing_warning": "AnalysisChart chunk 558.01 kB"
+  },
+  "browser_ui": {
+    "engine": "Microsoft Edge via headless Playwright",
+    "desktop": "1440x1050",
+    "mobile": "390x844",
+    "checks": [
+      "field cards",
+      "citation navigation",
+      "event names",
+      "mode selection",
+      "light and dark themes",
+      "no horizontal mobile overflow"
+    ],
+    "fixture_api": true,
+    "fixture_source": "synthetic real-model integration",
+    "real_human_labels_written": 0
+  },
+  "readme_visual_review": "SVG, images and local layout passed; GitHub Mermaid not evaluated in local preview",
+  "existing_report_audit": "passed",
+  "synthetic_live_integration": {
+    "summary": "smoke-summary.json",
+    "phase": "during implementation, before final edge-case corrections; final hashes above describe offline acceptance",
+    "repair_path_exercised": false,
+    "repair_test_coverage": "production Runtime with replacement model",
+    "semantic_accuracy": null
+  }
+}

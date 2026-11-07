@@ -171,6 +171,19 @@ class Report(Contract):
     verification_status: Literal["needs_human_review"] = "needs_human_review"
 
 
+class FieldRequirement(Contract):
+    source_id: str = Field(min_length=1, max_length=64)
+    name: str = Field(min_length=1, max_length=100)
+    criterion: str = Field(default="完整回答该字段，保留对象、实验阶段和适用条件", max_length=500)
+
+
+class FieldCandidate(Contract):
+    source_id: str = Field(min_length=1, max_length=64)
+    name: str = Field(min_length=1, max_length=100)
+    answer: str = Field(min_length=1, max_length=2000)
+    evidence_ids: list[str] = Field(max_length=20)
+
+
 class RunCreate(Contract):
     session_id: str
     question: str = Field(min_length=1, max_length=10000)
@@ -180,6 +193,18 @@ class RunCreate(Contract):
     max_steps: int = Field(default=10, ge=1, le=30)
     max_tokens: int = Field(default=20000, ge=2000, le=100000)
     max_seconds: int = Field(default=180, ge=10, le=900)
+    field_mode: Literal["off", "observe", "bounded"] = "off"
+    required_fields: list[FieldRequirement] = Field(default_factory=list, max_length=96)
+    max_field_repairs: int = Field(default=1, ge=0, le=2)
+
+    @model_validator(mode="after")
+    def distinct_requirements(self):
+        keys = [(f.source_id, f.name) for f in self.required_fields]
+        if len(keys) != len(set(keys)):
+            raise ValueError("重复的论文字段要求")
+        if self.required_fields and self.field_mode == "off":
+            raise ValueError("指定字段要求时请启用 observe 或 bounded")
+        return self
 
 
 # Response models make the contract useful before the frontend is rebuilt.
@@ -287,6 +312,7 @@ class RunView(RunCreate):
     error: Optional[str]
     markdown: Optional[str] = None
     source_coverage: dict[str, Any] = Field(default_factory=dict)
+    field_state: dict[str, Any] = Field(default_factory=dict)
 
 
 class ReportView(Contract):
