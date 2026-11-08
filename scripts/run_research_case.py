@@ -131,7 +131,7 @@ async def run_case(directory, env_file):
         usage_note="Returned logical usage; failed SDK transport attempts cannot be independently billed from this trace")
     write(out/"run.json",final)
     write(out/"trace.json",dict(calls=measured.calls,events=events))
-    write(out/"sources.json",sources)
+    write(out/"sources.json",[{k:source[k] for k in ("id","title","kind","uri","version","source_hash","line_count")} for source in sources])
     write(out/"summary.json",summary)
     (out/"report.md").write_text(final.get("markdown") or "No valid report was delivered.\n",encoding="utf-8")
     print(json.dumps(summary))
