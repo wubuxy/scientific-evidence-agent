@@ -1,0 +1,69 @@
+{
+  "id": "context-gate-dev001-v1",
+  "prepared_at": "2026-11-08T10:20:53.793638+00:00",
+  "scope": "Two development repetitions of one previously observed task; no independent task sample or method-effect estimate",
+  "execution_code_commit": "7ace925630c882951603693d1e8cdf2e5cb0813c",
+  "hypotheses": [
+    "The repaired contract can deliver a valid report within the fixed budget.",
+    "The fixed agent can read task-relevant passages beyond the opening excerpts. This requires evidence review, not merely counting reads."
+  ],
+  "repeats": 2,
+  "task_id": "research-judgment-dev-001",
+  "model": "qwen3.5-27b",
+  "temperature": 0.1,
+  "extra_body": {
+    "enable_thinking": false
+  },
+  "memory_mode": "legacy",
+  "retrieval_strategy": "grep",
+  "allow_network": false,
+  "max_tokens_per_run": 30000,
+  "max_steps_per_run": 18,
+  "max_seconds_per_run": 600,
+  "max_field_repairs": 1,
+  "logical_token_ceiling_total": 60000,
+  "sdk_transport_retries": 1,
+  "application_result_retries": 0,
+  "transport_billing_note": "Unknown or retried transport cost is not independently recoverable.",
+  "independent_variables": "None; same fixed executor, task and output contract for both repetitions.",
+  "baseline_scope": "Historical runs are failure context only: their output contract differs.",
+  "freeze_rule": "No code, prompt, input, rubric or budget edits between the two repetitions. Retain all outcomes.",
+  "stopping_rule": "Exactly two planned attempts; no replacement of failures. Stop early only for unknown billing, missing access or an external service fault; record missing outcomes.",
+  "mechanical_checks": [
+    "delivered Report validates",
+    "every citation belongs to a canonical read from this run",
+    "returned usage <= 30000",
+    "eight requested fields tracked; presence is not correctness"
+  ],
+  "descriptive_metrics": [
+    "input/output/total tokens per call",
+    "tool schemas and output allowance",
+    "budget decisions",
+    "all read ranges by paper",
+    "read ranges extending after line 50, explicitly a location proxy only",
+    "unresolved fields",
+    "claim kinds and proposals",
+    "rejected drafts"
+  ],
+  "human_checks": [
+    "six frozen task rubrics",
+    "per-field context sufficiency",
+    "per-field answer support",
+    "proposal feasibility"
+  ],
+  "human_scores": null,
+  "semantic_accuracy": null,
+  "held_out_data_used": false,
+  "manifest_sha256": {
+    "repeat-01": "db798375b3d7337d9d894492dd779ce6bd7ea20f8aa2e21509c5297f3756c40c",
+    "repeat-02": "db798375b3d7337d9d894492dd779ce6bd7ea20f8aa2e21509c5297f3756c40c"
+  },
+  "input_sha256": {
+    "inputs/digestables.blocks.json": "5758194e55d5222b8dbfdde83c2b2248f4d08e5bc0f725fbe50e0bac10a69fb2",
+    "inputs/digestables.txt": "243150fdb32bcde1d3c164b23744de83b9dc254df30252ff1ad56f70e309e342",
+    "inputs/qasper.blocks.json": "d9334c8d9d2bb50fcfcbcc08fe25dd70ec0b5691e1c30eef01a1759a88945baa",
+    "inputs/qasper.txt": "5137e9aae0d5c9ca7031585c93adaf76267931d9cd194408954475f37f375cc3",
+    "inputs/task.json": "d2af176659d72b40d80f27019c20e260737bf29229d2bbea7ad691b175f89613"
+  },
+  "rubric_sha256": "5080dd2c58b3022b005580b7617d30778acfd0e1652376a6eb43823afdcdf6a0"
+}

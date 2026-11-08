@@ -1,0 +1,51 @@
+{
+  "purpose": "single real-paper development case; no accuracy claim",
+  "model": "qwen3.5-27b",
+  "max_tokens": 30000,
+  "max_steps": 18,
+  "max_seconds": 600,
+  "field_mode": "bounded",
+  "max_field_repairs": 1,
+  "temperature": 0.1,
+  "extra_body": {
+    "enable_thinking": false
+  },
+  "sdk_transport_retries": 1,
+  "application_result_retries": 0,
+  "input_sha256": {
+    "inputs/digestables.blocks.json": "5758194e55d5222b8dbfdde83c2b2248f4d08e5bc0f725fbe50e0bac10a69fb2",
+    "inputs/digestables.txt": "243150fdb32bcde1d3c164b23744de83b9dc254df30252ff1ad56f70e309e342",
+    "inputs/qasper.blocks.json": "d9334c8d9d2bb50fcfcbcc08fe25dd70ec0b5691e1c30eef01a1759a88945baa",
+    "inputs/qasper.txt": "5137e9aae0d5c9ca7031585c93adaf76267931d9cd194408954475f37f375cc3",
+    "inputs/task.json": "d2af176659d72b40d80f27019c20e260737bf29229d2bbea7ad691b175f89613"
+  },
+  "rubric_sha256": "5080dd2c58b3022b005580b7617d30778acfd0e1652376a6eb43823afdcdf6a0",
+  "code_sha256": {
+    "scripts/run_research_case.py": "13bb37d5f2cab7be06e7927e0f87498d09f22e2c5af45f1d506d93b7bb476f72",
+    "backend/app/research_backend/__init__.py": "00990f0c5216aa4b48ae2175ee82c617dbd93dbbe6179bbd4ae3bed4bf154b37",
+    "backend/app/research_backend/analysis.py": "6e801f1f151fbc4f6d8f38a0edd0c646ee7a3edb9e61b2229fe6bf889850baf5",
+    "backend/app/research_backend/analysis_worker.py": "f6ae1c577b7db332ef69041187fe5bd38d10a0e7991cdd716c04ba7b17de23b3",
+    "backend/app/research_backend/api.py": "9eb0665965164a02b354140216612fe68d25a1d919d101033ff9ac8cfa6dcbfa",
+    "backend/app/research_backend/cli.py": "73dfdc052046746722406af71d6800dca9336157c456889637d8bbef89d60490",
+    "backend/app/research_backend/config.py": "b1a9972cab32e6ecf3ca32640fe41d13616e0e154f092d9f315a8f9455c04de7",
+    "backend/app/research_backend/datasets.py": "0a2d0a9226b12e851884f24d0239b0ba18f412a210522dac6ef8808d066ad11f",
+    "backend/app/research_backend/discovery.py": "85e3ce9827e24363645fbf323a1e16fffbe6992d496842aacccb6bb917688586",
+    "backend/app/research_backend/evaluation.py": "d63b23c1672c89c86897613de3851340617c1fc4a043f8528e2c652f6b1d4a0f",
+    "backend/app/research_backend/field_state.py": "e77b0da2d778718f17a3850c83261a971e01ad9fd66495f55dd9c3633fe154d1",
+    "backend/app/research_backend/ingest.py": "8e7fcdc3e0e707be2ec25effa536d94e424d452e995421455a8f29446a992046",
+    "backend/app/research_backend/lab_api.py": "8fb2cefdae85bf45383d51943bde31010c545c42a6030fb549659b79a41b72ec",
+    "backend/app/research_backend/lab_runtime.py": "2d1fdd640f68178993b25bd4476cf6e33a4058b077083e39fe4bc9d0aa26ef3a",
+    "backend/app/research_backend/lab_schemas.py": "55bd4049dba5cd9c83d3f7ecba93913a8b5d3e7959bc266b7399708f2b7e91b2",
+    "backend/app/research_backend/local_rag.py": "88b0f65b1519f88542a05822bff1f29b4dd1a1574604b5e0a27bbe56bb9fa75d",
+    "backend/app/research_backend/lstm_model.py": "f00c21d3b1b5ee0c0934a1a1d3d867b0bc7535f21ffe35856d3ca730bf446731",
+    "backend/app/research_backend/memory.py": "b50c7d739506af279626ee8202f32648a873a5ac2368f7dff1b768a4309a14ef",
+    "backend/app/research_backend/providers.py": "830c793a9bd0cc6ea6c6378fa368f7ae2646695a424805d515d3019fe5c94b95",
+    "backend/app/research_backend/retrieval.py": "56f19dced93333e67bf2ddfe447e3bccfaa1cb1c6ce6a3652eb2c8c4be3b8763",
+    "backend/app/research_backend/runtime.py": "6e12b9859710a3ac8a767ffd61ace3a81a8530abd044e0f339291c3edd514b18",
+    "backend/app/research_backend/schemas.py": "201c361f47ec7bae0a344b2efae6354e0d7d854031fb66467602d5487dc62975",
+    "backend/app/research_backend/store.py": "5bc6e4c046e4f85cb0ca23c3bed93ae33f85fd1fc0d9309a272f77583f2808da",
+    "backend/app/research_backend/tools.py": "7610761ca6302e891b0087cd89b5db7804aaef548baf1fabf473a79e684c07dc",
+    "backend/app/research_backend/translation.py": "36ab9c97d1f065f0136585fc41e7b9df7cbdbc0ade1509a222971db3d9f29262",
+    "backend/app/research_backend/benchmarks/measurement.py": "7c293c011a8069540217ceb64006d793e6b9781b58f7e726e200466533115646"
+  }
+}
