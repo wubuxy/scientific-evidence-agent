@@ -272,6 +272,29 @@ async def test_joint_source_judge_sees_all_evidence_without_labels_and_enforces_
 
 
 @pytest.mark.asyncio
+async def test_measured_trace_freezes_provider_schema_output_limit_and_returned_usage():
+    from research_backend.providers import provider_tools
+    from research_backend.schemas import Report
+    tools = [dict(type="function",function=dict(name="finish_report",parameters=Report.model_json_schema()))]
+    expected = provider_tools(tools)
+    messages = [dict(role="user",content="Original request")]
+    class Model:
+        async def complete(self, request, definitions, max_tokens):
+            assert max_tokens == 777
+            return dict(tokens=120,prompt_tokens=100,completion_tokens=20,response_model="fixture",
+                message=dict(role="assistant",content="Public text",reasoning_content="Do not persist"))
+    measured = MeasuredModel(Model(),1000)
+    await measured.complete(messages,tools,777)
+    messages[0]["content"] = "Changed later"
+    tools[0]["function"]["parameters"].clear()
+    saved = measured.calls[0]
+    assert saved["provider_tools"] == expected and saved["max_output_tokens"] == 777
+    assert saved["messages"][0]["content"] == "Original request"
+    assert (saved["prompt_tokens"],saved["completion_tokens"],saved["response_model"]) == (100,20,"fixture")
+    assert "reasoning_content" not in saved["assistant"]
+
+
+@pytest.mark.asyncio
 async def test_measured_boundary_retains_unknown_cost_on_cancellation(report_study,tmp_path):
     class Model:
         async def complete(self,*args):

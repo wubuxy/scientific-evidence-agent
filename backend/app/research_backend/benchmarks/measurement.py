@@ -4,6 +4,7 @@ import json
 import time
 
 from ..runtime import estimate_prompt_tokens
+from ..providers import provider_tools
 
 
 class MeasuredModel:
@@ -31,13 +32,16 @@ class MeasuredModel:
             if remaining < 256:
                 raise ValueError("Insufficient remaining measured budget")
             max_tokens = min(max_tokens, remaining)
-        record = dict(tokens_used=None, messages=json.loads(json.dumps(messages)), assistant=None)
+        record = dict(tokens_used=None, messages=json.loads(json.dumps(messages)), assistant=None,
+            provider_tools=provider_tools(tools), max_output_tokens=max_tokens)
         started = time.monotonic()
         self.calls.append(record)
         try:
             operation = self.model.complete(messages, tools, max_tokens)
             response = await asyncio.wait_for(operation, self.deadline-time.monotonic()) if self.deadline is not None else await operation
             record.update(tokens_used=response.get("tokens"),
+                          prompt_tokens=response.get("prompt_tokens"), completion_tokens=response.get("completion_tokens"),
+                          response_model=response.get("response_model"),
                           assistant={k:v for k,v in response.get("message", {}).items()
                                      if k in {"role", "content", "tool_calls"}})
             if record["tokens_used"] is None:
