@@ -7,6 +7,8 @@ import time
 import re
 from .memory import EvidenceMemory
 from .grounding import unread_leads, read_context
+from .strategies import read_guidance, lexical_writer_evidence
+from .schemas import CompactReport
 from .providers import decode_tool_arguments, provider_tools
 from pydantic import ValidationError
 from .schemas import Report, ComparisonRow, FieldCandidate, ResearchPlanRequest
@@ -367,7 +369,7 @@ class Runtime:
         question_text = (f"历史记录预览（未经证据验证）：{history_text}\n当前问题：{run['question']}\n"
             + "当前资料清单（元数据，不是证据）：" + json.dumps(dict(sources=source_cards, truncated=len(source_items)>100), ensure_ascii=False))
         messages = [dict(role="system", content=SYSTEM), dict(role="user", content=question_text)]
-        memory = EvidenceMemory(run["question"])
+        memory = EvidenceMemory(run["question"], priority=run.get("memory_priority", "recent"))
         memory_mode = run.get("memory_mode", "legacy")
         memory_record = None
         field_mode = run.get("field_mode", "off")
@@ -385,8 +387,9 @@ class Runtime:
                 description="登记已规划论文字段的候选答案和本次回读证据；不是核实完成。最终仍须写入报告同名 attributes。",
                 parameters=FieldCandidate.model_json_schema())))
         allowed = {d["function"]["name"] for d in definitions}
+        report_contract = CompactReport if run.get("report_schema") == "compact" else Report
         definitions.append(dict(type="function", function=dict(name="finish_report",
-            description="交付带真实证据 ID 的结构化科研报告；列出限制，报告待人工审核", parameters=Report.model_json_schema())))
+            description="交付带真实证据 ID 的结构化科研报告；列出限制，报告待人工审核", parameters=report_contract.model_json_schema())))
         used_tokens = 0
         estimated_tokens = False
         calibration = 1.0
@@ -407,6 +410,8 @@ class Runtime:
                 pending_read_sources=[sid for sid in plan["source_ids"] if sid not in read_sources] if plan else [],
                 read_evidence_ids=sorted(read_ids))
             progress_note = "\n本次覆盖进度（仅表示原文回读，不等于字段事实已全部核实）：" + json.dumps(progress, ensure_ascii=False)
+            if run.get("read_guidance", False):
+                progress_note += read_guidance(read_evidence, pending_leads, source_cards)
             if ledger is not None:
                 progress_note += ("\n字段要求与操作状态：" + json.dumps(ledger.compact_prompt(), ensure_ascii=False)
                     + "\n报告 comparison_rows.attributes 必须逐字使用计划字段名。未找到时写本次未核实。"
@@ -428,7 +433,9 @@ class Runtime:
                 research_definitions = [d for d in definitions if d["function"]["name"] == "sources_read"]
             full_reserve = math.ceil(estimate_prompt_tokens(messages, research_definitions) * calibration * 1.1)
             final_system = FINAL_SYSTEM + progress_note
-            minimum_final = final_context(final_system, question_text, read_evidence,
+            writer_evidence = (lexical_writer_evidence(read_evidence, run["question"], run.get("required_fields", []))
+                               if run.get("writer_context") == "lexical" else read_evidence)
+            minimum_final = final_context(final_system, question_text, writer_evidence,
                 char_budget=FINAL_EVIDENCE_MIN, report_feedback=report_feedback)
             final_reserve = math.ceil(estimate_prompt_tokens(minimum_final, definitions[-1:]) * calibration * 1.1)
             research_output = min(1200, run["max_tokens"] - used_tokens - full_reserve
@@ -450,7 +457,7 @@ class Runtime:
             evidence_char_budget = None
             if finishing:
                 messages, raw_estimate, reserve, evidence_char_budget = fit_final_context(
-                    final_system, question_text, read_evidence, active_definitions,
+                    final_system, question_text, writer_evidence, active_definitions,
                     run["max_tokens"] - used_tokens - FINAL_OUTPUT_RESERVE, calibration, report_feedback)
             else:
                 raw_estimate = estimate_prompt_tokens(messages, active_definitions)
@@ -518,7 +525,7 @@ class Runtime:
                             normalized_columns=[], validation_status="pending"), parent_id=run_id)
                         normalized, moved = normalize_report_columns(arguments)
                         self.store.update(owner, workspace_id, "report_draft", draft["id"], normalized_columns=moved)
-                        report = Report.model_validate(normalized).model_dump()
+                        report = Report.model_validate(report_contract.model_validate(normalized).model_dump()).model_dump()
                         if ledger is not None and repair_base is not None:
                             report = Report.model_validate(ledger.merge_patch(repair_base, report, repair_scope)).model_dump()
                         if not plan and not finishing:

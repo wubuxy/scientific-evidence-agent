@@ -83,8 +83,8 @@ def inspect_case(folder, task, manifest):
     decisions = [e['data'] for e in trace['events'] if e['type']=='budget_decision']
     return dict(status=run['status'], memory_mode=run['memory_mode'],
         model_calls=len(costs), returned_tokens=total, known_tokens=known,
-        input_tokens=sum(c['prompt_tokens'] or 0 for c in trace['calls']),
-        output_tokens=sum(c['completion_tokens'] or 0 for c in trace['calls']),
+        input_tokens=sum(c.get('prompt_tokens') or 0 for c in trace['calls']),
+        output_tokens=sum(c.get('completion_tokens') or 0 for c in trace['calls']),
         elapsed_seconds=summary['elapsed_seconds'],
         contract_pass=inspection['contract_pass'], mechanical_errors=inspection['errors'],
         read_calls=len(reads), search_calls=sum(c['name']=='sources_search' for c in calls),
@@ -97,7 +97,7 @@ def inspect_case(folder, task, manifest):
         rejected_drafts=sum(d['validation_status']=='rejected' for d in load(folder/'report-drafts.json')),
         stop_reason=run.get('field_state',{}).get('stop_reason'),
         phase_sequence=[d['phase'] for d in decisions],
-        max_input_tokens=max((c['prompt_tokens'] or 0 for c in trace['calls']),default=0),
+        max_input_tokens=max((c.get('prompt_tokens') or 0 for c in trace['calls']),default=0),
         location_note='Line depth and non-overlap are diagnostics, not evidence relevance or answer correctness.')
 
 

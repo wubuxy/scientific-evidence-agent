@@ -210,6 +210,24 @@ class FieldRequirement(Contract):
     criterion: str = Field(default="完整回答该字段，保留对象、实验阶段和适用条件", max_length=500)
 
 
+class CompactComparisonRow(Contract):
+    source_id: str
+    method: str
+    evidence_ids: list[str] = Field(min_length=1, max_length=20)
+    attributes: dict[str, str] = Field(default_factory=dict, max_length=12,
+        description="逐字使用指定字段名；单元格保留对象、阶段、条件和未知项")
+
+    @model_validator(mode="after")
+    def bounded_attributes(self):
+        ComparisonRow.model_validate(self.model_dump())
+        return self
+
+
+class CompactReport(Report):
+    """Smaller wire format; persisted reports still use the canonical Report."""
+    comparison_rows: list[CompactComparisonRow] = Field(default_factory=list, max_length=100)
+
+
 class FieldCandidate(Contract):
     source_id: str = Field(min_length=1, max_length=64)
     name: str = Field(min_length=1, max_length=100)
@@ -223,6 +241,10 @@ class RunCreate(Contract):
     retrieval_strategy: Literal["grep", "rag", "combined"] = "grep"
     allow_network: bool = False
     memory_mode: Literal["evidence", "legacy"] = "legacy"
+    read_guidance: bool = False
+    memory_priority: Literal["recent", "read_first"] = "recent"
+    writer_context: Literal["prefix", "lexical"] = "prefix"
+    report_schema: Literal["full", "compact"] = "full"
     max_steps: int = Field(default=10, ge=1, le=30)
     max_tokens: int = Field(default=20000, ge=2000, le=100000)
     max_seconds: int = Field(default=180, ge=10, le=900)
@@ -232,6 +254,8 @@ class RunCreate(Contract):
 
     @model_validator(mode="after")
     def distinct_requirements(self):
+        if self.memory_priority == "read_first" and self.memory_mode != "evidence":
+            raise ValueError("read_first requires evidence memory")
         keys = [(f.source_id, f.name) for f in self.required_fields]
         if len(keys) != len(set(keys)):
             raise ValueError("重复的论文字段要求")

@@ -48,6 +48,34 @@ def test_memory_preparation_changes_only_the_condition(tmp_path):
     assert a==b
 
 
+def test_frozen_strategies_reach_runtime_without_paid_calls(tmp_path,monkeypatch):
+    from research_backend.config import Settings
+    from research_backend.runtime import Runtime
+    runner=module('run_research_case')
+    flags=dict(read_guidance=True,memory_priority='read_first',writer_context='lexical',report_schema='compact')
+    runner.prepare(tmp_path/'case','evidence',strategies=flags,task_id='custom',question='Custom task')
+    monkeypatch.setattr(Settings,'from_env',lambda:Settings(llm_api_key='offline',
+        llm_model='qwen3.5-27b',llm_extra_body={'enable_thinking':False}))
+    async def capture(runtime,owner,wid,rid):
+        run=runtime.store.get(owner,wid,'run',rid)
+        assert all(run[key]==value for key,value in flags.items()) and run['question']=='Custom task'
+        runtime.store.update(owner,wid,'run',rid,status='failed',error='offline')
+    monkeypatch.setattr(Runtime,'execute',capture)
+    assert asyncio.run(runner.run_case(tmp_path/'case',tmp_path/'.env'))==1
+
+
+def test_strategy_sweep_is_balanced_and_each_single_arm_changes_one_switch(monkeypatch):
+    from collections import Counter
+    monkeypatch.syspath_prepend(str(ROOT/'scripts'))
+    sweep=module('strategy_sweep')
+    rows=sweep.schedule()
+    assert len(rows)==len({r['case'] for r in rows})==24
+    assert set(Counter((r['task'],r['arm']) for r in rows).values())=={2}
+    for name,flags in sweep.ARMS.items():
+        if name not in {'baseline','combined'}:
+            assert sum(flags[k]!=sweep.BASE[k] for k in flags)==1
+
+
 @pytest.mark.parametrize('fault',['usage','human_score','missing','quote'])
 def test_architecture_audit_rejects_corrupt_result(tmp_path,fault):
     auditor=module('audit_architecture_study')

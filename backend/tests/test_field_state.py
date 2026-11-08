@@ -177,7 +177,7 @@ class LoopModel:
 
 
 def run_loop(tmp_path, model, mode="bounded", max_steps=8, requirements=(), cancel_when=None,
-             max_tokens=50000, memory_mode="legacy"):
+             max_tokens=50000, memory_mode="legacy", strategies=None):
     app = create_app(Settings(data_dir=tmp_path,jwt_secret=SECRET),model=model)
     with TestClient(app) as client:
         wid = workspace(client); sid = source(client,wid,text="Training data X.\nInitialized from Y.")
@@ -185,6 +185,7 @@ def run_loop(tmp_path, model, mode="bounded", max_steps=8, requirements=(), canc
         base=f"/api/v1/workspaces/{wid}"
         session=client.post(base+"/sessions",headers=headers(),json={}).json()["id"]
         response=client.post(base+"/runs",headers=headers(),json=dict(session_id=session,question="Data and Init?",
+            **(strategies or {}),
             field_mode=mode,max_tokens=max_tokens,max_steps=max_steps,max_field_repairs=2,memory_mode=memory_mode,
             required_fields=[dict(source_id=sid, **field) for field in requirements]))
         assert response.status_code == 202, response.text

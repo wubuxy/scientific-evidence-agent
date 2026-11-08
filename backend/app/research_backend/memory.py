@@ -8,8 +8,9 @@ import re
 
 
 class EvidenceMemory:
-    def __init__(self, question):
+    def __init__(self, question, priority="recent"):
         self.question = question
+        self.priority = priority
         self.sources, self.evidence, self.actions = {}, {}, []
 
     def observe(self, name, arguments, observation):
@@ -28,6 +29,9 @@ class EvidenceMemory:
         if data.get("id") and "quote" in data:
             items = [data]
         for item in items:
+            if (self.priority == "read_first" and name != "sources_read"
+                    and self.evidence.get(item["id"], {}).get("citable")):
+                continue  # A later search preview must not demote an actual read.
             self.evidence[item["id"]] = dict(item, citable=name == "sources_read",
                 search_terms=arguments.get("query", "") + " " + (arguments.get("grep_query") or ""))
         # Discovery records are leads with explicit import status, not evidence.
@@ -77,6 +81,8 @@ class EvidenceMemory:
             groups.setdefault(item["source_id"], []).append(item)
         ordered = [items[i] for i in range(max((len(v) for v in groups.values()), default=0))
                    for items in groups.values() if i < len(items)]
+        if self.priority == "read_first":
+            ordered.sort(key=lambda item: not item.get("citable", False))
         cards, used = [], 0
         for item in ordered:
             cap = min(1800, max(500, char_budget // max(1, min(len(ordered), 7))))

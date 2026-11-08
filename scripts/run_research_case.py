@@ -45,7 +45,8 @@ def write(path, value):
     path.write_text(json.dumps(value, ensure_ascii=False, indent=2)+"\n", encoding="utf-8")
 
 
-def prepare(directory, memory_mode="legacy"):
+def prepare(directory, memory_mode="legacy", *, task_id="research-judgment-dev-001", question=QUESTION,
+            fields=None, rubric=None, strategies=None):
     if memory_mode not in {"legacy", "evidence"}:
         raise ValueError("Unsupported memory mode")
     directory.mkdir(parents=True, exist_ok=False)
@@ -59,14 +60,15 @@ def prepare(directory, memory_mode="legacy"):
         for suffix in (".txt", ".blocks.json"):
             (inputs/(name+suffix)).write_bytes((ROOT/"frontend/public/demo/papers"/(name+suffix)).read_bytes())
         sources.append(dict(id=name, title=title, uri=uri))
-    write(inputs/"task.json", dict(id="research-judgment-dev-001", question=QUESTION, sources=sources, fields=FIELDS,
+    write(inputs/"task.json", dict(id=task_id, question=question, sources=sources, fields=FIELDS if fields is None else fields,
         provenance="Previously observed public demo papers; one development case, not held-out evaluation"))
     write(directory/"rubric.json", dict(status="pending_independent_human_review", scale="0 or 1 after evidence review; null means unreviewed",
-        items=[dict(id=f"r{i+1}", criterion=text, score=None, rationale=None) for i,text in enumerate(RUBRIC)]))
+        items=[dict(id=f"r{i+1}", criterion=text, score=None, rationale=None) for i,text in enumerate(RUBRIC if rubric is None else rubric)]))
     code = [ROOT/"scripts/run_research_case.py"] + sorted((ROOT/"backend/app/research_backend").glob("*.py")) + [ROOT/"backend/app/research_backend/benchmarks/measurement.py"]
     write(directory/"manifest.json", dict(purpose="single real-paper development case; no accuracy claim",
         model="qwen3.5-27b", max_tokens=30000, max_steps=18, max_seconds=600, field_mode="bounded", max_field_repairs=1,
         memory_mode=memory_mode, retrieval_strategy="grep", allow_network=False,
+        **({"strategies": strategies} if strategies is not None else {}),
         temperature=0.1, extra_body=dict(enable_thinking=False), sdk_transport_retries=1, application_result_retries=0,
         input_sha256={str(p.relative_to(directory)).replace("\\","/"):sha(p) for p in sorted(inputs.iterdir())},
         rubric_sha256=sha(directory/"rubric.json"),
@@ -113,6 +115,7 @@ async def run_case(directory, env_file):
     session = store.put(owner,wid,"session",dict(title=task["id"]))
     body = RunCreate(session_id=session["id"], question=task["question"],
         memory_mode=manifest.get("memory_mode", "legacy"),
+        **manifest.get("strategies", {}),
         retrieval_strategy=manifest.get("retrieval_strategy", "grep"), allow_network=manifest.get("allow_network", False),
         **{k:manifest[k] for k in ("max_tokens","max_steps","max_seconds","field_mode","max_field_repairs")},
         required_fields=[dict(source_id=source["id"], **field) for source in sources for field in task["fields"]])
