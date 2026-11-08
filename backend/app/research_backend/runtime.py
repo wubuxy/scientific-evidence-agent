@@ -23,6 +23,22 @@ class BudgetExceeded(RuntimeError):
     """A terminal budget failure must not enter the recoverable tool-error loop."""
 
 
+class MeasuredBudgetExceeded(BudgetExceeded, ValueError):
+    """Carry returned billing across a measured boundary that rejects the answer."""
+    def __init__(self, response):
+        super().__init__("Measured token budget exceeded")
+        self.usage = {key: response.get(key) for key in
+                      ("tokens", "prompt_tokens", "completion_tokens", "finish_reason", "response_model")}
+
+
+def update_token_calibration(previous, prompt_tokens, raw_estimate):
+    """Never lower the safety factor after a cheaper phase or projection.
+
+This is a conservative heuristic, not an exact tokenizer or billing guarantee.
+"""
+    return max(1.0, previous, prompt_tokens / max(1, raw_estimate))
+
+
 SYSTEM = """你是面向 AI/NLP 研究生的科研证据助手，任务是组会调研、跨论文实验条件对齐和结论核验。
 先查看资料列表，再用 sources_search 查找与用户问题相关的证据，随后按行回读相邻上下文。
 sources_search 的检索策略由服务端固定，混合策略必定调用 Grep 与 RAG；不要自行改策略。
@@ -480,7 +496,12 @@ class Runtime:
                     pending_leads=len(pending_leads), source_ids=sorted({item["source_id"] for item in pending_leads}),
                     evidence_sufficiency="not_assessed"))
             started = time.monotonic()
-            completion = await self.model.complete(messages, active_definitions, output_allowance)
+            boundary_failure = None
+            try:
+                completion = await self.model.complete(messages, active_definitions, output_allowance)
+            except MeasuredBudgetExceeded as exc:
+                # Account for the response before failing. Never execute its tools.
+                boundary_failure, completion = exc, exc.usage
             self.store.event(owner, workspace_id, run_id, "model_usage", dict(step=step + 1,
                 memory_mode=memory_mode, finishing=finishing, prompt_estimate=reserve,
                 stop_reason=stop_reason, tokens_before_call=used_tokens, budget_remaining=run["max_tokens"]-used_tokens,
@@ -489,7 +510,7 @@ class Runtime:
                 total_tokens=completion.get("tokens"), finish_reason=completion.get("finish_reason"),
                 elapsed_ms=round((time.monotonic() - started) * 1000, 2)))
             if completion.get("prompt_tokens"):
-                calibration = min(2.0, max(0.5, completion["prompt_tokens"] / raw_estimate))
+                calibration = update_token_calibration(calibration, completion["prompt_tokens"], raw_estimate)
             actual = completion.get("tokens")
             if actual is None:
                 actual = reserve + len(json.dumps(completion["message"], ensure_ascii=False)) // 2
@@ -499,8 +520,10 @@ class Runtime:
                               tokens_used=used_tokens, tokens_estimated=estimated_tokens)
             if self.store.get(owner, workspace_id, "run", run_id)["status"] == "cancelled":
                 return
+            if boundary_failure is not None:
+                raise boundary_failure
             if used_tokens > run["max_tokens"]:
-                raise ValueError("模型返回的用量超过任务 token 预算")
+                raise BudgetExceeded("模型返回的用量超过任务 token 预算")
             message = completion["message"]
             calls = message.get("tool_calls") or []
             if not calls:
@@ -621,6 +644,8 @@ class Runtime:
                     observation = {"data": model_view(result["data"]), "tool_call_id": result["id"]}
                     self.store.event(owner, workspace_id, run_id, "tool_completed",
                                      {"name": name, "tool_call_id": result["id"]})
+                except BudgetExceeded:
+                    raise  # A billed terminal failure is never a repairable tool error.
                 except (ValueError, Unavailable, NotFound, LookupError) as exc:
                     if reading:
                         read_feedback = validation_feedback(exc)
@@ -679,6 +704,15 @@ class Runtime:
             payload, _ = decode_tool_arguments(calls[0], [definition])
             ledger.apply_reviews(payload, cases, response.get("response_model") or run.get("model"))
             record["status"] = "recorded"
+        except MeasuredBudgetExceeded as exc:
+            # The review response was paid for but must not update judgments.
+            actual = exc.usage["tokens"]
+            used += actual
+            record.update(status="failed", error=type(exc).__name__, tokens_used=actual,
+                          response_model=exc.usage.get("response_model"))
+            ledger.review_status = "failed"
+            ledger.stop_reason = "token_budget_exceeded"
+            raise
         except asyncio.CancelledError:
             record["status"] = "cancelled"
             ledger.review_status = "cancelled"

@@ -3,7 +3,7 @@ import asyncio
 import json
 import time
 
-from ..runtime import estimate_prompt_tokens
+from ..runtime import estimate_prompt_tokens, MeasuredBudgetExceeded, BudgetExceeded
 from ..providers import provider_tools
 
 
@@ -27,6 +27,8 @@ class MeasuredModel:
             raise ValueError("Logical policy time budget exhausted")
         if self.tokens is None:
             raise ValueError("Cannot continue after unknown provider usage")
+        if self.known_tokens >= self.ceiling:
+            raise BudgetExceeded("Measured token budget already exhausted")
         if self.preflight:
             remaining = self.ceiling - self.known_tokens - int(estimate_prompt_tokens(messages, tools) * 1.15)
             if remaining < 256:
@@ -51,7 +53,7 @@ class MeasuredModel:
                 record["tokens_used"] = None
                 raise ValueError("Invalid provider usage")
             if self.known_tokens > self.ceiling:
-                raise ValueError("Measured token budget exceeded")
+                raise MeasuredBudgetExceeded(response)
             return response
         finally:
             record["elapsed_seconds"] = round(time.monotonic() - started, 3)
