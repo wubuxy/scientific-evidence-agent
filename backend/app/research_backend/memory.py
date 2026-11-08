@@ -13,7 +13,11 @@ class EvidenceMemory:
         self.sources, self.evidence, self.actions = {}, {}, []
 
     def observe(self, name, arguments, observation):
-        self.actions.append(dict(name=name, arguments=arguments, error=observation.get("error")))
+        # Report drafts are persisted separately. Repeating a whole rejected
+        # draft in each of the six recent actions defeats memory compaction.
+        action_args = ({"draft_stored": True} if name == "finish_report" else arguments)
+        self.actions.append(dict(name=name, arguments=action_args,
+            error=(observation.get("error") or "")[:1600] or None))
         data = observation.get("data", {})
         if data.get("warnings"):
             self.actions[-1]["warnings"] = data["warnings"][:4]
@@ -24,7 +28,8 @@ class EvidenceMemory:
         if data.get("id") and "quote" in data:
             items = [data]
         for item in items:
-            self.evidence[item["id"]] = dict(item, search_terms=arguments.get("query", "") + " " + (arguments.get("grep_query") or ""))
+            self.evidence[item["id"]] = dict(item, citable=name == "sources_read",
+                search_terms=arguments.get("query", "") + " " + (arguments.get("grep_query") or ""))
         # Discovery records are leads with explicit import status, not evidence.
         if "papers" in data:
             self.actions[-1]["collection"] = {k: data[k] for k in ("job_id", "status", "papers") if k in data}
@@ -76,7 +81,8 @@ class EvidenceMemory:
         for item in ordered:
             cap = min(1800, max(500, char_budget // max(1, min(len(ordered), 7))))
             card = {k: item[k] for k in ("id", "source_id", "start_line", "end_line")}
-            card.update(excerpts=self.preview(item, cap), excerpt_only=True)
+            card.update(excerpts=self.preview(item, cap), excerpt_only=True,
+                citable=item.get("citable", False), origin="read" if item.get("citable") else "search_lead")
             size = len(json.dumps(card, ensure_ascii=False))
             if used + size > char_budget:
                 continue

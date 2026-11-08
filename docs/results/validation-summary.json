@@ -3,19 +3,19 @@
   "model": "qwen3.5-27b",
   "scope": "Agent development runs, engineering validation, and separately reported local verifier studies; QASPER frozen test set reserved",
   "checks": {
-    "offline_tests_passed": 240,
+    "offline_tests_passed": 256,
     "frontend_typecheck": "passed",
     "frontend_production_build": "passed",
     "live_report_api": "completed",
-    "offline_tests_collected": 240,
+    "offline_tests_collected": 256,
     "offline_test_profiles": [
       {
         "profile": "full-locked",
         "platform": "Windows",
         "python": "3.13.13",
         "dependencies": "core + analysis under constraints-ci.txt; CPU torch from the official index",
-        "collected": 240,
-        "passed": 240,
+        "collected": 256,
+        "passed": 256,
         "skipped": 0,
         "failed": 0,
         "errors": 0,
@@ -30,7 +30,7 @@
           "pytest-asyncio": "1.4.1.post1",
           "openai": "3.46.0"
         },
-        "evidence": "docs/results/execution-v1/validation.json"
+        "evidence": "docs/results/context-repair-v1/validation.json"
       }
     ],
     "ci_workflow": ".github/workflows/ci.yml",
@@ -39,7 +39,7 @@
     "reproducibility_guide": "docs/REPRODUCIBILITY.md",
     "frontend_build_note": "npm ci, explicit TypeScript check, and production build passed; 558.01 kB analysis chunk warning remains",
     "dependency_constraints_sha256": "f2e946c20ebb1c80ab79be44342d045f6ff55236bb364a515fae6a63e254a1a2",
-    "reproducibility_note": "Windows full: 230 passed, zero skips. Added public field replay source, candidate-version and cost integrity checks. Earlier profiles retained separately.",
+    "reproducibility_note": "Windows full: 256 passed, zero skips. Added context reservation and report proposal regressions; no new model calls.",
     "offline_test_profiles_before_demo": [
       {
         "profile": "core",
@@ -557,7 +557,32 @@
       "logical_tokens": 52210,
       "semantic_accuracy": null,
       "evidence": "docs/results/RESEARCH_JUDGMENT_DEV001.md"
-    }
+    },
+    "offline_test_profiles_before_context_repair": [
+      {
+        "profile": "full-locked",
+        "platform": "Windows",
+        "python": "3.13.13",
+        "dependencies": "core + analysis under constraints-ci.txt; CPU torch from the official index",
+        "collected": 240,
+        "passed": 240,
+        "skipped": 0,
+        "failed": 0,
+        "errors": 0,
+        "packages": {
+          "fastapi": "0.162.0",
+          "numpy": "2.5.4",
+          "scipy": "1.18.1",
+          "openpyxl": "3.1.5",
+          "torch": "2.15.0+cpu",
+          "pydantic": "2.14.3",
+          "pytest": "9.2.0",
+          "pytest-asyncio": "1.4.1.post1",
+          "openai": "3.46.0"
+        },
+        "evidence": "docs/results/execution-v1/validation.json"
+      }
+    ]
   },
   "datasets": {
     "qasper": {
@@ -1015,6 +1040,15 @@
     "route": "/demo/fields",
     "new_model_calls": 0,
     "real_human_labels": 0,
+    "semantic_accuracy": null
+  },
+  "context_repair_v1": {
+    "report": "docs/results/CONTEXT_REPAIR_V1.md",
+    "validation": "docs/results/context-repair-v1/validation.json",
+    "audit": "docs/results/context-repair-audit.json",
+    "new_model_calls": 0,
+    "historical_failed_runs": 2,
+    "historical_rejected_drafts": 4,
     "semantic_accuracy": null
   }
 }

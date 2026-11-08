@@ -1,0 +1,49 @@
+{
+  "date": "2026-11-08",
+  "scope": "offline engineering regression; no new quality experiment",
+  "backend": {
+    "collected": 256,
+    "passed": 256,
+    "failed": 0,
+    "skipped": 0,
+    "errors": 0,
+    "junit_sha256": "07f0164ecd59b76c4b2ad796c0212e60c168891d0a1f35846cc13e1a078f05e7"
+  },
+  "frontend_tests": {
+    "passed": 5
+  },
+  "frontend_typecheck": "passed",
+  "frontend_build": "passed",
+  "frontend_build_note": "Existing 558.01 kB AnalysisChart chunk warning",
+  "fault_cases": 17,
+  "ui": {
+    "status": "passed",
+    "mode": "real UI with intercepted API; no model calls",
+    "submitted_runs": 2,
+    "explicit_pairs": 4,
+    "mobile": "390x844",
+    "themes": [
+      "light",
+      "dark"
+    ],
+    "workspace_reset": true,
+    "invalid_submissions_blocked": true,
+    "proposal_render_and_basis_citation": true
+  },
+  "historical_audits": [
+    "report_calibration_v1: passed; human labels remain zero",
+    "repair_study: passed; 200 outcomes and 40 cached policies"
+  ],
+  "new_model_calls": 0,
+  "new_training_runs": 0,
+  "semantic_accuracy": null,
+  "code_sha256": {
+    "backend/app/research_backend/runtime.py": "6e12b9859710a3ac8a767ffd61ace3a81a8530abd044e0f339291c3edd514b18",
+    "backend/app/research_backend/providers.py": "830c793a9bd0cc6ea6c6378fa368f7ae2646695a424805d515d3019fe5c94b95",
+    "backend/app/research_backend/schemas.py": "201c361f47ec7bae0a344b2efae6354e0d7d854031fb66467602d5487dc62975",
+    "backend/app/research_backend/memory.py": "b50c7d739506af279626ee8202f32648a873a5ac2368f7dff1b768a4309a14ef",
+    "backend/app/research_backend/field_state.py": "e77b0da2d778718f17a3850c83261a971e01ad9fd66495f55dd9c3633fe154d1",
+    "scripts/diagnose_agent_context.py": "ef9b1d301b38181c79c1df60e0326f13d9b13229f3001e64f4bb4b35c543adfe"
+  },
+  "ci": "Check the exact commit in GitHub Actions"
+}

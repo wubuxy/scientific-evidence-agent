@@ -4,6 +4,8 @@
 
 ## 先建立领域地图
 
+针对本次“预算不足是否来自上下文”的故障，优先阅读 [Anthropic 上下文工程](https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents)、下文的 Sufficient Context 与 RARR。具体诊断、采用的机制和未证明的部分见 [上下文与契约修复](results/CONTEXT_REPAIR_V1.md)；阅读论文后先修执行问题，再验证质量。
+
 Deep Research 通常包含问题拆解、反复获取资料、管理工作记忆、综合并引用证据、检查缺口和停止。它覆盖网页事实查找、长报告和企业资料调研；这些任务的难度与成功标准不同。综述 [Deep Research: A Systematic Survey](https://arxiv.org/abs/2512.02038) 将规划、信息获取、记忆和回答组织为四个核心组件，并梳理提示、SFT 和 Agent RL。建议先读组件图和评测章节，再按下面的问题阅读。
 
 | 研究主线 | 大家在做什么 | 仍未解决的关键问题 |

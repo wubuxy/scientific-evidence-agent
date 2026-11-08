@@ -1,0 +1,102 @@
+{
+  "scope": "offline_saved_trace_audit_and_matched_schema_prompt_projection",
+  "model_calls": 0,
+  "quality_result": null,
+  "provider_savings": null,
+  "limitations": [
+    "Current schema held constant to isolate system text; old tool payloads were not recorded.",
+    "No counterfactual model responses; this does not prove an extra read or a successful report.",
+    "Input share measures cumulative billed input, not context-window overflow.",
+    "A proposal tag or valid citation cannot establish semantic support."
+  ],
+  "cases": [
+    {
+      "case": "original",
+      "status": "failed",
+      "historical_calls": 5,
+      "measured_input_tokens": 23537,
+      "measured_total_tokens": 26258,
+      "input_fraction": 0.8964,
+      "first_forced_final": {
+        "step": 4,
+        "tokens_before_call": 15022,
+        "stop_reason": "final_reserve"
+      },
+      "final_prompt_projection": [
+        {
+          "step": 4,
+          "measured_old_prompt_tokens": 4560,
+          "matched_schema_estimate_old_system": 6062,
+          "matched_schema_estimate_phase_system": 4965,
+          "estimated_reduction": 1097,
+          "question_evidence_feedback_unchanged": true
+        },
+        {
+          "step": 5,
+          "measured_old_prompt_tokens": 4560,
+          "matched_schema_estimate_old_system": 6062,
+          "matched_schema_estimate_phase_system": 4965,
+          "estimated_reduction": 1097,
+          "question_evidence_feedback_unchanged": true
+        }
+      ],
+      "historical_drafts": 2,
+      "still_rejected_by_current_contract": 2,
+      "schema_characters_before_annotation_removal": 3310,
+      "schema_characters_after_annotation_removal": 2664,
+      "inputs_sha256": {
+        "trace.json": "6908ebe725aff1a4be7594639aad56e74d0dd65bec700c84c056efdafb807cee",
+        "run.json": "ef6cff7d876863bee8aed81ee1bd5e0e28b2d3c3a6c3a16b4bfc78477c928e1b",
+        "rejected-drafts.json": "da084468beb8681aa9b564d07d8c71246407643788b08ba7e4d27f8d698430fc"
+      }
+    },
+    {
+      "case": "feedback-fix",
+      "status": "failed",
+      "historical_calls": 5,
+      "measured_input_tokens": 23125,
+      "measured_total_tokens": 25952,
+      "input_fraction": 0.8911,
+      "first_forced_final": {
+        "step": 4,
+        "tokens_before_call": 14803,
+        "stop_reason": "final_reserve"
+      },
+      "final_prompt_projection": [
+        {
+          "step": 4,
+          "measured_old_prompt_tokens": 4360,
+          "matched_schema_estimate_old_system": 5784,
+          "matched_schema_estimate_phase_system": 4687,
+          "estimated_reduction": 1097,
+          "question_evidence_feedback_unchanged": true
+        },
+        {
+          "step": 5,
+          "measured_old_prompt_tokens": 4537,
+          "matched_schema_estimate_old_system": 6044,
+          "matched_schema_estimate_phase_system": 4947,
+          "estimated_reduction": 1097,
+          "question_evidence_feedback_unchanged": true
+        }
+      ],
+      "historical_drafts": 2,
+      "still_rejected_by_current_contract": 2,
+      "schema_characters_before_annotation_removal": 3310,
+      "schema_characters_after_annotation_removal": 2664,
+      "inputs_sha256": {
+        "trace.json": "04ca77749ddfe52989d2783c31825f9b971f15734164b624fd211c083aa5d6a5",
+        "run.json": "ad77ae21334eed7850357f226eeb48632721ff87ca3e201190dfe5be295189d9",
+        "rejected-drafts.json": "8ffe95ed825e55170dc2e08f6000315e725b365e1e8b4d5e7e167b2067137bf9"
+      }
+    }
+  ],
+  "code_sha256": {
+    "backend/app/research_backend/runtime.py": "6e12b9859710a3ac8a767ffd61ace3a81a8530abd044e0f339291c3edd514b18",
+    "backend/app/research_backend/providers.py": "830c793a9bd0cc6ea6c6378fa368f7ae2646695a424805d515d3019fe5c94b95",
+    "backend/app/research_backend/schemas.py": "201c361f47ec7bae0a344b2efae6354e0d7d854031fb66467602d5487dc62975",
+    "backend/app/research_backend/memory.py": "b50c7d739506af279626ee8202f32648a873a5ac2368f7dff1b768a4309a14ef",
+    "backend/app/research_backend/field_state.py": "e77b0da2d778718f17a3850c83261a971e01ad9fd66495f55dd9c3633fe154d1",
+    "scripts/diagnose_agent_context.py": "ef9b1d301b38181c79c1df60e0326f13d9b13229f3001e64f4bb4b35c543adfe"
+  }
+}

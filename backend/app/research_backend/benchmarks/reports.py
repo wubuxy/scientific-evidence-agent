@@ -86,7 +86,12 @@ async def run_report(task, documents, settings, method, directory, embedder, max
 
 
 def units(report, documents):
-    """Claims plus individual comparison cells; never silently ignore table facts."""
+    """Findings/inferences plus table cells; proposals need a separate rubric.
+
+    This unit metric does not establish whole-report quality. A proposal's
+    rationale is already evaluated via its referenced claims; its feasibility,
+    assumptions and plan require human review and must not inflate support rate.
+    """
     result = []
     for i, claim in enumerate(report["claims"]):
         text = claim["text"] + ("\nScope: " + claim["qualification"] if claim["qualification"] else "")
@@ -157,6 +162,8 @@ def inspect_prediction(prediction, task, documents, budget):
         field_presence_rate=sum(covered)/len(covered),
         cited_source_coverage=len(cited_sources & set(task["source_ids"]))/len(task["source_ids"]),
         errors=sorted(set(errors)), units=extracted, valid_reads=valid,
+        proposal_count=len((report or {}).get("proposals", [])), proposal_quality=None,
+        assessment_scope="claims_and_comparison_cells_only",
         semantic_success=None, tokens_used=tokens, known_tokens_used=known)
 
 

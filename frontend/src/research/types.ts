@@ -3,9 +3,10 @@ export interface Source { id: string; title: string; kind: string; uri: string |
 export interface Session { id: string; title: string; created_at: string }
 export interface Message { id: string; role: 'user' | 'assistant'; content: string; run_id: string | null; created_at: string }
 export interface Evidence { id: string; source_id: string; source_hash: string; title: string; uri: string | null; quote: string; start_line: number; end_line: number; locations: { page: number | null; start_seconds: number | null; end_seconds: number | null; block_type: string }[]; method?: string }
-export interface Claim { text: string; evidence_ids: string[]; qualification: string }
+export interface Claim { text: string; evidence_ids: string[]; qualification: string; kind?: 'finding' | 'inference' }
+export interface Proposal { text: string; basis_claim_indices: number[]; assumptions: string[]; validation_plan: string; status: 'proposed_not_executed' }
 export interface Comparison { source_id: string; method: string; dataset: string; model: string; metric: string; result: string; conditions: string; comparability: string; evidence_ids: string[]; attributes?: Record<string, string> }
-export interface Report { title: string; claims: Claim[]; comparison_rows: Comparison[]; limitations: string[]; verification_status: string }
+export interface Report { title: string; claims: Claim[]; comparison_rows: Comparison[]; limitations: string[]; verification_status: string; proposals?: Proposal[] }
 export type Strategy = 'grep' | 'rag' | 'combined'
 export interface FieldRequirement { source_id: string; name: string; criterion: string }
 export interface FieldState { version: string; requirement_origin: 'request' | 'model_plan'; total: number; present: number; unresolved: number; reviewed: number; semantic_success: null; repair_rounds: number; stop_reason: string | null; review_status: string; fields: { id: string; source_id: string; name: string; criterion: string; answer: string; evidence_ids: string[]; revision: number; coverage: string; activity: string; review: null | { support: string; adequacy: string; rationale: string } }[] }

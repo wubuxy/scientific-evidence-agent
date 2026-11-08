@@ -71,6 +71,8 @@ jobs:
         run: python -m pytest tests -q --junitxml=test-results/pytest.xml
       - name: Export Agent fault matrix
         run: python ../scripts/eval_agent_faults.py --out test-results/agent-faults
+      - name: Audit saved failure context without model calls
+        run: python ../scripts/diagnose_agent_context.py --out test-results/context-audit.json
       - name: Audit published verifier pilot
         run: python ../scripts/audit_verifier_pilot.py
       - name: Audit repair study and cached gate comparison

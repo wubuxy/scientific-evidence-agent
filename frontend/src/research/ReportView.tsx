@@ -11,6 +11,7 @@ export function CitationChips({ ids, evidence, onSelect }: { ids: string[]; evid
 
 export default function ReportView({ report, evidence, sources, onSelect }: { report: Report; evidence: Evidence[]; sources: Source[]; onSelect: (id: string) => void }) {
   const columns = [...new Set(report.comparison_rows.flatMap(row => Object.keys(row.attributes ?? {})))]
+  const proposals = report.proposals ?? []
   return <article className="report">
     <div className="report-eyebrow"><span className="pill amber"><Icon name="evidence" size={13}/>待人工核验</span><span>RESEARCH BRIEF</span></div>
     <h2>{report.title}</h2>
@@ -19,7 +20,7 @@ export default function ReportView({ report, evidence, sources, onSelect }: { re
     {report.claims.length === 0 && <p className="muted">本次没有形成可引用的结论。</p>}
     {report.claims.map((claim, index) => <div className="claim" key={index}>
       <span className="claim-number">{String(index + 1).padStart(2, '0')}</span>
-      <div><p>{claim.text}</p><CitationChips ids={claim.evidence_ids} evidence={evidence} onSelect={onSelect}/>{claim.qualification && <p className="qualification">适用范围 · {claim.qualification}</p>}</div>
+      <div>{claim.kind === 'inference' && <span className="pill amber">基于原文的推断</span>}<p>{claim.text}</p><CitationChips ids={claim.evidence_ids} evidence={evidence} onSelect={onSelect}/>{claim.qualification && <p className="qualification">适用范围 · {claim.qualification}</p>}</div>
     </div>)}
     {report.comparison_rows.length > 0 && <>
       <div className="section-label"><span>02</span><h3>跨论文对照</h3></div>
@@ -36,7 +37,20 @@ export default function ReportView({ report, evidence, sources, onSelect }: { re
         </tr>)}
       </tbody></table></div>}
     </>}
-    <div className="section-label"><span>{report.comparison_rows.length ? '03' : '02'}</span><h3>局限与待核验项</h3></div>
+    {proposals.length > 0 && <section aria-label="方案建议">
+      <div className="section-label"><span>{report.comparison_rows.length ? '03' : '02'}</span><h3>方案建议 · 尚未执行</h3></div>
+      <p className="muted small">原文支持的是方案依据；方案本身的效果仍须通过实验验证。</p>
+      {proposals.map((proposal, index) => <div className="claim" key={index}>
+        <span className="claim-number">{String(index + 1).padStart(2, '0')}</span>
+        <div><p>{proposal.text}</p>
+          <p className="qualification">依据 · 结论 {proposal.basis_claim_indices.map(i => i + 1).join('、')}</p>
+          <CitationChips ids={[...new Set(proposal.basis_claim_indices.flatMap(i => report.claims[i]?.evidence_ids ?? []))]} evidence={evidence} onSelect={onSelect}/>
+          <p className="qualification">假设 · {proposal.assumptions.join('；')}</p>
+          <p className="qualification">验证计划 · {proposal.validation_plan}</p>
+        </div>
+      </div>)}
+    </section>}
+    <div className="section-label"><span>{String(2 + Number(report.comparison_rows.length > 0) + Number(proposals.length > 0)).padStart(2, '0')}</span><h3>局限与待核验项</h3></div>
     <div className="limitations"><Icon name="warning" size={20}/><ul>{report.limitations.map((item, index) => <li key={index}>{item}</li>)}</ul></div>
     <div className="report-footer"><Icon name="book" size={16}/>让每一个结论，都能回到原文。</div>
   </article>

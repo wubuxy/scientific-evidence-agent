@@ -1,5 +1,5 @@
 """Public contracts; source locations survive changes of retrieval backend."""
-from typing import Any, Generic, Literal, Optional, TypeVar
+from typing import Annotated, Any, Generic, Literal, Optional, TypeVar
 from pydantic import BaseModel, ConfigDict, Field, model_validator
 
 
@@ -141,6 +141,31 @@ class Claim(Contract):
     text: str = Field(min_length=1, max_length=4000)
     evidence_ids: list[str] = Field(min_length=1, max_length=20)
     qualification: str = Field(default="", max_length=2000)
+    kind: Literal["finding", "inference"] = Field(default="finding",
+        description="finding 为原文发现；inference 为基于原文的推断，须在 qualification 写推理条件；两者都必须引用")
+
+    @model_validator(mode="after")
+    def qualified_inference(self):
+        if self.kind == "inference" and not self.qualification:
+            raise ValueError("推断必须在 qualification 说明推理条件")
+        return self
+
+
+class Proposal(Contract):
+    text: str = Field(min_length=1, max_length=2000, description="尚未执行的方案，不承载未经引用的论文事实")
+    basis_claim_indices: list[Annotated[int, Field(ge=0, strict=True)]] = Field(min_length=1, max_length=20,
+        description="本报告 claims 的零起始下标；仅为方案依据，不表示原文验证过该方案")
+    assumptions: list[str] = Field(min_length=1, max_length=10)
+    validation_plan: str = Field(min_length=1, max_length=2000)
+    status: Literal["proposed_not_executed"] = "proposed_not_executed"
+
+    @model_validator(mode="after")
+    def explicit_assumptions(self):
+        if any(not value.strip() or len(value) > 1000 for value in self.assumptions):
+            raise ValueError("方案假设须为 1–1000 字符")
+        if len(set(self.basis_claim_indices)) != len(self.basis_claim_indices):
+            raise ValueError("方案依据不能重复")
+        return self
 
 
 class ComparisonRow(Contract):
@@ -169,6 +194,14 @@ class Report(Contract):
     comparison_rows: list[ComparisonRow] = Field(default_factory=list, max_length=100)
     limitations: list[str] = Field(min_length=1, max_length=50)
     verification_status: Literal["needs_human_review"] = "needs_human_review"
+    proposals: list[Proposal] = Field(default_factory=list, max_length=10)
+
+    @model_validator(mode="after")
+    def valid_proposal_bases(self):
+        if any(index < 0 or index >= len(self.claims)
+               for proposal in self.proposals for index in proposal.basis_claim_indices):
+            raise ValueError("方案依据必须指向本报告已有的 claims（零起始下标）")
+        return self
 
 
 class FieldRequirement(Contract):

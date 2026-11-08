@@ -221,3 +221,13 @@ class FieldLedger:
         return dict(requirement_origin=self.origin, fields=[{k:f[k] for k in
             ("id", "source_id", "name", "criterion", "coverage", "activity", "attempts")} for f in self.fields.values()],
             repair_rounds=self.repair_rounds)
+
+    def compact_prompt(self):
+        """Group identical criteria across papers; never shorten their meaning."""
+        groups = {}
+        for field in self.fields.values():
+            key = (field["name"], field["criterion"])
+            group = groups.setdefault(key, dict(name=key[0], criterion=key[1], states=[]))
+            group["states"].append({k:field[k] for k in ("id", "source_id", "coverage", "activity", "attempts")})
+        return dict(requirement_origin=self.origin, requirements=list(groups.values()),
+            repair_rounds=self.repair_rounds)

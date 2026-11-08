@@ -128,6 +128,39 @@ def inline_tool_schemas(definitions):
     return result
 
 
+def provider_tools(definitions):
+    """The exact public schema projection used by both budgeting and transport.
+
+    Pydantic's display titles add no validation constraints. Strip annotations,
+    never property names (a report still has its required `title` property).
+    Keep descriptions, defaults and every validation keyword.
+    """
+    def compact(node):
+        if isinstance(node, list):
+            return [compact(value) for value in node]
+        if not isinstance(node, dict):
+            return node
+        result = {}
+        for key, value in node.items():
+            if key in {"title", "examples"}:
+                continue
+            if key in {"properties", "$defs", "patternProperties", "dependentSchemas"}:
+                result[key] = {name: compact(schema) for name, schema in value.items()}
+            elif key in {"items", "prefixItems", "additionalProperties", "allOf", "anyOf", "oneOf",
+                         "not", "contains", "if", "then", "else", "unevaluatedProperties", "unevaluatedItems"}:
+                result[key] = compact(value)
+            else:
+                # Defaults/enums/consts are data, not subschemas. A literal
+                # object's `title` key must not disappear from their values.
+                result[key] = value
+        return result
+
+    result = inline_tool_schemas(definitions)
+    for tool in result:
+        tool["function"]["parameters"] = compact(tool["function"].get("parameters", {}))
+    return result
+
+
 def decode_tool_arguments(call, definitions):
     """Decode valid JSON containers emitted as strings, then let contracts validate.
 
@@ -176,7 +209,7 @@ class ChatModel:
                                timeout=self.settings.llm_timeout, max_retries=1) as client:
             forced_name = tools[0]["function"]["name"] if len(tools) == 1 else None
             response = await client.chat.completions.create(model=self.settings.llm_model,
-                messages=messages, tools=inline_tool_schemas(tools), max_tokens=max_tokens, temperature=0.1,
+                messages=messages, tools=provider_tools(tools), max_tokens=max_tokens, temperature=0.1,
                 **({"extra_body": self.settings.llm_extra_body} if self.settings.llm_extra_body else {}),
                 tool_choice={"type": "function", "function": {"name": forced_name}} if forced_name else "auto")
         if not response.choices:
