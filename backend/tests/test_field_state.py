@@ -2,7 +2,9 @@
 import asyncio
 from copy import deepcopy
 import json
+import os
 import time
+from threading import Event
 
 import pytest
 from fastapi.testclient import TestClient
@@ -10,7 +12,33 @@ from research_backend.field_state import FieldLedger, value_for
 from research_backend.api import create_app
 from research_backend.config import Settings
 from research_backend.schemas import Report, RunCreate
+from research_backend.runtime import Runtime
 from tests.test_research_backend import SECRET, headers, workspace, source
+
+
+@pytest.fixture(autouse=True)
+def record_runtime_outcomes(monkeypatch, request):
+    """Expose stored outcomes to the fault-matrix report, including failures."""
+    if os.environ.get("AGENT_FAULT_RECORD") != "1":
+        return
+    record_property = request.getfixturevalue("record_property")
+    execute = Runtime.execute
+
+    async def observed(runtime, owner, wid, rid):
+        try:
+            return await execute(runtime, owner, wid, rid)
+        finally:
+            run = runtime.store.get(owner, wid, "run", rid)
+            state = run.get("field_state", {})
+            record_property("runtime_outcome", json.dumps(dict(
+                status=run["status"], stop_reason=state.get("stop_reason"),
+                present=state.get("present"), unresolved=state.get("unresolved"),
+                semantic_success=state.get("semantic_success"), review_status=state.get("review_status"),
+                tokens_used=run["tokens_used"], tokens_estimated=run["tokens_estimated"],
+                report_preserved=run.get("report") is not None,
+                event_types=[e["type"] for e in runtime.store.events(owner, wid, rid)],
+            )))
+    monkeypatch.setattr(Runtime, "execute", observed)
 
 
 def read(eid="e1", sid="s1", quote="Training uses dataset X."):
@@ -148,7 +176,7 @@ class LoopModel:
             id=f"c{self.calls}",type="function",function=dict(name=name,arguments=json.dumps(args)))]))
 
 
-def run_loop(tmp_path, model, mode="bounded", max_steps=8):
+def run_loop(tmp_path, model, mode="bounded", max_steps=8, requirements=(), cancel_when=None):
     app = create_app(Settings(data_dir=tmp_path,jwt_secret=SECRET),model=model)
     with TestClient(app) as client:
         wid = workspace(client); sid = source(client,wid,text="Training data X.\nInitialized from Y.")
@@ -156,12 +184,16 @@ def run_loop(tmp_path, model, mode="bounded", max_steps=8):
         base=f"/api/v1/workspaces/{wid}"
         session=client.post(base+"/sessions",headers=headers(),json={}).json()["id"]
         response=client.post(base+"/runs",headers=headers(),json=dict(session_id=session,question="Data and Init?",
-            field_mode=mode,max_tokens=50000,max_steps=max_steps,max_field_repairs=2))
+            field_mode=mode,max_tokens=50000,max_steps=max_steps,max_field_repairs=2,
+            required_fields=[dict(source_id=sid, **field) for field in requirements]))
         assert response.status_code == 202, response.text
         rid=response.json()["id"]
         for _ in range(200):
+            if cancel_when is not None and cancel_when.is_set():
+                assert client.post(base+f"/runs/{rid}/cancel",headers=headers()).json()["status"] == "cancelled"
+                cancel_when = None
             run=client.get(base+"/runs/"+rid,headers=headers()).json()
-            if run["status"] in {"completed","failed"}: break
+            if run["status"] in {"completed","failed","cancelled"}: break
             time.sleep(.01)
         reviews=client.get(base+f"/runs/{rid}/field-reviews",headers=headers()).json()["items"]
         assert client.get(base+f"/runs/{rid}/field-reviews",headers=headers("bob")).status_code==404
@@ -249,11 +281,12 @@ def test_review_over_budget_fails_run_and_records_returned_usage(tmp_path):
     assert reviews[0]["tokens_used"]==51000 and run["field_state"]["reviewed"]==0
 
 
-def test_failed_repair_preserves_valid_report_and_explicit_gap(tmp_path):
+@pytest.mark.parametrize("failure", [RuntimeError, asyncio.TimeoutError], ids=["service_error", "timeout"])
+def test_failed_repair_preserves_valid_report_and_explicit_gap(tmp_path, failure):
     class BrokenRepair(LoopModel):
         async def complete(self,messages,tools,max_tokens):
             if self.finish_count:
-                raise RuntimeError("Provider unavailable during repair")
+                raise failure("Provider unavailable during repair")
             return await super().complete(messages,tools,max_tokens)
     model=BrokenRepair()
     run,reviews,events=run_loop(tmp_path,model)
@@ -261,3 +294,57 @@ def test_failed_repair_preserves_valid_report_and_explicit_gap(tmp_path):
     assert value_for(run["report"],model.sid,"Data")[0]=="X"
     assert run["field_state"]["stop_reason"]=="repair_failed" and run["field_state"]["unresolved"]==1
     assert any(e["type"]=="field_repair_failed" for e in events)
+
+
+def test_explicit_user_criteria_reach_first_model_call_and_persist(tmp_path):
+    class InspectRequirements(LoopModel):
+        async def complete(self, messages, tools, max_tokens):
+            if self.calls == 0:
+                assert "Distinguish training from evaluation data" in messages[0]["content"]
+                assert "Name the training initialization" in messages[0]["content"]
+            return await super().complete(messages, tools, max_tokens)
+    requirements = [dict(name="Data", criterion="Distinguish training from evaluation data"),
+                    dict(name="Init", criterion="Name the training initialization")]
+    run, _, _ = run_loop(tmp_path, InspectRequirements(), requirements=requirements)
+    assert run["status"] == "completed"
+    assert run["field_state"]["requirement_origin"] == "request"
+    assert [f["criterion"] for f in run["field_state"]["fields"]] == [f["criterion"] for f in requirements]
+    assert [f["criterion"] for f in run["required_fields"]] == [f["criterion"] for f in requirements]
+
+
+def test_cancel_during_repair_never_promotes_checkpoint_to_success(tmp_path):
+    waiting = Event()
+    class WaitingRepair(LoopModel):
+        async def complete(self, messages, tools, max_tokens):
+            if self.finish_count:
+                waiting.set()
+                await asyncio.sleep(30)
+            return await super().complete(messages, tools, max_tokens)
+    run, reviews, events = run_loop(tmp_path, WaitingRepair(), cancel_when=waiting)
+    assert run["status"] == "cancelled" and run["report"] is None and not reviews
+    assert run["tokens_used"] == 300
+    assert any(e["type"] == "field_repair_requested" for e in events)
+    assert any(e["type"] == "run_cancelled" for e in events)
+    assert not any(e["type"] == "report_ready" for e in events)
+
+
+def test_finalization_keeps_validation_feedback_after_context_rebuild(tmp_path):
+    class InvalidThenCorrected(LoopModel):
+        async def complete(self, messages, tools, max_tokens):
+            result = await super().complete(messages, tools, max_tokens)
+            if self.finish_count == 1:
+                call = result["message"]["tool_calls"][0]["function"]
+                draft = json.loads(call["arguments"])
+                draft["claims"] = [dict(text="Unsupported fixture claim", evidence_ids=[])]
+                call["arguments"] = json.dumps(draft)
+            elif self.finish_count == 2:
+                assert len(tools) == 1 and tools[0]["function"]["name"] == "finish_report"
+                assert "claims.0.evidence_ids" in "\n".join(m["content"] for m in messages)
+                assert "Training data X." in "\n".join(m["content"] for m in messages)
+            return result
+    model = InvalidThenCorrected()
+    run, _, events = run_loop(tmp_path, model, mode="off", max_steps=4)
+    assert run["status"] == "completed", run.get("error")
+    assert model.finish_count == 2 and model.calls == 4
+    assert run["tokens_used"] == 400
+    assert len([e for e in events if e["type"] == "tool_error"]) == 1

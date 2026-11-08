@@ -16,6 +16,8 @@ API `RunCreate.field_mode` 支持 `off`、`observe`、`bounded`。API 默认 `of
 
 可在请求中传入 `required_fields`，每项含 `source_id`、`name`、`criterion`，最多 96 项。服务器先检查来源属于该工作区，拒绝重复项。未指定时，从首次 `plan_research` 的论文与字段笛卡尔积建立台账，来源标为 `model_plan`，界面明确提示可能遗漏用户要求。已固定的论文和字段不能删除；初始自动提取的完整性仍需检查。
 
+工作台已提供“运行前确认要求”：可选择必答论文并添加共用字段与完成标准，开始研究时展开为 `required_fields`。切换课题或创建全新研究会清空编辑内容；关闭字段检查时显式要求不能提交。选中的论文是必答对象，检索仍可访问当前课题其他资料。运行后可在字段卡查看原完成标准。交互和隔离验证见[运行要求与故障矩阵](results/EXECUTION_V1.md)。
+
 ```json
 {
   "session_id": "当前会话 ID",
@@ -52,6 +54,8 @@ API `RunCreate.field_mode` 支持 `off`、`observe`、`bounded`。API 默认 `of
 ## 验证与下一步
 
 测试覆盖生产 Runtime 的完整路径，以及撤销要求、跨论文证据、候选版本失效、整批原子核验、局部补丁保留、无进展、观察模式、步数用尽、未知用量、超额用量和访问隔离。前端进度卡可查看缺项、答案版本、核验意见并点击原文。
+
+独立离线入口 `python scripts/eval_agent_faults.py --out test-results/agent-faults-new` 汇总 17 个故障与契约场景，记录实际终态和停止原因；不调用真实模型，不产生语义准确率。缺失、跳过和采集失败均不计为通过。
 
 真实模型接通脚本只使用合成资料，不接触 92 条盲审样本或留出测试：
 

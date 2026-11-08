@@ -1,21 +1,21 @@
 {
-  "updated": "2026-11-07",
+  "updated": "2026-11-08",
   "model": "qwen3.5-27b",
   "scope": "Agent development runs, engineering validation, and separately reported local verifier studies; QASPER frozen test set reserved",
   "checks": {
-    "offline_tests_passed": 230,
+    "offline_tests_passed": 240,
     "frontend_typecheck": "passed",
     "frontend_production_build": "passed",
     "live_report_api": "completed",
-    "offline_tests_collected": 230,
+    "offline_tests_collected": 240,
     "offline_test_profiles": [
       {
         "profile": "full-locked",
         "platform": "Windows",
         "python": "3.13.13",
         "dependencies": "core + analysis under constraints-ci.txt; CPU torch from the official index",
-        "collected": 230,
-        "passed": 230,
+        "collected": 240,
+        "passed": 240,
         "skipped": 0,
         "failed": 0,
         "errors": 0,
@@ -30,7 +30,7 @@
           "pytest-asyncio": "1.4.1.post1",
           "openai": "3.46.0"
         },
-        "evidence": "docs/results/showcase-v1/validation.json"
+        "evidence": "docs/results/execution-v1/validation.json"
       }
     ],
     "ci_workflow": ".github/workflows/ci.yml",
@@ -513,7 +513,51 @@
         },
         "evidence": "docs/results/field-state-v1/validation.json"
       }
-    ]
+    ],
+    "offline_test_profiles_before_execution_v1": [
+      {
+        "profile": "full-locked",
+        "platform": "Windows",
+        "python": "3.13.13",
+        "dependencies": "core + analysis under constraints-ci.txt; CPU torch from the official index",
+        "collected": 230,
+        "passed": 230,
+        "skipped": 0,
+        "failed": 0,
+        "errors": 0,
+        "packages": {
+          "fastapi": "0.162.0",
+          "numpy": "2.5.4",
+          "scipy": "1.18.1",
+          "openpyxl": "3.1.5",
+          "torch": "2.15.0+cpu",
+          "pydantic": "2.14.3",
+          "pytest": "9.2.0",
+          "pytest-asyncio": "1.4.1.post1",
+          "openai": "3.46.0"
+        },
+        "evidence": "docs/results/showcase-v1/validation.json"
+      }
+    ],
+    "agent_fault_matrix": {
+      "planned": 17,
+      "passed": 17,
+      "semantic_accuracy": null,
+      "evidence": "docs/results/execution-v1/faults.json"
+    },
+    "requirements_editor": {
+      "frontend_tests": 5,
+      "ui": "passed",
+      "evidence": "docs/results/execution-v1/ui-validation.json"
+    },
+    "research_judgment_development_case": {
+      "runs": 2,
+      "completed": 0,
+      "failed": 2,
+      "logical_tokens": 52210,
+      "semantic_accuracy": null,
+      "evidence": "docs/results/RESEARCH_JUDGMENT_DEV001.md"
+    }
   },
   "datasets": {
     "qasper": {

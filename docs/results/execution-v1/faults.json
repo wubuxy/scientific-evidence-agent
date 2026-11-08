@@ -1,0 +1,456 @@
+{
+  "status": "passed",
+  "planned": 17,
+  "counts": {
+    "passed": 17
+  },
+  "pytest_exit_code": 0,
+  "errors": [],
+  "cases": [
+    {
+      "id": "requirements",
+      "nodeid": "tests/test_field_state.py::test_requirements_cannot_disappear_and_reading_is_not_verification",
+      "expected": "Cannot delete requirements; reading is not verification",
+      "status": "passed",
+      "observations": [],
+      "duration_seconds": 0.002
+    },
+    {
+      "id": "explicit_request",
+      "nodeid": "tests/test_field_state.py::test_explicit_user_criteria_reach_first_model_call_and_persist",
+      "expected": "User criteria reach the model and persist with the run",
+      "status": "passed",
+      "observations": [
+        {
+          "status": "completed",
+          "stop_reason": "coverage_complete_review_pending",
+          "present": 2,
+          "unresolved": 0,
+          "semantic_success": null,
+          "review_status": "recorded",
+          "tokens_used": 500,
+          "tokens_estimated": false,
+          "report_preserved": true,
+          "event_types": [
+            "run_started",
+            "field_state_updated",
+            "model_usage",
+            "field_state_updated",
+            "tool_completed",
+            "model_usage",
+            "field_state_updated",
+            "tool_completed",
+            "model_usage",
+            "field_state_updated",
+            "field_repair_requested",
+            "tool_error",
+            "model_usage",
+            "field_review_recorded",
+            "field_state_updated",
+            "report_ready"
+          ]
+        }
+      ],
+      "duration_seconds": 1.155
+    },
+    {
+      "id": "missing_evidence",
+      "nodeid": "tests/test_field_state.py::test_field_candidate_requires_current_same_paper_evidence[unknown-s1]",
+      "expected": "Reject evidence not read in this run",
+      "status": "passed",
+      "observations": [],
+      "duration_seconds": 0.001
+    },
+    {
+      "id": "foreign_evidence",
+      "nodeid": "tests/test_field_state.py::test_field_candidate_requires_current_same_paper_evidence[e1-s2]",
+      "expected": "Reject another paper's evidence",
+      "status": "passed",
+      "observations": [],
+      "duration_seconds": 0.001
+    },
+    {
+      "id": "stale_review",
+      "nodeid": "tests/test_field_state.py::test_review_is_version_bound_and_never_semantic_success",
+      "expected": "Invalidate old review after evidence changes",
+      "status": "passed",
+      "observations": [],
+      "duration_seconds": 0.001
+    },
+    {
+      "id": "malformed_review",
+      "nodeid": "tests/test_field_state.py::test_bad_review_batch_has_no_partial_commit[span]",
+      "expected": "Invalid spans reject the entire review batch",
+      "status": "passed",
+      "observations": [],
+      "duration_seconds": 0.001
+    },
+    {
+      "id": "repair",
+      "nodeid": "tests/test_field_state.py::test_complete_runtime_repairs_gap_preserves_answers_counts_review_and_exposes_state",
+      "expected": "Fill gap while preserving original answers and accounting review cost",
+      "status": "passed",
+      "observations": [
+        {
+          "status": "completed",
+          "stop_reason": "coverage_complete_review_pending",
+          "present": 2,
+          "unresolved": 0,
+          "semantic_success": null,
+          "review_status": "recorded",
+          "tokens_used": 500,
+          "tokens_estimated": false,
+          "report_preserved": true,
+          "event_types": [
+            "run_started",
+            "field_state_updated",
+            "model_usage",
+            "field_state_updated",
+            "tool_completed",
+            "model_usage",
+            "field_state_updated",
+            "tool_completed",
+            "model_usage",
+            "field_state_updated",
+            "field_repair_requested",
+            "tool_error",
+            "model_usage",
+            "field_review_recorded",
+            "field_state_updated",
+            "report_ready"
+          ]
+        }
+      ],
+      "duration_seconds": 0.92
+    },
+    {
+      "id": "no_progress",
+      "nodeid": "tests/test_field_state.py::test_modes_and_no_progress_terminate_without_fabricated_success[bounded-2]",
+      "expected": "Stop without progress; keep unresolved field",
+      "status": "passed",
+      "observations": [
+        {
+          "status": "completed",
+          "stop_reason": "no_progress",
+          "present": 1,
+          "unresolved": 1,
+          "semantic_success": null,
+          "review_status": "recorded",
+          "tokens_used": 500,
+          "tokens_estimated": false,
+          "report_preserved": true,
+          "event_types": [
+            "run_started",
+            "field_state_updated",
+            "model_usage",
+            "field_state_updated",
+            "tool_completed",
+            "model_usage",
+            "field_state_updated",
+            "tool_completed",
+            "model_usage",
+            "field_state_updated",
+            "field_repair_requested",
+            "tool_error",
+            "model_usage",
+            "field_review_recorded",
+            "field_state_updated",
+            "report_ready"
+          ]
+        }
+      ],
+      "duration_seconds": 0.897
+    },
+    {
+      "id": "review_failure",
+      "nodeid": "tests/test_field_state.py::test_bad_semantic_review_keeps_report_and_cost_but_not_verdict",
+      "expected": "Keep report and cost, reject invalid review verdict",
+      "status": "passed",
+      "observations": [
+        {
+          "status": "completed",
+          "stop_reason": "coverage_complete_review_pending",
+          "present": 2,
+          "unresolved": 0,
+          "semantic_success": null,
+          "review_status": "failed",
+          "tokens_used": 500,
+          "tokens_estimated": false,
+          "report_preserved": true,
+          "event_types": [
+            "run_started",
+            "field_state_updated",
+            "model_usage",
+            "field_state_updated",
+            "tool_completed",
+            "model_usage",
+            "field_state_updated",
+            "tool_completed",
+            "model_usage",
+            "field_state_updated",
+            "field_repair_requested",
+            "tool_error",
+            "model_usage",
+            "field_review_recorded",
+            "field_state_updated",
+            "report_ready"
+          ]
+        }
+      ],
+      "duration_seconds": 0.989
+    },
+    {
+      "id": "finalization_feedback",
+      "nodeid": "tests/test_field_state.py::test_finalization_keeps_validation_feedback_after_context_rebuild",
+      "expected": "Preserve report validation feedback when rebuilding final context",
+      "status": "passed",
+      "observations": [
+        {
+          "status": "completed",
+          "stop_reason": null,
+          "present": null,
+          "unresolved": null,
+          "semantic_success": null,
+          "review_status": null,
+          "tokens_used": 400,
+          "tokens_estimated": false,
+          "report_preserved": true,
+          "event_types": [
+            "run_started",
+            "model_usage",
+            "tool_completed",
+            "model_usage",
+            "tool_completed",
+            "model_usage",
+            "tool_error",
+            "model_usage",
+            "report_ready"
+          ]
+        }
+      ],
+      "duration_seconds": 1.817
+    },
+    {
+      "id": "step_budget",
+      "nodeid": "tests/test_field_state.py::test_last_step_skips_repair_and_review_and_reports_gap",
+      "expected": "Stop at step cap with explicit unresolved field",
+      "status": "passed",
+      "observations": [
+        {
+          "status": "completed",
+          "stop_reason": "max_steps",
+          "present": 1,
+          "unresolved": 1,
+          "semantic_success": null,
+          "review_status": "skipped_budget_or_no_candidates",
+          "tokens_used": 300,
+          "tokens_estimated": false,
+          "report_preserved": true,
+          "event_types": [
+            "run_started",
+            "field_state_updated",
+            "model_usage",
+            "field_state_updated",
+            "tool_completed",
+            "model_usage",
+            "field_state_updated",
+            "tool_completed",
+            "model_usage",
+            "field_state_updated",
+            "report_ready"
+          ]
+        }
+      ],
+      "duration_seconds": 0.777
+    },
+    {
+      "id": "unknown_usage",
+      "nodeid": "tests/test_field_state.py::test_unknown_generation_usage_skips_additional_reviewer",
+      "expected": "Do not spend more on review when prior usage is unknown",
+      "status": "passed",
+      "observations": [
+        {
+          "status": "completed",
+          "stop_reason": "unresolved_fields",
+          "present": 1,
+          "unresolved": 1,
+          "semantic_success": null,
+          "review_status": "skipped_budget_or_no_candidates",
+          "tokens_used": 14405,
+          "tokens_estimated": true,
+          "report_preserved": true,
+          "event_types": [
+            "run_started",
+            "field_state_updated",
+            "model_usage",
+            "field_state_updated",
+            "tool_completed",
+            "model_usage",
+            "field_state_updated",
+            "tool_completed",
+            "model_usage",
+            "field_state_updated",
+            "report_ready"
+          ]
+        }
+      ],
+      "duration_seconds": 0.785
+    },
+    {
+      "id": "token_overrun",
+      "nodeid": "tests/test_field_state.py::test_review_over_budget_fails_run_and_records_returned_usage",
+      "expected": "Returned usage above cap fails the run and remains recorded",
+      "status": "passed",
+      "observations": [
+        {
+          "status": "failed",
+          "stop_reason": "token_budget_exceeded",
+          "present": 2,
+          "unresolved": 0,
+          "semantic_success": null,
+          "review_status": "failed",
+          "tokens_used": 51400,
+          "tokens_estimated": false,
+          "report_preserved": false,
+          "event_types": [
+            "run_started",
+            "field_state_updated",
+            "model_usage",
+            "field_state_updated",
+            "tool_completed",
+            "model_usage",
+            "field_state_updated",
+            "tool_completed",
+            "model_usage",
+            "field_state_updated",
+            "field_repair_requested",
+            "tool_error",
+            "model_usage",
+            "field_review_recorded",
+            "field_state_updated",
+            "run_failed"
+          ]
+        }
+      ],
+      "duration_seconds": 0.983
+    },
+    {
+      "id": "service_failure",
+      "nodeid": "tests/test_field_state.py::test_failed_repair_preserves_valid_report_and_explicit_gap[service_error]",
+      "expected": "Service error preserves checkpoint and explicit gap",
+      "status": "passed",
+      "observations": [
+        {
+          "status": "completed",
+          "stop_reason": "repair_failed",
+          "present": 1,
+          "unresolved": 1,
+          "semantic_success": null,
+          "review_status": "not_run",
+          "tokens_used": 300,
+          "tokens_estimated": true,
+          "report_preserved": true,
+          "event_types": [
+            "run_started",
+            "field_state_updated",
+            "model_usage",
+            "field_state_updated",
+            "tool_completed",
+            "model_usage",
+            "field_state_updated",
+            "tool_completed",
+            "model_usage",
+            "field_state_updated",
+            "field_repair_requested",
+            "tool_error",
+            "field_repair_failed",
+            "report_ready"
+          ]
+        }
+      ],
+      "duration_seconds": 0.894
+    },
+    {
+      "id": "provider_timeout",
+      "nodeid": "tests/test_field_state.py::test_failed_repair_preserves_valid_report_and_explicit_gap[timeout]",
+      "expected": "Provider timeout preserves checkpoint; not a wall-clock load test",
+      "status": "passed",
+      "observations": [
+        {
+          "status": "completed",
+          "stop_reason": "repair_failed",
+          "present": 1,
+          "unresolved": 1,
+          "semantic_success": null,
+          "review_status": "not_run",
+          "tokens_used": 300,
+          "tokens_estimated": true,
+          "report_preserved": true,
+          "event_types": [
+            "run_started",
+            "field_state_updated",
+            "model_usage",
+            "field_state_updated",
+            "tool_completed",
+            "model_usage",
+            "field_state_updated",
+            "tool_completed",
+            "model_usage",
+            "field_state_updated",
+            "field_repair_requested",
+            "tool_error",
+            "field_repair_failed",
+            "report_ready"
+          ]
+        }
+      ],
+      "duration_seconds": 1.987
+    },
+    {
+      "id": "cancellation",
+      "nodeid": "tests/test_field_state.py::test_cancel_during_repair_never_promotes_checkpoint_to_success",
+      "expected": "Cancellation stays cancelled even with a valid checkpoint",
+      "status": "passed",
+      "observations": [
+        {
+          "status": "cancelled",
+          "stop_reason": null,
+          "present": 1,
+          "unresolved": 1,
+          "semantic_success": null,
+          "review_status": "not_run",
+          "tokens_used": 300,
+          "tokens_estimated": false,
+          "report_preserved": false,
+          "event_types": [
+            "run_started",
+            "field_state_updated",
+            "model_usage",
+            "field_state_updated",
+            "tool_completed",
+            "model_usage",
+            "field_state_updated",
+            "tool_completed",
+            "model_usage",
+            "field_state_updated",
+            "field_repair_requested",
+            "tool_error",
+            "run_cancelled"
+          ]
+        }
+      ],
+      "duration_seconds": 0.753
+    },
+    {
+      "id": "workspace_isolation",
+      "nodeid": "tests/test_field_state.py::test_explicit_requirements_cannot_reference_another_workspace",
+      "expected": "Foreign workspace requirement rejected before any model call",
+      "status": "passed",
+      "observations": [],
+      "duration_seconds": 0.178
+    }
+  ],
+  "semantic_accuracy": null,
+  "model_calls_paid": 0,
+  "scope": "synthetic fault regression; passing is not research quality or production availability"
+}

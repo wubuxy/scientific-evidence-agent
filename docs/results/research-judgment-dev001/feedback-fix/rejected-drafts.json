@@ -1,0 +1,185 @@
+[
+  {
+    "arguments": {
+      "title": "基于 QASPER 与 ArxivDIGESTables 的论文研究 Agent 评测方案对比与建议",
+      "claims": [
+        {
+          "text": "QASPER 适合验证单篇论文内的信息检索与证据定位能力。其任务要求模型根据标题和摘要生成的问题，在全文中找到答案并给出支撑证据，强调对复杂推理和跨段落信息的整合。",
+          "evidence_ids": [
+            "ev_80cb035e851b22d653f2761177f697c5"
+          ]
+        },
+        {
+          "text": "ArxivDIGESTables 适合验证跨多篇论文的文献综述与结构化比较能力。其任务是将多篇文章的关键属性（如方法、结果）提取并合成到统一的表格中，侧重于模式识别与信息对齐。",
+          "evidence_ids": [
+            "ev_e968541d0c9e7a4a95bdca730337cdd3"
+          ]
+        },
+        {
+          "text": "两个任务的指标不能直接横向排名，因为评估对象不同：QASPER 衡量的是问答对的 F1 分数（答案匹配度），而 ArxivDIGESTables 衡量的是表格生成的准确性及新属性的有用性，且后者涉及跨文档的模式对齐。",
+          "evidence_ids": [
+            "ev_80cb035e851b22d653f2761177f697c5",
+            "ev_e968541d0c9e7a4a95bdca730337cdd3"
+          ]
+        },
+        {
+          "text": "当前产品能力中，针对“提出有依据的研究建议”这一高阶推理能力，两篇论文均未提供直接的评测依据。QASPER 仅覆盖事实性问答，ArxivDIGESTables 仅覆盖信息提取与表格化。",
+          "evidence_ids": [
+            "ev_80cb035e851b22d653f2761177f697c5",
+            "ev_e968541d0c9e7a4a95bdca730337cdd3"
+          ]
+        },
+        {
+          "text": "最小可执行评测组合建议：使用 QASPER 测试集验证单篇问答准确率（需人工核对证据引用位置）；使用 ArxivDIGESTables 测试集验证跨篇表格生成的一致性（需人工检查列对齐与新属性价值）。",
+          "evidence_ids": []
+        },
+        {
+          "text": "数据划分应严格遵循原文提供的训练/开发/测试集；失败计数应包含“无法找到答案”、“证据引用错误”以及“表格列定义冲突”三类明确错误。",
+          "evidence_ids": []
+        }
+      ],
+      "comparison_rows": [
+        {
+          "source_id": "1400bec6-8877-491e-9f5c-9a2ff47cba40",
+          "method": "QASPER QA Task",
+          "dataset": "5,049 questions over 1,585 NLP papers",
+          "model": "本次未核实",
+          "metric": "F1 score (answer match)",
+          "result": "Human models outperform existing models by at least 27 F1 points",
+          "conditions": "Questions based on title/abstract; answers require full text evidence",
+          "comparability": "unknown",
+          "evidence_ids": [
+            "ev_80cb035e851b22d653f2761177f697c5"
+          ],
+          "attributes": {
+            "任务与输入输出": "单篇论文内信息检索，输入为问题+全文，输出为答案+证据",
+            "参考答案与标注": "由NLP从业者编写问题和答案，并提供支撑证据",
+            "指标与比较条件": "F1分数衡量答案匹配度，不跨任务比较",
+            "适用范围与缺口": "适用于单篇深度阅读，未覆盖跨篇综合或建议生成"
+          }
+        },
+        {
+          "source_id": "cc9352d3-b7c2-496f-ac42-7de00977e922",
+          "method": "ArxivDIGESTables Table Generation",
+          "dataset": "2,228 tables synthesizing 7,542 papers",
+          "model": "本次未核实",
+          "metric": "Table reconstruction accuracy & novel aspect utility",
+          "result": "LMs benefit from additional context; generated aspects can be useful even if incomplete",
+          "conditions": "Decomposed into schema and value generation steps",
+          "comparability": "unknown",
+          "evidence_ids": [
+            "ev_e968541d0c9e7a4a95bdca730337cdd3"
+          ],
+          "attributes": {
+            "任务与输入输出": "跨多篇论文文献综述，输入为多篇文章，输出为结构化表格",
+            "参考答案与标注": "从ArXiv论文中提取的人类作者表格作为参考",
+            "指标与比较条件": "DECONTEXT EVAL自动评估对齐，结合人工评估新属性价值",
+            "适用范围与缺口": "适用于跨篇比较与结构化，未覆盖单篇深度推理或建议生成"
+          }
+        }
+      ],
+      "limitations": [
+        "本报告仅基于两篇论文的摘要部分进行回读，未深入实验细节章节，具体模型性能数字可能不完整。",
+        "关于‘提出有依据的研究建议’能力的评测方案属于建议性质，未在原文中找到直接对应的数据集或指标。",
+        "最小可执行评测组合中的具体数据划分比例和人工检查流程为方案设计，非原文已验证事实。",
+        "未核实两篇论文中具体的基线模型名称及其在各自任务上的详细表现数据。"
+      ],
+      "verification_status": "needs_human_review"
+    },
+    "normalized_columns": [],
+    "validation_status": "rejected",
+    "id": "bb5c26a9-02af-4c27-8789-d10a4e059eb6",
+    "workspace_id": "6c7053fe-3722-4b21-a21c-6d354811e598",
+    "created_at": "2026-11-08T09:02:17.068618+00:00",
+    "updated_at": "2026-11-08T09:02:17.087715+00:00",
+    "error": "2 validation errors for Report\nclaims.4.evidence_ids\n  List should have at least 1 item after validation, not 0 [type=too_short, input_value=[], input_type=list]\n    For further information visit https://errors.pydantic.dev/2.14/v/too_short\nclaims.5.evidence_ids\n  List should have at least 1 item after validation, not 0 [type=too_short, input_value=[], input_type=list]\n    For further information visit https://errors.pydantic.dev/2.14/v/too_short"
+  },
+  {
+    "arguments": {
+      "title": "基于QASPER与ArxivDIGESTables的论文研究Agent评测方案对比与建议",
+      "claims": [
+        {
+          "text": "QASPER适合验证单篇论文内的信息检索与证据定位能力，其问题由NLP从业者仅阅读标题和摘要后提出，答案需从全文中查找并附带支撑证据。",
+          "evidence_ids": [
+            "ev_80cb035e851b22d653f2761177f697c5"
+          ],
+          "qualification": ""
+        },
+        {
+          "text": "ArxivDIGESTables适合验证跨论文的信息综合与结构化生成能力，其任务是将多篇论文的关键方面提取并合成文献综述表格。",
+          "evidence_ids": [
+            "ev_e968541d0c9e7a4a95bdca730337cdd3"
+          ],
+          "qualification": ""
+        },
+        {
+          "text": "两个任务的指标不能直接横向排名，因为QASPER衡量的是单篇内问答的F1分数（依赖全文证据），而ArxivDIGESTables衡量的是表格生成的重构质量（依赖多源对齐与DECONTEXT EVAL自动评估）。",
+          "evidence_ids": [
+            "ev_80cb035e851b22d653f2761177f697c5",
+            "ev_e968541d0c9e7a4a95bdca730337cdd3"
+          ],
+          "qualification": ""
+        },
+        {
+          "text": "当前产品仍缺评测依据的能力包括：跨论文比较中的冲突检测、研究建议的原创性与可行性评估、以及长文档推理中的幻觉抑制。",
+          "evidence_ids": [],
+          "qualification": "本次所读片段尚未确认具体评测方法或数据支持"
+        }
+      ],
+      "comparison_rows": [
+        {
+          "source_id": "1400bec6-8877-491e-9f5c-9a2ff47cba40",
+          "method": "QASPER",
+          "dataset": "5,049个问题覆盖1,585篇NLP论文",
+          "model": "本次未核实",
+          "metric": "F1（人类基线高出模型至少27点）",
+          "result": "本次未核实",
+          "conditions": "问题由仅读标题摘要者提出，答案需全文证据",
+          "comparability": "unknown",
+          "evidence_ids": [
+            "ev_80cb035e851b22d653f2761177f697c5"
+          ],
+          "attributes": {
+            "任务与输入输出": "单篇论文内信息检索问答",
+            "参考答案与标注": "NLP从业者提供答案及支撑证据",
+            "指标与比较条件": "F1分数，依赖全文证据匹配",
+            "适用范围与缺口": "适用于单篇深度理解，未覆盖跨篇比较"
+          }
+        },
+        {
+          "source_id": "cc9352d3-b7c2-496f-ac42-7de00977e922",
+          "method": "ArxivDIGESTables",
+          "dataset": "2,228个文献综述表格，合成7,542篇论文",
+          "model": "本次未核实",
+          "metric": "DECONTEXT EVAL自动评估 + 人工评估",
+          "result": "本次未核实",
+          "conditions": "表格行对应论文，列对应比较维度",
+          "comparability": "unknown",
+          "evidence_ids": [
+            "ev_e968541d0c9e7a4a95bdca730337cdd3"
+          ],
+          "attributes": {
+            "任务与输入输出": "跨论文信息综合生成表格",
+            "参考答案与标注": "人工构建的文献综述表格",
+            "指标与比较条件": "表格元素对齐质量，表面形式可不同",
+            "适用范围与缺口": "适用于多源信息结构化，未覆盖冲突检测"
+          }
+        }
+      ],
+      "limitations": [
+        "本次仅回读了两篇论文的摘要部分，未深入实验细节与完整评测协议",
+        "缺少对跨论文冲突检测、研究建议原创性评估的具体评测方法证据",
+        "未找到关于长文档推理中幻觉抑制的量化指标或基准",
+        "无法确认当前最强模型在两项任务上的最新表现，因原文未报告后续进展"
+      ],
+      "verification_status": "needs_human_review"
+    },
+    "normalized_columns": [],
+    "validation_status": "rejected",
+    "id": "85c8a134-1629-41aa-a0da-d0e6e6c57996",
+    "workspace_id": "6c7053fe-3722-4b21-a21c-6d354811e598",
+    "created_at": "2026-11-08T09:02:30.361530+00:00",
+    "updated_at": "2026-11-08T09:02:30.377436+00:00",
+    "error": "1 validation error for Report\nclaims.3.evidence_ids\n  List should have at least 1 item after validation, not 0 [type=too_short, input_value=[], input_type=list]\n    For further information visit https://errors.pydantic.dev/2.14/v/too_short"
+  }
+]

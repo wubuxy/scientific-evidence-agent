@@ -1,0 +1,24 @@
+.requirement-editor { margin: 12px 0; border: 1px solid var(--theme-border); border-radius: 10px; background: var(--theme-surface); color: var(--theme-fg-primary); font-size: 12px; }
+.requirement-editor summary { padding: 13px 16px; cursor: pointer; font-weight: 600; }
+.requirement-editor summary span { margin-left: 8px; color: var(--theme-fg-muted); font-size: 11px; font-weight: 400; }
+.requirement-editor fieldset { border: 0; margin: 0; padding: 0 16px 16px; min-width: 0; }
+.requirement-editor p { font-size: 12px; line-height: 1.8; color: var(--theme-fg-muted); }
+.requirement-toggle, .requirement-sources label { display: flex; align-items: flex-start; gap: 8px; line-height: 1.7; }
+.requirement-editor input[type=checkbox] { flex: 0 0 auto; margin-top: 4px; }
+.requirement-source-heading { display: flex; align-items: center; justify-content: space-between; margin: 16px 0 10px; }
+.requirement-sources { display: grid; gap: 8px; max-height: 180px; overflow-y: auto; }
+.requirement-sources span { overflow-wrap: anywhere; }
+.requirement-fields { display: grid; gap: 12px; margin: 18px 0 12px; }
+.requirement-row { display: grid; grid-template-columns: minmax(100px, 1fr) minmax(150px, 2fr) auto; align-items: start; gap: 12px; }
+.requirement-row label { display: grid; gap: 6px; color: var(--theme-fg-muted); font-size: 11px; }
+.requirement-row input, .requirement-row textarea { box-sizing: border-box; width: 100%; min-width: 0; padding: 9px; border: 1px solid var(--theme-border); border-radius: 6px; background: var(--theme-surface); color: var(--theme-fg-primary); font: inherit; font-size: 12px; }
+.requirement-row textarea { resize: vertical; }
+.requirement-row button { margin-top: 25px; }
+.requirement-editor .requirement-error { color: var(--theme-danger, #b64a36); }
+.requirement-editor fieldset:disabled { opacity: .7; }
+@media (max-width: 760px) {
+  .requirement-editor summary span { display: block; margin: 6px 0 0 15px; }
+  .requirement-row { grid-template-columns: minmax(0, 1fr) auto; }
+  .requirement-row label:nth-child(2) { grid-column: 1 / -1; grid-row: 2; }
+  .requirement-row button { grid-column: 2; grid-row: 1; }
+}

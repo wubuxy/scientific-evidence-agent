@@ -6,6 +6,8 @@ import ImportDialog from './ImportDialog'
 import ReportView from './ReportView'
 import ToolTrace from './ToolTrace'
 import FieldProgress from './FieldProgress'
+import RequirementEditor from './RequirementEditor'
+import { emptyRequirements, prepareRequirements } from './requirements'
 import DataLab from './DataLab'
 import TranslationDesk from './TranslationDesk'
 import AppearanceSettings, { AppearanceEntry } from './AppearanceSettings'
@@ -53,6 +55,7 @@ export default function ResearchWorkbench() {
   const [network, setNetwork] = useState(false)
   const [budget, setBudget] = useState(20000)
   const [fieldMode, setFieldMode] = useState<'off' | 'observe' | 'bounded'>('bounded')
+  const [requirements, setRequirements] = useState(emptyRequirements)
   const [settings, setSettings] = useState(false)
   const [importOpen, setImportOpen] = useState(false)
   const [newWorkspace, setNewWorkspace] = useState(false)
@@ -79,6 +82,7 @@ export default function ResearchWorkbench() {
   const currentWid = useRef(wid); currentWid.current = wid
   const questionInput = useRef<HTMLTextAreaElement>(null)
   const indexed = sources.filter(item => item.rag_indexed).length
+  const preparedRequirements = prepareRequirements(requirements, sources, fieldMode)
 
   useEffect(() => {
     let alive = true
@@ -106,6 +110,7 @@ export default function ResearchWorkbench() {
   useEffect(() => {
     setSources([]); setRuns([]); setSessions([]); setEvidence([]); setSelectedRun(null); setSelectedEvidence(null)
     setSessionId(''); setMessages([]); setEvents([]); setSearchResult(null); setInspector(false); setError(''); setNotice(''); setQuestion('')
+    setRequirements(emptyRequirements())
     if (!wid) return
     localStorage.setItem('research.workspace', wid)
     const controller = new AbortController()
@@ -195,6 +200,7 @@ export default function ResearchWorkbench() {
     if (!wid || !question.trim() || busy || runs.some(isActive)) return
     if (!sources.length && !network) { setError('请先添加资料，或在研究设置中允许联网发现文献。'); return }
     if (strategy === 'rag' && !indexed) { setError('语义检索需要先在文献资料页为至少一份资料建立索引。'); return }
+    if (preparedRequirements.error) { setError(preparedRequirements.error); return }
     const taskWid = wid
     setBusy(true); setError('')
     try {
@@ -204,7 +210,7 @@ export default function ResearchWorkbench() {
         sid = session.id
         if (currentWid.current === taskWid) { setSessions(previous => [session, ...previous]); setSessionId(sid) }
       }
-      const run = await post<Run>(workspacePath(taskWid, '/runs'), { session_id: sid, question: question.trim(), retrieval_strategy: strategy, allow_network: network, max_steps: 10, max_tokens: budget, max_seconds: 300, field_mode: fieldMode, max_field_repairs: 1 })
+      const run = await post<Run>(workspacePath(taskWid, '/runs'), { session_id: sid, question: question.trim(), retrieval_strategy: strategy, allow_network: network, max_steps: 10, max_tokens: budget, max_seconds: 300, field_mode: fieldMode, max_field_repairs: 1, required_fields: preparedRequirements.fields })
       if (currentWid.current !== taskWid) return
       setSelectedRun(run); setRuns(previous => [run, ...previous]); setQuestion(''); setTab('process'); setPage('research')
       const data = await request<{ items: Message[] }>(workspacePath(taskWid, `/sessions/${sid}/messages?limit=100`))
@@ -217,7 +223,7 @@ export default function ResearchWorkbench() {
     try { const run = await post<Run>(workspacePath(wid, `/runs/${selectedRun.id}/cancel`), {}); setSelectedRun(run); setRuns(previous => previous.map(item => item.id === run.id ? run : item)) } catch (err) { setError(errorText(err)) } finally { setBusy(false) }
   }
   function openRun(run: Run) { setSelectedRun(run); setSessionId(run.session_id); setPage('research'); setTab(isActive(run) ? 'process' : 'report') }
-  function freshResearch() { setSelectedRun(null); setSessionId(''); setMessages([]); setEvents([]); setQuestion(''); setPage('research'); setTab('report'); setSidebar(false); questionInput.current?.focus() }
+  function freshResearch() { setSelectedRun(null); setSessionId(''); setMessages([]); setEvents([]); setQuestion(''); setRequirements(emptyRequirements()); setPage('research'); setTab('report'); setSidebar(false); questionInput.current?.focus() }
   async function showEvidence(id: string) {
     const taskWid = wid
     setInspector(true); setReading(true); setSelectedEvidence(null)
@@ -272,7 +278,7 @@ export default function ResearchWorkbench() {
   }
 
   const fieldOptions = <label>字段检查<select aria-label="字段检查" value={fieldMode} onChange={e => setFieldMode(e.target.value as typeof fieldMode)}><option value="bounded">跟踪字段并补齐缺项</option><option value="observe">只跟踪与记录核验意见</option><option value="off">关闭字段检查</option></select></label>
-  const renderComposer = () => <div className="composer-wrap"><div className="composer">
+  const renderComposer = () => <div className="composer-wrap"><RequirementEditor sources={sources} draft={requirements} onChange={setRequirements} disabled={!wid || loading || busy || runs.some(isActive)} error={preparedRequirements.error}/><div className="composer">
     <textarea ref={questionInput} aria-label="研究问题" placeholder={selectedRun ? '继续追问，或对这份报告提出核验问题…' : '描述你想研究的问题，例如：这些方法的实验设置是否可比？'} value={question} onChange={e => setQuestion(e.target.value)} maxLength={10000} disabled={!wid || busy} onKeyDown={e => { if (e.key === 'Enter' && (e.ctrlKey || e.metaKey) && !e.nativeEvent.isComposing) { e.preventDefault(); void startResearch() } }}/>
     <div className="composer-toolbar"><div className="composer-options"><button className={`soft-button ${settings ? 'selected' : ''}`} onClick={() => setSettings(!settings)} aria-expanded={settings}><Icon name="settings" size={15}/>{strategy === 'grep' ? '原文检索' : strategy === 'rag' ? '语义检索' : '联合检索'}<Icon name="down" size={12}/></button><span className={`network-indicator ${network ? 'on' : ''}`}><Icon name="globe" size={14}/>{network ? '允许联网' : '仅课题资料'}</span></div>{runs.some(isActive) ? <button className="button" disabled={busy} onClick={() => { const run = runs.find(isActive); if (run) openRun(run) }}>查看进行中的研究 <Icon name="arrow" size={15}/></button> : <button className="button primary" disabled={!wid || !question.trim() || busy} onClick={() => void startResearch()}>{busy ? '提交中…' : '开始研究'}<Icon name="arrow" size={17}/></button>}</div>
   </div>{settings && <div className="research-settings"><label>检索方式<select value={strategy} onChange={e => setStrategy(e.target.value as Strategy)}>{Object.entries(STRATEGIES).map(([key, label]) => <option key={key} value={key}>{label}</option>)}</select></label>{fieldOptions}<label className="checkbox-label"><input type="checkbox" checked={network} onChange={e => setNetwork(e.target.checked)}/>允许搜索 arXiv 与网络资料</label><label>Token 总预算<input type="number" min={2000} max={100000} step={1000} value={budget} onChange={e => setBudget(Math.min(100000, Math.max(2000, Number(e.target.value) || 20000)))}/></label><p>Grep 在全文中匹配并回读；RAG 检索已建索引的资料。联合模式执行关键词与语义双路检索，再融合证据；单路不可用时会标记降级。当前 {indexed}/{sources.length} 份资料已建索引。</p></div>}<p className="composer-hint">范围：当前课题全部资料{strategy !== 'grep' ? '（语义部分仅覆盖已建索引资料）' : ''}<span>Ctrl / ⌘ + Enter 发送</span></p></div>

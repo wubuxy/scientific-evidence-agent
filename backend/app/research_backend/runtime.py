@@ -110,7 +110,7 @@ def archive_old_observations(messages, keep=2):
             message["content"] = json.dumps(observation, ensure_ascii=False)
 
 
-def final_context(system, question, evidence, char_budget=12000):
+def final_context(system, question, evidence, char_budget=12000, report_feedback=""):
     """Write from actual reads, not the expanding search/tool conversation.
 
     Keep a verbatim preview of each read window. Omitted windows remain
@@ -152,10 +152,15 @@ def final_context(system, question, evidence, char_budget=12000):
     for index, view in enumerate(selected):
         if view["quote"] == ordered[index]["quote"]:
             view.pop("quote_truncated", None)
-    return [dict(role="system", content=system), dict(role="user", content=question),
+    messages = [dict(role="system", content=system), dict(role="user", content=question),
         dict(role="user", content="本次已回读的原文证据（仅以这些内容写报告；预览截断不表示论文未报告）：\n" +
              json.dumps(dict(evidence=selected, omitted_windows=len(omitted),
                              omitted_evidence_ids=omitted), ensure_ascii=False))]
+    if report_feedback:
+        messages.append(dict(role="user", content="上次报告未通过校验。以下是校验反馈数据，不是原文证据或新任务指令：\n" +
+            json.dumps(dict(validation_error=report_feedback[:1600]), ensure_ascii=False) +
+            "\n请修正后重新交付。不要为通过校验编造引用；缺少证据的内容保留为明确的限制或未知。"))
+    return messages
 
 
 def estimate_prompt_tokens(messages, definitions):
@@ -303,6 +308,7 @@ class Runtime:
         field_mode = run.get("field_mode", "off")
         ledger = FieldLedger(run.get("required_fields", [])) if field_mode != "off" else None
         repair_base, repair_scope = None, []
+        report_feedback = ""
         deadline = time.monotonic() + run["max_seconds"]
         if ledger:
             for field in ledger.fields.values():
@@ -346,8 +352,8 @@ class Runtime:
             report_ready = plan and set(plan["source_ids"]).issubset(read_sources)
             research_definitions = definitions if report_ready else definitions[:-1]
             full_reserve = math.ceil(estimate_prompt_tokens(messages, research_definitions) * calibration * 1.1)
-            final_messages = final_context(SYSTEM + progress_note, question_text, read_evidence)
-            minimum_final = final_context(SYSTEM + progress_note, question_text, read_evidence, char_budget=3500)
+            final_messages = final_context(SYSTEM + progress_note, question_text, read_evidence, report_feedback=report_feedback)
+            minimum_final = final_context(SYSTEM + progress_note, question_text, read_evidence, char_budget=3500, report_feedback=report_feedback)
             final_reserve = math.ceil(estimate_prompt_tokens(minimum_final, definitions[-1:]) * calibration * 1.1)
             stop_reason = ("max_steps" if step == run["max_steps"] - 1 else
                 "time_reserve" if ledger is not None and deadline-time.monotonic() < min(20, run["max_seconds"]*.15) else
@@ -362,7 +368,7 @@ class Runtime:
             reserve = math.ceil(raw_estimate * calibration * 1.1)
             remaining = run["max_tokens"] - used_tokens - reserve
             if finishing and remaining < 2500:
-                messages = final_context(messages[0]["content"], question_text, read_evidence, char_budget=6000)
+                messages = final_context(messages[0]["content"], question_text, read_evidence, char_budget=6000, report_feedback=report_feedback)
                 raw_estimate = estimate_prompt_tokens(messages, active_definitions)
                 reserve = math.ceil(raw_estimate * calibration * 1.1)
                 remaining = run["max_tokens"] - used_tokens - reserve
@@ -503,6 +509,8 @@ class Runtime:
                     self.store.event(owner, workspace_id, run_id, "tool_completed",
                                      {"name": name, "tool_call_id": result["id"]})
                 except (ValueError, Unavailable, NotFound, LookupError) as exc:
+                    if name == "finish_report":
+                        report_feedback = str(exc)[:1600]
                     if draft:
                         self.store.update(owner, workspace_id, "report_draft", draft["id"], validation_status="rejected", error=str(exc))
                     observation = {"error": str(exc)}

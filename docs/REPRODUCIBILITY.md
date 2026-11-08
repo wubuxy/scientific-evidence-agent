@@ -51,11 +51,11 @@ scipy 和 openpyxl 的检查发生在对应测试中。缺少 scipy 不会跳过
 
 ## 本地验证记录
 
-截至 2026-11-07，加入公开字段回放的原文、版本与成本完整性检查后，Windows 完整环境收集并通过 230 项。此前字段控制器阶段为 228 项、自然报告校准阶段为 204 项、人工阅读包阶段为 187 项、缓存策略回放阶段为 195 项。下表同时保留此前的 Ubuntu 核心环境记录，收集数分开列出：
+截至 2026-11-08，加入显式要求、取消、超时、收尾反馈及故障汇总边界检查后，Windows 完整环境收集并通过 240 项。此前公开回放阶段为 230 项、字段控制器阶段为 228 项、自然报告校准阶段为 204 项、人工阅读包阶段为 187 项、缓存策略回放阶段为 195 项。下表同时保留此前的 Ubuntu 核心环境记录，收集数分开列出：
 
 | 环境 | 收集 | 通过 | 跳过 | 失败 |
 |---|---:|---:|---:|---:|
-| Windows / Python 3.13，完整环境，含 rg 和 CPU torch 2.15.0，本轮 | 230 | 230 | 0 | 0 |
+| Windows / Python 3.13，完整环境，含 rg 和 CPU torch 2.15.0，本轮 | 240 | 240 | 0 | 0 |
 | A5000 主机 Ubuntu / Python 3.12，核心依赖环境，含 rg，上一提交 | 186 | 173 | 13（统计、XLSX、LSTM） | 0 |
 
 干净环境的核心和分析依赖按提交的约束文件安装，CPU torch 从官方索引补齐。140、142、152、163、168、177、186 项的历史矩阵分别保存在机器记录的 `offline_test_profiles_before_demo`、`offline_test_profiles_before_agent_evals`、`offline_test_profiles_before_eval_completion`、`offline_test_profiles_before_verifier_pilot`、`offline_test_profiles_before_verifier_scale`、`offline_test_profiles_before_verifier_labels`、`offline_test_profiles_before_human_review` 中；最新结果和包版本见 [validation-summary.json](results/validation-summary.json) 的 `checks`。历史 163 项时 Windows 核心环境为 150 passed / 13 skipped，缺 rg 为 145 passed / 18 skipped；这些历史数值不冒充最新运行。
@@ -67,6 +67,8 @@ scipy 和 openpyxl 的检查发生在对应测试中。缺少 scipy 不会跳过
 第三轮完成六次 7B BF16 LoRA 标签干预对照与 1,446 条新预测。运行 `python scripts/audit_verifier_labels.py --bootstrap` 可无 GPU 重算三种标签口径、校准阈值和主要配对区间。数据与代码在运行前冻结，模型和语料保存在服务器 `D:\Ding`，仓库保留预测与评分元数据，见[标签干预报告](results/SCIFACT_LABEL_ABLATION_V1.md)。
 
 ## 持续集成
+
+仓库根目录运行 `python scripts/eval_agent_faults.py --out test-results/agent-faults-new` 可单独生成 17 个故障场景的 JSON、Markdown、JUnit、日志和代码哈希；目录必须全新。它复用离线生产循环检查，不调用真实模型。前端目录的 `npm test` 使用 Node 24，运行 5 项要求构造与隔离检查；浏览器脚本使用独立的可选 Playwright 环境。详见[执行验证](results/EXECUTION_V1.md)。
 
 [CI 工作流](../.github/workflows/ci.yml) 在 main 分支推送、PR 和手动触发时运行：
 

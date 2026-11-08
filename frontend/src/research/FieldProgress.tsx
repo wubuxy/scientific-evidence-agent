@@ -30,6 +30,7 @@ export default function FieldProgress({ state, sources, onSelect }: {
         <div className="field-card-top"><span>{sources.find(s => s.id === field.source_id)?.title ?? '研究资料'}</span>
           <span className="field-status">{coverageLabels[field.coverage] ?? field.coverage}</span></div>
         <h3>{field.name}</h3><p className="field-answer">{field.answer || (field.activity === 'source_read' ? '已阅读这篇论文，尚未登记该字段答案。' : '等待定位相关证据。')}</p>
+        {field.criterion && <details className="field-review"><summary>完成标准</summary><p>{field.criterion}</p></details>}
         <div className="field-evidence">{field.evidence_ids.map((id, i) => <button key={id} onClick={() => onSelect(id)} aria-label={`${field.name}的证据 ${i+1}`}>原文 {i+1} ↗</button>)}
           {field.revision > 0 && <span>版本 {field.revision}</span>}</div>
         {field.review && <div className="field-review"><strong>模型核验意见 · 待人工确认</strong>
