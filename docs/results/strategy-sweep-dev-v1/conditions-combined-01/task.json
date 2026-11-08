@@ -1,0 +1,35 @@
+{
+  "id": "strategy-dev-conditions",
+  "question": "我们要决定哪些训练和评测做法可以迁移到论文研究 Agent。仅根据提供的 QASPER 与 ArxivDIGESTables 两篇论文，按指定字段逐篇比较。\n明确区分数据集构建、模型训练与推理评测阶段；尤其区分题目作者看到了什么、回答者或系统实际收到什么，和不同 oracle / non-oracle 条件。\n哪些分数具有可比前提，哪些不能相互排名？训练是否需要新增标注，论文证据足不足以据此为我们的 Agent 选择微调？\n在 claims 中给出有引用的判断，在 proposals 中提出一个最小、尚未执行的控制实验，写清固定项、改动项、失败计数和停止条件。\n重要事实必须引用本次回读的原文，证据不够明确写本次未核实；不要用发表时结果推断当前最强模型，不读取论文外的数据集。",
+  "sources": [
+    {
+      "id": "qasper",
+      "title": "A Dataset of Information-Seeking Questions and Answers Anchored in Research Papers",
+      "uri": "https://arxiv.org/abs/2105.03011v1"
+    },
+    {
+      "id": "digestables",
+      "title": "ArxivDIGESTables: Synthesizing Scientific Literature into Tables using Language Models",
+      "uri": "https://arxiv.org/abs/2410.22360v1"
+    }
+  ],
+  "fields": [
+    {
+      "name": "角色与输入",
+      "criterion": "区分数据构建者、标注者、回答系统及其输入权限，不能把题目作者的视野当成回答系统的输入"
+    },
+    {
+      "name": "训练与数据划分",
+      "criterion": "区分任务数据划分、模型训练或微调、推理使用；找不到时明确未知，不把使用模型等同于训练模型"
+    },
+    {
+      "name": "评测条件与指标",
+      "criterion": "说明指标对象、参考依赖及 oracle/non-oracle 等适用条件；无法直接比较时解释原因"
+    },
+    {
+      "name": "迁移条件与未知",
+      "criterion": "把论文已验证事实、对产品的迁移推断及未解决问题分开，有引用且不夸大外推"
+    }
+  ],
+  "provenance": "Previously observed public demo papers; one development case, not held-out evaluation"
+}

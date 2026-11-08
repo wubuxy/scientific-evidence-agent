@@ -1,0 +1,35 @@
+{
+  "id": "strategy-dev-design",
+  "question": "为一个论文研究 Agent 设计评测方案。产品需要回答单篇论文问题、跨论文比较，并提出有依据的研究建议。\n仅根据提供的 QASPER 与 ArxivDIGESTables 两篇论文，先分别按指定字段比较，再在 claims 中给出综合判断：\n各适合验证哪类能力？为什么两个任务的指标不能直接横向排名？哪些产品能力仍缺评测依据？\n提出一个最小可执行的评测组合，说明数据划分、人工检查和失败计数。把论文事实与自己的方案建议明确区分。\n重要事实必须引用本次回读的原文。没有证据时明确保留未知，不用论文发表时的结果推断当前最强模型。\n不要读取论文外的数据集或声称已经完成新评测。",
+  "sources": [
+    {
+      "id": "qasper",
+      "title": "A Dataset of Information-Seeking Questions and Answers Anchored in Research Papers",
+      "uri": "https://arxiv.org/abs/2105.03011v1"
+    },
+    {
+      "id": "digestables",
+      "title": "ArxivDIGESTables: Synthesizing Scientific Literature into Tables using Language Models",
+      "uri": "https://arxiv.org/abs/2410.22360v1"
+    }
+  ],
+  "fields": [
+    {
+      "name": "任务与输入输出",
+      "criterion": "说明研究问题、单篇或跨篇范围、输入与输出，避免仅给数据集名称"
+    },
+    {
+      "name": "参考答案与标注",
+      "criterion": "说明参考来自谁、如何收集，以及证据或表格标注的性质"
+    },
+    {
+      "name": "指标与比较条件",
+      "criterion": "说明指标衡量的对象与参考依赖，不跨任务直接比较分数"
+    },
+    {
+      "name": "适用范围与缺口",
+      "criterion": "区分论文已验证的范围与对我们产品的推断，给出原文依据或明确未知"
+    }
+  ],
+  "provenance": "Previously observed public demo papers; one development case, not held-out evaluation"
+}
