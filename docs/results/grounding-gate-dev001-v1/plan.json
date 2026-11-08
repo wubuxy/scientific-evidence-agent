@@ -1,0 +1,70 @@
+{
+  "id": "grounding-gate-dev001-v1",
+  "prepared_at": "2026-11-08T14:29:43.047403+00:00",
+  "scope": "Two development repetitions of one previously observed task; no independent task sample or method-effect estimate",
+  "execution_code_commit": "2f682c0514834391d01b2304f6bebfc4ed4ed7c7",
+  "hypotheses": [
+    "The search-to-read controller executes actual reads from both required papers and delivers a structurally and citation-valid report within the frozen budget."
+  ],
+  "repeats": 2,
+  "task_id": "research-judgment-dev-001",
+  "model": "qwen3.5-27b",
+  "temperature": 0.1,
+  "extra_body": {
+    "enable_thinking": false
+  },
+  "memory_mode": "legacy",
+  "retrieval_strategy": "grep",
+  "allow_network": false,
+  "max_tokens_per_run": 30000,
+  "max_steps_per_run": 18,
+  "max_seconds_per_run": 600,
+  "max_field_repairs": 1,
+  "logical_token_ceiling_total": 60000,
+  "sdk_transport_retries": 1,
+  "application_result_retries": 0,
+  "transport_billing_note": "Unknown or retried transport cost is not independently recoverable.",
+  "independent_variables": "None within this gate; both repetitions use the currently repaired controller. No new focus or memory implementation.",
+  "baseline_scope": "Earlier failed runs are historical diagnostics. This gate repeats one already-seen development task and cannot establish generalization or quality gains.",
+  "freeze_rule": "No code, prompt, input, rubric or budget edits between the two repetitions. Retain all outcomes.",
+  "stopping_rule": "Exactly two planned attempts; no replacement of failures. Stop early only for unknown billing, missing access or an external service fault; record missing outcomes.",
+  "mechanical_checks": [
+    "delivered Report validates",
+    "citations are canonical reads from this run",
+    "both required papers have actual reads",
+    "returned usage <= 30000",
+    "eight requirements retained; field presence is not correctness"
+  ],
+  "descriptive_metrics": [
+    "input/output/total tokens per call",
+    "tool schemas and output allowance",
+    "budget decisions",
+    "all read ranges by paper",
+    "read ranges extending after line 50, explicitly a location proxy only",
+    "unresolved fields",
+    "claim kinds and proposals",
+    "rejected drafts"
+  ],
+  "human_checks": [
+    "six frozen task rubrics",
+    "per-field context sufficiency",
+    "per-field answer support",
+    "proposal feasibility"
+  ],
+  "human_scores": null,
+  "semantic_accuracy": null,
+  "held_out_data_used": false,
+  "manifest_sha256": {
+    "repeat-01": "f0301328cabeacf73ed60a9f1aae2363abd75a4a029005150d0705e717dd2cb8",
+    "repeat-02": "f0301328cabeacf73ed60a9f1aae2363abd75a4a029005150d0705e717dd2cb8"
+  },
+  "input_sha256": {
+    "inputs/digestables.blocks.json": "5758194e55d5222b8dbfdde83c2b2248f4d08e5bc0f725fbe50e0bac10a69fb2",
+    "inputs/digestables.txt": "243150fdb32bcde1d3c164b23744de83b9dc254df30252ff1ad56f70e309e342",
+    "inputs/qasper.blocks.json": "d9334c8d9d2bb50fcfcbcc08fe25dd70ec0b5691e1c30eef01a1759a88945baa",
+    "inputs/qasper.txt": "5137e9aae0d5c9ca7031585c93adaf76267931d9cd194408954475f37f375cc3",
+    "inputs/task.json": "d2af176659d72b40d80f27019c20e260737bf29229d2bbea7ad691b175f89613"
+  },
+  "rubric_sha256": "5080dd2c58b3022b005580b7617d30778acfd0e1652376a6eb43823afdcdf6a0",
+  "next_stage": "After both attempts, diagnose all outcomes. Any new architecture condition requires a separately frozen plan. No automatic replacement of failed attempts."
+}
