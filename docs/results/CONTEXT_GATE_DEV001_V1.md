@@ -42,6 +42,8 @@ Qwen3.5-27B、temperature 0.1、thinking 关闭；每次 30,000 token / 18 步 /
 
 离线生产循环回归覆盖两种记忆模式、阶段权限、无命中、区间覆盖、步数/预算不足时停止，以及冻结结果篡改和虚构人工分数的拒绝。检查结果见 [validation.json](context-gate-dev001-v1/validation.json)。
 
+其中 7 个搜索集成场景使用受控正则搜索，依赖 ripgrep；缺失时明确跳过。区间、上下文投影与冻结结果审计无需 rg。完整环境的通过数不包括这些跳过；CI 另跑无 rg 环境，检查既有字面搜索回退与依赖标记。
+
 ```bash
 python scripts/audit_context_gate.py
 cd backend

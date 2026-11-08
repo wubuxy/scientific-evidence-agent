@@ -68,6 +68,7 @@ class SearchModel:
 
 
 @pytest.mark.parametrize("memory_mode",["legacy","evidence"])
+@pytest.mark.requires_rg
 def test_real_search_transitions_to_read_before_another_search_or_report(tmp_path,memory_mode):
     model=SearchModel()
     run,_,events=run_loop(tmp_path,model,mode="off",memory_mode=memory_mode)
@@ -79,6 +80,7 @@ def test_real_search_transitions_to_read_before_another_search_or_report(tmp_pat
     assert run["tokens_used"]==400
 
 
+@pytest.mark.requires_rg
 def test_cannot_bypass_read_stage_with_another_search(tmp_path):
     model=SearchModel(violate=True)
     run,_,events=run_loop(tmp_path,model,mode="off")
@@ -89,6 +91,7 @@ def test_cannot_bypass_read_stage_with_another_search(tmp_path):
 
 
 @pytest.mark.parametrize("constraint",["steps","tokens"])
+@pytest.mark.requires_rg
 def test_no_read_evidence_stops_without_paying_for_impossible_report(tmp_path,constraint):
     class CostModel(SearchModel):
         async def complete(self,*args):
@@ -107,12 +110,14 @@ def test_no_read_evidence_stops_without_paying_for_impossible_report(tmp_path,co
     assert not any(e["type"]=="report_ready" for e in events)
 
 
+@pytest.mark.requires_rg
 def test_empty_search_does_not_force_reading_a_nonexistent_hit(tmp_path):
     run,_,events=run_loop(tmp_path,SearchModel(miss=True),mode="off")
     assert run["status"]=="completed",run.get("error")
     assert not any(e["type"]=="read_checkpoint_requested" for e in events)
 
 
+@pytest.mark.requires_rg
 def test_invalid_read_keeps_error_feedback_and_leads_for_next_attempt(tmp_path):
     run,_,events=run_loop(tmp_path,SearchModel(bad_read=True),mode="off")
     assert run["status"]=="completed",run.get("error")
