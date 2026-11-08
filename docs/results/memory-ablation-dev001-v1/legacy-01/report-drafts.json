@@ -1,0 +1,114 @@
+[
+  {
+    "arguments": {
+      "title": "基于 QASPER 与 ArxivDIGESTables 的 Agent 评测方案对比与建议",
+      "claims": [
+        {
+          "text": "QASPER 任务要求模型根据单篇论文的全文回答由 NLP 从业者提出的信息寻求问题，并输出答案及支撑证据（段落、图表），其核心是验证单篇文档内的复杂推理与信息定位能力。",
+          "evidence_ids": [
+            "ev_1d100740b7cd255e3f9cef7408c84f93",
+            "ev_f5764dc79e38e099c469cfa363385d9b"
+          ],
+          "kind": "finding"
+        },
+        {
+          "text": "ArxivDIGESTables 任务要求模型将多篇论文（输入集合）综合为文献综述表格，包含行（论文）和列（比较维度/方面），旨在验证跨文档的信息抽取、模式生成与结构化综合能力。",
+          "evidence_ids": [
+            "ev_677ccd3706dd1847d0c685c53c8f504a",
+            "ev_5049056d7e502b94a54cfbd0249e5338"
+          ],
+          "kind": "finding"
+        },
+        {
+          "text": "QASPER 使用 Answer-F1 和 Evidence-F1 衡量答案与证据的匹配度，而 ArxivDIGESTables 评估生成的表格模式是否有用且值是否正确，两者任务目标（问答 vs. 表格生成）、输入粒度（单篇 vs. 多篇）及输出形式完全不同，因此指标无法直接横向排名。",
+          "evidence_ids": [
+            "ev_f5764dc79e38e099c469cfa363385d9b",
+            "ev_5049056d7e502b94a54cfbd0249e5338"
+          ],
+          "kind": "inference",
+          "qualification": "基于两篇论文对任务定义、输入输出形式及评估指标的明确描述，推断其不可直接比较。"
+        },
+        {
+          "text": "当前两篇论文均未提供针对“提出有依据的研究建议”这一产品能力的直接评测数据或基准；QASPER 仅关注事实性问答，ArxivDIGESTables 关注表格重构与新颖方面生成，但未验证基于多源信息的深度研究建议生成能力。",
+          "evidence_ids": [
+            "ev_1d100740b7cd255e3f9cef7408c84f93",
+            "ev_677ccd3706dd1847d0c685c53c8f504a"
+          ],
+          "kind": "inference",
+          "qualification": "基于原文对任务范围（QA 与表格生成）的描述，推断缺乏针对“研究建议生成”的显式评测依据。"
+        },
+        {
+          "text": "QASPER 数据集包含 5,049 个问题覆盖 1,585 篇 NLP 论文，标注者需从全文中选取证据，其中 55.5% 的问题需要跨段落证据，13% 需要图表证据。",
+          "evidence_ids": [
+            "ev_6058d807ed11676091a2601b1dccf130"
+          ],
+          "kind": "finding"
+        },
+        {
+          "text": "ArxivDIGESTables 包含 2,228 个文献综述表格，综合了 7,542 篇论文，评估方法包括自动对齐（DECONTEXT EVAL）和人工评估（有用性、具体性、洞察力）。",
+          "evidence_ids": [
+            "ev_677ccd3706dd1847d0c685c53c8f504a",
+            "ev_06705ce9ef5f774513f5d33269769a7a"
+          ],
+          "kind": "finding"
+        }
+      ],
+      "comparison_rows": "\n[{\"source_id\": \"53dac8a0-e505-4930-812b-cb7383c2f946\", \"method\": \"QASPER QA & Evidence Extraction\", \"dataset\": \"QASPER (5,049 questions, 1,585 papers)\", \"model\": \"本次未核实\", \"metric\": \"Answer-F1, Evidence-F1\", \"result\": \"本次未核实\", \"conditions\": \"单篇论文全文输入，NLP 从业者标注\", \"comparability\": \"unknown\", \"evidence_ids\": [\"ev_f5764dc79e38e099c469cfa363385d9b\", \"ev_6058d807ed11676091a2601b1dccf130\"], \"attributes\": {\"任务与输入输出\": \"单篇论文问答，输出答案及证据\", \"参考答案与标注\": \"NLP 从业者提供答案及证据段落/图表\", \"指标与比较条件\": \"Span-level F1，基于全文答案与证据匹配\", \"适用范围与缺口\": \"验证单篇复杂推理，缺跨篇比较与建议生成\"}}]\n[{\"source_id\": \"1a228499-8c06-4e09-a8f1-3fd7ee9e6caa\", \"method\": \"Literature Review Table Generation\", \"dataset\": \"ArxivDIGESTables (2,228 tables, 7,542 papers)\", \"model\": \"本次未核实\", \"metric\": \"Schema usefulness, Value correctness, Human ratings\", \"result\": \"本次未核实\", \"conditions\": \"多篇论文输入，生成结构化表格\", \"comparability\": \"unknown\", \"evidence_ids\": [\"ev_5049056d7e502b94a54cfbd0249e5338\", \"ev_06705ce9ef5f774513f5d33269769a7a\"], \"attributes\": {\"任务与输入输出\": \"多篇论文综合，输出文献综述表格\", \"参考答案与标注\": \"人类作者撰写的表格作为参考\", \"指标与比较条件\": \"自动对齐 + 人工评估（有用性/具体性/洞察力）\", \"适用范围与缺口\": \"验证跨篇结构化综合，缺深度研究建议生成\"}}]\n",
+      "limitations": [
+        "本报告仅基于 QASPER 和 ArxivDIGESTables 两篇论文的原文内容，未引入外部数据集或最新模型结果。",
+        "关于“提出有依据的研究建议”的产品能力，原文未提供直接的评测基准或数据，相关结论为基于任务范围的推断。",
+        "两篇论文的评估指标（F1 vs. 人工评分/对齐）因任务本质不同而无法直接数值比较。",
+        "未验证当前最强模型在两个任务上的实际表现，仅引用了论文发布时的实验背景。"
+      ],
+      "proposals": [
+        {
+          "text": "构建最小可执行评测组合：(1) 单篇能力：使用 QASPER 测试集（按原文划分）评估答案与证据提取的 F1；(2) 跨篇能力：使用 ArxivDIGESTables 测试集评估表格生成的模式有用性与值正确率；(3) 建议能力：暂缺标准数据集，采用人工构造少量跨篇场景，由专家评估建议的逻辑依据。",
+          "basis_claim_indices": [
+            0,
+            1,
+            3
+          ],
+          "assumptions": [
+            "QASPER 和 ArxivDIGESTables 的测试集划分可直接用于评测。",
+            "人工构造的建议评估场景能反映真实需求。",
+            "现有自动指标不足以完全覆盖“研究建议”的质量。"
+          ],
+          "validation_plan": "1. 下载并划分 QASPER 和 ArxivDIGESTables 测试集；2. 运行 Agent 生成答案/表格/建议；3. 计算自动指标（F1、对齐得分）；4. 对建议部分进行人工盲审，记录失败案例（如依据缺失、逻辑错误）并计数。"
+        },
+        {
+          "text": "建立失败计数机制：针对每个任务定义明确的失败标准（如 QASPER 中答案 F1<0.5 或证据缺失；ArxivDIGESTables 中关键列缺失或值错误；建议任务中无原文依据），统计失败比例以量化风险。",
+          "basis_claim_indices": [
+            0,
+            1,
+            3
+          ],
+          "assumptions": [
+            "失败标准可被清晰定义且与用户期望一致。",
+            "自动指标与人工判断具有相关性。"
+          ],
+          "validation_plan": "1. 制定各任务的失败判定规则；2. 在测试集上运行并标记失败样本；3. 抽样人工复核失败判定准确性；4. 输出失败率报告。"
+        },
+        {
+          "text": "数据划分与人工检查流程：严格遵循原文的数据划分（train/val/test），确保测试集未见训练数据；对自动评估存疑的样本（如低分但看似合理，或高分但明显错误）进行人工抽检。",
+          "basis_claim_indices": [
+            0,
+            1
+          ],
+          "assumptions": [
+            "原文提供的数据划分是可靠且无泄露的。",
+            "人工抽检能有效发现自动指标的盲区。"
+          ],
+          "validation_plan": "1. 确认数据划分文件；2. 运行自动评估；3. 按分数分布分层抽样（高/中/低分）；4. 组织专家进行一致性检查并修正最终结果。"
+        }
+      ],
+      "verification_status": "needs_human_review"
+    },
+    "normalized_columns": [],
+    "validation_status": "rejected",
+    "id": "92608a5e-d1f9-4afd-8e74-287e480f0d2b",
+    "workspace_id": "702b1f61-aa6e-47f8-b50d-ef8724538edb",
+    "created_at": "2026-11-08T14:38:33.390231+00:00",
+    "updated_at": "2026-11-08T14:38:33.410013+00:00",
+    "error": "1 validation error for Report\ncomparison_rows\n  Input should be a valid list [type=list_type, input_value='\\n[{\"source_id\": \"53dac8...究建议生成\"}}]\\n', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.14/v/list_type"
+  }
+]

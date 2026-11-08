@@ -75,6 +75,10 @@ jobs:
         run: python ../scripts/diagnose_agent_context.py --out test-results/context-audit.json
       - name: Audit frozen search-to-read development failures
         run: python ../scripts/audit_context_gate.py
+      - name: Audit read controller and memory comparison
+        run: |
+          python ../scripts/audit_architecture_study.py --root ../docs/results/grounding-gate-dev001-v1
+          python ../scripts/audit_architecture_study.py --root ../docs/results/memory-ablation-dev001-v1
       - name: Audit published verifier pilot
         run: python ../scripts/audit_verifier_pilot.py
       - name: Audit repair study and cached gate comparison

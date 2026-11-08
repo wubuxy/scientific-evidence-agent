@@ -51,11 +51,11 @@ scipy 和 openpyxl 的检查发生在对应测试中。缺少 scipy 不会跳过
 
 ## 本地验证记录
 
-截至 2026-11-08，加入搜索到回读的阶段控制、回读错误反馈、调用记录及冻结失败审计后，Windows 完整环境收集并通过 268 项；上一轮上下文与方案契约检查为 256 项，显式要求与故障检查为 240 项。此前公开回放阶段为 230 项、字段控制器阶段为 228 项、自然报告校准阶段为 204 项、人工阅读包阶段为 187 项、缓存策略回放阶段为 195 项。下表同时保留此前的 Ubuntu 核心环境记录，收集数分开列出：
+截至 2026-11-08，加入冻结记忆条件、原文与费用审计、独立报告评审包检查后，Windows 完整环境收集并通过 276 项；此前搜索到回读控制为 268 项，上下文与方案契约检查为 256 项，显式要求与故障检查为 240 项。此前公开回放阶段为 230 项、字段控制器阶段为 228 项、自然报告校准阶段为 204 项、人工阅读包阶段为 187 项、缓存策略回放阶段为 195 项。下表同时保留此前的 Ubuntu 核心环境记录，收集数分开列出：
 
 | 环境 | 收集 | 通过 | 跳过 | 失败 |
 |---|---:|---:|---:|---:|
-| Windows / Python 3.13，完整环境，含 rg 和 CPU torch 2.15.0，本轮 | 268 | 268 | 0 | 0 |
+| Windows / Python 3.13，完整环境，含 rg 和 CPU torch 2.15.0，本轮 | 276 | 276 | 0 | 0 |
 | A5000 主机 Ubuntu / Python 3.12，核心依赖环境，含 rg，上一提交 | 186 | 173 | 13（统计、XLSX、LSTM） | 0 |
 
 干净环境的核心和分析依赖按提交的约束文件安装，CPU torch 从官方索引补齐。140、142、152、163、168、177、186 项的历史矩阵分别保存在机器记录的 `offline_test_profiles_before_demo`、`offline_test_profiles_before_agent_evals`、`offline_test_profiles_before_eval_completion`、`offline_test_profiles_before_verifier_pilot`、`offline_test_profiles_before_verifier_scale`、`offline_test_profiles_before_verifier_labels`、`offline_test_profiles_before_human_review` 中；最新结果和包版本见 [validation-summary.json](results/validation-summary.json) 的 `checks`。历史 163 项时 Windows 核心环境为 150 passed / 13 skipped，缺 rg 为 145 passed / 18 skipped；这些历史数值不冒充最新运行。
@@ -93,3 +93,5 @@ uv pip compile requirements-research.txt requirements-analysis.txt --universal -
 本轮上下文修复未新增模型调用。复现 `python scripts/diagnose_agent_context.py --out test-results/context-audit-new.json` 可检查历史失败及固定工具格式下的提示投影；这是离线估算，不是新运行的质量或成本结果。见[修复记录](results/CONTEXT_REPAIR_V1.md)。
 
 后续冻结复测执行了两次真实开发尝试，均失败；据此增加回读阶段控制后仅做离线验证。`python scripts/audit_context_gate.py` 检查失败记录与预算投影，审计通过不表示研究任务通过。见[复测记录](results/CONTEXT_GATE_DEV001_V1.md)。
+
+再下一轮完成两次回读检查与四次记忆模式对照，共 166,036 个返回 token。`scripts/audit_architecture_study.py --root docs/results/grounding-gate-dev001-v1` 和同命令的 `memory-ablation-dev001-v1` 目录可分别离线审计；记录与来源按原字节冻结。模式、报告、全部失败和独立评审包说明见[架构对照](results/MEMORY_ARCHITECTURE_DEV001_V1.md)。所有语义分数仍为空，未切换默认模式。

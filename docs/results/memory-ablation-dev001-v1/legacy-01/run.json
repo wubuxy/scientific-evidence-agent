@@ -1,0 +1,211 @@
+{
+  "session_id": "f531fed6-f7c8-485e-86e3-d92c0e55dbc7",
+  "question": "为一个论文研究 Agent 设计评测方案。产品需要回答单篇论文问题、跨论文比较，并提出有依据的研究建议。\n仅根据提供的 QASPER 与 ArxivDIGESTables 两篇论文，先分别按指定字段比较，再在 claims 中给出综合判断：\n各适合验证哪类能力？为什么两个任务的指标不能直接横向排名？哪些产品能力仍缺评测依据？\n提出一个最小可执行的评测组合，说明数据划分、人工检查和失败计数。把论文事实与自己的方案建议明确区分。\n重要事实必须引用本次回读的原文。没有证据时明确保留未知，不用论文发表时的结果推断当前最强模型。\n不要读取论文外的数据集或声称已经完成新评测。",
+  "retrieval_strategy": "grep",
+  "allow_network": false,
+  "memory_mode": "legacy",
+  "max_steps": 18,
+  "max_tokens": 30000,
+  "max_seconds": 600,
+  "field_mode": "bounded",
+  "required_fields": [
+    {
+      "source_id": "53dac8a0-e505-4930-812b-cb7383c2f946",
+      "name": "任务与输入输出",
+      "criterion": "说明研究问题、单篇或跨篇范围、输入与输出，避免仅给数据集名称"
+    },
+    {
+      "source_id": "53dac8a0-e505-4930-812b-cb7383c2f946",
+      "name": "参考答案与标注",
+      "criterion": "说明参考来自谁、如何收集，以及证据或表格标注的性质"
+    },
+    {
+      "source_id": "53dac8a0-e505-4930-812b-cb7383c2f946",
+      "name": "指标与比较条件",
+      "criterion": "说明指标衡量的对象与参考依赖，不跨任务直接比较分数"
+    },
+    {
+      "source_id": "53dac8a0-e505-4930-812b-cb7383c2f946",
+      "name": "适用范围与缺口",
+      "criterion": "区分论文已验证的范围与对我们产品的推断，给出原文依据或明确未知"
+    },
+    {
+      "source_id": "1a228499-8c06-4e09-a8f1-3fd7ee9e6caa",
+      "name": "任务与输入输出",
+      "criterion": "说明研究问题、单篇或跨篇范围、输入与输出，避免仅给数据集名称"
+    },
+    {
+      "source_id": "1a228499-8c06-4e09-a8f1-3fd7ee9e6caa",
+      "name": "参考答案与标注",
+      "criterion": "说明参考来自谁、如何收集，以及证据或表格标注的性质"
+    },
+    {
+      "source_id": "1a228499-8c06-4e09-a8f1-3fd7ee9e6caa",
+      "name": "指标与比较条件",
+      "criterion": "说明指标衡量的对象与参考依赖，不跨任务直接比较分数"
+    },
+    {
+      "source_id": "1a228499-8c06-4e09-a8f1-3fd7ee9e6caa",
+      "name": "适用范围与缺口",
+      "criterion": "区分论文已验证的范围与对我们产品的推断，给出原文依据或明确未知"
+    }
+  ],
+  "max_field_repairs": 1,
+  "status": "failed",
+  "model": "qwen3.5-27b",
+  "tokens_used": 29289,
+  "tokens_estimated": false,
+  "step": 5,
+  "report": null,
+  "error": "已达到 token 预算，请缩小资料范围或提高预算",
+  "id": "0fd0197e-7442-46ca-a9a5-6aa455d5314a",
+  "workspace_id": "702b1f61-aa6e-47f8-b50d-ef8724538edb",
+  "created_at": "2026-11-08T14:37:29.222455+00:00",
+  "updated_at": "2026-11-08T14:38:58.084324+00:00",
+  "field_state": {
+    "version": "field-ledger-v1",
+    "requirement_origin": "request",
+    "fields": [
+      {
+        "source_id": "53dac8a0-e505-4930-812b-cb7383c2f946",
+        "name": "任务与输入输出",
+        "criterion": "说明研究问题、单篇或跨篇范围、输入与输出，避免仅给数据集名称",
+        "id": "field-573c1903da926f92",
+        "activity": "source_read",
+        "answer": "",
+        "evidence_ids": [],
+        "candidate_hash": null,
+        "revision": 0,
+        "coverage": "missing",
+        "review": null,
+        "attempts": 0
+      },
+      {
+        "source_id": "53dac8a0-e505-4930-812b-cb7383c2f946",
+        "name": "参考答案与标注",
+        "criterion": "说明参考来自谁、如何收集，以及证据或表格标注的性质",
+        "id": "field-98dca20932348bf8",
+        "activity": "source_read",
+        "answer": "",
+        "evidence_ids": [],
+        "candidate_hash": null,
+        "revision": 0,
+        "coverage": "missing",
+        "review": null,
+        "attempts": 0
+      },
+      {
+        "source_id": "53dac8a0-e505-4930-812b-cb7383c2f946",
+        "name": "指标与比较条件",
+        "criterion": "说明指标衡量的对象与参考依赖，不跨任务直接比较分数",
+        "id": "field-9b3d71352af42b85",
+        "activity": "source_read",
+        "answer": "",
+        "evidence_ids": [],
+        "candidate_hash": null,
+        "revision": 0,
+        "coverage": "missing",
+        "review": null,
+        "attempts": 0
+      },
+      {
+        "source_id": "53dac8a0-e505-4930-812b-cb7383c2f946",
+        "name": "适用范围与缺口",
+        "criterion": "区分论文已验证的范围与对我们产品的推断，给出原文依据或明确未知",
+        "id": "field-8348c5d4ec808b2e",
+        "activity": "source_read",
+        "answer": "",
+        "evidence_ids": [],
+        "candidate_hash": null,
+        "revision": 0,
+        "coverage": "missing",
+        "review": null,
+        "attempts": 0
+      },
+      {
+        "source_id": "1a228499-8c06-4e09-a8f1-3fd7ee9e6caa",
+        "name": "任务与输入输出",
+        "criterion": "说明研究问题、单篇或跨篇范围、输入与输出，避免仅给数据集名称",
+        "id": "field-de3f24f2f795a5f1",
+        "activity": "source_read",
+        "answer": "",
+        "evidence_ids": [],
+        "candidate_hash": null,
+        "revision": 0,
+        "coverage": "missing",
+        "review": null,
+        "attempts": 0
+      },
+      {
+        "source_id": "1a228499-8c06-4e09-a8f1-3fd7ee9e6caa",
+        "name": "参考答案与标注",
+        "criterion": "说明参考来自谁、如何收集，以及证据或表格标注的性质",
+        "id": "field-f478ac8de1dacfab",
+        "activity": "source_read",
+        "answer": "",
+        "evidence_ids": [],
+        "candidate_hash": null,
+        "revision": 0,
+        "coverage": "missing",
+        "review": null,
+        "attempts": 0
+      },
+      {
+        "source_id": "1a228499-8c06-4e09-a8f1-3fd7ee9e6caa",
+        "name": "指标与比较条件",
+        "criterion": "说明指标衡量的对象与参考依赖，不跨任务直接比较分数",
+        "id": "field-1570c7d7e19dee4d",
+        "activity": "source_read",
+        "answer": "",
+        "evidence_ids": [],
+        "candidate_hash": null,
+        "revision": 0,
+        "coverage": "missing",
+        "review": null,
+        "attempts": 0
+      },
+      {
+        "source_id": "1a228499-8c06-4e09-a8f1-3fd7ee9e6caa",
+        "name": "适用范围与缺口",
+        "criterion": "区分论文已验证的范围与对我们产品的推断，给出原文依据或明确未知",
+        "id": "field-a69477ab26a7f072",
+        "activity": "source_read",
+        "answer": "",
+        "evidence_ids": [],
+        "candidate_hash": null,
+        "revision": 0,
+        "coverage": "missing",
+        "review": null,
+        "attempts": 0
+      }
+    ],
+    "total": 8,
+    "present": 0,
+    "unresolved": 8,
+    "reviewed": 0,
+    "semantic_success": null,
+    "review_status": "not_run",
+    "repair_rounds": 0,
+    "stop_reason": null,
+    "previous_versions": []
+  },
+  "source_coverage": {
+    "status": "partial",
+    "planned_source_ids": [
+      "53dac8a0-e505-4930-812b-cb7383c2f946",
+      "1a228499-8c06-4e09-a8f1-3fd7ee9e6caa"
+    ],
+    "fields": [
+      "任务与输入输出",
+      "参考答案与标注",
+      "指标与比较条件",
+      "适用范围与缺口"
+    ],
+    "read_source_ids": [
+      "1a228499-8c06-4e09-a8f1-3fd7ee9e6caa",
+      "53dac8a0-e505-4930-812b-cb7383c2f946"
+    ],
+    "unread_source_ids": [],
+    "field_verification": "not_automatically_verified"
+  }
+}

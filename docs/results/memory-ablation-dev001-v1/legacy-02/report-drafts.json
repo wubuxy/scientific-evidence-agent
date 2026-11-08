@@ -1,0 +1,149 @@
+[
+  {
+    "arguments": {
+      "title": "基于QASPER与ArxivDIGESTables的Agent评测方案对比与建议",
+      "claims": [
+        {
+          "text": "QASPER 数据集包含5,049个由NLP从业者针对1,585篇论文标题和摘要提出的问题，答案及支撑证据需从全文（包括多段落、表格或图表）中检索，旨在评估单篇论文内的复杂推理与信息检索能力。",
+          "evidence_ids": [
+            "ev_f44785f40ae47a3ecbe975b714f4c57d",
+            "ev_0b119c5092cb4d32e7f97baf09812556"
+          ],
+          "kind": "finding"
+        },
+        {
+          "text": "ArxivDIGESTables 数据集包含2,228个文献综述表，综合了7,542篇论文，任务被分解为“模式生成”（确定共享方面/列）和“值生成”（填充具体数值），旨在评估跨多篇论文的文献综合与结构化比较能力。",
+          "evidence_ids": [
+            "ev_8abc2b0cd667853a8008642ef2166aa8",
+            "ev_6bf9d5f653da2c58c54cbcc87655cec7"
+          ],
+          "kind": "finding"
+        },
+        {
+          "text": "QASPER 的标注由两组独立的NLP从业者完成：一组仅阅读标题和摘要提出问题，另一组阅读全文提供答案并标注支撑证据（文本、表格或图表），其中55.5%的问题需要跨段落证据。",
+          "evidence_ids": [
+            "ev_f44785f40ae47a3ecbe975b714f4c57d",
+            "ev_0b119c5092cb4d32e7f97baf09812556"
+          ],
+          "kind": "finding"
+        },
+        {
+          "text": "ArxivDIGESTables 的参考表提取自ArXiv论文，评估采用DECONTEXT EVAL方法对齐不同表面形式的元素，并发现即使模型未能完全重构参考表，其生成的新颖方面仍可能有用。",
+          "evidence_ids": [
+            "ev_8abc2b0cd667853a8008642ef2166aa8",
+            "ev_6bf9d5f653da2c58c54cbcc87655cec7"
+          ],
+          "kind": "finding"
+        },
+        {
+          "text": "两个任务的指标不能直接横向排名，因为QASPER衡量的是单篇文档内基于特定问题的信息检索与推理（F1分数），而ArxivDIGESTables衡量的是多篇文档的模式归纳与结构化合成能力（重构度与新颖性）。",
+          "evidence_ids": [
+            "ev_0b119c5092cb4d32e7f97baf09812556",
+            "ev_6bf9d5f653da2c58c54cbcc87655cec7"
+          ],
+          "kind": "inference",
+          "qualification": "基于两篇论文对任务定义（单篇QA vs 多篇综述表生成）和评估目标（精确匹配/推理 vs 结构对齐/新颖性）的描述差异推断。"
+        },
+        {
+          "text": "当前产品能力中，针对“提出有依据的研究建议”这一需求，两篇论文均未提供直接的评测依据；QASPER仅验证了问答能力，ArxivDIGESTables仅验证了表格合成能力，未涉及基于文献的综合建议生成。",
+          "evidence_ids": [
+            "ev_f44785f40ae47a3ecbe975b714f4c57d",
+            "ev_8abc2b0cd667853a8008642ef2166aa8"
+          ],
+          "kind": "inference",
+          "qualification": "基于原文仅描述QA和表格生成任务，未提及研究建议生成任务的评测设置推断。"
+        }
+      ],
+      "comparison_rows": [
+        {
+          "source_id": "1d2819b0-273a-49e2-b6dc-e2437357424b",
+          "method": "QASPER QA",
+          "dataset": "5,049个问题/1,585篇NLP论文",
+          "model": "本次未核实",
+          "metric": "F1 (答案与证据选择)",
+          "result": "本次未核实",
+          "conditions": "单篇全文，问题基于标题/摘要",
+          "comparability": "unknown",
+          "evidence_ids": [
+            "ev_f44785f40ae47a3ecbe975b714f4c57d",
+            "ev_0b119c5092cb4d32e7f97baf09812556"
+          ],
+          "attributes": {
+            "任务范围": "单篇论文内部",
+            "输入输出": "问题->答案+证据片段",
+            "标注性质": "人工双盲（提问/回答分离）"
+          }
+        },
+        {
+          "source_id": "aede5863-3fac-4b9c-825a-23a6024cbcd1",
+          "method": "ArxivDIGESTables Table Gen",
+          "dataset": "2,228张表/7,542篇论文",
+          "model": "本次未核实",
+          "metric": "DECONTEXT EVAL / 人工评估",
+          "result": "本次未核实",
+          "conditions": "多篇输入，输出结构化表格",
+          "comparability": "unknown",
+          "evidence_ids": [
+            "ev_8abc2b0cd667853a8008642ef2166aa8",
+            "ev_6bf9d5f653da2c58c54cbcc87655cec7"
+          ],
+          "attributes": {
+            "任务范围": "跨多篇论文",
+            "输入输出": "论文集合->模式(列)+值(单元格)",
+            "标注性质": "提取自现有论文综述表"
+          }
+        }
+      ],
+      "limitations": [
+        "本报告仅基于提供的两篇论文摘要与引言部分，未包含具体的实验结果数据（如具体F1分数、DECONTEXT评分细节）或完整的评测协议。",
+        "关于‘研究建议’能力的评测缺口是基于原文未提及该任务推断的，原文未明确说明是否支持此类扩展。",
+        "无法验证当前最强模型在两个数据集上的最新表现，原文仅报告了发布时的基线差距。",
+        "ArxivDIGESTables中‘新颖方面’的具体量化标准未在回读片段中详述，仅知其存在人工评估环节。"
+      ],
+      "proposals": [
+        {
+          "text": "构建最小可执行评测组合：选取QASPER中100个需跨段落证据的问题测试单篇推理，选取ArxivDIGESTables中50个表测试跨篇综合，最后人工评估模型是否能基于上述结果提出一条未被原文直接陈述但逻辑成立的研究建议。",
+          "basis_claim_indices": [
+            0,
+            1,
+            5
+          ],
+          "assumptions": [
+            "假设QASPER和ArxivDIGESTables的数据集格式可直接用于API调用或本地加载。",
+            "假设人工评估者具备足够的领域知识以判断‘研究建议’的有效性。"
+          ],
+          "validation_plan": "1. 数据划分：随机抽取QASPER 100题（确保含跨段落证据）、ArxivDIGESTables 50表。2. 自动运行：记录QASPER的F1和证据召回率，记录ArxivDIGESTables的重构准确率。3. 人工检查：邀请2名专家对模型输出的‘研究建议’进行打分（相关性、创新性、依据充分性）。4. 失败计数：统计QASPER中证据缺失导致的错误数，以及ArxivDIGESTables中模式识别错误的数量。"
+        },
+        {
+          "text": "设计‘失败归因’分析流程：针对QASPER中模型未能找到跨段落证据的案例，分类是检索失败还是推理失败；针对ArxivDIGESTables中模式不匹配案例，区分是术语理解偏差还是信息遗漏。",
+          "basis_claim_indices": [
+            0,
+            1
+          ],
+          "assumptions": [
+            "假设模型的中间推理过程（如检索到的片段）是可解释或可获取的。"
+          ],
+          "validation_plan": "收集所有低分样本，人工标注失败原因标签（检索/推理/术语/遗漏），计算各类别占比，指导后续优化方向。"
+        },
+        {
+          "text": "建立‘建议生成’的弱监督基准：利用QASPER中的问题和答案作为上下文，要求模型生成‘下一步研究方向’，并由专家对照原文结论判断其合理性，以此填补当前评测缺口。",
+          "basis_claim_indices": [
+            5
+          ],
+          "assumptions": [
+            "假设基于现有QA数据的上下文足以激发合理的建议生成。",
+            "假设专家评估可以作为该新任务的临时金标准。"
+          ],
+          "validation_plan": "选取QASPER中20个高难度问题，让模型生成建议，由3名专家独立评分，计算一致性系数（Kappa），若一致性高则纳入正式评测集。"
+        }
+      ],
+      "verification_status": "needs_human_review"
+    },
+    "normalized_columns": [],
+    "validation_status": "accepted",
+    "id": "64175184-6a3d-40c8-b432-dce65aa0f562",
+    "workspace_id": "fee177ec-4a74-4b7e-980f-cc53fc01c6d8",
+    "created_at": "2026-11-08T14:43:07.925769+00:00",
+    "updated_at": "2026-11-08T14:43:08.095947+00:00"
+  }
+]
