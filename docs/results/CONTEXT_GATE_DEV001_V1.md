@@ -17,6 +17,8 @@ Qwen3.5-27B、temperature 0.1、thinking 关闭；每次 30,000 token / 18 步 /
 
 [完整摘要](context-gate-dev001-v1/summary.json) · [第一次轨迹](context-gate-dev001-v1/repeat-01/trace.json) · [第二次轨迹](context-gate-dev001-v1/repeat-02/trace.json)。每次目录保留 manifest、工具调用、空回读列表、被拒草稿和来源版本；草稿内容不是本项目认可的结论。
 
+归档按运行时原始字节保存。首次发布时 Git 的换行转换使 CI 的原始 SHA-256 检查失败；后续关闭该目录的文本换行转换，恢复 Windows 原始记录的 CRLF 字节。冻结哈希及任务、预算、评分内容均未修改；现在从 Git 检出的副本也执行同一审计。
+
 ## 这次定位到的执行问题
 
 两次都按相同顺序行动：规划 → 对第一篇执行四个搜索 → 对第二篇执行四个搜索 → 被预算控制器强制收尾 → 连续三次报告校验失败。
