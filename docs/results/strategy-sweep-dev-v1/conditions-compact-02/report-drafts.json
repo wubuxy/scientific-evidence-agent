@@ -1,0 +1,112 @@
+[
+  {
+    "arguments": {
+      "title": "QASPER 与 ArxivDIGESTables 在角色、训练划分、评测条件及迁移可行性上的对比分析",
+      "claims": [
+        {
+          "text": "QASPER 数据集中，问题由仅阅读标题和摘要的 NLP 从业者撰写，答案由另一组 NLP 从业者提供并附带证据；系统输入为全文，但问题构建者未接触全文。",
+          "evidence_ids": [
+            "ev_485758ab3111644a7881713ce943f86b"
+          ],
+          "kind": "finding"
+        },
+        {
+          "text": "ArxivDIGESTables 数据集包含从 ArXiv 论文中提取的 2,228 个文献综述表格，用于评估语言模型将多篇论文合成为表格的能力，任务分解为 schema 生成和值生成两步。",
+          "evidence_ids": [
+            "ev_a2d876f15337dfa522162931172c4dc9"
+          ],
+          "kind": "finding"
+        },
+        {
+          "text": "QASPER 评测中，现有模型在全文问答任务上表现远低于人类（F1 差距至少 27 点），表明该任务对文档级推理要求高，且当前模型难以直接迁移。",
+          "evidence_ids": [
+            "ev_485758ab3111644a7881713ce943f86b"
+          ],
+          "kind": "inference",
+          "qualification": "基于原文报告的人类与模型性能差距推断，假设评测条件一致且无额外微调。"
+        },
+        {
+          "text": "ArxivDIGESTables 提出 DECONTEXT EVAL 自动评估方法，用于对齐表格元素以支持可扩展评估，但原文未明确说明是否区分 oracle（有参考表）与 non-oracle（无参考表）条件下的指标差异。",
+          "evidence_ids": [
+            "ev_a2d876f15337dfa522162931172c4dc9"
+          ],
+          "kind": "inference",
+          "qualification": "原文提及自动评估方法但未详述不同 oracle 条件下的指标表现，故推断其存在但未验证。"
+        },
+        {
+          "text": "两篇论文均未明确说明模型是否在各自数据集上进行过训练或微调，仅报告了基线模型在测试集上的表现，因此无法判断是否需要新增标注以支持微调。",
+          "evidence_ids": [
+            "ev_485758ab3111644a7881713ce943f86b",
+            "ev_a2d876f15337dfa522162931172c4dc9"
+          ],
+          "kind": "inference",
+          "qualification": "原文仅描述数据集构建与评测结果，未涉及训练过程细节，故推断训练状态未知。"
+        },
+        {
+          "text": "QASPER 与 ArxivDIGESTables 的任务目标、输入形式与输出结构差异显著，前者为单文档问答，后者为多文档表格合成，两者分数不具备直接可比性。",
+          "evidence_ids": [
+            "ev_485758ab3111644a7881713ce943f86b",
+            "ev_a2d876f15337dfa522162931172c4dc9"
+          ],
+          "kind": "inference",
+          "qualification": "基于任务定义与数据结构的差异推断，假设评测指标与条件不可跨任务对齐。"
+        }
+      ],
+      "comparison_rows": [
+        {
+          "source_id": "28be8424-bd82-4dcf-b68f-4aa34b0b8ac5",
+          "method": "QASPER",
+          "evidence_ids": [
+            "ev_485758ab3111644a7881713ce943f86b"
+          ],
+          "attributes": {
+            "角色与输入": "问题作者仅见标题/摘要，回答者见全文；系统输入为全文",
+            "训练与数据划分": "本次未核实",
+            "评测条件与指标": "F1 指标，人类 vs 模型差距≥27点，全文问答",
+            "迁移条件与未知": "任务复杂度高，模型表现差，迁移需进一步研究"
+          }
+        },
+        {
+          "source_id": "ec465eab-3065-4e8f-b9fb-e1b3b1759641",
+          "method": "ArxivDIGESTables",
+          "evidence_ids": [
+            "ev_a2d876f15337dfa522162931172c4dc9"
+          ],
+          "attributes": {
+            "角色与输入": "输入为多篇论文，输出为文献综述表格",
+            "训练与数据划分": "本次未核实",
+            "评测条件与指标": "DECONTEXT EVAL 自动评估，含人工评估",
+            "迁移条件与未知": "依赖上下文增强生成，novel aspects 可能有用"
+          }
+        }
+      ],
+      "limitations": [
+        "两篇论文均未明确说明模型是否在各自数据集上进行了训练或微调，训练状态未知。",
+        "ArxivDIGESTables 未明确区分 oracle 与 non-oracle 条件下的评测指标差异。",
+        "QASPER 与 ArxivDIGESTables 任务目标与数据结构差异大，分数不可直接比较。",
+        "原文未提供关于是否需要新增标注以支持微调的直接证据。"
+      ],
+      "proposals": [
+        {
+          "text": "设计一个最小控制实验：固定输入为 QASPER 风格的单文档问答任务，改动项为是否使用 ArxivDIGESTables 中的表格生成模块作为辅助信息源，评估 F1 变化。",
+          "basis_claim_indices": [
+            0,
+            2,
+            5
+          ],
+          "assumptions": [
+            "表格生成模块可提供额外结构化信息",
+            "辅助信息不会引入噪声干扰问答"
+          ],
+          "validation_plan": "在 QASPER 测试集上运行基线模型与增强模型，记录 F1 变化；若 F1 提升<5% 或下降则停止，失败计数达 3 次终止实验。"
+        }
+      ]
+    },
+    "normalized_columns": [],
+    "validation_status": "accepted",
+    "id": "b608d08e-cdae-4337-81af-fbffa56ce83b",
+    "workspace_id": "e54973a4-caac-40f3-86b2-34a704bcceb2",
+    "created_at": "2026-11-08T15:32:32.907300+00:00",
+    "updated_at": "2026-11-08T15:32:33.001421+00:00"
+  }
+]

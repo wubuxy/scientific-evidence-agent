@@ -1,0 +1,215 @@
+{
+  "session_id": "b5e03eb4-2f99-4b37-a9b4-79347e08cd31",
+  "question": "我们要决定哪些训练和评测做法可以迁移到论文研究 Agent。仅根据提供的 QASPER 与 ArxivDIGESTables 两篇论文，按指定字段逐篇比较。\n明确区分数据集构建、模型训练与推理评测阶段；尤其区分题目作者看到了什么、回答者或系统实际收到什么，和不同 oracle / non-oracle 条件。\n哪些分数具有可比前提，哪些不能相互排名？训练是否需要新增标注，论文证据足不足以据此为我们的 Agent 选择微调？\n在 claims 中给出有引用的判断，在 proposals 中提出一个最小、尚未执行的控制实验，写清固定项、改动项、失败计数和停止条件。\n重要事实必须引用本次回读的原文，证据不够明确写本次未核实；不要用发表时结果推断当前最强模型，不读取论文外的数据集。",
+  "retrieval_strategy": "grep",
+  "allow_network": false,
+  "memory_mode": "evidence",
+  "read_guidance": false,
+  "memory_priority": "read_first",
+  "writer_context": "prefix",
+  "report_schema": "full",
+  "max_steps": 18,
+  "max_tokens": 30000,
+  "max_seconds": 600,
+  "field_mode": "bounded",
+  "required_fields": [
+    {
+      "source_id": "99a742e7-472c-42d5-97b6-d3b06c66213d",
+      "name": "角色与输入",
+      "criterion": "区分数据构建者、标注者、回答系统及其输入权限，不能把题目作者的视野当成回答系统的输入"
+    },
+    {
+      "source_id": "99a742e7-472c-42d5-97b6-d3b06c66213d",
+      "name": "训练与数据划分",
+      "criterion": "区分任务数据划分、模型训练或微调、推理使用；找不到时明确未知，不把使用模型等同于训练模型"
+    },
+    {
+      "source_id": "99a742e7-472c-42d5-97b6-d3b06c66213d",
+      "name": "评测条件与指标",
+      "criterion": "说明指标对象、参考依赖及 oracle/non-oracle 等适用条件；无法直接比较时解释原因"
+    },
+    {
+      "source_id": "99a742e7-472c-42d5-97b6-d3b06c66213d",
+      "name": "迁移条件与未知",
+      "criterion": "把论文已验证事实、对产品的迁移推断及未解决问题分开，有引用且不夸大外推"
+    },
+    {
+      "source_id": "a35bfc17-06dc-4b3b-be50-a880b5a916ae",
+      "name": "角色与输入",
+      "criterion": "区分数据构建者、标注者、回答系统及其输入权限，不能把题目作者的视野当成回答系统的输入"
+    },
+    {
+      "source_id": "a35bfc17-06dc-4b3b-be50-a880b5a916ae",
+      "name": "训练与数据划分",
+      "criterion": "区分任务数据划分、模型训练或微调、推理使用；找不到时明确未知，不把使用模型等同于训练模型"
+    },
+    {
+      "source_id": "a35bfc17-06dc-4b3b-be50-a880b5a916ae",
+      "name": "评测条件与指标",
+      "criterion": "说明指标对象、参考依赖及 oracle/non-oracle 等适用条件；无法直接比较时解释原因"
+    },
+    {
+      "source_id": "a35bfc17-06dc-4b3b-be50-a880b5a916ae",
+      "name": "迁移条件与未知",
+      "criterion": "把论文已验证事实、对产品的迁移推断及未解决问题分开，有引用且不夸大外推"
+    }
+  ],
+  "max_field_repairs": 1,
+  "status": "failed",
+  "model": "qwen3.5-27b",
+  "tokens_used": 27282,
+  "tokens_estimated": false,
+  "step": 5,
+  "report": null,
+  "error": "已达到 token 预算，请缩小资料范围或提高预算",
+  "id": "bcde028f-bce4-471e-811a-e72cae9c8d6f",
+  "workspace_id": "cb95a09c-475a-490c-814f-7cda77024b97",
+  "created_at": "2026-11-08T15:22:20.504742+00:00",
+  "updated_at": "2026-11-08T15:23:03.776216+00:00",
+  "field_state": {
+    "version": "field-ledger-v1",
+    "requirement_origin": "request",
+    "fields": [
+      {
+        "source_id": "99a742e7-472c-42d5-97b6-d3b06c66213d",
+        "name": "角色与输入",
+        "criterion": "区分数据构建者、标注者、回答系统及其输入权限，不能把题目作者的视野当成回答系统的输入",
+        "id": "field-c1993f677fc9c8f7",
+        "activity": "source_read",
+        "answer": "",
+        "evidence_ids": [],
+        "candidate_hash": null,
+        "revision": 0,
+        "coverage": "missing",
+        "review": null,
+        "attempts": 0
+      },
+      {
+        "source_id": "99a742e7-472c-42d5-97b6-d3b06c66213d",
+        "name": "训练与数据划分",
+        "criterion": "区分任务数据划分、模型训练或微调、推理使用；找不到时明确未知，不把使用模型等同于训练模型",
+        "id": "field-6318ad10d8ad20ce",
+        "activity": "source_read",
+        "answer": "",
+        "evidence_ids": [],
+        "candidate_hash": null,
+        "revision": 0,
+        "coverage": "missing",
+        "review": null,
+        "attempts": 0
+      },
+      {
+        "source_id": "99a742e7-472c-42d5-97b6-d3b06c66213d",
+        "name": "评测条件与指标",
+        "criterion": "说明指标对象、参考依赖及 oracle/non-oracle 等适用条件；无法直接比较时解释原因",
+        "id": "field-d4364e4fbeb4cec9",
+        "activity": "source_read",
+        "answer": "",
+        "evidence_ids": [],
+        "candidate_hash": null,
+        "revision": 0,
+        "coverage": "missing",
+        "review": null,
+        "attempts": 0
+      },
+      {
+        "source_id": "99a742e7-472c-42d5-97b6-d3b06c66213d",
+        "name": "迁移条件与未知",
+        "criterion": "把论文已验证事实、对产品的迁移推断及未解决问题分开，有引用且不夸大外推",
+        "id": "field-50bf88315f602533",
+        "activity": "source_read",
+        "answer": "",
+        "evidence_ids": [],
+        "candidate_hash": null,
+        "revision": 0,
+        "coverage": "missing",
+        "review": null,
+        "attempts": 0
+      },
+      {
+        "source_id": "a35bfc17-06dc-4b3b-be50-a880b5a916ae",
+        "name": "角色与输入",
+        "criterion": "区分数据构建者、标注者、回答系统及其输入权限，不能把题目作者的视野当成回答系统的输入",
+        "id": "field-7c8f4fe34c7dba7b",
+        "activity": "source_read",
+        "answer": "",
+        "evidence_ids": [],
+        "candidate_hash": null,
+        "revision": 0,
+        "coverage": "missing",
+        "review": null,
+        "attempts": 0
+      },
+      {
+        "source_id": "a35bfc17-06dc-4b3b-be50-a880b5a916ae",
+        "name": "训练与数据划分",
+        "criterion": "区分任务数据划分、模型训练或微调、推理使用；找不到时明确未知，不把使用模型等同于训练模型",
+        "id": "field-b965b9f5511bcf28",
+        "activity": "source_read",
+        "answer": "",
+        "evidence_ids": [],
+        "candidate_hash": null,
+        "revision": 0,
+        "coverage": "missing",
+        "review": null,
+        "attempts": 0
+      },
+      {
+        "source_id": "a35bfc17-06dc-4b3b-be50-a880b5a916ae",
+        "name": "评测条件与指标",
+        "criterion": "说明指标对象、参考依赖及 oracle/non-oracle 等适用条件；无法直接比较时解释原因",
+        "id": "field-73879fd4140f404c",
+        "activity": "source_read",
+        "answer": "",
+        "evidence_ids": [],
+        "candidate_hash": null,
+        "revision": 0,
+        "coverage": "missing",
+        "review": null,
+        "attempts": 0
+      },
+      {
+        "source_id": "a35bfc17-06dc-4b3b-be50-a880b5a916ae",
+        "name": "迁移条件与未知",
+        "criterion": "把论文已验证事实、对产品的迁移推断及未解决问题分开，有引用且不夸大外推",
+        "id": "field-817e7c7fb0a73dc4",
+        "activity": "source_read",
+        "answer": "",
+        "evidence_ids": [],
+        "candidate_hash": null,
+        "revision": 0,
+        "coverage": "missing",
+        "review": null,
+        "attempts": 0
+      }
+    ],
+    "total": 8,
+    "present": 0,
+    "unresolved": 8,
+    "reviewed": 0,
+    "semantic_success": null,
+    "review_status": "not_run",
+    "repair_rounds": 0,
+    "stop_reason": null,
+    "previous_versions": []
+  },
+  "source_coverage": {
+    "status": "partial",
+    "planned_source_ids": [
+      "99a742e7-472c-42d5-97b6-d3b06c66213d",
+      "a35bfc17-06dc-4b3b-be50-a880b5a916ae"
+    ],
+    "fields": [
+      "角色与输入",
+      "训练与数据划分",
+      "评测条件与指标",
+      "迁移条件与未知"
+    ],
+    "read_source_ids": [
+      "99a742e7-472c-42d5-97b6-d3b06c66213d",
+      "a35bfc17-06dc-4b3b-be50-a880b5a916ae"
+    ],
+    "unread_source_ids": [],
+    "field_verification": "not_automatically_verified"
+  }
+}

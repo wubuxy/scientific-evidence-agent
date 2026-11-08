@@ -1,0 +1,137 @@
+[
+  {
+    "arguments": {
+      "title": "QASPER 与 ArxivDIGESTables 在训练、评测与迁移条件上的对比分析",
+      "claims": [
+        {
+          "text": "QASPER 数据集由 NLP 读者提出问题，由另一组 NLP 从业者回答并标注证据（文本、表格或图表），每篇论文平均 3.2 个问题。",
+          "evidence_ids": [
+            "ev_61ea2055cd6dd9996404dd884eb3fc50"
+          ],
+          "kind": "finding"
+        },
+        {
+          "text": "QASPER 的评测指标为 Answer-F1（答案正确性）和 Evidence-F1（证据选择正确性），系统需从整篇论文中检索信息，而 oracle 实验仅基于金标准证据回答问题。",
+          "evidence_ids": [
+            "ev_a6248b71d33dc4aba64f65916fa0cba6",
+            "ev_61ea2055cd6dd9996404dd884eb3fc50"
+          ],
+          "kind": "finding"
+        },
+        {
+          "text": "QASPER 中人类性能估计为 Answer-F1 60.9 和 Evidence-F1 71.6，但该值为下限，因仅使用两个标注计算且标注者为 NLP 从业者而非领域专家。",
+          "evidence_ids": [
+            "ev_a6248b71d33dc4aba64f65916fa0cba6"
+          ],
+          "kind": "finding"
+        },
+        {
+          "text": "ArxivDIGESTables 任务是将多篇论文合成为文献综述表格，模型生成的列可能与参考列不匹配，但人工评估显示部分不匹配列仍具实用性。",
+          "evidence_ids": [
+            "ev_8bd68108e644ddba613a6f80fa73893b",
+            "ev_80a6c4ab97c8e8858c7d64d9fecb7656"
+          ],
+          "kind": "finding"
+        },
+        {
+          "text": "ArxivDIGESTables 面临自动评估困难，因语义相似内容可能以不同表面形式表达，目前依赖人工评估协议验证生成列的效用。",
+          "evidence_ids": [
+            "ev_80a6c4ab97c8e8858c7d64d9fecb7656",
+            "ev_8bd68108e644ddba613a6f80fa73893b"
+          ],
+          "kind": "finding"
+        },
+        {
+          "text": "两篇论文均未明确说明模型是否针对各自任务进行了微调，也未提供训练数据划分细节；QASPER 提及 oracle 实验暗示预训练与领域适应可能有益，但未验证具体微调策略。",
+          "evidence_ids": [
+            "ev_61ea2055cd6dd9996404dd884eb3fc50",
+            "ev_f5037df4d042a0da19732db3c0f333a1"
+          ],
+          "kind": "inference",
+          "qualification": "基于 QASPER 提到‘更好的预训练和领域适应可能有帮助’及 ArxivDIGESTables 未报告训练细节推断"
+        }
+      ],
+      "comparison_rows": [
+        {
+          "source_id": "4618e843-34a7-4d42-81f5-3e120603b62f",
+          "method": "QASPER QA 系统",
+          "dataset": "QASPER (5,049 问题, 1,585 论文)",
+          "model": "本次未核实",
+          "metric": "Answer-F1, Evidence-F1",
+          "result": "人类下限: Answer-F1 60.9, Evidence-F1 71.6",
+          "conditions": "非 oracle：整篇论文检索；oracle：仅金标准证据",
+          "comparability": "qualified",
+          "evidence_ids": [
+            "ev_a6248b71d33dc4aba64f65916fa0cba6",
+            "ev_61ea2055cd6dd9996404dd884eb3fc50"
+          ],
+          "attributes": {
+            "角色与输入": "提问者：NLP 读者；回答者：NLP 从业者；系统输入：整篇论文",
+            "训练与数据划分": "训练/微调细节未报告；数据划分为 train/val/test（具体比例未读）",
+            "评测条件与指标": "Answer-F1（答案）、Evidence-F1（证据）；区分 oracle/non-oracle",
+            "迁移条件与未知": "oracle 实验暗示领域适应有益，但未验证微调必要性"
+          }
+        },
+        {
+          "source_id": "272b5cd0-cebc-4306-a01f-b1ff5d92bbda",
+          "method": "ArxivDIGESTables 表格生成",
+          "dataset": "ArxivDIGESTables (合成文献综述表)",
+          "model": "本次未核实",
+          "metric": "人工评估（列效用）",
+          "result": "生成列常不匹配参考列，但部分具实用性",
+          "conditions": "依赖人工评估；自动评估因表面形式差异困难",
+          "comparability": "unknown",
+          "evidence_ids": [
+            "ev_8bd68108e644ddba613a6f80fa73893b",
+            "ev_80a6c4ab97c8e8858c7d64d9fecb7656"
+          ],
+          "attributes": {
+            "角色与输入": "输入：多篇论文；输出：文献综述表；无明确标注者角色",
+            "训练与数据划分": "训练/微调细节未报告；数据划分未读",
+            "评测条件与指标": "人工评估列效用；自动评估困难",
+            "迁移条件与未知": "未验证微调效果；自动评估方法待开发"
+          }
+        }
+      ],
+      "limitations": [
+        "两篇论文均未明确报告模型是否经过任务特定微调，无法直接推断微调必要性。",
+        "QASPER 的人类性能为下限估计，实际人类上限未知，影响系统性能基准判断。",
+        "ArxivDIGESTables 缺乏自动评估指标，迁移至 Agent 时难以量化生成质量。",
+        "两篇论文的数据划分细节（如 train/val/test 比例）未在回读范围内找到，无法复现训练流程。"
+      ],
+      "proposals": [
+        {
+          "text": "设计最小控制实验：在 QASPER 测试集上比较基座模型（zero-shot）与轻量微调模型（LoRA）在 non-oracle 条件下的 Answer-F1 提升。",
+          "basis_claim_indices": [
+            1,
+            5
+          ],
+          "assumptions": [
+            "QASPER 的 domain-adaptation 提示对微调有效；",
+            "LoRA 微调可显著降低训练成本且保持性能增益"
+          ],
+          "validation_plan": "固定项：测试集、评估指标（Answer-F1）、non-oracle 条件；改动项：是否进行 LoRA 微调；失败计数：若微调后 F1 提升 < 2 点则视为无效；停止条件：完成 3 次随机种子实验均无显著提升即终止。"
+        },
+        {
+          "text": "构建 ArxivDIGESTables 的自动评估代理：利用 LLM 作为裁判，对生成列与参考列的语义对齐度打分，替代部分人工评估。",
+          "basis_claim_indices": [
+            4,
+            5
+          ],
+          "assumptions": [
+            "LLM 裁判能可靠识别表面形式差异下的语义等价性；",
+            "自动评分与人工效用评估存在正相关"
+          ],
+          "validation_plan": "固定项：生成模型、输入论文集合；改动项：评估方式（人工 vs LLM 裁判）；失败计数：若 LLM 评分与人工效用相关性 < 0.6 则视为无效；停止条件：在 50 个样本上验证相关性达标或连续 3 次实验失败。"
+        }
+      ],
+      "verification_status": "needs_human_review"
+    },
+    "normalized_columns": [],
+    "validation_status": "accepted",
+    "id": "5bf416c0-f917-4167-a380-894bdf538550",
+    "workspace_id": "be0b93c4-ba94-444d-bfa7-35c6cb79d14b",
+    "created_at": "2026-11-08T15:33:40.541348+00:00",
+    "updated_at": "2026-11-08T15:33:40.657614+00:00"
+  }
+]

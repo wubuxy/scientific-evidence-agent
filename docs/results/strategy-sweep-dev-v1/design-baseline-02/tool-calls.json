@@ -1,0 +1,2414 @@
+[
+  {
+    "name": "plan_research",
+    "arguments": {
+      "source_ids": [
+        "98a8407f-4f58-48a2-abd5-e0d1aff2b4bc",
+        "515356d9-2549-407e-81eb-fcd4475d3154"
+      ],
+      "fields": [
+        "任务与输入输出",
+        "参考答案与标注",
+        "指标与比较条件",
+        "适用范围与缺口"
+      ]
+    },
+    "run_id": "4dac3ab2-e567-4e46-b74c-ae06f0a74f8e",
+    "status": "succeeded",
+    "data": {
+      "source_ids": [
+        "98a8407f-4f58-48a2-abd5-e0d1aff2b4bc",
+        "515356d9-2549-407e-81eb-fcd4475d3154"
+      ],
+      "fields": [
+        "任务与输入输出",
+        "参考答案与标注",
+        "指标与比较条件",
+        "适用范围与缺口"
+      ],
+      "id": "59b97fae-7e07-42e3-9a8d-6ac7251987d1",
+      "workspace_id": "a6133957-44af-4e34-9764-a4e72f3e5c9c",
+      "created_at": "2026-11-08T15:27:31.543586+00:00"
+    },
+    "error": null,
+    "elapsed_ms": 20,
+    "id": "ea4c4402-82ef-4b14-b5fb-4d34f24b411e",
+    "workspace_id": "a6133957-44af-4e34-9764-a4e72f3e5c9c",
+    "created_at": "2026-11-08T15:27:31.551379+00:00"
+  },
+  {
+    "name": "sources_search",
+    "arguments": {
+      "query": "task definition input output question answering research papers",
+      "grep_query": "question.*answer|input.*output|task.*definition",
+      "source_ids": [
+        "98a8407f-4f58-48a2-abd5-e0d1aff2b4bc"
+      ],
+      "limit": 5,
+      "context_lines": 3
+    },
+    "run_id": "4dac3ab2-e567-4e46-b74c-ae06f0a74f8e",
+    "status": "succeeded",
+    "data": {
+      "hits": [
+        {
+          "source_id": "98a8407f-4f58-48a2-abd5-e0d1aff2b4bc",
+          "source_hash": "7aaa103d0d4a431142c64d6f38bbff246e14ba8b5369fd0582a8a0e32d75a78f",
+          "title": "A Dataset of Information-Seeking Questions and Answers Anchored in Research Papers",
+          "uri": "https://arxiv.org/abs/2105.03011v1",
+          "quote": "Abstract\nReaders of academic research papers often\nread with the goal of answering speciﬁc ques-\ntions. Question Answering systems that can\nanswer those questions can make consumption\nof the content much more efﬁcient. However,\nbuilding such tools requires data that reﬂect",
+          "start_line": 7,
+          "end_line": 13,
+          "locations": [
+            {
+              "block_index": 0,
+              "page": 1,
+              "start_seconds": null,
+              "end_seconds": null,
+              "block_type": "text"
+            },
+            {
+              "block_index": 0,
+              "page": 1,
+              "start_seconds": null,
+              "end_seconds": null,
+              "block_type": "text"
+            },
+            {
+              "block_index": 0,
+              "page": 1,
+              "start_seconds": null,
+              "end_seconds": null,
+              "block_type": "text"
+            },
+            {
+              "block_index": 0,
+              "page": 1,
+              "start_seconds": null,
+              "end_seconds": null,
+              "block_type": "text"
+            },
+            {
+              "block_index": 0,
+              "page": 1,
+              "start_seconds": null,
+              "end_seconds": null,
+              "block_type": "text"
+            },
+            {
+              "block_index": 0,
+              "page": 1,
+              "start_seconds": null,
+              "end_seconds": null,
+              "block_type": "text"
+            },
+            {
+              "block_index": 0,
+              "page": 1,
+              "start_seconds": null,
+              "end_seconds": null,
+              "block_type": "text"
+            }
+          ],
+          "id": "ev_aea6a2b16044d1fab5a2770f81212c28",
+          "workspace_id": "a6133957-44af-4e34-9764-a4e72f3e5c9c",
+          "created_at": "2026-11-08T15:27:40.886883+00:00",
+          "method": "grep",
+          "score": 0.01639344262295082,
+          "backend_ranks": {
+            "grep": 1
+          },
+          "match_lines": [
+            10
+          ]
+        },
+        {
+          "source_id": "98a8407f-4f58-48a2-abd5-e0d1aff2b4bc",
+          "source_hash": "7aaa103d0d4a431142c64d6f38bbff246e14ba8b5369fd0582a8a0e32d75a78f",
+          "title": "A Dataset of Information-Seeking Questions and Answers Anchored in Research Papers",
+          "uri": "https://arxiv.org/abs/2105.03011v1",
+          "quote": "the difﬁculty of the task arising from complex\nreasoning about claims made in multiple parts\nof a paper. In contrast, existing information-\nseeking question answering datasets usually\ncontain questions about generic factoid-type\ninformation. We therefore present Q ASPER ,\na dataset of 5,049 questions over 1,585 Natu-",
+          "start_line": 14,
+          "end_line": 20,
+          "locations": [
+            {
+              "block_index": 0,
+              "page": 1,
+              "start_seconds": null,
+              "end_seconds": null,
+              "block_type": "text"
+            },
+            {
+              "block_index": 0,
+              "page": 1,
+              "start_seconds": null,
+              "end_seconds": null,
+              "block_type": "text"
+            },
+            {
+              "block_index": 0,
+              "page": 1,
+              "start_seconds": null,
+              "end_seconds": null,
+              "block_type": "text"
+            },
+            {
+              "block_index": 0,
+              "page": 1,
+              "start_seconds": null,
+              "end_seconds": null,
+              "block_type": "text"
+            },
+            {
+              "block_index": 0,
+              "page": 1,
+              "start_seconds": null,
+              "end_seconds": null,
+              "block_type": "text"
+            },
+            {
+              "block_index": 0,
+              "page": 1,
+              "start_seconds": null,
+              "end_seconds": null,
+              "block_type": "text"
+            },
+            {
+              "block_index": 0,
+              "page": 1,
+              "start_seconds": null,
+              "end_seconds": null,
+              "block_type": "text"
+            }
+          ],
+          "id": "ev_dee621281a8ebcc6684021250b949d1f",
+          "workspace_id": "a6133957-44af-4e34-9764-a4e72f3e5c9c",
+          "created_at": "2026-11-08T15:27:40.903192+00:00",
+          "method": "grep",
+          "score": 0.016129032258064516,
+          "backend_ranks": {
+            "grep": 2
+          },
+          "match_lines": [
+            17
+          ]
+        },
+        {
+          "source_id": "98a8407f-4f58-48a2-abd5-e0d1aff2b4bc",
+          "source_hash": "7aaa103d0d4a431142c64d6f38bbff246e14ba8b5369fd0582a8a0e32d75a78f",
+          "title": "A Dataset of Information-Seeking Questions and Answers Anchored in Research Papers",
+          "uri": "https://arxiv.org/abs/2105.03011v1",
+          "quote": "of those benchmarks focus on an “open domain”\nsetting where the questions are not anchored in any\nparticular user context. The result is an emphasis\nQuasar: Datasets for Question Answering by Search and Reading\nAbstractWepresenttwonewlarge-scaledatasetsaimedatevaluatingsystemsdesignedtocomprehendanaturallanguagequeryandextractitsanswerfromalargecorpusoftext.TheQUASAR-Sdatasetconsistsof37000cloze-style(fill-in-the-gap)queriesconstructedfromdefinitionsofsoftwareentitytagsonthepopularwebsiteStackOverflow.Weevaluateseveralbaselinesonbothdatasets,rangingfromsimpleheuristicstopowerfulneuralmodels,andshowthattheselagbehindhumanperformanceby16.4%&32.1%forQuasar-Sand-Trespectively.\n3 Dataset Construction Each dataset consists of a collection of records with one QA problem per record. For each record, we include some question text, a context document relevant to the question, a set of candidate solutions, and the correct solution. \n3.2 Context Retrieval The context document for each record consists of a list of ranked and scored pseudodocumentsrelevant to the question.\nQ. Which retrieval system was used for the baselines?\n4.4 ResultsSeveral baselines rely on the retrieved context to extract the answer to a question. For these, we refer to the fraction of instances for which the correct answer is present in the context as Search Accuracy. The performance of the baseline amongthese instances is referred to as the Reading Accuracy.\nA:The dataset comes with a ranked set of relevant documents. Hence the baselines do not use a retrieval system.\nEvidence paragraphsQuestion and AnswerTitle and AbstractFigure 1: An example instance taken from Q ASPER .\nAques tion about the paper is written after reading\nonly the title and the abstract. To arrive at the an-\nswer , one ﬁnds relevant evidence , which can be spread",
+          "start_line": 47,
+          "end_line": 60,
+          "locations": [
+            {
+              "block_index": 0,
+              "page": 1,
+              "start_seconds": null,
+              "end_seconds": null,
+              "block_type": "text"
+            },
+            {
+              "block_index": 0,
+              "page": 1,
+              "start_seconds": null,
+              "end_seconds": null,
+              "block_type": "text"
+            },
+            {
+              "block_index": 0,
+              "page": 1,
+              "start_seconds": null,
+              "end_seconds": null,
+              "block_type": "text"
+            },
+            {
+              "block_index": 0,
+              "page": 1,
+              "start_seconds": null,
+              "end_seconds": null,
+              "block_type": "text"
+            },
+            {
+              "block_index": 0,
+              "page": 1,
+              "start_seconds": null,
+              "end_seconds": null,
+              "block_type": "text"
+            },
+            {
+              "block_index": 0,
+              "page": 1,
+              "start_seconds": null,
+              "end_seconds": null,
+              "block_type": "text"
+            },
+            {
+              "block_index": 0,
+              "page": 1,
+              "start_seconds": null,
+              "end_seconds": null,
+              "block_type": "text"
+            },
+            {
+              "block_index": 0,
+              "page": 1,
+              "start_seconds": null,
+              "end_seconds": null,
+              "block_type": "text"
+            },
+            {
+              "block_index": 0,
+              "page": 1,
+              "start_seconds": null,
+              "end_seconds": null,
+              "block_type": "text"
+            },
+            {
+              "block_index": 0,
+              "page": 1,
+              "start_seconds": null,
+              "end_seconds": null,
+              "block_type": "text"
+            },
+            {
+              "block_index": 0,
+              "page": 1,
+              "start_seconds": null,
+              "end_seconds": null,
+              "block_type": "text"
+            },
+            {
+              "block_index": 0,
+              "page": 1,
+              "start_seconds": null,
+              "end_seconds": null,
+              "block_type": "text"
+            },
+            {
+              "block_index": 0,
+              "page": 1,
+              "start_seconds": null,
+              "end_seconds": null,
+              "block_type": "text"
+            },
+            {
+              "block_index": 0,
+              "page": 1,
+              "start_seconds": null,
+              "end_seconds": null,
+              "block_type": "text"
+            }
+          ],
+          "id": "ev_5e97189f5f03abf6dd63048270215d31",
+          "workspace_id": "a6133957-44af-4e34-9764-a4e72f3e5c9c",
+          "created_at": "2026-11-08T15:27:40.919776+00:00",
+          "method": "grep",
+          "score": 0.015873015873015872,
+          "backend_ranks": {
+            "grep": 3
+          },
+          "match_lines": [
+            50
+          ]
+        },
+        {
+          "source_id": "98a8407f-4f58-48a2-abd5-e0d1aff2b4bc",
+          "source_hash": "7aaa103d0d4a431142c64d6f38bbff246e14ba8b5369fd0582a8a0e32d75a78f",
+          "title": "A Dataset of Information-Seeking Questions and Answers Anchored in Research Papers",
+          "uri": "https://arxiv.org/abs/2105.03011v1",
+          "quote": "on generic factoid questions, rather than the full\nrange of information needs people have.\nWe present QASPER ,1an information-seeking\nquestion answering (QA) dataset over academic re-\nsearch papers. Each question is written as a follow-\nup to the title and abstract of a particular paper,\nand the answer, if present, is identiﬁed in the rest",
+          "start_line": 66,
+          "end_line": 72,
+          "locations": [
+            {
+              "block_index": 0,
+              "page": 1,
+              "start_seconds": null,
+              "end_seconds": null,
+              "block_type": "text"
+            },
+            {
+              "block_index": 0,
+              "page": 1,
+              "start_seconds": null,
+              "end_seconds": null,
+              "block_type": "text"
+            },
+            {
+              "block_index": 0,
+              "page": 1,
+              "start_seconds": null,
+              "end_seconds": null,
+              "block_type": "text"
+            },
+            {
+              "block_index": 0,
+              "page": 1,
+              "start_seconds": null,
+              "end_seconds": null,
+              "block_type": "text"
+            },
+            {
+              "block_index": 0,
+              "page": 1,
+              "start_seconds": null,
+              "end_seconds": null,
+              "block_type": "text"
+            },
+            {
+              "block_index": 0,
+              "page": 1,
+              "start_seconds": null,
+              "end_seconds": null,
+              "block_type": "text"
+            },
+            {
+              "block_index": 0,
+              "page": 1,
+              "start_seconds": null,
+              "end_seconds": null,
+              "block_type": "text"
+            }
+          ],
+          "id": "ev_36cf94c9672dd503dcc4dfbecc8fb4d1",
+          "workspace_id": "a6133957-44af-4e34-9764-a4e72f3e5c9c",
+          "created_at": "2026-11-08T15:27:40.936292+00:00",
+          "method": "grep",
+          "score": 0.015625,
+          "backend_ranks": {
+            "grep": 4
+          },
+          "match_lines": [
+            69
+          ]
+        },
+        {
+          "source_id": "98a8407f-4f58-48a2-abd5-e0d1aff2b4bc",
+          "source_hash": "7aaa103d0d4a431142c64d6f38bbff246e14ba8b5369fd0582a8a0e32d75a78f",
+          "title": "A Dataset of Information-Seeking Questions and Answers Anchored in Research Papers",
+          "uri": "https://arxiv.org/abs/2105.03011v1",
+          "quote": "datasets, because (i)abstracts provide rich prompts\nfor questions that can be asked as follow-up and\n(ii)academic research papers naturally trigger ques-\n1Loosely derived from Question Answering over Scien-\ntiﬁc Research Papers . The dataset, baseline code, and other\ninformation about the project can be found at https://\nallenai.org/project/qasper .arXiv:2105.03011v1  [cs.CL]  7 May 2021",
+          "start_line": 76,
+          "end_line": 82,
+          "locations": [
+            {
+              "block_index": 0,
+              "page": 1,
+              "start_seconds": null,
+              "end_seconds": null,
+              "block_type": "text"
+            },
+            {
+              "block_index": 0,
+              "page": 1,
+              "start_seconds": null,
+              "end_seconds": null,
+              "block_type": "text"
+            },
+            {
+              "block_index": 0,
+              "page": 1,
+              "start_seconds": null,
+              "end_seconds": null,
+              "block_type": "text"
+            },
+            {
+              "block_index": 0,
+              "page": 1,
+              "start_seconds": null,
+              "end_seconds": null,
+              "block_type": "text"
+            },
+            {
+              "block_index": 0,
+              "page": 1,
+              "start_seconds": null,
+              "end_seconds": null,
+              "block_type": "text"
+            },
+            {
+              "block_index": 0,
+              "page": 1,
+              "start_seconds": null,
+              "end_seconds": null,
+              "block_type": "text"
+            },
+            {
+              "block_index": 0,
+              "page": 1,
+              "start_seconds": null,
+              "end_seconds": null,
+              "block_type": "text"
+            }
+          ],
+          "id": "ev_4cdd1f5693788ae22b7b7e4700569e0f",
+          "workspace_id": "a6133957-44af-4e34-9764-a4e72f3e5c9c",
+          "created_at": "2026-11-08T15:27:40.952525+00:00",
+          "method": "grep",
+          "score": 0.015384615384615385,
+          "backend_ranks": {
+            "grep": 5
+          },
+          "match_lines": [
+            79
+          ]
+        }
+      ],
+      "warnings": [],
+      "partial": false,
+      "truncated": true,
+      "backends": [
+        "ripgrep"
+      ],
+      "backend_runs": [
+        {
+          "name": "grep",
+          "backend": "ripgrep",
+          "status": "succeeded",
+          "elapsed_ms": 117.78,
+          "hits": 5,
+          "truncated": true,
+          "evidence_ids": [
+            "ev_5df1383eddbf756b02a6e8927696fdc4",
+            "ev_bd2a1547ed1c55869efed07f16159c49",
+            "ev_38d3b87368c6bf8510a8cd7813a833f1",
+            "ev_b8316f2fbb085f8da78ec2471d02b509",
+            "ev_25a8bf13c8f9c8464910bbfae03ea49f"
+          ],
+          "next_offset": 5,
+          "total_windows": 34,
+          "total_matches": 38
+        }
+      ],
+      "merge": "overlap_window_rrf",
+      "strategy": "grep",
+      "grep_next_offset": 5,
+      "grep_total_windows": 34,
+      "coverage": "仅为检索返回的证据窗口；不得据此声称已读全文或论文未报告"
+    },
+    "error": null,
+    "elapsed_ms": 204,
+    "id": "570a385f-6375-4d2d-bdfd-0202d43115f7",
+    "workspace_id": "a6133957-44af-4e34-9764-a4e72f3e5c9c",
+    "created_at": "2026-11-08T15:27:40.960097+00:00"
+  },
+  {
+    "name": "sources_search",
+    "arguments": {
+      "query": "task definition input output table synthesis scientific literature",
+      "grep_query": "table.*synthesis|input.*output|task.*definition",
+      "source_ids": [
+        "515356d9-2549-407e-81eb-fcd4475d3154"
+      ],
+      "limit": 5,
+      "context_lines": 3
+    },
+    "run_id": "4dac3ab2-e567-4e46-b74c-ae06f0a74f8e",
+    "status": "succeeded",
+    "data": {
+      "hits": [
+        {
+          "source_id": "515356d9-2549-407e-81eb-fcd4475d3154",
+          "source_hash": "f0a41771d2f878a6b4f34cba435fa838a6bb93195a63e4356a2210b3abd37cbd",
+          "title": "ArxivDIGESTables: Synthesizing Scientific Literature into Tables using Language Models",
+          "uri": "https://arxiv.org/abs/2410.22360v1",
+          "quote": "3 Literature Review Table Generation\nEquipped with our dataset, we formalize the task\nof generating literature review tables.\nTask Definition We define our table generation\ntask as follows: Given an input set of Mdocuments\nd1, . . . , d M, generate a table with Mrows and any\nnumber of columns N≥2. Each row r1, . . . , r M",
+          "start_line": 310,
+          "end_line": 316,
+          "locations": [
+            {
+              "block_index": 3,
+              "page": 4,
+              "start_seconds": null,
+              "end_seconds": null,
+              "block_type": "text"
+            },
+            {
+              "block_index": 3,
+              "page": 4,
+              "start_seconds": null,
+              "end_seconds": null,
+              "block_type": "text"
+            },
+            {
+              "block_index": 3,
+              "page": 4,
+              "start_seconds": null,
+              "end_seconds": null,
+              "block_type": "text"
+            },
+            {
+              "block_index": 3,
+              "page": 4,
+              "start_seconds": null,
+              "end_seconds": null,
+              "block_type": "text"
+            },
+            {
+              "block_index": 3,
+              "page": 4,
+              "start_seconds": null,
+              "end_seconds": null,
+              "block_type": "text"
+            },
+            {
+              "block_index": 3,
+              "page": 4,
+              "start_seconds": null,
+              "end_seconds": null,
+              "block_type": "text"
+            },
+            {
+              "block_index": 3,
+              "page": 4,
+              "start_seconds": null,
+              "end_seconds": null,
+              "block_type": "text"
+            }
+          ],
+          "id": "ev_b4883a2d186f47062d293b202320b612",
+          "workspace_id": "a6133957-44af-4e34-9764-a4e72f3e5c9c",
+          "created_at": "2026-11-08T15:27:41.064635+00:00",
+          "method": "grep",
+          "score": 0.01639344262295082,
+          "backend_ranks": {
+            "grep": 1
+          },
+          "match_lines": [
+            313
+          ]
+        }
+      ],
+      "warnings": [],
+      "partial": false,
+      "truncated": false,
+      "backends": [
+        "ripgrep"
+      ],
+      "backend_runs": [
+        {
+          "name": "grep",
+          "backend": "ripgrep",
+          "status": "succeeded",
+          "elapsed_ms": 47.56,
+          "hits": 1,
+          "truncated": false,
+          "evidence_ids": [
+            "ev_757f5c090142a09fa8661ea62a2d1191"
+          ],
+          "next_offset": null,
+          "total_windows": 1,
+          "total_matches": 1
+        }
+      ],
+      "merge": "overlap_window_rrf",
+      "strategy": "grep",
+      "grep_next_offset": null,
+      "grep_total_windows": 1,
+      "coverage": "仅为检索返回的证据窗口；不得据此声称已读全文或论文未报告"
+    },
+    "error": null,
+    "elapsed_ms": 69,
+    "id": "9a078c33-c9ff-42f1-a20e-7a7c91a910c6",
+    "workspace_id": "a6133957-44af-4e34-9764-a4e72f3e5c9c",
+    "created_at": "2026-11-08T15:27:41.072152+00:00"
+  },
+  {
+    "name": "sources_read",
+    "arguments": {
+      "source_id": "98a8407f-4f58-48a2-abd5-e0d1aff2b4bc",
+      "start_line": 66,
+      "line_count": 60
+    },
+    "run_id": "4dac3ab2-e567-4e46-b74c-ae06f0a74f8e",
+    "status": "succeeded",
+    "data": {
+      "source_id": "98a8407f-4f58-48a2-abd5-e0d1aff2b4bc",
+      "source_hash": "7aaa103d0d4a431142c64d6f38bbff246e14ba8b5369fd0582a8a0e32d75a78f",
+      "title": "A Dataset of Information-Seeking Questions and Answers Anchored in Research Papers",
+      "uri": "https://arxiv.org/abs/2105.03011v1",
+      "quote": "on generic factoid questions, rather than the full\nrange of information needs people have.\nWe present QASPER ,1an information-seeking\nquestion answering (QA) dataset over academic re-\nsearch papers. Each question is written as a follow-\nup to the title and abstract of a particular paper,\nand the answer, if present, is identiﬁed in the rest\nof the paper, along with evidence required to ar-\nrive at it. This setup results in questions requiring\nmore complex document-level reasoning than prior\ndatasets, because (i)abstracts provide rich prompts\nfor questions that can be asked as follow-up and\n(ii)academic research papers naturally trigger ques-\n1Loosely derived from Question Answering over Scien-\ntiﬁc Research Papers . The dataset, baseline code, and other\ninformation about the project can be found at https://\nallenai.org/project/qasper .arXiv:2105.03011v1  [cs.CL]  7 May 2021\ntions by their target readers that require supporting\nor refuting claims. This evidence may be spread\nacross the paper, including tables and ﬁgures, often\nresulting in complex entailment problems. The ex-\nample in Figure 1 illustrates one such case where\nwe need to retrieve information from paragraphs in\nthree different sections to answer the question.\nQASPER contains 5,049 questions over 1,585\nnatural language processing (NLP) papers, asked\nby regular readers of NLP papers, and answered by\na separate set of NLP practitioners. Each paper has\nan average of 3.2 questions, up to a maximum of\n12 questions for a single paper. In addition to pro-\nviding answers when the questions are answerable,\nthe annotators were asked to select text, tables, or\nﬁgures as evidence required for answering the ques-\ntions. 55.5% of the questions require evidence from\nmultiple paragraphs in the paper and 13% require\ntables or ﬁgures. To the best of our knowledge,\nQASPER is the ﬁrst QA dataset in the academic\nresearch domain focusing on entire papers, and not\njust abstracts.\nTo quantify the difﬁculty of the tasks in QASPER ,\nwe apply state-of-the-art document-level Trans-\nformer (Vaswani et al., 2017) models to the tasks\nof selecting evidence and generating answers, and\nshow that the best model performance lags behind\nhumans by 27 F1points at answering questions\nfrom entire papers, and 32 F1points at selecting\nthe paragraphs that provide evidence to answer the\nquestions, indicating that these are both unsolved\nproblems. Additionally, we experiment with ora-\ncles that answer questions from gold evidence and\nﬁnd that better pretraining and domain-adaptation\nmight be helpful.\n2 Building the Q ASPER Dataset\nWe now describe our process for constructing the\ndataset. We began with a set of open-access NLP\npapers, recruited NLP practitioners who are regu-\nlar readers of research papers, and designed two\ndifferent data collection interfaces: one for collect-\ning follow-up questions given titles and abstracts,\nand another for obtaining evidence and answers to",
+      "start_line": 66,
+      "end_line": 125,
+      "locations": [
+        {
+          "block_index": 0,
+          "page": 1,
+          "start_seconds": null,
+          "end_seconds": null,
+          "block_type": "text"
+        },
+        {
+          "block_index": 0,
+          "page": 1,
+          "start_seconds": null,
+          "end_seconds": null,
+          "block_type": "text"
+        },
+        {
+          "block_index": 0,
+          "page": 1,
+          "start_seconds": null,
+          "end_seconds": null,
+          "block_type": "text"
+        },
+        {
+          "block_index": 0,
+          "page": 1,
+          "start_seconds": null,
+          "end_seconds": null,
+          "block_type": "text"
+        },
+        {
+          "block_index": 0,
+          "page": 1,
+          "start_seconds": null,
+          "end_seconds": null,
+          "block_type": "text"
+        },
+        {
+          "block_index": 0,
+          "page": 1,
+          "start_seconds": null,
+          "end_seconds": null,
+          "block_type": "text"
+        },
+        {
+          "block_index": 0,
+          "page": 1,
+          "start_seconds": null,
+          "end_seconds": null,
+          "block_type": "text"
+        },
+        {
+          "block_index": 0,
+          "page": 1,
+          "start_seconds": null,
+          "end_seconds": null,
+          "block_type": "text"
+        },
+        {
+          "block_index": 0,
+          "page": 1,
+          "start_seconds": null,
+          "end_seconds": null,
+          "block_type": "text"
+        },
+        {
+          "block_index": 0,
+          "page": 1,
+          "start_seconds": null,
+          "end_seconds": null,
+          "block_type": "text"
+        },
+        {
+          "block_index": 0,
+          "page": 1,
+          "start_seconds": null,
+          "end_seconds": null,
+          "block_type": "text"
+        },
+        {
+          "block_index": 0,
+          "page": 1,
+          "start_seconds": null,
+          "end_seconds": null,
+          "block_type": "text"
+        },
+        {
+          "block_index": 0,
+          "page": 1,
+          "start_seconds": null,
+          "end_seconds": null,
+          "block_type": "text"
+        },
+        {
+          "block_index": 0,
+          "page": 1,
+          "start_seconds": null,
+          "end_seconds": null,
+          "block_type": "text"
+        },
+        {
+          "block_index": 0,
+          "page": 1,
+          "start_seconds": null,
+          "end_seconds": null,
+          "block_type": "text"
+        },
+        {
+          "block_index": 0,
+          "page": 1,
+          "start_seconds": null,
+          "end_seconds": null,
+          "block_type": "text"
+        },
+        {
+          "block_index": 0,
+          "page": 1,
+          "start_seconds": null,
+          "end_seconds": null,
+          "block_type": "text"
+        },
+        {
+          "block_index": 1,
+          "page": 2,
+          "start_seconds": null,
+          "end_seconds": null,
+          "block_type": "text"
+        },
+        {
+          "block_index": 1,
+          "page": 2,
+          "start_seconds": null,
+          "end_seconds": null,
+          "block_type": "text"
+        },
+        {
+          "block_index": 1,
+          "page": 2,
+          "start_seconds": null,
+          "end_seconds": null,
+          "block_type": "text"
+        },
+        {
+          "block_index": 1,
+          "page": 2,
+          "start_seconds": null,
+          "end_seconds": null,
+          "block_type": "text"
+        },
+        {
+          "block_index": 1,
+          "page": 2,
+          "start_seconds": null,
+          "end_seconds": null,
+          "block_type": "text"
+        },
+        {
+          "block_index": 1,
+          "page": 2,
+          "start_seconds": null,
+          "end_seconds": null,
+          "block_type": "text"
+        },
+        {
+          "block_index": 1,
+          "page": 2,
+          "start_seconds": null,
+          "end_seconds": null,
+          "block_type": "text"
+        },
+        {
+          "block_index": 1,
+          "page": 2,
+          "start_seconds": null,
+          "end_seconds": null,
+          "block_type": "text"
+        },
+        {
+          "block_index": 1,
+          "page": 2,
+          "start_seconds": null,
+          "end_seconds": null,
+          "block_type": "text"
+        },
+        {
+          "block_index": 1,
+          "page": 2,
+          "start_seconds": null,
+          "end_seconds": null,
+          "block_type": "text"
+        },
+        {
+          "block_index": 1,
+          "page": 2,
+          "start_seconds": null,
+          "end_seconds": null,
+          "block_type": "text"
+        },
+        {
+          "block_index": 1,
+          "page": 2,
+          "start_seconds": null,
+          "end_seconds": null,
+          "block_type": "text"
+        },
+        {
+          "block_index": 1,
+          "page": 2,
+          "start_seconds": null,
+          "end_seconds": null,
+          "block_type": "text"
+        },
+        {
+          "block_index": 1,
+          "page": 2,
+          "start_seconds": null,
+          "end_seconds": null,
+          "block_type": "text"
+        },
+        {
+          "block_index": 1,
+          "page": 2,
+          "start_seconds": null,
+          "end_seconds": null,
+          "block_type": "text"
+        },
+        {
+          "block_index": 1,
+          "page": 2,
+          "start_seconds": null,
+          "end_seconds": null,
+          "block_type": "text"
+        },
+        {
+          "block_index": 1,
+          "page": 2,
+          "start_seconds": null,
+          "end_seconds": null,
+          "block_type": "text"
+        },
+        {
+          "block_index": 1,
+          "page": 2,
+          "start_seconds": null,
+          "end_seconds": null,
+          "block_type": "text"
+        },
+        {
+          "block_index": 1,
+          "page": 2,
+          "start_seconds": null,
+          "end_seconds": null,
+          "block_type": "text"
+        },
+        {
+          "block_index": 1,
+          "page": 2,
+          "start_seconds": null,
+          "end_seconds": null,
+          "block_type": "text"
+        },
+        {
+          "block_index": 1,
+          "page": 2,
+          "start_seconds": null,
+          "end_seconds": null,
+          "block_type": "text"
+        },
+        {
+          "block_index": 1,
+          "page": 2,
+          "start_seconds": null,
+          "end_seconds": null,
+          "block_type": "text"
+        },
+        {
+          "block_index": 1,
+          "page": 2,
+          "start_seconds": null,
+          "end_seconds": null,
+          "block_type": "text"
+        },
+        {
+          "block_index": 1,
+          "page": 2,
+          "start_seconds": null,
+          "end_seconds": null,
+          "block_type": "text"
+        },
+        {
+          "block_index": 1,
+          "page": 2,
+          "start_seconds": null,
+          "end_seconds": null,
+          "block_type": "text"
+        },
+        {
+          "block_index": 1,
+          "page": 2,
+          "start_seconds": null,
+          "end_seconds": null,
+          "block_type": "text"
+        },
+        {
+          "block_index": 1,
+          "page": 2,
+          "start_seconds": null,
+          "end_seconds": null,
+          "block_type": "text"
+        },
+        {
+          "block_index": 1,
+          "page": 2,
+          "start_seconds": null,
+          "end_seconds": null,
+          "block_type": "text"
+        },
+        {
+          "block_index": 1,
+          "page": 2,
+          "start_seconds": null,
+          "end_seconds": null,
+          "block_type": "text"
+        },
+        {
+          "block_index": 1,
+          "page": 2,
+          "start_seconds": null,
+          "end_seconds": null,
+          "block_type": "text"
+        },
+        {
+          "block_index": 1,
+          "page": 2,
+          "start_seconds": null,
+          "end_seconds": null,
+          "block_type": "text"
+        },
+        {
+          "block_index": 1,
+          "page": 2,
+          "start_seconds": null,
+          "end_seconds": null,
+          "block_type": "text"
+        },
+        {
+          "block_index": 1,
+          "page": 2,
+          "start_seconds": null,
+          "end_seconds": null,
+          "block_type": "text"
+        },
+        {
+          "block_index": 1,
+          "page": 2,
+          "start_seconds": null,
+          "end_seconds": null,
+          "block_type": "text"
+        },
+        {
+          "block_index": 1,
+          "page": 2,
+          "start_seconds": null,
+          "end_seconds": null,
+          "block_type": "text"
+        },
+        {
+          "block_index": 1,
+          "page": 2,
+          "start_seconds": null,
+          "end_seconds": null,
+          "block_type": "text"
+        },
+        {
+          "block_index": 1,
+          "page": 2,
+          "start_seconds": null,
+          "end_seconds": null,
+          "block_type": "text"
+        },
+        {
+          "block_index": 1,
+          "page": 2,
+          "start_seconds": null,
+          "end_seconds": null,
+          "block_type": "text"
+        },
+        {
+          "block_index": 1,
+          "page": 2,
+          "start_seconds": null,
+          "end_seconds": null,
+          "block_type": "text"
+        },
+        {
+          "block_index": 1,
+          "page": 2,
+          "start_seconds": null,
+          "end_seconds": null,
+          "block_type": "text"
+        },
+        {
+          "block_index": 1,
+          "page": 2,
+          "start_seconds": null,
+          "end_seconds": null,
+          "block_type": "text"
+        },
+        {
+          "block_index": 1,
+          "page": 2,
+          "start_seconds": null,
+          "end_seconds": null,
+          "block_type": "text"
+        },
+        {
+          "block_index": 1,
+          "page": 2,
+          "start_seconds": null,
+          "end_seconds": null,
+          "block_type": "text"
+        }
+      ],
+      "id": "ev_af225b0b773d796d7eb7a529d37166a2",
+      "workspace_id": "a6133957-44af-4e34-9764-a4e72f3e5c9c",
+      "created_at": "2026-11-08T15:27:45.451859+00:00"
+    },
+    "error": null,
+    "elapsed_ms": 18,
+    "id": "9f7246a7-a3e5-449d-bbc1-39e2f99b63bf",
+    "workspace_id": "a6133957-44af-4e34-9764-a4e72f3e5c9c",
+    "created_at": "2026-11-08T15:27:45.459695+00:00"
+  },
+  {
+    "name": "sources_read",
+    "arguments": {
+      "source_id": "515356d9-2549-407e-81eb-fcd4475d3154",
+      "start_line": 310,
+      "line_count": 60
+    },
+    "run_id": "4dac3ab2-e567-4e46-b74c-ae06f0a74f8e",
+    "status": "succeeded",
+    "data": {
+      "source_id": "515356d9-2549-407e-81eb-fcd4475d3154",
+      "source_hash": "f0a41771d2f878a6b4f34cba435fa838a6bb93195a63e4356a2210b3abd37cbd",
+      "title": "ArxivDIGESTables: Synthesizing Scientific Literature into Tables using Language Models",
+      "uri": "https://arxiv.org/abs/2410.22360v1",
+      "quote": "3 Literature Review Table Generation\nEquipped with our dataset, we formalize the task\nof generating literature review tables.\nTask Definition We define our table generation\ntask as follows: Given an input set of Mdocuments\nd1, . . . , d M, generate a table with Mrows and any\nnumber of columns N≥2. Each row r1, . . . , r M\ncorresponds to a unique input document. Each col-\numnc1, . . . , c Nrepresents a unique aspect. Taken\ntogether, the columns constitute a schema. The\ntable then has N×Mvalues, with one value in\neach cell.3The cell values should be derived from\nthe input documents.\nGeneration We consider two main approaches to\ngenerate a table given a set of input documents. (1)\nThe schema and values could be jointly generated,\ne.g. in a single call to a language model. This ap-\nproach is fast, but initial experiments found it more\nprone to hallucinations and generic column names\n(e.g., “ Title ” or “ Year ”). (2) The generation pro-\ncess can be decomposed into separate schema and\nvalue generation steps. This approach is slower\nbut allows us to overcome context window limits\nand leverage prior work in aspect-based question\nanswering to perform value generation.\nEvaluation We evaluate our approaches by de-\ntermining whether the generated schemas are use-\nfuland values are correct . We consider a gener-\nated schema to be useful if its aspects either match\nthose in the corresponding human-authored table\nin\n ARXIV DIGEST ABLES or if human evalua-\ntors rate them to be useful.4These two conditions\nallow us to measure how well systems reconstruct\nreference table aspects (§5.1) and evaluate their\nability to generate novel aspects (§6.1). Second,\nwe evaluate correctness of values as we would for\nany information extraction or QA task: for a pair\nof aligned columns (and rows), we judge whether\nthe predicted cell value is semantically equivalent\nto the gold cell value (see §5.2).\n4 Experiments\nWe prompt language models to perform either joint\nor decomposed generation.\n4.1 Base Models\nWe use two language models, one open-weight,\nMixtral 8x22 (Mistral AI, 2024), and one closed\nweight, GPT-3.5-Turbo (Open AI, 2022). To avoid\ngaming our recall metric, we instruct all models\nto generate schemas with the same number of as-\npects as the corresponding reference tables. (More\nprompting details in Appendix §B.5).\n3We leave the case where a cell can contain multiple values\nto future work.\n4There are many alternative ways to evaluate usefulness.\nFor example, adding constraints on users’ reading time could\npenalize very detailed tables, while ideation-focused use cases\ncould penalize more generic aspects.4.2 Joint Table Generation\nWe represent input papers using their titles and\nabstracts, which usually have enough information",
+      "start_line": 310,
+      "end_line": 369,
+      "locations": [
+        {
+          "block_index": 3,
+          "page": 4,
+          "start_seconds": null,
+          "end_seconds": null,
+          "block_type": "text"
+        },
+        {
+          "block_index": 3,
+          "page": 4,
+          "start_seconds": null,
+          "end_seconds": null,
+          "block_type": "text"
+        },
+        {
+          "block_index": 3,
+          "page": 4,
+          "start_seconds": null,
+          "end_seconds": null,
+          "block_type": "text"
+        },
+        {
+          "block_index": 3,
+          "page": 4,
+          "start_seconds": null,
+          "end_seconds": null,
+          "block_type": "text"
+        },
+        {
+          "block_index": 3,
+          "page": 4,
+          "start_seconds": null,
+          "end_seconds": null,
+          "block_type": "text"
+        },
+        {
+          "block_index": 3,
+          "page": 4,
+          "start_seconds": null,
+          "end_seconds": null,
+          "block_type": "text"
+        },
+        {
+          "block_index": 3,
+          "page": 4,
+          "start_seconds": null,
+          "end_seconds": null,
+          "block_type": "text"
+        },
+        {
+          "block_index": 3,
+          "page": 4,
+          "start_seconds": null,
+          "end_seconds": null,
+          "block_type": "text"
+        },
+        {
+          "block_index": 3,
+          "page": 4,
+          "start_seconds": null,
+          "end_seconds": null,
+          "block_type": "text"
+        },
+        {
+          "block_index": 3,
+          "page": 4,
+          "start_seconds": null,
+          "end_seconds": null,
+          "block_type": "text"
+        },
+        {
+          "block_index": 4,
+          "page": 5,
+          "start_seconds": null,
+          "end_seconds": null,
+          "block_type": "text"
+        },
+        {
+          "block_index": 4,
+          "page": 5,
+          "start_seconds": null,
+          "end_seconds": null,
+          "block_type": "text"
+        },
+        {
+          "block_index": 4,
+          "page": 5,
+          "start_seconds": null,
+          "end_seconds": null,
+          "block_type": "text"
+        },
+        {
+          "block_index": 4,
+          "page": 5,
+          "start_seconds": null,
+          "end_seconds": null,
+          "block_type": "text"
+        },
+        {
+          "block_index": 4,
+          "page": 5,
+          "start_seconds": null,
+          "end_seconds": null,
+          "block_type": "text"
+        },
+        {
+          "block_index": 4,
+          "page": 5,
+          "start_seconds": null,
+          "end_seconds": null,
+          "block_type": "text"
+        },
+        {
+          "block_index": 4,
+          "page": 5,
+          "start_seconds": null,
+          "end_seconds": null,
+          "block_type": "text"
+        },
+        {
+          "block_index": 4,
+          "page": 5,
+          "start_seconds": null,
+          "end_seconds": null,
+          "block_type": "text"
+        },
+        {
+          "block_index": 4,
+          "page": 5,
+          "start_seconds": null,
+          "end_seconds": null,
+          "block_type": "text"
+        },
+        {
+          "block_index": 4,
+          "page": 5,
+          "start_seconds": null,
+          "end_seconds": null,
+          "block_type": "text"
+        },
+        {
+          "block_index": 4,
+          "page": 5,
+          "start_seconds": null,
+          "end_seconds": null,
+          "block_type": "text"
+        },
+        {
+          "block_index": 4,
+          "page": 5,
+          "start_seconds": null,
+          "end_seconds": null,
+          "block_type": "text"
+        },
+        {
+          "block_index": 4,
+          "page": 5,
+          "start_seconds": null,
+          "end_seconds": null,
+          "block_type": "text"
+        },
+        {
+          "block_index": 4,
+          "page": 5,
+          "start_seconds": null,
+          "end_seconds": null,
+          "block_type": "text"
+        },
+        {
+          "block_index": 4,
+          "page": 5,
+          "start_seconds": null,
+          "end_seconds": null,
+          "block_type": "text"
+        },
+        {
+          "block_index": 4,
+          "page": 5,
+          "start_seconds": null,
+          "end_seconds": null,
+          "block_type": "text"
+        },
+        {
+          "block_index": 4,
+          "page": 5,
+          "start_seconds": null,
+          "end_seconds": null,
+          "block_type": "text"
+        },
+        {
+          "block_index": 4,
+          "page": 5,
+          "start_seconds": null,
+          "end_seconds": null,
+          "block_type": "text"
+        },
+        {
+          "block_index": 4,
+          "page": 5,
+          "start_seconds": null,
+          "end_seconds": null,
+          "block_type": "text"
+        },
+        {
+          "block_index": 4,
+          "page": 5,
+          "start_seconds": null,
+          "end_seconds": null,
+          "block_type": "text"
+        },
+        {
+          "block_index": 4,
+          "page": 5,
+          "start_seconds": null,
+          "end_seconds": null,
+          "block_type": "text"
+        },
+        {
+          "block_index": 4,
+          "page": 5,
+          "start_seconds": null,
+          "end_seconds": null,
+          "block_type": "text"
+        },
+        {
+          "block_index": 4,
+          "page": 5,
+          "start_seconds": null,
+          "end_seconds": null,
+          "block_type": "text"
+        },
+        {
+          "block_index": 4,
+          "page": 5,
+          "start_seconds": null,
+          "end_seconds": null,
+          "block_type": "text"
+        },
+        {
+          "block_index": 4,
+          "page": 5,
+          "start_seconds": null,
+          "end_seconds": null,
+          "block_type": "text"
+        },
+        {
+          "block_index": 4,
+          "page": 5,
+          "start_seconds": null,
+          "end_seconds": null,
+          "block_type": "text"
+        },
+        {
+          "block_index": 4,
+          "page": 5,
+          "start_seconds": null,
+          "end_seconds": null,
+          "block_type": "text"
+        },
+        {
+          "block_index": 4,
+          "page": 5,
+          "start_seconds": null,
+          "end_seconds": null,
+          "block_type": "text"
+        },
+        {
+          "block_index": 4,
+          "page": 5,
+          "start_seconds": null,
+          "end_seconds": null,
+          "block_type": "text"
+        },
+        {
+          "block_index": 4,
+          "page": 5,
+          "start_seconds": null,
+          "end_seconds": null,
+          "block_type": "text"
+        },
+        {
+          "block_index": 4,
+          "page": 5,
+          "start_seconds": null,
+          "end_seconds": null,
+          "block_type": "text"
+        },
+        {
+          "block_index": 4,
+          "page": 5,
+          "start_seconds": null,
+          "end_seconds": null,
+          "block_type": "text"
+        },
+        {
+          "block_index": 4,
+          "page": 5,
+          "start_seconds": null,
+          "end_seconds": null,
+          "block_type": "text"
+        },
+        {
+          "block_index": 4,
+          "page": 5,
+          "start_seconds": null,
+          "end_seconds": null,
+          "block_type": "text"
+        },
+        {
+          "block_index": 4,
+          "page": 5,
+          "start_seconds": null,
+          "end_seconds": null,
+          "block_type": "text"
+        },
+        {
+          "block_index": 4,
+          "page": 5,
+          "start_seconds": null,
+          "end_seconds": null,
+          "block_type": "text"
+        },
+        {
+          "block_index": 4,
+          "page": 5,
+          "start_seconds": null,
+          "end_seconds": null,
+          "block_type": "text"
+        },
+        {
+          "block_index": 4,
+          "page": 5,
+          "start_seconds": null,
+          "end_seconds": null,
+          "block_type": "text"
+        },
+        {
+          "block_index": 4,
+          "page": 5,
+          "start_seconds": null,
+          "end_seconds": null,
+          "block_type": "text"
+        },
+        {
+          "block_index": 4,
+          "page": 5,
+          "start_seconds": null,
+          "end_seconds": null,
+          "block_type": "text"
+        },
+        {
+          "block_index": 4,
+          "page": 5,
+          "start_seconds": null,
+          "end_seconds": null,
+          "block_type": "text"
+        },
+        {
+          "block_index": 4,
+          "page": 5,
+          "start_seconds": null,
+          "end_seconds": null,
+          "block_type": "text"
+        },
+        {
+          "block_index": 4,
+          "page": 5,
+          "start_seconds": null,
+          "end_seconds": null,
+          "block_type": "text"
+        },
+        {
+          "block_index": 4,
+          "page": 5,
+          "start_seconds": null,
+          "end_seconds": null,
+          "block_type": "text"
+        },
+        {
+          "block_index": 4,
+          "page": 5,
+          "start_seconds": null,
+          "end_seconds": null,
+          "block_type": "text"
+        },
+        {
+          "block_index": 4,
+          "page": 5,
+          "start_seconds": null,
+          "end_seconds": null,
+          "block_type": "text"
+        },
+        {
+          "block_index": 4,
+          "page": 5,
+          "start_seconds": null,
+          "end_seconds": null,
+          "block_type": "text"
+        },
+        {
+          "block_index": 4,
+          "page": 5,
+          "start_seconds": null,
+          "end_seconds": null,
+          "block_type": "text"
+        },
+        {
+          "block_index": 4,
+          "page": 5,
+          "start_seconds": null,
+          "end_seconds": null,
+          "block_type": "text"
+        },
+        {
+          "block_index": 4,
+          "page": 5,
+          "start_seconds": null,
+          "end_seconds": null,
+          "block_type": "text"
+        }
+      ],
+      "id": "ev_9fe1404d510a9bf4e8fbf096a8307011",
+      "workspace_id": "a6133957-44af-4e34-9764-a4e72f3e5c9c",
+      "created_at": "2026-11-08T15:27:45.519386+00:00"
+    },
+    "error": null,
+    "elapsed_ms": 18,
+    "id": "8eac82cc-f21a-4137-97d9-72061abfe0ab",
+    "workspace_id": "a6133957-44af-4e34-9764-a4e72f3e5c9c",
+    "created_at": "2026-11-08T15:27:45.527324+00:00"
+  },
+  {
+    "name": "sources_read",
+    "arguments": {
+      "source_id": "98a8407f-4f58-48a2-abd5-e0d1aff2b4bc",
+      "start_line": 66,
+      "line_count": 60
+    },
+    "run_id": "4dac3ab2-e567-4e46-b74c-ae06f0a74f8e",
+    "status": "succeeded",
+    "data": {
+      "source_id": "98a8407f-4f58-48a2-abd5-e0d1aff2b4bc",
+      "source_hash": "7aaa103d0d4a431142c64d6f38bbff246e14ba8b5369fd0582a8a0e32d75a78f",
+      "title": "A Dataset of Information-Seeking Questions and Answers Anchored in Research Papers",
+      "uri": "https://arxiv.org/abs/2105.03011v1",
+      "quote": "on generic factoid questions, rather than the full\nrange of information needs people have.\nWe present QASPER ,1an information-seeking\nquestion answering (QA) dataset over academic re-\nsearch papers. Each question is written as a follow-\nup to the title and abstract of a particular paper,\nand the answer, if present, is identiﬁed in the rest\nof the paper, along with evidence required to ar-\nrive at it. This setup results in questions requiring\nmore complex document-level reasoning than prior\ndatasets, because (i)abstracts provide rich prompts\nfor questions that can be asked as follow-up and\n(ii)academic research papers naturally trigger ques-\n1Loosely derived from Question Answering over Scien-\ntiﬁc Research Papers . The dataset, baseline code, and other\ninformation about the project can be found at https://\nallenai.org/project/qasper .arXiv:2105.03011v1  [cs.CL]  7 May 2021\ntions by their target readers that require supporting\nor refuting claims. This evidence may be spread\nacross the paper, including tables and ﬁgures, often\nresulting in complex entailment problems. The ex-\nample in Figure 1 illustrates one such case where\nwe need to retrieve information from paragraphs in\nthree different sections to answer the question.\nQASPER contains 5,049 questions over 1,585\nnatural language processing (NLP) papers, asked\nby regular readers of NLP papers, and answered by\na separate set of NLP practitioners. Each paper has\nan average of 3.2 questions, up to a maximum of\n12 questions for a single paper. In addition to pro-\nviding answers when the questions are answerable,\nthe annotators were asked to select text, tables, or\nﬁgures as evidence required for answering the ques-\ntions. 55.5% of the questions require evidence from\nmultiple paragraphs in the paper and 13% require\ntables or ﬁgures. To the best of our knowledge,\nQASPER is the ﬁrst QA dataset in the academic\nresearch domain focusing on entire papers, and not\njust abstracts.\nTo quantify the difﬁculty of the tasks in QASPER ,\nwe apply state-of-the-art document-level Trans-\nformer (Vaswani et al., 2017) models to the tasks\nof selecting evidence and generating answers, and\nshow that the best model performance lags behind\nhumans by 27 F1points at answering questions\nfrom entire papers, and 32 F1points at selecting\nthe paragraphs that provide evidence to answer the\nquestions, indicating that these are both unsolved\nproblems. Additionally, we experiment with ora-\ncles that answer questions from gold evidence and\nﬁnd that better pretraining and domain-adaptation\nmight be helpful.\n2 Building the Q ASPER Dataset\nWe now describe our process for constructing the\ndataset. We began with a set of open-access NLP\npapers, recruited NLP practitioners who are regu-\nlar readers of research papers, and designed two\ndifferent data collection interfaces: one for collect-\ning follow-up questions given titles and abstracts,\nand another for obtaining evidence and answers to",
+      "start_line": 66,
+      "end_line": 125,
+      "locations": [
+        {
+          "block_index": 0,
+          "page": 1,
+          "start_seconds": null,
+          "end_seconds": null,
+          "block_type": "text"
+        },
+        {
+          "block_index": 0,
+          "page": 1,
+          "start_seconds": null,
+          "end_seconds": null,
+          "block_type": "text"
+        },
+        {
+          "block_index": 0,
+          "page": 1,
+          "start_seconds": null,
+          "end_seconds": null,
+          "block_type": "text"
+        },
+        {
+          "block_index": 0,
+          "page": 1,
+          "start_seconds": null,
+          "end_seconds": null,
+          "block_type": "text"
+        },
+        {
+          "block_index": 0,
+          "page": 1,
+          "start_seconds": null,
+          "end_seconds": null,
+          "block_type": "text"
+        },
+        {
+          "block_index": 0,
+          "page": 1,
+          "start_seconds": null,
+          "end_seconds": null,
+          "block_type": "text"
+        },
+        {
+          "block_index": 0,
+          "page": 1,
+          "start_seconds": null,
+          "end_seconds": null,
+          "block_type": "text"
+        },
+        {
+          "block_index": 0,
+          "page": 1,
+          "start_seconds": null,
+          "end_seconds": null,
+          "block_type": "text"
+        },
+        {
+          "block_index": 0,
+          "page": 1,
+          "start_seconds": null,
+          "end_seconds": null,
+          "block_type": "text"
+        },
+        {
+          "block_index": 0,
+          "page": 1,
+          "start_seconds": null,
+          "end_seconds": null,
+          "block_type": "text"
+        },
+        {
+          "block_index": 0,
+          "page": 1,
+          "start_seconds": null,
+          "end_seconds": null,
+          "block_type": "text"
+        },
+        {
+          "block_index": 0,
+          "page": 1,
+          "start_seconds": null,
+          "end_seconds": null,
+          "block_type": "text"
+        },
+        {
+          "block_index": 0,
+          "page": 1,
+          "start_seconds": null,
+          "end_seconds": null,
+          "block_type": "text"
+        },
+        {
+          "block_index": 0,
+          "page": 1,
+          "start_seconds": null,
+          "end_seconds": null,
+          "block_type": "text"
+        },
+        {
+          "block_index": 0,
+          "page": 1,
+          "start_seconds": null,
+          "end_seconds": null,
+          "block_type": "text"
+        },
+        {
+          "block_index": 0,
+          "page": 1,
+          "start_seconds": null,
+          "end_seconds": null,
+          "block_type": "text"
+        },
+        {
+          "block_index": 0,
+          "page": 1,
+          "start_seconds": null,
+          "end_seconds": null,
+          "block_type": "text"
+        },
+        {
+          "block_index": 1,
+          "page": 2,
+          "start_seconds": null,
+          "end_seconds": null,
+          "block_type": "text"
+        },
+        {
+          "block_index": 1,
+          "page": 2,
+          "start_seconds": null,
+          "end_seconds": null,
+          "block_type": "text"
+        },
+        {
+          "block_index": 1,
+          "page": 2,
+          "start_seconds": null,
+          "end_seconds": null,
+          "block_type": "text"
+        },
+        {
+          "block_index": 1,
+          "page": 2,
+          "start_seconds": null,
+          "end_seconds": null,
+          "block_type": "text"
+        },
+        {
+          "block_index": 1,
+          "page": 2,
+          "start_seconds": null,
+          "end_seconds": null,
+          "block_type": "text"
+        },
+        {
+          "block_index": 1,
+          "page": 2,
+          "start_seconds": null,
+          "end_seconds": null,
+          "block_type": "text"
+        },
+        {
+          "block_index": 1,
+          "page": 2,
+          "start_seconds": null,
+          "end_seconds": null,
+          "block_type": "text"
+        },
+        {
+          "block_index": 1,
+          "page": 2,
+          "start_seconds": null,
+          "end_seconds": null,
+          "block_type": "text"
+        },
+        {
+          "block_index": 1,
+          "page": 2,
+          "start_seconds": null,
+          "end_seconds": null,
+          "block_type": "text"
+        },
+        {
+          "block_index": 1,
+          "page": 2,
+          "start_seconds": null,
+          "end_seconds": null,
+          "block_type": "text"
+        },
+        {
+          "block_index": 1,
+          "page": 2,
+          "start_seconds": null,
+          "end_seconds": null,
+          "block_type": "text"
+        },
+        {
+          "block_index": 1,
+          "page": 2,
+          "start_seconds": null,
+          "end_seconds": null,
+          "block_type": "text"
+        },
+        {
+          "block_index": 1,
+          "page": 2,
+          "start_seconds": null,
+          "end_seconds": null,
+          "block_type": "text"
+        },
+        {
+          "block_index": 1,
+          "page": 2,
+          "start_seconds": null,
+          "end_seconds": null,
+          "block_type": "text"
+        },
+        {
+          "block_index": 1,
+          "page": 2,
+          "start_seconds": null,
+          "end_seconds": null,
+          "block_type": "text"
+        },
+        {
+          "block_index": 1,
+          "page": 2,
+          "start_seconds": null,
+          "end_seconds": null,
+          "block_type": "text"
+        },
+        {
+          "block_index": 1,
+          "page": 2,
+          "start_seconds": null,
+          "end_seconds": null,
+          "block_type": "text"
+        },
+        {
+          "block_index": 1,
+          "page": 2,
+          "start_seconds": null,
+          "end_seconds": null,
+          "block_type": "text"
+        },
+        {
+          "block_index": 1,
+          "page": 2,
+          "start_seconds": null,
+          "end_seconds": null,
+          "block_type": "text"
+        },
+        {
+          "block_index": 1,
+          "page": 2,
+          "start_seconds": null,
+          "end_seconds": null,
+          "block_type": "text"
+        },
+        {
+          "block_index": 1,
+          "page": 2,
+          "start_seconds": null,
+          "end_seconds": null,
+          "block_type": "text"
+        },
+        {
+          "block_index": 1,
+          "page": 2,
+          "start_seconds": null,
+          "end_seconds": null,
+          "block_type": "text"
+        },
+        {
+          "block_index": 1,
+          "page": 2,
+          "start_seconds": null,
+          "end_seconds": null,
+          "block_type": "text"
+        },
+        {
+          "block_index": 1,
+          "page": 2,
+          "start_seconds": null,
+          "end_seconds": null,
+          "block_type": "text"
+        },
+        {
+          "block_index": 1,
+          "page": 2,
+          "start_seconds": null,
+          "end_seconds": null,
+          "block_type": "text"
+        },
+        {
+          "block_index": 1,
+          "page": 2,
+          "start_seconds": null,
+          "end_seconds": null,
+          "block_type": "text"
+        },
+        {
+          "block_index": 1,
+          "page": 2,
+          "start_seconds": null,
+          "end_seconds": null,
+          "block_type": "text"
+        },
+        {
+          "block_index": 1,
+          "page": 2,
+          "start_seconds": null,
+          "end_seconds": null,
+          "block_type": "text"
+        },
+        {
+          "block_index": 1,
+          "page": 2,
+          "start_seconds": null,
+          "end_seconds": null,
+          "block_type": "text"
+        },
+        {
+          "block_index": 1,
+          "page": 2,
+          "start_seconds": null,
+          "end_seconds": null,
+          "block_type": "text"
+        },
+        {
+          "block_index": 1,
+          "page": 2,
+          "start_seconds": null,
+          "end_seconds": null,
+          "block_type": "text"
+        },
+        {
+          "block_index": 1,
+          "page": 2,
+          "start_seconds": null,
+          "end_seconds": null,
+          "block_type": "text"
+        },
+        {
+          "block_index": 1,
+          "page": 2,
+          "start_seconds": null,
+          "end_seconds": null,
+          "block_type": "text"
+        },
+        {
+          "block_index": 1,
+          "page": 2,
+          "start_seconds": null,
+          "end_seconds": null,
+          "block_type": "text"
+        },
+        {
+          "block_index": 1,
+          "page": 2,
+          "start_seconds": null,
+          "end_seconds": null,
+          "block_type": "text"
+        },
+        {
+          "block_index": 1,
+          "page": 2,
+          "start_seconds": null,
+          "end_seconds": null,
+          "block_type": "text"
+        },
+        {
+          "block_index": 1,
+          "page": 2,
+          "start_seconds": null,
+          "end_seconds": null,
+          "block_type": "text"
+        },
+        {
+          "block_index": 1,
+          "page": 2,
+          "start_seconds": null,
+          "end_seconds": null,
+          "block_type": "text"
+        },
+        {
+          "block_index": 1,
+          "page": 2,
+          "start_seconds": null,
+          "end_seconds": null,
+          "block_type": "text"
+        },
+        {
+          "block_index": 1,
+          "page": 2,
+          "start_seconds": null,
+          "end_seconds": null,
+          "block_type": "text"
+        },
+        {
+          "block_index": 1,
+          "page": 2,
+          "start_seconds": null,
+          "end_seconds": null,
+          "block_type": "text"
+        },
+        {
+          "block_index": 1,
+          "page": 2,
+          "start_seconds": null,
+          "end_seconds": null,
+          "block_type": "text"
+        },
+        {
+          "block_index": 1,
+          "page": 2,
+          "start_seconds": null,
+          "end_seconds": null,
+          "block_type": "text"
+        }
+      ],
+      "id": "ev_af225b0b773d796d7eb7a529d37166a2",
+      "workspace_id": "a6133957-44af-4e34-9764-a4e72f3e5c9c",
+      "created_at": "2026-11-08T15:27:45.451859+00:00"
+    },
+    "error": null,
+    "elapsed_ms": 11,
+    "id": "c97bb49b-a88d-46c0-96c9-8646c6140e6d",
+    "workspace_id": "a6133957-44af-4e34-9764-a4e72f3e5c9c",
+    "created_at": "2026-11-08T15:27:51.197251+00:00"
+  },
+  {
+    "name": "sources_read",
+    "arguments": {
+      "source_id": "515356d9-2549-407e-81eb-fcd4475d3154",
+      "start_line": 310,
+      "line_count": 60
+    },
+    "run_id": "4dac3ab2-e567-4e46-b74c-ae06f0a74f8e",
+    "status": "succeeded",
+    "data": {
+      "source_id": "515356d9-2549-407e-81eb-fcd4475d3154",
+      "source_hash": "f0a41771d2f878a6b4f34cba435fa838a6bb93195a63e4356a2210b3abd37cbd",
+      "title": "ArxivDIGESTables: Synthesizing Scientific Literature into Tables using Language Models",
+      "uri": "https://arxiv.org/abs/2410.22360v1",
+      "quote": "3 Literature Review Table Generation\nEquipped with our dataset, we formalize the task\nof generating literature review tables.\nTask Definition We define our table generation\ntask as follows: Given an input set of Mdocuments\nd1, . . . , d M, generate a table with Mrows and any\nnumber of columns N≥2. Each row r1, . . . , r M\ncorresponds to a unique input document. Each col-\numnc1, . . . , c Nrepresents a unique aspect. Taken\ntogether, the columns constitute a schema. The\ntable then has N×Mvalues, with one value in\neach cell.3The cell values should be derived from\nthe input documents.\nGeneration We consider two main approaches to\ngenerate a table given a set of input documents. (1)\nThe schema and values could be jointly generated,\ne.g. in a single call to a language model. This ap-\nproach is fast, but initial experiments found it more\nprone to hallucinations and generic column names\n(e.g., “ Title ” or “ Year ”). (2) The generation pro-\ncess can be decomposed into separate schema and\nvalue generation steps. This approach is slower\nbut allows us to overcome context window limits\nand leverage prior work in aspect-based question\nanswering to perform value generation.\nEvaluation We evaluate our approaches by de-\ntermining whether the generated schemas are use-\nfuland values are correct . We consider a gener-\nated schema to be useful if its aspects either match\nthose in the corresponding human-authored table\nin\n ARXIV DIGEST ABLES or if human evalua-\ntors rate them to be useful.4These two conditions\nallow us to measure how well systems reconstruct\nreference table aspects (§5.1) and evaluate their\nability to generate novel aspects (§6.1). Second,\nwe evaluate correctness of values as we would for\nany information extraction or QA task: for a pair\nof aligned columns (and rows), we judge whether\nthe predicted cell value is semantically equivalent\nto the gold cell value (see §5.2).\n4 Experiments\nWe prompt language models to perform either joint\nor decomposed generation.\n4.1 Base Models\nWe use two language models, one open-weight,\nMixtral 8x22 (Mistral AI, 2024), and one closed\nweight, GPT-3.5-Turbo (Open AI, 2022). To avoid\ngaming our recall metric, we instruct all models\nto generate schemas with the same number of as-\npects as the corresponding reference tables. (More\nprompting details in Appendix §B.5).\n3We leave the case where a cell can contain multiple values\nto future work.\n4There are many alternative ways to evaluate usefulness.\nFor example, adding constraints on users’ reading time could\npenalize very detailed tables, while ideation-focused use cases\ncould penalize more generic aspects.4.2 Joint Table Generation\nWe represent input papers using their titles and\nabstracts, which usually have enough information",
+      "start_line": 310,
+      "end_line": 369,
+      "locations": [
+        {
+          "block_index": 3,
+          "page": 4,
+          "start_seconds": null,
+          "end_seconds": null,
+          "block_type": "text"
+        },
+        {
+          "block_index": 3,
+          "page": 4,
+          "start_seconds": null,
+          "end_seconds": null,
+          "block_type": "text"
+        },
+        {
+          "block_index": 3,
+          "page": 4,
+          "start_seconds": null,
+          "end_seconds": null,
+          "block_type": "text"
+        },
+        {
+          "block_index": 3,
+          "page": 4,
+          "start_seconds": null,
+          "end_seconds": null,
+          "block_type": "text"
+        },
+        {
+          "block_index": 3,
+          "page": 4,
+          "start_seconds": null,
+          "end_seconds": null,
+          "block_type": "text"
+        },
+        {
+          "block_index": 3,
+          "page": 4,
+          "start_seconds": null,
+          "end_seconds": null,
+          "block_type": "text"
+        },
+        {
+          "block_index": 3,
+          "page": 4,
+          "start_seconds": null,
+          "end_seconds": null,
+          "block_type": "text"
+        },
+        {
+          "block_index": 3,
+          "page": 4,
+          "start_seconds": null,
+          "end_seconds": null,
+          "block_type": "text"
+        },
+        {
+          "block_index": 3,
+          "page": 4,
+          "start_seconds": null,
+          "end_seconds": null,
+          "block_type": "text"
+        },
+        {
+          "block_index": 3,
+          "page": 4,
+          "start_seconds": null,
+          "end_seconds": null,
+          "block_type": "text"
+        },
+        {
+          "block_index": 4,
+          "page": 5,
+          "start_seconds": null,
+          "end_seconds": null,
+          "block_type": "text"
+        },
+        {
+          "block_index": 4,
+          "page": 5,
+          "start_seconds": null,
+          "end_seconds": null,
+          "block_type": "text"
+        },
+        {
+          "block_index": 4,
+          "page": 5,
+          "start_seconds": null,
+          "end_seconds": null,
+          "block_type": "text"
+        },
+        {
+          "block_index": 4,
+          "page": 5,
+          "start_seconds": null,
+          "end_seconds": null,
+          "block_type": "text"
+        },
+        {
+          "block_index": 4,
+          "page": 5,
+          "start_seconds": null,
+          "end_seconds": null,
+          "block_type": "text"
+        },
+        {
+          "block_index": 4,
+          "page": 5,
+          "start_seconds": null,
+          "end_seconds": null,
+          "block_type": "text"
+        },
+        {
+          "block_index": 4,
+          "page": 5,
+          "start_seconds": null,
+          "end_seconds": null,
+          "block_type": "text"
+        },
+        {
+          "block_index": 4,
+          "page": 5,
+          "start_seconds": null,
+          "end_seconds": null,
+          "block_type": "text"
+        },
+        {
+          "block_index": 4,
+          "page": 5,
+          "start_seconds": null,
+          "end_seconds": null,
+          "block_type": "text"
+        },
+        {
+          "block_index": 4,
+          "page": 5,
+          "start_seconds": null,
+          "end_seconds": null,
+          "block_type": "text"
+        },
+        {
+          "block_index": 4,
+          "page": 5,
+          "start_seconds": null,
+          "end_seconds": null,
+          "block_type": "text"
+        },
+        {
+          "block_index": 4,
+          "page": 5,
+          "start_seconds": null,
+          "end_seconds": null,
+          "block_type": "text"
+        },
+        {
+          "block_index": 4,
+          "page": 5,
+          "start_seconds": null,
+          "end_seconds": null,
+          "block_type": "text"
+        },
+        {
+          "block_index": 4,
+          "page": 5,
+          "start_seconds": null,
+          "end_seconds": null,
+          "block_type": "text"
+        },
+        {
+          "block_index": 4,
+          "page": 5,
+          "start_seconds": null,
+          "end_seconds": null,
+          "block_type": "text"
+        },
+        {
+          "block_index": 4,
+          "page": 5,
+          "start_seconds": null,
+          "end_seconds": null,
+          "block_type": "text"
+        },
+        {
+          "block_index": 4,
+          "page": 5,
+          "start_seconds": null,
+          "end_seconds": null,
+          "block_type": "text"
+        },
+        {
+          "block_index": 4,
+          "page": 5,
+          "start_seconds": null,
+          "end_seconds": null,
+          "block_type": "text"
+        },
+        {
+          "block_index": 4,
+          "page": 5,
+          "start_seconds": null,
+          "end_seconds": null,
+          "block_type": "text"
+        },
+        {
+          "block_index": 4,
+          "page": 5,
+          "start_seconds": null,
+          "end_seconds": null,
+          "block_type": "text"
+        },
+        {
+          "block_index": 4,
+          "page": 5,
+          "start_seconds": null,
+          "end_seconds": null,
+          "block_type": "text"
+        },
+        {
+          "block_index": 4,
+          "page": 5,
+          "start_seconds": null,
+          "end_seconds": null,
+          "block_type": "text"
+        },
+        {
+          "block_index": 4,
+          "page": 5,
+          "start_seconds": null,
+          "end_seconds": null,
+          "block_type": "text"
+        },
+        {
+          "block_index": 4,
+          "page": 5,
+          "start_seconds": null,
+          "end_seconds": null,
+          "block_type": "text"
+        },
+        {
+          "block_index": 4,
+          "page": 5,
+          "start_seconds": null,
+          "end_seconds": null,
+          "block_type": "text"
+        },
+        {
+          "block_index": 4,
+          "page": 5,
+          "start_seconds": null,
+          "end_seconds": null,
+          "block_type": "text"
+        },
+        {
+          "block_index": 4,
+          "page": 5,
+          "start_seconds": null,
+          "end_seconds": null,
+          "block_type": "text"
+        },
+        {
+          "block_index": 4,
+          "page": 5,
+          "start_seconds": null,
+          "end_seconds": null,
+          "block_type": "text"
+        },
+        {
+          "block_index": 4,
+          "page": 5,
+          "start_seconds": null,
+          "end_seconds": null,
+          "block_type": "text"
+        },
+        {
+          "block_index": 4,
+          "page": 5,
+          "start_seconds": null,
+          "end_seconds": null,
+          "block_type": "text"
+        },
+        {
+          "block_index": 4,
+          "page": 5,
+          "start_seconds": null,
+          "end_seconds": null,
+          "block_type": "text"
+        },
+        {
+          "block_index": 4,
+          "page": 5,
+          "start_seconds": null,
+          "end_seconds": null,
+          "block_type": "text"
+        },
+        {
+          "block_index": 4,
+          "page": 5,
+          "start_seconds": null,
+          "end_seconds": null,
+          "block_type": "text"
+        },
+        {
+          "block_index": 4,
+          "page": 5,
+          "start_seconds": null,
+          "end_seconds": null,
+          "block_type": "text"
+        },
+        {
+          "block_index": 4,
+          "page": 5,
+          "start_seconds": null,
+          "end_seconds": null,
+          "block_type": "text"
+        },
+        {
+          "block_index": 4,
+          "page": 5,
+          "start_seconds": null,
+          "end_seconds": null,
+          "block_type": "text"
+        },
+        {
+          "block_index": 4,
+          "page": 5,
+          "start_seconds": null,
+          "end_seconds": null,
+          "block_type": "text"
+        },
+        {
+          "block_index": 4,
+          "page": 5,
+          "start_seconds": null,
+          "end_seconds": null,
+          "block_type": "text"
+        },
+        {
+          "block_index": 4,
+          "page": 5,
+          "start_seconds": null,
+          "end_seconds": null,
+          "block_type": "text"
+        },
+        {
+          "block_index": 4,
+          "page": 5,
+          "start_seconds": null,
+          "end_seconds": null,
+          "block_type": "text"
+        },
+        {
+          "block_index": 4,
+          "page": 5,
+          "start_seconds": null,
+          "end_seconds": null,
+          "block_type": "text"
+        },
+        {
+          "block_index": 4,
+          "page": 5,
+          "start_seconds": null,
+          "end_seconds": null,
+          "block_type": "text"
+        },
+        {
+          "block_index": 4,
+          "page": 5,
+          "start_seconds": null,
+          "end_seconds": null,
+          "block_type": "text"
+        },
+        {
+          "block_index": 4,
+          "page": 5,
+          "start_seconds": null,
+          "end_seconds": null,
+          "block_type": "text"
+        },
+        {
+          "block_index": 4,
+          "page": 5,
+          "start_seconds": null,
+          "end_seconds": null,
+          "block_type": "text"
+        },
+        {
+          "block_index": 4,
+          "page": 5,
+          "start_seconds": null,
+          "end_seconds": null,
+          "block_type": "text"
+        },
+        {
+          "block_index": 4,
+          "page": 5,
+          "start_seconds": null,
+          "end_seconds": null,
+          "block_type": "text"
+        },
+        {
+          "block_index": 4,
+          "page": 5,
+          "start_seconds": null,
+          "end_seconds": null,
+          "block_type": "text"
+        },
+        {
+          "block_index": 4,
+          "page": 5,
+          "start_seconds": null,
+          "end_seconds": null,
+          "block_type": "text"
+        },
+        {
+          "block_index": 4,
+          "page": 5,
+          "start_seconds": null,
+          "end_seconds": null,
+          "block_type": "text"
+        }
+      ],
+      "id": "ev_9fe1404d510a9bf4e8fbf096a8307011",
+      "workspace_id": "a6133957-44af-4e34-9764-a4e72f3e5c9c",
+      "created_at": "2026-11-08T15:27:45.519386+00:00"
+    },
+    "error": null,
+    "elapsed_ms": 11,
+    "id": "dbb8862b-067b-4a52-865e-2dd6b9c78f92",
+    "workspace_id": "a6133957-44af-4e34-9764-a4e72f3e5c9c",
+    "created_at": "2026-11-08T15:27:51.259310+00:00"
+  }
+]

@@ -1,0 +1,375 @@
+{
+  "session_id": "5345fb31-d274-43fd-a5a2-ddc6eed9509a",
+  "question": "我们要决定哪些训练和评测做法可以迁移到论文研究 Agent。仅根据提供的 QASPER 与 ArxivDIGESTables 两篇论文，按指定字段逐篇比较。\n明确区分数据集构建、模型训练与推理评测阶段；尤其区分题目作者看到了什么、回答者或系统实际收到什么，和不同 oracle / non-oracle 条件。\n哪些分数具有可比前提，哪些不能相互排名？训练是否需要新增标注，论文证据足不足以据此为我们的 Agent 选择微调？\n在 claims 中给出有引用的判断，在 proposals 中提出一个最小、尚未执行的控制实验，写清固定项、改动项、失败计数和停止条件。\n重要事实必须引用本次回读的原文，证据不够明确写本次未核实；不要用发表时结果推断当前最强模型，不读取论文外的数据集。",
+  "retrieval_strategy": "grep",
+  "allow_network": false,
+  "memory_mode": "evidence",
+  "read_guidance": false,
+  "memory_priority": "recent",
+  "writer_context": "lexical",
+  "report_schema": "full",
+  "max_steps": 18,
+  "max_tokens": 30000,
+  "max_seconds": 600,
+  "field_mode": "bounded",
+  "required_fields": [
+    {
+      "source_id": "4618e843-34a7-4d42-81f5-3e120603b62f",
+      "name": "角色与输入",
+      "criterion": "区分数据构建者、标注者、回答系统及其输入权限，不能把题目作者的视野当成回答系统的输入"
+    },
+    {
+      "source_id": "4618e843-34a7-4d42-81f5-3e120603b62f",
+      "name": "训练与数据划分",
+      "criterion": "区分任务数据划分、模型训练或微调、推理使用；找不到时明确未知，不把使用模型等同于训练模型"
+    },
+    {
+      "source_id": "4618e843-34a7-4d42-81f5-3e120603b62f",
+      "name": "评测条件与指标",
+      "criterion": "说明指标对象、参考依赖及 oracle/non-oracle 等适用条件；无法直接比较时解释原因"
+    },
+    {
+      "source_id": "4618e843-34a7-4d42-81f5-3e120603b62f",
+      "name": "迁移条件与未知",
+      "criterion": "把论文已验证事实、对产品的迁移推断及未解决问题分开，有引用且不夸大外推"
+    },
+    {
+      "source_id": "272b5cd0-cebc-4306-a01f-b1ff5d92bbda",
+      "name": "角色与输入",
+      "criterion": "区分数据构建者、标注者、回答系统及其输入权限，不能把题目作者的视野当成回答系统的输入"
+    },
+    {
+      "source_id": "272b5cd0-cebc-4306-a01f-b1ff5d92bbda",
+      "name": "训练与数据划分",
+      "criterion": "区分任务数据划分、模型训练或微调、推理使用；找不到时明确未知，不把使用模型等同于训练模型"
+    },
+    {
+      "source_id": "272b5cd0-cebc-4306-a01f-b1ff5d92bbda",
+      "name": "评测条件与指标",
+      "criterion": "说明指标对象、参考依赖及 oracle/non-oracle 等适用条件；无法直接比较时解释原因"
+    },
+    {
+      "source_id": "272b5cd0-cebc-4306-a01f-b1ff5d92bbda",
+      "name": "迁移条件与未知",
+      "criterion": "把论文已验证事实、对产品的迁移推断及未解决问题分开，有引用且不夸大外推"
+    }
+  ],
+  "max_field_repairs": 1,
+  "status": "completed",
+  "model": "qwen3.5-27b",
+  "tokens_used": 27801,
+  "tokens_estimated": false,
+  "step": 5,
+  "report": {
+    "title": "QASPER 与 ArxivDIGESTables 在训练、评测与迁移条件上的对比分析",
+    "claims": [
+      {
+        "text": "QASPER 数据集由 NLP 读者提出问题，由另一组 NLP 从业者回答并标注证据（文本、表格或图表），每篇论文平均 3.2 个问题。",
+        "evidence_ids": [
+          "ev_61ea2055cd6dd9996404dd884eb3fc50"
+        ],
+        "qualification": "",
+        "kind": "finding"
+      },
+      {
+        "text": "QASPER 的评测指标为 Answer-F1（答案正确性）和 Evidence-F1（证据选择正确性），系统需从整篇论文中检索信息，而 oracle 实验仅基于金标准证据回答问题。",
+        "evidence_ids": [
+          "ev_a6248b71d33dc4aba64f65916fa0cba6",
+          "ev_61ea2055cd6dd9996404dd884eb3fc50"
+        ],
+        "qualification": "",
+        "kind": "finding"
+      },
+      {
+        "text": "QASPER 中人类性能估计为 Answer-F1 60.9 和 Evidence-F1 71.6，但该值为下限，因仅使用两个标注计算且标注者为 NLP 从业者而非领域专家。",
+        "evidence_ids": [
+          "ev_a6248b71d33dc4aba64f65916fa0cba6"
+        ],
+        "qualification": "",
+        "kind": "finding"
+      },
+      {
+        "text": "ArxivDIGESTables 任务是将多篇论文合成为文献综述表格，模型生成的列可能与参考列不匹配，但人工评估显示部分不匹配列仍具实用性。",
+        "evidence_ids": [
+          "ev_8bd68108e644ddba613a6f80fa73893b",
+          "ev_80a6c4ab97c8e8858c7d64d9fecb7656"
+        ],
+        "qualification": "",
+        "kind": "finding"
+      },
+      {
+        "text": "ArxivDIGESTables 面临自动评估困难，因语义相似内容可能以不同表面形式表达，目前依赖人工评估协议验证生成列的效用。",
+        "evidence_ids": [
+          "ev_80a6c4ab97c8e8858c7d64d9fecb7656",
+          "ev_8bd68108e644ddba613a6f80fa73893b"
+        ],
+        "qualification": "",
+        "kind": "finding"
+      },
+      {
+        "text": "两篇论文均未明确说明模型是否针对各自任务进行了微调，也未提供训练数据划分细节；QASPER 提及 oracle 实验暗示预训练与领域适应可能有益，但未验证具体微调策略。",
+        "evidence_ids": [
+          "ev_61ea2055cd6dd9996404dd884eb3fc50",
+          "ev_f5037df4d042a0da19732db3c0f333a1"
+        ],
+        "qualification": "基于 QASPER 提到‘更好的预训练和领域适应可能有帮助’及 ArxivDIGESTables 未报告训练细节推断",
+        "kind": "inference"
+      }
+    ],
+    "comparison_rows": [
+      {
+        "source_id": "4618e843-34a7-4d42-81f5-3e120603b62f",
+        "method": "QASPER QA 系统",
+        "dataset": "QASPER (5,049 问题, 1,585 论文)",
+        "model": "本次未核实",
+        "metric": "Answer-F1, Evidence-F1",
+        "result": "人类下限: Answer-F1 60.9, Evidence-F1 71.6",
+        "conditions": "非 oracle：整篇论文检索；oracle：仅金标准证据",
+        "comparability": "qualified",
+        "evidence_ids": [
+          "ev_a6248b71d33dc4aba64f65916fa0cba6",
+          "ev_61ea2055cd6dd9996404dd884eb3fc50"
+        ],
+        "attributes": {
+          "角色与输入": "提问者：NLP 读者；回答者：NLP 从业者；系统输入：整篇论文",
+          "训练与数据划分": "训练/微调细节未报告；数据划分为 train/val/test（具体比例未读）",
+          "评测条件与指标": "Answer-F1（答案）、Evidence-F1（证据）；区分 oracle/non-oracle",
+          "迁移条件与未知": "oracle 实验暗示领域适应有益，但未验证微调必要性"
+        }
+      },
+      {
+        "source_id": "272b5cd0-cebc-4306-a01f-b1ff5d92bbda",
+        "method": "ArxivDIGESTables 表格生成",
+        "dataset": "ArxivDIGESTables (合成文献综述表)",
+        "model": "本次未核实",
+        "metric": "人工评估（列效用）",
+        "result": "生成列常不匹配参考列，但部分具实用性",
+        "conditions": "依赖人工评估；自动评估因表面形式差异困难",
+        "comparability": "unknown",
+        "evidence_ids": [
+          "ev_8bd68108e644ddba613a6f80fa73893b",
+          "ev_80a6c4ab97c8e8858c7d64d9fecb7656"
+        ],
+        "attributes": {
+          "角色与输入": "输入：多篇论文；输出：文献综述表；无明确标注者角色",
+          "训练与数据划分": "训练/微调细节未报告；数据划分未读",
+          "评测条件与指标": "人工评估列效用；自动评估困难",
+          "迁移条件与未知": "未验证微调效果；自动评估方法待开发"
+        }
+      }
+    ],
+    "limitations": [
+      "两篇论文均未明确报告模型是否经过任务特定微调，无法直接推断微调必要性。",
+      "QASPER 的人类性能为下限估计，实际人类上限未知，影响系统性能基准判断。",
+      "ArxivDIGESTables 缺乏自动评估指标，迁移至 Agent 时难以量化生成质量。",
+      "两篇论文的数据划分细节（如 train/val/test 比例）未在回读范围内找到，无法复现训练流程。"
+    ],
+    "verification_status": "needs_human_review",
+    "proposals": [
+      {
+        "text": "设计最小控制实验：在 QASPER 测试集上比较基座模型（zero-shot）与轻量微调模型（LoRA）在 non-oracle 条件下的 Answer-F1 提升。",
+        "basis_claim_indices": [
+          1,
+          5
+        ],
+        "assumptions": [
+          "QASPER 的 domain-adaptation 提示对微调有效；",
+          "LoRA 微调可显著降低训练成本且保持性能增益"
+        ],
+        "validation_plan": "固定项：测试集、评估指标（Answer-F1）、non-oracle 条件；改动项：是否进行 LoRA 微调；失败计数：若微调后 F1 提升 < 2 点则视为无效；停止条件：完成 3 次随机种子实验均无显著提升即终止。",
+        "status": "proposed_not_executed"
+      },
+      {
+        "text": "构建 ArxivDIGESTables 的自动评估代理：利用 LLM 作为裁判，对生成列与参考列的语义对齐度打分，替代部分人工评估。",
+        "basis_claim_indices": [
+          4,
+          5
+        ],
+        "assumptions": [
+          "LLM 裁判能可靠识别表面形式差异下的语义等价性；",
+          "自动评分与人工效用评估存在正相关"
+        ],
+        "validation_plan": "固定项：生成模型、输入论文集合；改动项：评估方式（人工 vs LLM 裁判）；失败计数：若 LLM 评分与人工效用相关性 < 0.6 则视为无效；停止条件：在 50 个样本上验证相关性达标或连续 3 次实验失败。",
+        "status": "proposed_not_executed"
+      }
+    ]
+  },
+  "error": null,
+  "id": "c895e8ea-7893-4537-abe2-3f0e668f5442",
+  "workspace_id": "be0b93c4-ba94-444d-bfa7-35c6cb79d14b",
+  "created_at": "2026-11-08T15:32:33.223399+00:00",
+  "updated_at": "2026-11-08T15:33:40.697644+00:00",
+  "field_state": {
+    "version": "field-ledger-v1",
+    "requirement_origin": "request",
+    "fields": [
+      {
+        "source_id": "4618e843-34a7-4d42-81f5-3e120603b62f",
+        "name": "角色与输入",
+        "criterion": "区分数据构建者、标注者、回答系统及其输入权限，不能把题目作者的视野当成回答系统的输入",
+        "id": "field-c50bba70e95d4b83",
+        "activity": "candidate",
+        "answer": "提问者：NLP 读者；回答者：NLP 从业者；系统输入：整篇论文",
+        "evidence_ids": [
+          "ev_61ea2055cd6dd9996404dd884eb3fc50",
+          "ev_a6248b71d33dc4aba64f65916fa0cba6"
+        ],
+        "candidate_hash": "6bc6a1179e502370f5f70723840de3c452257e840559ce848775db91b2697ac3",
+        "revision": 1,
+        "coverage": "present",
+        "review": null,
+        "attempts": 0
+      },
+      {
+        "source_id": "4618e843-34a7-4d42-81f5-3e120603b62f",
+        "name": "训练与数据划分",
+        "criterion": "区分任务数据划分、模型训练或微调、推理使用；找不到时明确未知，不把使用模型等同于训练模型",
+        "id": "field-41a1f594a9d2525b",
+        "activity": "candidate",
+        "answer": "训练/微调细节未报告；数据划分为 train/val/test（具体比例未读）",
+        "evidence_ids": [
+          "ev_61ea2055cd6dd9996404dd884eb3fc50",
+          "ev_a6248b71d33dc4aba64f65916fa0cba6"
+        ],
+        "candidate_hash": "6d80904d5af0bc88afde21fc54deb53f11b781dc018620fe029288fd7c56b0ea",
+        "revision": 1,
+        "coverage": "present",
+        "review": null,
+        "attempts": 0
+      },
+      {
+        "source_id": "4618e843-34a7-4d42-81f5-3e120603b62f",
+        "name": "评测条件与指标",
+        "criterion": "说明指标对象、参考依赖及 oracle/non-oracle 等适用条件；无法直接比较时解释原因",
+        "id": "field-85d9dcdbd2496805",
+        "activity": "candidate",
+        "answer": "Answer-F1（答案）、Evidence-F1（证据）；区分 oracle/non-oracle",
+        "evidence_ids": [
+          "ev_61ea2055cd6dd9996404dd884eb3fc50",
+          "ev_a6248b71d33dc4aba64f65916fa0cba6"
+        ],
+        "candidate_hash": "ac46380be82a94a0077c86c9bfd84482d01866f5b616946f2016710908af0265",
+        "revision": 1,
+        "coverage": "present",
+        "review": null,
+        "attempts": 0
+      },
+      {
+        "source_id": "4618e843-34a7-4d42-81f5-3e120603b62f",
+        "name": "迁移条件与未知",
+        "criterion": "把论文已验证事实、对产品的迁移推断及未解决问题分开，有引用且不夸大外推",
+        "id": "field-a03e331f60edfc29",
+        "activity": "candidate",
+        "answer": "oracle 实验暗示领域适应有益，但未验证微调必要性",
+        "evidence_ids": [
+          "ev_61ea2055cd6dd9996404dd884eb3fc50",
+          "ev_a6248b71d33dc4aba64f65916fa0cba6"
+        ],
+        "candidate_hash": "bb792a8f8675e4e15e3e09d1336c3291b11b37b11f90bf76ef4b54650ed5fe0c",
+        "revision": 1,
+        "coverage": "present",
+        "review": null,
+        "attempts": 0
+      },
+      {
+        "source_id": "272b5cd0-cebc-4306-a01f-b1ff5d92bbda",
+        "name": "角色与输入",
+        "criterion": "区分数据构建者、标注者、回答系统及其输入权限，不能把题目作者的视野当成回答系统的输入",
+        "id": "field-02633734cae5757e",
+        "activity": "candidate",
+        "answer": "输入：多篇论文；输出：文献综述表；无明确标注者角色",
+        "evidence_ids": [
+          "ev_80a6c4ab97c8e8858c7d64d9fecb7656",
+          "ev_8bd68108e644ddba613a6f80fa73893b"
+        ],
+        "candidate_hash": "0235166e61672f54334a72e2a5f4aabc43c66005b2275cfe676d7f0c352b9061",
+        "revision": 1,
+        "coverage": "present",
+        "review": null,
+        "attempts": 0
+      },
+      {
+        "source_id": "272b5cd0-cebc-4306-a01f-b1ff5d92bbda",
+        "name": "训练与数据划分",
+        "criterion": "区分任务数据划分、模型训练或微调、推理使用；找不到时明确未知，不把使用模型等同于训练模型",
+        "id": "field-97c8b2aca2819e91",
+        "activity": "candidate",
+        "answer": "训练/微调细节未报告；数据划分未读",
+        "evidence_ids": [
+          "ev_80a6c4ab97c8e8858c7d64d9fecb7656",
+          "ev_8bd68108e644ddba613a6f80fa73893b"
+        ],
+        "candidate_hash": "f7556ecea1b5077e9c4c9baf39bc8a605322f2c8271eca105917d1b22d36a0e5",
+        "revision": 1,
+        "coverage": "present",
+        "review": null,
+        "attempts": 0
+      },
+      {
+        "source_id": "272b5cd0-cebc-4306-a01f-b1ff5d92bbda",
+        "name": "评测条件与指标",
+        "criterion": "说明指标对象、参考依赖及 oracle/non-oracle 等适用条件；无法直接比较时解释原因",
+        "id": "field-28f23794d61e8c9d",
+        "activity": "candidate",
+        "answer": "人工评估列效用；自动评估困难",
+        "evidence_ids": [
+          "ev_80a6c4ab97c8e8858c7d64d9fecb7656",
+          "ev_8bd68108e644ddba613a6f80fa73893b"
+        ],
+        "candidate_hash": "a10e8c36a005cec18eff3661bdce5c1cf5e1f3f1bb4d18e67d396db5c7e841eb",
+        "revision": 1,
+        "coverage": "present",
+        "review": null,
+        "attempts": 0
+      },
+      {
+        "source_id": "272b5cd0-cebc-4306-a01f-b1ff5d92bbda",
+        "name": "迁移条件与未知",
+        "criterion": "把论文已验证事实、对产品的迁移推断及未解决问题分开，有引用且不夸大外推",
+        "id": "field-b2e84b31836fe93c",
+        "activity": "candidate",
+        "answer": "未验证微调效果；自动评估方法待开发",
+        "evidence_ids": [
+          "ev_80a6c4ab97c8e8858c7d64d9fecb7656",
+          "ev_8bd68108e644ddba613a6f80fa73893b"
+        ],
+        "candidate_hash": "b736cb406cf181ce8ddc52239cf8ae6f1c99b7ed822026505c2f1045948b6769",
+        "revision": 1,
+        "coverage": "present",
+        "review": null,
+        "attempts": 0
+      }
+    ],
+    "total": 8,
+    "present": 8,
+    "unresolved": 0,
+    "reviewed": 0,
+    "semantic_success": null,
+    "review_status": "skipped_budget_or_no_candidates",
+    "repair_rounds": 0,
+    "stop_reason": "final_reserve",
+    "previous_versions": []
+  },
+  "source_coverage": {
+    "status": "complete",
+    "planned_source_ids": [
+      "4618e843-34a7-4d42-81f5-3e120603b62f",
+      "272b5cd0-cebc-4306-a01f-b1ff5d92bbda"
+    ],
+    "fields": [
+      "角色与输入",
+      "训练与数据划分",
+      "评测条件与指标",
+      "迁移条件与未知"
+    ],
+    "read_source_ids": [
+      "272b5cd0-cebc-4306-a01f-b1ff5d92bbda",
+      "4618e843-34a7-4d42-81f5-3e120603b62f"
+    ],
+    "unread_source_ids": [],
+    "uncited_source_ids": [],
+    "field_verification": "not_automatically_verified",
+    "stop_reason": "final_reserve"
+  },
+  "markdown": "# QASPER 与 ArxivDIGESTables 在训练、评测与迁移条件上的对比分析\n\n状态：待研究者审核\n\n- QASPER 数据集由 NLP 读者提出问题，由另一组 NLP 从业者回答并标注证据（文本、表格或图表），每篇论文平均 3.2 个问题。 [ev_61ea2055cd6dd9996404dd884eb3fc50]\n- QASPER 的评测指标为 Answer-F1（答案正确性）和 Evidence-F1（证据选择正确性），系统需从整篇论文中检索信息，而 oracle 实验仅基于金标准证据回答问题。 [ev_a6248b71d33dc4aba64f65916fa0cba6, ev_61ea2055cd6dd9996404dd884eb3fc50]\n- QASPER 中人类性能估计为 Answer-F1 60.9 和 Evidence-F1 71.6，但该值为下限，因仅使用两个标注计算且标注者为 NLP 从业者而非领域专家。 [ev_a6248b71d33dc4aba64f65916fa0cba6]\n- ArxivDIGESTables 任务是将多篇论文合成为文献综述表格，模型生成的列可能与参考列不匹配，但人工评估显示部分不匹配列仍具实用性。 [ev_8bd68108e644ddba613a6f80fa73893b, ev_80a6c4ab97c8e8858c7d64d9fecb7656]\n- ArxivDIGESTables 面临自动评估困难，因语义相似内容可能以不同表面形式表达，目前依赖人工评估协议验证生成列的效用。 [ev_80a6c4ab97c8e8858c7d64d9fecb7656, ev_8bd68108e644ddba613a6f80fa73893b]\n- [推断] 两篇论文均未明确说明模型是否针对各自任务进行了微调，也未提供训练数据划分细节；QASPER 提及 oracle 实验暗示预训练与领域适应可能有益，但未验证具体微调策略。 [ev_61ea2055cd6dd9996404dd884eb3fc50, ev_f5037df4d042a0da19732db3c0f333a1]\n  适用范围：基于 QASPER 提到‘更好的预训练和领域适应可能有帮助’及 ArxivDIGESTables 未报告训练细节推断\n\n| 论文 / 方法 | 角色与输入 | 训练与数据划分 | 评测条件与指标 | 迁移条件与未知 | 证据 |\n|---|---|---|---|---|---|\n| QASPER QA 系统 | 提问者：NLP 读者；回答者：NLP 从业者；系统输入：整篇论文 | 训练/微调细节未报告；数据划分为 train/val/test（具体比例未读） | Answer-F1（答案）、Evidence-F1（证据）；区分 oracle/non-oracle | oracle 实验暗示领域适应有益，但未验证微调必要性 | ev_a6248b71d33dc4aba64f65916fa0cba6, ev_61ea2055cd6dd9996404dd884eb3fc50 |\n| ArxivDIGESTables 表格生成 | 输入：多篇论文；输出：文献综述表；无明确标注者角色 | 训练/微调细节未报告；数据划分未读 | 人工评估列效用；自动评估困难 | 未验证微调效果；自动评估方法待开发 | ev_8bd68108e644ddba613a6f80fa73893b, ev_80a6c4ab97c8e8858c7d64d9fecb7656 |\n\n## 方案建议（尚未执行，待验证）\n\n- 设计最小控制实验：在 QASPER 测试集上比较基座模型（zero-shot）与轻量微调模型（LoRA）在 non-oracle 条件下的 Answer-F1 提升。\n  依据：结论 2, 6\n  假设：QASPER 的 domain-adaptation 提示对微调有效；；LoRA 微调可显著降低训练成本且保持性能增益\n  验证计划：固定项：测试集、评估指标（Answer-F1）、non-oracle 条件；改动项：是否进行 LoRA 微调；失败计数：若微调后 F1 提升 < 2 点则视为无效；停止条件：完成 3 次随机种子实验均无显著提升即终止。\n- 构建 ArxivDIGESTables 的自动评估代理：利用 LLM 作为裁判，对生成列与参考列的语义对齐度打分，替代部分人工评估。\n  依据：结论 5, 6\n  假设：LLM 裁判能可靠识别表面形式差异下的语义等价性；；自动评分与人工效用评估存在正相关\n  验证计划：固定项：生成模型、输入论文集合；改动项：评估方式（人工 vs LLM 裁判）；失败计数：若 LLM 评分与人工效用相关性 < 0.6 则视为无效；停止条件：在 50 个样本上验证相关性达标或连续 3 次实验失败。\n\n## 限制与待验证问题\n\n- 两篇论文均未明确报告模型是否经过任务特定微调，无法直接推断微调必要性。\n- QASPER 的人类性能为下限估计，实际人类上限未知，影响系统性能基准判断。\n- ArxivDIGESTables 缺乏自动评估指标，迁移至 Agent 时难以量化生成质量。\n- 两篇论文的数据划分细节（如 train/val/test 比例）未在回读范围内找到，无法复现训练流程。"
+}

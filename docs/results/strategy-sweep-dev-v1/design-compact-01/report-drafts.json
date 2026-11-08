@@ -1,0 +1,139 @@
+[
+  {
+    "arguments": {
+      "title": "基于QASPER与ArxivDIGESTables的论文研究Agent评测方案对比与建议",
+      "claims": [
+        {
+          "text": "QASPER数据集包含5,049个由NLP从业者针对1,585篇NLP论文标题和摘要提出的问题，答案及支撑证据需从全文中检索，旨在评估文档级复杂推理能力。",
+          "evidence_ids": [
+            "ev_68a19c05a7debb14284c968448d627ff",
+            "ev_928cf8d002fc0ddb780d23b90850acab"
+          ],
+          "kind": "finding"
+        },
+        {
+          "text": "ArxivDIGESTables数据集包含2,228个文献综述表格，涵盖7,542篇论文，任务被分解为Schema生成（确定共享方面）和Value生成（填充具体值），用于评估跨论文信息综合与结构化输出能力。",
+          "evidence_ids": [
+            "ev_ca12cd9abf1149bbd171f3c78c504be7",
+            "ev_1f9ac95a4fbbb0d7dd2d3300e938d982"
+          ],
+          "kind": "finding"
+        },
+        {
+          "text": "QASPER的标注由两组独立的NLP从业者完成：一组仅看标题和摘要写问题，另一组阅读全文后提供答案并标注支撑证据（文本、表格或图表）。",
+          "evidence_ids": [
+            "ev_68a19c05a7debb14284c968448d627ff",
+            "ev_76ca2117d5173883dcf1d34082394391"
+          ],
+          "kind": "finding"
+        },
+        {
+          "text": "ArxivDIGESTables的参考表格提取自ArXiv论文，评估方法DECONTEXT EVAL通过自动对齐不同表面形式但语义相同的表格元素来衡量模型生成质量。",
+          "evidence_ids": [
+            "ev_ca12cd9abf1149bbd171f3c78c504be7",
+            "ev_1f9ac95a4fbbb0d7dd2d3300e938d982"
+          ],
+          "kind": "finding"
+        },
+        {
+          "text": "两个任务的指标不能直接横向排名，因为QASPER衡量的是单篇文档内的信息检索与推理（问答F1），而ArxivDIGESTables衡量的是多篇文档间的模式识别与结构化综合（表格重建/新颖性），任务目标与输出形式本质不同。",
+          "evidence_ids": [
+            "ev_68a19c05a7debb14284c968448d627ff",
+            "ev_ca12cd9abf1149bbd171f3c78c504be7"
+          ],
+          "kind": "inference",
+          "qualification": "基于两篇论文对任务定义（单篇QA vs 多篇表格合成）和评估目标（答案准确性 vs 结构一致性/新颖性）的描述推断。"
+        },
+        {
+          "text": "当前依据原文无法验证产品是否具备处理非NLP领域论文、长文档上下文窗口限制下的表现，以及在无明确Schema提示下的自主表格构建能力，这些缺口需进一步实测。",
+          "evidence_ids": [],
+          "kind": "inference",
+          "qualification": "原文仅覆盖NLP领域（QASPER）和特定格式的文献综述表（ArxivDIGESTables），未涉及其他领域或通用场景的评测数据。"
+        }
+      ],
+      "comparison_rows": [
+        {
+          "source_id": "c42bdbfa-5c41-4d1e-983a-c52e4e654be9",
+          "method": "QASPER",
+          "evidence_ids": [
+            "ev_68a19c05a7debb14284c968448d627ff",
+            "ev_928cf8d002fc0ddb780d23b90850acab"
+          ],
+          "attributes": {
+            "任务与输入输出": "单篇论文QA；输入：论文全文+基于标题/摘要的问题；输出：答案+证据引用",
+            "参考答案与标注": "NLP从业者独立撰写问题与答案，标注支撑证据（文本/图/表）",
+            "指标与比较条件": "F1分数（答案匹配度），强调文档级推理，不与通用事实型QA直接比",
+            "适用范围与缺口": "适用于验证单篇深度理解；缺非NLP领域、超长文档及多模态复杂推理验证"
+          }
+        },
+        {
+          "source_id": "6487622b-4bc8-4431-b8cf-a585831fdf68",
+          "method": "ArxivDIGESTables",
+          "evidence_ids": [
+            "ev_ca12cd9abf1149bbd171f3c78c504be7",
+            "ev_1f9ac95a4fbbb0d7dd2d3300e938d982"
+          ],
+          "attributes": {
+            "任务与输入输出": "多篇论文综合；输入：一组论文；输出：结构化文献综述表格（Schema+Values）",
+            "参考答案与标注": "从ArXiv论文提取的真实综述表，含人工定义的方面（Aspects）",
+            "指标与比较条件": "DECONTEXT EVAL（自动对齐）、人工评估（新颖性与有用性）；不直接与单篇QA比",
+            "适用范围与缺口": "适用于验证跨篇综合与结构化生成；缺无预设Schema时的自主发现能力及非综述类表格生成验证"
+          }
+        }
+      ],
+      "limitations": [
+        "本报告仅基于QASPER和ArxivDIGESTables两篇论文的摘要与引言部分，未核实完整实验设置与所有基线结果。",
+        "QASPER仅覆盖NLP领域，ArxivDIGESTables仅覆盖ArXiv上的综述表，无法直接推断其他学科或表格类型的性能。",
+        "原文未提供关于模型在极端长文档或高噪声输入下的具体失败案例分析，相关鲁棒性未知。",
+        "提出的评测方案尚未执行，其有效性依赖于实际数据划分与人工审核流程的落地。"
+      ],
+      "proposals": [
+        {
+          "text": "构建最小可执行评测组合：选取QASPER测试集50题（单篇推理）与ArxivDIGESTables测试集20表（跨篇综合），按领域分层抽样。",
+          "basis_claim_indices": [
+            0,
+            1
+          ],
+          "assumptions": [
+            "现有API能稳定处理单篇PDF解析与多篇文本输入",
+            "人工审核资源可在两周内完成100个样本的校验"
+          ],
+          "validation_plan": "1. 数据准备：随机抽取样本，确保领域分布均匀；2. 自动化运行：调用Agent接口获取答案与表格；3. 人工检查：双人盲审，记录答案错误、证据缺失、表格结构偏差；4. 失败计数：统计完全不可用样本比例，设定阈值（如>20%则需优化）。"
+        },
+        {
+          "text": "设计“Schema泛化”压力测试：在ArxivDIGESTables任务中移除预设列名，要求Agent自主归纳方面并生成表格。",
+          "basis_claim_indices": [
+            1,
+            3
+          ],
+          "assumptions": [
+            "Agent具备无监督聚类或关键词提取能力以生成Schema",
+            "人工评估标准可扩展至‘方面合理性’维度"
+          ],
+          "validation_plan": "1. 输入相同论文集但不提供参考Schema；2. 对比生成Schema与参考Schema的重合度（IoU）；3. 人工评估生成方面的逻辑一致性与覆盖度；4. 记录因Schema错误导致的Value填充失败率。"
+        },
+        {
+          "text": "建立跨任务一致性检查机制：对同一组论文，先问QASPER式问题再要求生成表格，验证信息抽取的一致性。",
+          "basis_claim_indices": [
+            0,
+            1,
+            4
+          ],
+          "assumptions": [
+            "Agent内部状态在连续对话中能保持上下文一致性",
+            "存在足够重叠的论文子集可用于交叉验证"
+          ],
+          "validation_plan": "1. 选取10篇同时出现在两个数据集（或类似主题）的论文；2. 分别执行QA任务和表格生成任务；3. 比对QA中提取的关键信息与表格对应单元格的数值/描述是否冲突；4. 统计矛盾案例数作为一致性指标。"
+        }
+      ],
+      "verification_status": "needs_human_review"
+    },
+    "normalized_columns": [],
+    "validation_status": "rejected",
+    "id": "f57087cc-6151-4860-b027-ffc4a8c6df93",
+    "workspace_id": "3136b4aa-614b-4ab3-b32b-486200a9babe",
+    "created_at": "2026-11-08T15:16:32.610277+00:00",
+    "updated_at": "2026-11-08T15:16:32.633731+00:00",
+    "error": "1 validation error for CompactReport\nclaims.5.evidence_ids\n  List should have at least 1 item after validation, not 0 [type=too_short, input_value=[], input_type=list]\n    For further information visit https://errors.pydantic.dev/2.14/v/too_short"
+  }
+]

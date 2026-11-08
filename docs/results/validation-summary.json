@@ -3,19 +3,19 @@
   "model": "qwen3.5-27b",
   "scope": "Agent development runs, engineering validation, and separately reported local verifier studies; QASPER frozen test set reserved",
   "checks": {
-    "offline_tests_passed": 276,
+    "offline_tests_passed": 300,
     "frontend_typecheck": "passed",
     "frontend_production_build": "passed",
     "live_report_api": "completed",
-    "offline_tests_collected": 276,
+    "offline_tests_collected": 300,
     "offline_test_profiles": [
       {
         "profile": "full-locked",
         "platform": "Windows",
         "python": "3.13.13",
         "dependencies": "core + analysis under constraints-ci.txt; CPU torch from the official index",
-        "collected": 276,
-        "passed": 276,
+        "collected": 300,
+        "passed": 300,
         "skipped": 0,
         "failed": 0,
         "errors": 0,
@@ -30,7 +30,7 @@
           "pytest-asyncio": "1.4.1.post1",
           "openai": "3.46.0"
         },
-        "evidence": "docs/results/memory-ablation-dev001-v1/validation.json"
+        "evidence": "docs/results/strategy-sweep-dev-v1/validation.json"
       }
     ],
     "ci_workflow": ".github/workflows/ci.yml",
@@ -632,6 +632,31 @@
         },
         "evidence": "docs/results/context-gate-dev001-v1/validation.json"
       }
+    ],
+    "offline_test_profiles_before_strategy_sweep": [
+      {
+        "profile": "full-locked",
+        "platform": "Windows",
+        "python": "3.13.13",
+        "dependencies": "core + analysis under constraints-ci.txt; CPU torch from the official index",
+        "collected": 276,
+        "passed": 276,
+        "skipped": 0,
+        "failed": 0,
+        "errors": 0,
+        "packages": {
+          "fastapi": "0.162.0",
+          "numpy": "2.5.4",
+          "scipy": "1.18.1",
+          "openpyxl": "3.1.5",
+          "torch": "2.15.0+cpu",
+          "pydantic": "2.14.3",
+          "pytest": "9.2.0",
+          "pytest-asyncio": "1.4.1.post1",
+          "openai": "3.46.0"
+        },
+        "evidence": "docs/results/memory-ablation-dev001-v1/validation.json"
+      }
     ]
   },
   "datasets": {
@@ -1122,5 +1147,17 @@
     "human_labels": 0,
     "semantic_accuracy": null,
     "report": "docs/results/MEMORY_ARCHITECTURE_DEV001_V1.md"
+  },
+  "strategy_sweep_dev_v1": {
+    "planned_attempts": 24,
+    "executed_attempts": 24,
+    "contract_passes": 15,
+    "fully_populated_reports": 13,
+    "returned_tokens": 654061,
+    "model_calls": 123,
+    "human_labels": 0,
+    "semantic_accuracy": null,
+    "results": "docs/results/STRATEGY_SWEEP_DEV_V1.md",
+    "audit_command": "python scripts/strategy_sweep.py audit"
   }
 }

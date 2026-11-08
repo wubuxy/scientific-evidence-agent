@@ -1,0 +1,388 @@
+{
+  "session_id": "c1213b07-ad3d-4099-bdaf-d10529be9110",
+  "question": "我们要决定哪些训练和评测做法可以迁移到论文研究 Agent。仅根据提供的 QASPER 与 ArxivDIGESTables 两篇论文，按指定字段逐篇比较。\n明确区分数据集构建、模型训练与推理评测阶段；尤其区分题目作者看到了什么、回答者或系统实际收到什么，和不同 oracle / non-oracle 条件。\n哪些分数具有可比前提，哪些不能相互排名？训练是否需要新增标注，论文证据足不足以据此为我们的 Agent 选择微调？\n在 claims 中给出有引用的判断，在 proposals 中提出一个最小、尚未执行的控制实验，写清固定项、改动项、失败计数和停止条件。\n重要事实必须引用本次回读的原文，证据不够明确写本次未核实；不要用发表时结果推断当前最强模型，不读取论文外的数据集。",
+  "retrieval_strategy": "grep",
+  "allow_network": false,
+  "memory_mode": "evidence",
+  "read_guidance": false,
+  "memory_priority": "recent",
+  "writer_context": "lexical",
+  "report_schema": "full",
+  "max_steps": 18,
+  "max_tokens": 30000,
+  "max_seconds": 600,
+  "field_mode": "bounded",
+  "required_fields": [
+    {
+      "source_id": "8cadbd33-cfb9-46b9-a8c7-95fe04c9546b",
+      "name": "角色与输入",
+      "criterion": "区分数据构建者、标注者、回答系统及其输入权限，不能把题目作者的视野当成回答系统的输入"
+    },
+    {
+      "source_id": "8cadbd33-cfb9-46b9-a8c7-95fe04c9546b",
+      "name": "训练与数据划分",
+      "criterion": "区分任务数据划分、模型训练或微调、推理使用；找不到时明确未知，不把使用模型等同于训练模型"
+    },
+    {
+      "source_id": "8cadbd33-cfb9-46b9-a8c7-95fe04c9546b",
+      "name": "评测条件与指标",
+      "criterion": "说明指标对象、参考依赖及 oracle/non-oracle 等适用条件；无法直接比较时解释原因"
+    },
+    {
+      "source_id": "8cadbd33-cfb9-46b9-a8c7-95fe04c9546b",
+      "name": "迁移条件与未知",
+      "criterion": "把论文已验证事实、对产品的迁移推断及未解决问题分开，有引用且不夸大外推"
+    },
+    {
+      "source_id": "1e13f213-0cc9-433d-9ab1-e7191a280039",
+      "name": "角色与输入",
+      "criterion": "区分数据构建者、标注者、回答系统及其输入权限，不能把题目作者的视野当成回答系统的输入"
+    },
+    {
+      "source_id": "1e13f213-0cc9-433d-9ab1-e7191a280039",
+      "name": "训练与数据划分",
+      "criterion": "区分任务数据划分、模型训练或微调、推理使用；找不到时明确未知，不把使用模型等同于训练模型"
+    },
+    {
+      "source_id": "1e13f213-0cc9-433d-9ab1-e7191a280039",
+      "name": "评测条件与指标",
+      "criterion": "说明指标对象、参考依赖及 oracle/non-oracle 等适用条件；无法直接比较时解释原因"
+    },
+    {
+      "source_id": "1e13f213-0cc9-433d-9ab1-e7191a280039",
+      "name": "迁移条件与未知",
+      "criterion": "把论文已验证事实、对产品的迁移推断及未解决问题分开，有引用且不夸大外推"
+    }
+  ],
+  "max_field_repairs": 1,
+  "status": "completed",
+  "model": "qwen3.5-27b",
+  "tokens_used": 29266,
+  "tokens_estimated": false,
+  "step": 5,
+  "report": {
+    "title": "QASPER 与 ArxivDIGESTables 训练评测做法迁移性比较报告",
+    "claims": [
+      {
+        "text": "QASPER 数据集构建采用解耦流程：研究生撰写问题，另一组经过资格考核的标注者基于全文回答并选择最小证据片段；系统输入为检索到的上下文伪文档列表。",
+        "evidence_ids": [
+          "ev_dbd51bfe615cf2f61578502434256dc7",
+          "ev_41a8045d162faf52b65c54038c9b52cd",
+          "ev_89d62505e66c7db455184fe28318360d"
+        ],
+        "qualification": "",
+        "kind": "finding"
+      },
+      {
+        "text": "ArxivDIGESTables 数据集由从论文中解析出的参考表格构成，过滤了字符数、引用数和行列数不满足条件的表格；部分表格值（如实验结果）无法仅从输入文本推导。",
+        "evidence_ids": [
+          "ev_9aeb9f5f73e6ac8a1f44fb6ae5e00ac4",
+          "ev_2643df162aa82f062f26bef562f74a68"
+        ],
+        "qualification": "",
+        "kind": "finding"
+      },
+      {
+        "text": "QASPER 评测指标为 Answer-F1 和 Evidence-F1，基于系统选择的段落/图表/表格与参考证据的匹配；人类性能估计为 Answer-F1 60.9、Evidence-F1 71.6，此为下限。",
+        "evidence_ids": [
+          "ev_e4c799ac6be5608f64e32b3748e1742a"
+        ],
+        "qualification": "",
+        "kind": "finding"
+      },
+      {
+        "text": "ArxivDIGESTables 评测包含 schema 对齐（DECONTEXT EVAL）与单元格语义等价判断；模型生成时为避免刷高 recall，被指令限制生成与参考相同数量的方面。",
+        "evidence_ids": [
+          "ev_9e30f13e93d36b6f1cfce039c02b3d73",
+          "ev_4bec3941768b23e1f3c68c2b46194953"
+        ],
+        "qualification": "",
+        "kind": "finding"
+      },
+      {
+        "text": "QASPER 基线模型使用 LED-base（基于 BART 初始化），支持长文档（16K tokens）；ArxivDIGESTables 实验使用了 Mixtral 8x22 和 GPT-3.5-Turbo，但未说明是否微调。",
+        "evidence_ids": [
+          "ev_741fd24f5360d351968ae598608b289a",
+          "ev_9e30f13e93d36b6f1cfce039c02b3d73"
+        ],
+        "qualification": "",
+        "kind": "finding"
+      },
+      {
+        "text": "两篇论文的评测条件不同：QASPER 依赖检索上下文且存在多证据参考，ArxivDIGESTables 依赖表格结构对齐与额外上下文（如生成的 caption）；直接跨任务排名不可比。",
+        "evidence_ids": [
+          "ev_89d62505e66c7db455184fe28318360d",
+          "ev_2643df162aa82f062f26bef562f74a68",
+          "ev_9e30f13e93d36b6f1cfce039c02b3d73"
+        ],
+        "qualification": "基于两文对输入上下文、参考形式及指标定义的差异推断",
+        "kind": "inference"
+      }
+    ],
+    "comparison_rows": [
+      {
+        "source_id": "8cadbd33-cfb9-46b9-a8c7-95fe04c9546b",
+        "method": "LED-base (BART-initialized)",
+        "dataset": "QASPER (18K papers, decoupled QA)",
+        "model": "LED-base",
+        "metric": "Answer-F1, Evidence-F1",
+        "result": "Human lower bound: 60.9 / 71.6",
+        "conditions": "Retrieved context; multiple evidence refs allowed",
+        "comparability": "unknown",
+        "evidence_ids": [
+          "ev_741fd24f5360d351968ae598608b289a",
+          "ev_e4c799ac6be5608f64e32b3748e1742a",
+          "ev_dbd51bfe615cf2f61578502434256dc7"
+        ],
+        "attributes": {
+          "角色与输入": "问题作者 vs 标注者；系统输入为检索伪文档",
+          "训练与数据划分": "未明确微调细节；使用预训练权重",
+          "评测条件与指标": "F1 over paragraphs/figures/tables; oracle-based",
+          "迁移条件与未知": "需验证检索质量对 F1 的影响"
+        }
+      },
+      {
+        "source_id": "1e13f213-0cc9-433d-9ab1-e7191a280039",
+        "method": "Mixtral 8x22, GPT-3.5-Turbo",
+        "dataset": "ArxivDIGESTables (filtered tables from papers)",
+        "model": "Mixtral 8x22, GPT-3.5-Turbo",
+        "metric": "Schema alignment, cell semantic equivalence",
+        "result": "本次未核实",
+        "conditions": "Additional context (e.g., generated captions); fixed aspect count",
+        "comparability": "unknown",
+        "evidence_ids": [
+          "ev_9e30f13e93d36b6f1cfce039c02b3d73",
+          "ev_2643df162aa82f062f26bef562f74a68",
+          "ev_9aeb9f5f73e6ac8a1f44fb6ae5e00ac4"
+        ],
+        "attributes": {
+          "角色与输入": "无显式标注者；输入为论文文本+可选上下文",
+          "训练与数据划分": "未说明微调；可能为零样本/少样本推理",
+          "评测条件与指标": "DECONTEXT EVAL for schema; non-oracle cell check",
+          "迁移条件与未知": "需验证额外上下文对 schema 重建的贡献"
+        }
+      }
+    ],
+    "limitations": [
+      "QASPER 未明确说明模型是否经过微调，仅提及使用预训练权重初始化",
+      "ArxivDIGESTables 未提供具体数值结果，仅描述评测方法",
+      "两文评测指标定义不同，无法直接进行跨任务性能排名",
+      "部分表格值无法从输入文本推导，影响非 oracle 条件下的评估有效性"
+    ],
+    "verification_status": "needs_human_review",
+    "proposals": [
+      {
+        "text": "在 QASPER 子集上对比零样本推理与微调后的 LED-base 在 Answer-F1 上的差异，固定检索器与上下文长度。",
+        "basis_claim_indices": [
+          0,
+          4
+        ],
+        "assumptions": [
+          "微调能提升复杂推理任务的 F1",
+          "检索质量是主要瓶颈而非模型容量"
+        ],
+        "validation_plan": "选取 500 个问答对，分别用零样本和微调模型测试，记录 F1 变化；若提升<2%则停止微调尝试",
+        "status": "proposed_not_executed"
+      },
+      {
+        "text": "在 ArxivDIGESTables 上测试添加不同上下文（caption、示例表）对 schema 对齐率的影响，固定模型为 GPT-3.5-Turbo。",
+        "basis_claim_indices": [
+          1,
+          5
+        ],
+        "assumptions": [
+          "额外上下文能显著提升 schema 重建能力",
+          "模型对提示敏感"
+        ],
+        "validation_plan": "设计三组提示（无上下文、仅 caption、caption+示例），各测 200 表，统计 schema 对齐率；若差异不显著则放弃该方向",
+        "status": "proposed_not_executed"
+      }
+    ]
+  },
+  "error": null,
+  "id": "852b18c6-1714-4322-a10b-5c414a3604cf",
+  "workspace_id": "dc6f8288-dff1-4017-93ef-2e2f7adeec52",
+  "created_at": "2026-11-08T15:17:18.565940+00:00",
+  "updated_at": "2026-11-08T15:18:25.200030+00:00",
+  "field_state": {
+    "version": "field-ledger-v1",
+    "requirement_origin": "request",
+    "fields": [
+      {
+        "source_id": "8cadbd33-cfb9-46b9-a8c7-95fe04c9546b",
+        "name": "角色与输入",
+        "criterion": "区分数据构建者、标注者、回答系统及其输入权限，不能把题目作者的视野当成回答系统的输入",
+        "id": "field-5db7fe7658d24ebd",
+        "activity": "candidate",
+        "answer": "问题作者 vs 标注者；系统输入为检索伪文档",
+        "evidence_ids": [
+          "ev_741fd24f5360d351968ae598608b289a",
+          "ev_dbd51bfe615cf2f61578502434256dc7",
+          "ev_e4c799ac6be5608f64e32b3748e1742a"
+        ],
+        "candidate_hash": "b53068ba6b94764736fcbe54888f7acff08bcd3c2ded9cb62f63b7514903d83e",
+        "revision": 1,
+        "coverage": "present",
+        "review": null,
+        "attempts": 0
+      },
+      {
+        "source_id": "8cadbd33-cfb9-46b9-a8c7-95fe04c9546b",
+        "name": "训练与数据划分",
+        "criterion": "区分任务数据划分、模型训练或微调、推理使用；找不到时明确未知，不把使用模型等同于训练模型",
+        "id": "field-5fba3bd02fc98d69",
+        "activity": "candidate",
+        "answer": "未明确微调细节；使用预训练权重",
+        "evidence_ids": [
+          "ev_741fd24f5360d351968ae598608b289a",
+          "ev_dbd51bfe615cf2f61578502434256dc7",
+          "ev_e4c799ac6be5608f64e32b3748e1742a"
+        ],
+        "candidate_hash": "37329b450d11680ea3611f2ced4f3db78078f61096f03645f40c95c8d0811332",
+        "revision": 1,
+        "coverage": "present",
+        "review": null,
+        "attempts": 0
+      },
+      {
+        "source_id": "8cadbd33-cfb9-46b9-a8c7-95fe04c9546b",
+        "name": "评测条件与指标",
+        "criterion": "说明指标对象、参考依赖及 oracle/non-oracle 等适用条件；无法直接比较时解释原因",
+        "id": "field-2ab6b57286b977df",
+        "activity": "candidate",
+        "answer": "F1 over paragraphs/figures/tables; oracle-based",
+        "evidence_ids": [
+          "ev_741fd24f5360d351968ae598608b289a",
+          "ev_dbd51bfe615cf2f61578502434256dc7",
+          "ev_e4c799ac6be5608f64e32b3748e1742a"
+        ],
+        "candidate_hash": "211e9089af09d48f62940f84c794ae825bb102320aa350f138af9f369c51b1c6",
+        "revision": 1,
+        "coverage": "present",
+        "review": null,
+        "attempts": 0
+      },
+      {
+        "source_id": "8cadbd33-cfb9-46b9-a8c7-95fe04c9546b",
+        "name": "迁移条件与未知",
+        "criterion": "把论文已验证事实、对产品的迁移推断及未解决问题分开，有引用且不夸大外推",
+        "id": "field-0548b8aa0118219b",
+        "activity": "candidate",
+        "answer": "需验证检索质量对 F1 的影响",
+        "evidence_ids": [
+          "ev_741fd24f5360d351968ae598608b289a",
+          "ev_dbd51bfe615cf2f61578502434256dc7",
+          "ev_e4c799ac6be5608f64e32b3748e1742a"
+        ],
+        "candidate_hash": "52223f499221b0ada564edcd8a8573847970da0c0b4ded4358915277b1b4978b",
+        "revision": 1,
+        "coverage": "present",
+        "review": null,
+        "attempts": 0
+      },
+      {
+        "source_id": "1e13f213-0cc9-433d-9ab1-e7191a280039",
+        "name": "角色与输入",
+        "criterion": "区分数据构建者、标注者、回答系统及其输入权限，不能把题目作者的视野当成回答系统的输入",
+        "id": "field-56fb1452875fec38",
+        "activity": "candidate",
+        "answer": "无显式标注者；输入为论文文本+可选上下文",
+        "evidence_ids": [
+          "ev_2643df162aa82f062f26bef562f74a68",
+          "ev_9aeb9f5f73e6ac8a1f44fb6ae5e00ac4",
+          "ev_9e30f13e93d36b6f1cfce039c02b3d73"
+        ],
+        "candidate_hash": "bdf25799e18622292765d28c9aa1afc04cac3193af3e3275a413c30745d5cc47",
+        "revision": 1,
+        "coverage": "present",
+        "review": null,
+        "attempts": 0
+      },
+      {
+        "source_id": "1e13f213-0cc9-433d-9ab1-e7191a280039",
+        "name": "训练与数据划分",
+        "criterion": "区分任务数据划分、模型训练或微调、推理使用；找不到时明确未知，不把使用模型等同于训练模型",
+        "id": "field-bf5b825225617c4d",
+        "activity": "candidate",
+        "answer": "未说明微调；可能为零样本/少样本推理",
+        "evidence_ids": [
+          "ev_2643df162aa82f062f26bef562f74a68",
+          "ev_9aeb9f5f73e6ac8a1f44fb6ae5e00ac4",
+          "ev_9e30f13e93d36b6f1cfce039c02b3d73"
+        ],
+        "candidate_hash": "447ec00380ba3e4ee9236e0f6749908bc8dbea8619b657fcbf40cf1e1b633835",
+        "revision": 1,
+        "coverage": "present",
+        "review": null,
+        "attempts": 0
+      },
+      {
+        "source_id": "1e13f213-0cc9-433d-9ab1-e7191a280039",
+        "name": "评测条件与指标",
+        "criterion": "说明指标对象、参考依赖及 oracle/non-oracle 等适用条件；无法直接比较时解释原因",
+        "id": "field-2e240a6af19b484f",
+        "activity": "candidate",
+        "answer": "DECONTEXT EVAL for schema; non-oracle cell check",
+        "evidence_ids": [
+          "ev_2643df162aa82f062f26bef562f74a68",
+          "ev_9aeb9f5f73e6ac8a1f44fb6ae5e00ac4",
+          "ev_9e30f13e93d36b6f1cfce039c02b3d73"
+        ],
+        "candidate_hash": "6b6c4687e33fbcf938d9b11d303bddb94b16e4d54961f62988a587283f7a3cef",
+        "revision": 1,
+        "coverage": "present",
+        "review": null,
+        "attempts": 0
+      },
+      {
+        "source_id": "1e13f213-0cc9-433d-9ab1-e7191a280039",
+        "name": "迁移条件与未知",
+        "criterion": "把论文已验证事实、对产品的迁移推断及未解决问题分开，有引用且不夸大外推",
+        "id": "field-9975974fc2081aad",
+        "activity": "candidate",
+        "answer": "需验证额外上下文对 schema 重建的贡献",
+        "evidence_ids": [
+          "ev_2643df162aa82f062f26bef562f74a68",
+          "ev_9aeb9f5f73e6ac8a1f44fb6ae5e00ac4",
+          "ev_9e30f13e93d36b6f1cfce039c02b3d73"
+        ],
+        "candidate_hash": "b0b69dfdb49ac24b3b1e94bdb7cc4b4a1f548c3dc42a849c3037955696050179",
+        "revision": 1,
+        "coverage": "present",
+        "review": null,
+        "attempts": 0
+      }
+    ],
+    "total": 8,
+    "present": 8,
+    "unresolved": 0,
+    "reviewed": 0,
+    "semantic_success": null,
+    "review_status": "skipped_budget_or_no_candidates",
+    "repair_rounds": 0,
+    "stop_reason": "final_reserve",
+    "previous_versions": []
+  },
+  "source_coverage": {
+    "status": "complete",
+    "planned_source_ids": [
+      "8cadbd33-cfb9-46b9-a8c7-95fe04c9546b",
+      "1e13f213-0cc9-433d-9ab1-e7191a280039"
+    ],
+    "fields": [
+      "角色与输入",
+      "训练与数据划分",
+      "评测条件与指标",
+      "迁移条件与未知"
+    ],
+    "read_source_ids": [
+      "1e13f213-0cc9-433d-9ab1-e7191a280039",
+      "8cadbd33-cfb9-46b9-a8c7-95fe04c9546b"
+    ],
+    "unread_source_ids": [],
+    "uncited_source_ids": [],
+    "field_verification": "not_automatically_verified",
+    "stop_reason": "final_reserve"
+  },
+  "markdown": "# QASPER 与 ArxivDIGESTables 训练评测做法迁移性比较报告\n\n状态：待研究者审核\n\n- QASPER 数据集构建采用解耦流程：研究生撰写问题，另一组经过资格考核的标注者基于全文回答并选择最小证据片段；系统输入为检索到的上下文伪文档列表。 [ev_dbd51bfe615cf2f61578502434256dc7, ev_41a8045d162faf52b65c54038c9b52cd, ev_89d62505e66c7db455184fe28318360d]\n- ArxivDIGESTables 数据集由从论文中解析出的参考表格构成，过滤了字符数、引用数和行列数不满足条件的表格；部分表格值（如实验结果）无法仅从输入文本推导。 [ev_9aeb9f5f73e6ac8a1f44fb6ae5e00ac4, ev_2643df162aa82f062f26bef562f74a68]\n- QASPER 评测指标为 Answer-F1 和 Evidence-F1，基于系统选择的段落/图表/表格与参考证据的匹配；人类性能估计为 Answer-F1 60.9、Evidence-F1 71.6，此为下限。 [ev_e4c799ac6be5608f64e32b3748e1742a]\n- ArxivDIGESTables 评测包含 schema 对齐（DECONTEXT EVAL）与单元格语义等价判断；模型生成时为避免刷高 recall，被指令限制生成与参考相同数量的方面。 [ev_9e30f13e93d36b6f1cfce039c02b3d73, ev_4bec3941768b23e1f3c68c2b46194953]\n- QASPER 基线模型使用 LED-base（基于 BART 初始化），支持长文档（16K tokens）；ArxivDIGESTables 实验使用了 Mixtral 8x22 和 GPT-3.5-Turbo，但未说明是否微调。 [ev_741fd24f5360d351968ae598608b289a, ev_9e30f13e93d36b6f1cfce039c02b3d73]\n- [推断] 两篇论文的评测条件不同：QASPER 依赖检索上下文且存在多证据参考，ArxivDIGESTables 依赖表格结构对齐与额外上下文（如生成的 caption）；直接跨任务排名不可比。 [ev_89d62505e66c7db455184fe28318360d, ev_2643df162aa82f062f26bef562f74a68, ev_9e30f13e93d36b6f1cfce039c02b3d73]\n  适用范围：基于两文对输入上下文、参考形式及指标定义的差异推断\n\n| 论文 / 方法 | 角色与输入 | 训练与数据划分 | 评测条件与指标 | 迁移条件与未知 | 证据 |\n|---|---|---|---|---|---|\n| LED-base (BART-initialized) | 问题作者 vs 标注者；系统输入为检索伪文档 | 未明确微调细节；使用预训练权重 | F1 over paragraphs/figures/tables; oracle-based | 需验证检索质量对 F1 的影响 | ev_741fd24f5360d351968ae598608b289a, ev_e4c799ac6be5608f64e32b3748e1742a, ev_dbd51bfe615cf2f61578502434256dc7 |\n| Mixtral 8x22, GPT-3.5-Turbo | 无显式标注者；输入为论文文本+可选上下文 | 未说明微调；可能为零样本/少样本推理 | DECONTEXT EVAL for schema; non-oracle cell check | 需验证额外上下文对 schema 重建的贡献 | ev_9e30f13e93d36b6f1cfce039c02b3d73, ev_2643df162aa82f062f26bef562f74a68, ev_9aeb9f5f73e6ac8a1f44fb6ae5e00ac4 |\n\n## 方案建议（尚未执行，待验证）\n\n- 在 QASPER 子集上对比零样本推理与微调后的 LED-base 在 Answer-F1 上的差异，固定检索器与上下文长度。\n  依据：结论 1, 5\n  假设：微调能提升复杂推理任务的 F1；检索质量是主要瓶颈而非模型容量\n  验证计划：选取 500 个问答对，分别用零样本和微调模型测试，记录 F1 变化；若提升<2%则停止微调尝试\n- 在 ArxivDIGESTables 上测试添加不同上下文（caption、示例表）对 schema 对齐率的影响，固定模型为 GPT-3.5-Turbo。\n  依据：结论 2, 6\n  假设：额外上下文能显著提升 schema 重建能力；模型对提示敏感\n  验证计划：设计三组提示（无上下文、仅 caption、caption+示例），各测 200 表，统计 schema 对齐率；若差异不显著则放弃该方向\n\n## 限制与待验证问题\n\n- QASPER 未明确说明模型是否经过微调，仅提及使用预训练权重初始化\n- ArxivDIGESTables 未提供具体数值结果，仅描述评测方法\n- 两文评测指标定义不同，无法直接进行跨任务性能排名\n- 部分表格值无法从输入文本推导，影响非 oracle 条件下的评估有效性"
+}

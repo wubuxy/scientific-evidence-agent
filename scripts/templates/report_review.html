@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>独立报告评审</title>
+<style>
+:root{font-family:system-ui,"Microsoft YaHei",sans-serif;color:#20334a;background:#edf2f7;line-height:1.65;color-scheme:light}
+*{box-sizing:border-box}body{margin:0}header{background:#142a40;color:white;padding:24px 5vw}h1{font-size:25px;margin:0 0 6px}p{margin:8px 0}header p{color:#c4d3e2;max-width:1000px;font-size:14px}
+nav{display:flex;flex-wrap:wrap;align-items:center;gap:12px;padding:16px 5vw;background:white;border-bottom:1px solid #ccd8e5;position:sticky;top:0;z-index:2}
+button,input,select,textarea{font:inherit;border:1px solid #b6c5d6;border-radius:7px;padding:8px 12px;background:white;color:inherit}button{cursor:pointer}button:hover{background:#e9f1fc}button:disabled{opacity:.4;cursor:default}.primary{background:#2465a2;color:white;border-color:#2465a2}.primary:hover{background:#184d80}input{max-width:190px}#progress{margin-left:auto;font-size:14px;color:#526780}
+main{display:grid;grid-template-columns:minmax(0,1.12fr) minmax(330px,1fr);gap:20px;padding:24px 5vw;align-items:start}.panel{background:white;border:1px solid #d7e1ec;border-radius:12px;padding:24px;min-width:0}.panel h2{font-size:20px;margin:0 0 12px}h3{font-size:16px;margin:10px 0}.muted{font-size:13px;color:#647a90}#report,#task{white-space:pre-wrap;overflow-wrap:anywhere;font-family:inherit;font-size:14px}#report{border-top:1px solid #dee7ef;padding-top:18px;line-height:1.8}details{border-top:1px solid #d7e1ec;padding:12px 0}summary{cursor:pointer;font-weight:600}pre.evidence{white-space:pre-wrap;overflow-wrap:anywhere;font:13px/1.7 ui-monospace,Consolas,monospace;background:#f4f7fb;padding:12px;border-radius:6px;max-height:390px;overflow:auto}
+.criterion{border-top:1px solid #dde5ef;padding:16px 0}.criterion label{display:block;font-size:14px;font-weight:600;margin-bottom:10px}.criterion select{width:100%;margin-bottom:10px}.criterion textarea{width:100%;min-height:94px;resize:vertical;font-size:14px}.criterion .issue{color:#a33425;font-size:13px}#save-status{font-size:13px;color:#667c92;padding:0 5vw 24px}a{color:#2167a5}.tag{font-size:12px;background:#edf3fa;padding:3px 8px;border-radius:4px;color:#3d668f}button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:3px solid #8ebfe9;outline-offset:2px}
+@media(max-width:900px){main{grid-template-columns:1fr;padding:16px}nav{padding:12px 16px;position:static}header{padding:20px 16px}.panel{padding:18px}#progress{margin-left:0}}
+</style></head><body>
+<header><h1>独立报告评审</h1><p>按每份报告的任务和六条标准核查原文。填写完整、引用存在，不等于事实正确。独立完成前，请勿查看实验条件或另一位评审者的答案。</p></header>
+<nav><label>评审者 <input id="annotator" placeholder="姓名或独立代号" aria-label="评审者"></label><button id="previous">上一份</button><button id="next">下一份</button><button id="export" class="primary">导出 labels.json</button><span id="progress" role="status"></span></nav>
+<main><section class="panel"><span id="report-id" class="tag"></span><h2>任务与报告</h2><details open><summary>本报告的任务</summary><div id="task"></div></details><pre id="report"></pre><h2>本次所读原文</h2><p class="muted">可核查下面的原文，也可打开全文。全文里存在、报告却没有引用的内容，不能补算成报告已提供的支持。</p><div id="papers"></div><div id="evidence"></div></section>
+<section class="panel"><h2>逐项判断</h2><p class="muted">复合标准全部满足才给 1。不能判断则保留“未判断”，并写明原因。请在理由中指出原文 ID 和行号。</p><div id="criteria"></div></section></main>
+<div id="save-status" role="status">记录保存在当前浏览器。完成或暂停时，请导出文件留存；页面不会上传任何数据。</div>
+<script type="application/json" id="review-data">__REVIEW_DATA__</script>
+<script>
+'use strict';
+const payload=JSON.parse(document.getElementById('review-data').textContent);
+let labels=structuredClone(payload.labels), current=0;
+const storageKey='scientific-review-'+labels.slot+'-'+payload.cases.map(c=>c.id).join('-');
+const el=id=>document.getElementById(id);
+function sameStructure(value){return value?.slot===labels.slot && value.annotation_source==='human' && Array.isArray(value.reports) && value.reports.length===labels.reports.length && value.reports.every((r,i)=>r.id===labels.reports[i].id && r.items.length===labels.reports[i].items.length && r.items.every((v,j)=>v.rubric_id===labels.reports[i].items[j].rubric_id && (v.score===null || v.score===0 || v.score===1)));}
+try{const saved=JSON.parse(localStorage.getItem(storageKey)||'null');if(saved&&sameStructure(saved))labels=saved;}catch{}
+el('annotator').value=labels.annotator||'';
+function updateProgress(){const items=labels.reports.flatMap(r=>r.items),count=items.filter(i=>i.score!==null&&typeof i.rationale==='string'&&i.rationale.trim()).length;el('progress').textContent=`第 ${current+1} / ${payload.cases.length} 份 · 已填写 ${count} / ${items.length} 项`;}
+function save(){try{localStorage.setItem(storageKey,JSON.stringify(labels));el('save-status').textContent='已保存到当前浏览器。完成或暂停时，请导出文件留存；页面不会上传任何数据。';}catch{el('save-status').textContent='当前浏览器不允许本地保存，请及时导出 labels.json。';}updateProgress();}
+function node(tag,text,cls){const n=document.createElement(tag);if(text!==undefined)n.textContent=text;if(cls)n.className=cls;return n;}
+function render(){
+ const c=payload.cases[current],record=labels.reports.find(r=>r.id===c.id);
+ el('report-id').textContent=c.id;el('task').textContent=c.task.question;el('report').textContent=c.markdown;
+ el('previous').disabled=current===0;el('next').disabled=current===payload.cases.length-1;
+ el('papers').replaceChildren();for(const source of c.task.sources){const link=node('a',source.id+' 全文');link.href='papers/'+encodeURIComponent(source.id)+'.txt';link.target='_blank';link.rel='noopener';el('papers').append(link,document.createTextNode('　'));}
+ el('evidence').replaceChildren();for(const e of c.evidence){const details=node('details');details.append(node('summary',e.title+' · '+e.start_line+'–'+e.end_line+' 行'),node('p',e.id,'muted'),node('pre',e.quote.split('\n').map((s,i)=>(e.start_line+i)+': '+s).join('\n'),'evidence'));el('evidence').append(details);}
+ el('criteria').replaceChildren();for(const rubric of c.rubric.items){
+  const item=record.items.find(i=>i.rubric_id===rubric.id),box=node('div',undefined,'criterion');
+  const label=node('label',rubric.id.toUpperCase()+' · '+rubric.criterion);label.htmlFor='rating-'+rubric.id;
+  const select=node('select');select.id=label.htmlFor;for(const [value,text] of [['','未判断'],['1','1 · 完全满足'],['0','0 · 不满足']]){const option=node('option',text);option.value=value;select.append(option);}select.value=item.score===null?'':String(item.score);
+  const reason=node('textarea');reason.value=item.rationale||'';reason.placeholder='理由、原文 ID 与行号；证据不足时说明缺少什么。';reason.setAttribute('aria-label',rubric.id+' 判断理由');
+  const issue=node('div','', 'issue');function check(){issue.textContent=item.score!==null&&!reason.value.trim()?'已选分数，请补充判断理由。':'';}
+  select.addEventListener('change',()=>{item.score=select.value===''?null:Number(select.value);check();save();});reason.addEventListener('input',()=>{item.rationale=reason.value.trim()?reason.value:null;check();save();});check();box.append(label,select,reason,issue);el('criteria').append(box);
+ }
+ updateProgress();
+}
+el('annotator').addEventListener('input',()=>{labels.annotator=el('annotator').value.trim()||null;save();});
+el('previous').addEventListener('click',()=>{current--;render();window.scrollTo(0,0);});el('next').addEventListener('click',()=>{current++;render();window.scrollTo(0,0);});
+el('export').addEventListener('click',()=>{save();const url=URL.createObjectURL(new Blob([JSON.stringify(labels,null,2)],{type:'application/json'}));const link=node('a');link.href=url;link.download='labels.json';link.click();setTimeout(()=>URL.revokeObjectURL(url),1000);});
+render();
+</script></body></html>

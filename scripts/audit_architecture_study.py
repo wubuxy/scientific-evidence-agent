@@ -31,6 +31,25 @@ def require(condition, message):
         raise ValueError(message)
 
 
+def interrupted_budget_counter(run, trace, manifest, total):
+    """Recognize the frozen v1 measured-boundary bug without discarding its cost.
+
+The wrapper saved the over-budget response then raised before Runtime could
+commit that one call. Only this exact failed-state/call/event pattern qualifies;
+it is not a general allowance for cost drift. Original artifacts stay unchanged.
+"""
+    if not manifest.get('strategies') or total is None or total<=manifest['max_tokens']:
+        return False
+    calls=trace['calls']
+    usage=[e['data'] for e in trace['events'] if e['type']=='model_usage']
+    return (run['status']=='failed' and run.get('error')=='Measured token budget exceeded'
+            and bool(calls) and len(usage)==len(calls)-1
+            and all(c['tokens_used'] is not None for c in calls)
+            and [e['total_tokens'] for e in usage]==[c['tokens_used'] for c in calls[:-1]]
+            and sum(c['tokens_used'] for c in calls[:-1])==run['tokens_used']
+            and total-run['tokens_used']==calls[-1]['tokens_used'])
+
+
 def inspect_case(folder, task, manifest):
     run, trace, reads, calls, sources = [load(folder/n) for n in
         ('run.json','trace.json','reads.json','tool-calls.json','sources.json')]
@@ -67,7 +86,8 @@ def inspect_case(folder, task, manifest):
     summary = load(folder/'summary.json')
     require(summary['tokens_used']==total and summary['known_tokens_used']==known, 'Summary usage mismatch')
     require(summary['model_calls']==len(costs) and summary['status']==run['status'], 'Run summary drift')
-    require(total is None or total==run['tokens_used'], 'Run cost drift')
+    boundary_interrupted=interrupted_budget_counter(run,trace,manifest,total)
+    require(total is None or total==run['tokens_used'] or boundary_interrupted, 'Run cost drift')
     require(summary['semantic_accuracy'] is None and summary['human_rubric_score'] is None, 'Human scores must remain pending')
     require(run['memory_mode']==manifest.get('memory_mode','legacy'), 'Memory mode drift')
     for key in ('max_tokens','max_steps','max_seconds','field_mode','max_field_repairs'):
@@ -98,7 +118,11 @@ def inspect_case(folder, task, manifest):
         stop_reason=run.get('field_state',{}).get('stop_reason'),
         phase_sequence=[d['phase'] for d in decisions],
         max_input_tokens=max((c.get('prompt_tokens') or 0 for c in trace['calls']),default=0),
-        location_note='Line depth and non-overlap are diagnostics, not evidence relevance or answer correctness.')
+        location_note='Line depth and non-overlap are diagnostics, not evidence relevance or answer correctness.',
+        **(dict(runtime_counter_tokens=run['tokens_used'],
+                boundary_uncommitted_tokens=total-run['tokens_used'] if boundary_interrupted else 0,
+                budget_overshoot_tokens=max(0,total-manifest['max_tokens']) if total is not None else None)
+           if manifest.get('strategies') else {}))
 
 
 def summarize(directory):

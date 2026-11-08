@@ -51,11 +51,11 @@ scipy 和 openpyxl 的检查发生在对应测试中。缺少 scipy 不会跳过
 
 ## 本地验证记录
 
-截至 2026-11-08，加入冻结记忆条件、原文与费用审计、独立报告评审包检查后，Windows 完整环境收集并通过 276 项；此前搜索到回读控制为 268 项，上下文与方案契约检查为 256 项，显式要求与故障检查为 240 项。此前公开回放阶段为 230 项、字段控制器阶段为 228 项、自然报告校准阶段为 204 项、人工阅读包阶段为 187 项、缓存策略回放阶段为 195 项。下表同时保留此前的 Ubuntu 核心环境记录，收集数分开列出：
+截至 2026-11-08，加入四个独立策略开关、双人报告标签导入和超预算记账修复后，Windows 完整环境收集并通过 300 项。此前冻结记忆对照为 276 项，搜索到回读控制为 268 项，上下文与方案契约检查为 256 项，显式要求与故障检查为 240 项。此前公开回放阶段为 230 项、字段控制器阶段为 228 项、自然报告校准阶段为 204 项、人工阅读包阶段为 187 项、缓存策略回放阶段为 195 项。下表同时保留此前的 Ubuntu 核心环境记录，收集数分开列出：
 
 | 环境 | 收集 | 通过 | 跳过 | 失败 |
 |---|---:|---:|---:|---:|
-| Windows / Python 3.13，完整环境，含 rg 和 CPU torch 2.15.0，本轮 | 276 | 276 | 0 | 0 |
+| Windows / Python 3.13，完整环境，含 rg 和 CPU torch 2.15.0，本轮 | 300 | 300 | 0 | 0 |
 | A5000 主机 Ubuntu / Python 3.12，核心依赖环境，含 rg，上一提交 | 186 | 173 | 13（统计、XLSX、LSTM） | 0 |
 
 干净环境的核心和分析依赖按提交的约束文件安装，CPU torch 从官方索引补齐。140、142、152、163、168、177、186 项的历史矩阵分别保存在机器记录的 `offline_test_profiles_before_demo`、`offline_test_profiles_before_agent_evals`、`offline_test_profiles_before_eval_completion`、`offline_test_profiles_before_verifier_pilot`、`offline_test_profiles_before_verifier_scale`、`offline_test_profiles_before_verifier_labels`、`offline_test_profiles_before_human_review` 中；最新结果和包版本见 [validation-summary.json](results/validation-summary.json) 的 `checks`。历史 163 项时 Windows 核心环境为 150 passed / 13 skipped，缺 rg 为 145 passed / 18 skipped；这些历史数值不冒充最新运行。

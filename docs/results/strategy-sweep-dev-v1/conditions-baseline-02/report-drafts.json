@@ -1,0 +1,151 @@
+[
+  {
+    "arguments": {
+      "title": "QASPER 与 ArxivDIGESTables 在角色、训练划分、评测条件及迁移可行性上的对比分析",
+      "claims": [
+        {
+          "text": "QASPER 数据集构建中，问题由仅阅读标题和摘要的 NLP 从业者撰写，而答案由另一组 NLP 从业者基于全文提供并附带证据；系统输入为全文，但问题生成者未接触全文。",
+          "evidence_ids": [
+            "ev_4a63af1b9a433c4e6a6b4ed7d5006582",
+            "ev_0b87e835f3318cbf8730d2284d200042"
+          ],
+          "kind": "finding"
+        },
+        {
+          "text": "ArxivDIGESTables 数据集通过从 ArXiv 论文中提取真实文献综述表格构建，包含 2,228 个表格，涵盖 7,542 篇论文的合成信息；数据收集过程涉及从 LaTeX 源提取表格并进行多轮过滤。",
+          "evidence_ids": [
+            "ev_9cebde61ba8da6bc617f4ee705a502e1",
+            "ev_da78c78f792bb4d58ec6acac223f7b8c"
+          ],
+          "kind": "finding"
+        },
+        {
+          "text": "QASPER 的评测指标（如 F1）基于模型从全文检索答案的能力，且存在 oracle 与非 oracle 条件的区分：若正确答案不在检索上下文中，则无法回答；现有模型在全文条件下仍比人类低至少 27 F1 点。",
+          "evidence_ids": [
+            "ev_4a63af1b9a433c4e6a6b4ed7d5006582"
+          ],
+          "kind": "inference",
+          "qualification": "基于原文提到‘existing models... underperforming humans by at least 27 F1 points when answering them from entire papers’及上下文对检索准确性的描述推断。"
+        },
+        {
+          "text": "ArxivDIGESTables 提出 DECONTEXT EVAL 方法用于自动评估模型生成的表格与人工参考表的一致性，强调即使模型未能完全重构参考表，其生成的新维度仍可能有用。",
+          "evidence_ids": [
+            "ev_9cebde61ba8da6bc617f4ee705a502e1"
+          ],
+          "kind": "finding"
+        },
+        {
+          "text": "两篇论文均未明确说明是否对预训练模型进行了任务特定微调，也未提供训练/验证/测试集的具体划分比例或策略。",
+          "evidence_ids": [],
+          "kind": "inference",
+          "qualification": "基于已读证据中未提及训练细节，仅描述了数据构建与评测框架，故推断该信息缺失。"
+        },
+        {
+          "text": "QASPER 的问题生成依赖于领域专家（NLP 从业者），而 ArxivDIGESTables 的表格提取依赖自动化流程与启发式规则；两者在数据构建者角色上存在本质差异。",
+          "evidence_ids": [
+            "ev_0b87e835f3318cbf8730d2284d200042",
+            "ev_da78c78f792bb4d58ec6acac223f7b8c"
+          ],
+          "kind": "inference",
+          "qualification": "基于 QASPER 明确招募 NLP 从业者进行问答标注，而 ArxivDIGESTables 使用自动化提取与过滤流程推断。"
+        }
+      ],
+      "comparison_rows": [
+        {
+          "source_id": "8b979429-050e-48cb-a69f-52d82952435a",
+          "method": "QASPER QA",
+          "dataset": "QASPER (5,049 questions over 1,585 NLP papers)",
+          "model": "本次未核实",
+          "metric": "F1 (human vs model gap ≥27 points)",
+          "result": "模型显著低于人类",
+          "conditions": "全文输入；问题基于标题+摘要生成；答案需全文证据",
+          "comparability": "qualified",
+          "evidence_ids": [
+            "ev_4a63af1b9a433c4e6a6b4ed7d5006582",
+            "ev_0b87e835f3318cbf8730d2284d200042"
+          ],
+          "attributes": {
+            "角色与输入": "问题作者仅见标题+摘要；回答系统见全文",
+            "训练与数据划分": "本次未核实",
+            "评测条件与指标": "F1，含 oracle/non-oracle 区分",
+            "迁移条件与未知": "需验证微调必要性及数据划分"
+          }
+        },
+        {
+          "source_id": "c10ac16e-1e68-41e9-91a0-23e9c5fffc28",
+          "method": "ArxivDIGESTables Table Synthesis",
+          "dataset": "ArxivDIGESTables (2,228 tables, 7,542 papers)",
+          "model": "本次未核实",
+          "metric": "DECONTEXT EVAL + 人工评估",
+          "result": "部分重构可行，新维度有价值",
+          "conditions": "输入为多篇论文；输出为结构化表格",
+          "comparability": "unknown",
+          "evidence_ids": [
+            "ev_9cebde61ba8da6bc617f4ee705a502e1",
+            "ev_da78c78f792bb4d58ec6acac223f7b8c"
+          ],
+          "attributes": {
+            "角色与输入": "自动化提取表格；无明确问题作者角色",
+            "训练与数据划分": "本次未核实",
+            "评测条件与指标": "DECONTEXT EVAL，支持非完全匹配评估",
+            "迁移条件与未知": "需验证表格生成任务与 Agent 目标对齐度"
+          }
+        }
+      ],
+      "limitations": [
+        "两篇论文均未提供模型训练细节（如微调策略、数据划分比例），无法直接判断微调必要性。",
+        "QASPER 的评测指标虽区分 oracle/non-oracle，但未提供具体实验配置以复现可比性。",
+        "ArxivDIGESTables 的 DECONTEXT EVAL 方法未说明其与标准指标（如 BLEU、ROUGE）的可比性。",
+        "两篇论文的数据构建流程差异大，直接迁移至统一 Agent 架构需额外验证。"
+      ],
+      "proposals": [
+        {
+          "text": "设计最小控制实验：固定输入为单篇论文，比较 QASPER 风格问答与 ArxivDIGESTables 风格表格生成的性能差异。",
+          "basis_claim_indices": [
+            0,
+            1,
+            5
+          ],
+          "assumptions": [
+            "Agent 可同时处理问答与表格生成任务",
+            "单篇论文足以支撑两种任务的基本评估"
+          ],
+          "validation_plan": "固定输入为 100 篇随机抽取的 NLP 论文，分别运行问答与表格生成模块，记录 F1 与 DECONTEXT EVAL 分数；失败计数定义为任一任务得分低于基线 10%；停止条件为连续 5 次实验均失败。"
+        },
+        {
+          "text": "验证是否需要新增标注：在 QASPER 数据上尝试零样本推理，评估当前模型在无微调情况下的表现。",
+          "basis_claim_indices": [
+            2,
+            4
+          ],
+          "assumptions": [
+            "现有预训练模型具备基础文档理解能力",
+            "零样本表现可反映微调必要性"
+          ],
+          "validation_plan": "选取 500 条 QASPER 测试样本，使用公开预训练模型（如 BERT-large）进行零样本推理，计算 F1；若平均 F1 < 30%，则标记为需要微调。"
+        },
+        {
+          "text": "探索混合任务场景：将 QASPER 问题作为表格生成的约束条件，评估联合优化效果。",
+          "basis_claim_indices": [
+            0,
+            1,
+            3
+          ],
+          "assumptions": [
+            "问答与表格生成任务存在互补性",
+            "联合优化可提升整体信息提取效率"
+          ],
+          "validation_plan": "构建 100 个混合任务实例（每例含 1 个问题 + 1 个表格生成需求），使用多任务学习框架训练，比较单独任务与联合任务的指标提升；停止条件为联合任务指标无显著提升（<5%）。"
+        }
+      ],
+      "verification_status": "needs_human_review"
+    },
+    "normalized_columns": [],
+    "validation_status": "rejected",
+    "id": "bb0182b3-08d8-4267-a709-f015bd8cb587",
+    "workspace_id": "2afa4c5a-0685-46c9-b2a6-1fc536b4ba71",
+    "created_at": "2026-11-08T15:31:00.325470+00:00",
+    "updated_at": "2026-11-08T15:31:00.341761+00:00",
+    "error": "1 validation error for Report\nclaims.4.evidence_ids\n  List should have at least 1 item after validation, not 0 [type=too_short, input_value=[], input_type=list]\n    For further information visit https://errors.pydantic.dev/2.14/v/too_short"
+  }
+]

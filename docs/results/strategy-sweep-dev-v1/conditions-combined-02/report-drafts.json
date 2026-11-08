@@ -1,0 +1,99 @@
+[
+  {
+    "arguments": {
+      "title": "QASPER 与 ArxivDIGESTables 训练评测做法迁移性比较报告",
+      "claims": [
+        {
+          "text": "QASPER 数据集构建采用解耦流程：问题撰写者仅阅读标题和摘要后提出问题，回答者（标注者）则被随机分配论文并可见全文、图表及问题，需判断是否可答并选择最小证据片段。",
+          "evidence_ids": [
+            "ev_971148068201280b2e668b4dbdd418c1",
+            "ev_821c2635c85c9124ab0a7ee0ca964b1b"
+          ],
+          "kind": "finding"
+        },
+        {
+          "text": "ArxivDIGESTables 从约 80 万篇含 LaTeX 源码的 ArXiv 论文中提取约 250 万张表格，经清洗过滤后保留 2,228 张高质量表格；过滤条件包括移除含数学符号或浮点数的列，以及移除无公开全文的论文行。",
+          "evidence_ids": [
+            "ev_928655950ab9542e592ebdd10bb5cf14",
+            "ev_2971b676668f9644ad0020107fd92a9b"
+          ],
+          "kind": "finding"
+        },
+        {
+          "text": "QASPER 评测区分 Search Accuracy（正确答案是否在检索上下文中）与 Reading Accuracy（在上下文包含答案时的回答准确率），基线模型不使用外部检索系统，而是直接使用数据集提供的排序文档列表。",
+          "evidence_ids": [
+            "ev_918f88f3e04797b0f0cb72c04ca3de40"
+          ],
+          "kind": "finding"
+        },
+        {
+          "text": "ArxivDIGESTables 提出 DECONTEXT EVAL 自动评估方法，用于对齐表格元素与底层方面，即使表面形式不同；人类评估发现即使模型未能完全重构参考表格，其生成的新方面仍可能有用。",
+          "evidence_ids": [
+            "ev_9dfe1d4bd6addbf197f9f319d82e024f"
+          ],
+          "kind": "finding"
+        },
+        {
+          "text": "QASPER 中最佳模型性能落后人类 27 F1 点（回答问题）和 32 F1 点（选择证据段落），表明整篇论文问答仍是未解决问题；使用金标准证据的 oracle 实验显示更好的预训练和领域适应可提升性能。",
+          "evidence_ids": [
+            "ev_a02844a0deed014a6586d1b2a34b5e8a"
+          ],
+          "kind": "finding"
+        },
+        {
+          "text": "两篇论文均未明确说明模型训练阶段的具体数据划分（如训练/验证/测试集比例）或微调策略，仅描述了数据收集与评测设置。",
+          "evidence_ids": [],
+          "kind": "inference",
+          "qualification": "基于已回读内容，未发现关于训练数据划分或微调超参数的描述，故推断为本次未核实。"
+        }
+      ],
+      "comparison_rows": [
+        {
+          "source_id": "50dbb981-fce6-4319-bb87-5a1dbeec12e8",
+          "method": "QASPER",
+          "evidence_ids": [
+            "ev_971148068201280b2e668b4dbdd418c1",
+            "ev_821c2635c85c9124ab0a7ee0ca964b1b",
+            "ev_918f88f3e04797b0f0cb72c04ca3de40"
+          ],
+          "attributes": {
+            "角色与输入": "问题撰写者仅见标题+摘要；回答者见全文+图表+问题",
+            "训练与数据划分": "本次未核实",
+            "评测条件与指标": "Search Accuracy + Reading Accuracy；非oracle基线用提供上下文",
+            "迁移条件与未知": "需验证整篇推理能力；oracle实验提示预训练/领域适应有效"
+          }
+        },
+        {
+          "source_id": "103c7c9d-6b07-4c40-891a-2e564064cce0",
+          "method": "ArxivDIGESTables",
+          "evidence_ids": [
+            "ev_928655950ab9542e592ebdd10bb5cf14",
+            "ev_2971b676668f9644ad0020107fd92a9b",
+            "ev_9dfe1d4bd6addbf197f9f319d82e024f"
+          ],
+          "attributes": {
+            "角色与输入": "表格提取自论文全文；生成任务需 grounding 到引用文本",
+            "训练与数据划分": "本次未核实",
+            "评测条件与指标": "DECONTEXT EVAL 自动对齐；人类评估补充效用",
+            "迁移条件与未知": "需确保信息源自引用论文；过滤数值型列以保可生成性"
+          }
+        }
+      ],
+      "limitations": [
+        "未找到两篇论文中关于训练/验证/测试集划分的明确描述，无法确认微调所需数据规模。",
+        "QASPER 的 Search Accuracy 依赖预设上下文，实际 Agent 若需自行检索则不可直接比较。",
+        "ArxivDIGESTables 的 DECONTEXT EVAL 为自动方法，其与人评结果的相关性未量化。",
+        "两篇论文均未提供跨任务迁移的实验证据，迁移可行性仅为推断。"
+      ],
+      "proposals": "\n[{\"text\": \"设计最小控制实验：固定 QASPER 问题集，对比两种输入条件——(A) 仅提供标题+摘要（模拟问题撰写者视角），(B) 提供全文+图表（模拟回答者视角），测量回答准确率差异。\", \"basis_claim_indices\": [0, 2], \"assumptions\": [\"Agent 能处理长文本输入\", \"问题难度在两种条件下可比\"], \"validation_plan\": \"运行 100 个样本，记录 A/B 条件下的 F1 分数；若 B 比 A 高 >15 点且统计显著，则支持全文输入的必要性；失败计数达 3 次（如解析错误）则停止。\"}, {\"text\": \"针对 ArxivDIGESTables，构建子集实验：选取 50 张含数值列的原始表格（未过滤前），测试模型能否正确识别并排除不可生成列，验证过滤规则的必要性。\", \"basis_claim_indices\": [1, 3], \"assumptions\": [\"数值列确实无法从文本推导\", \"模型对数值敏感\"], \"validation_plan\": \"人工标注 50 张表中哪些列应被过滤，对比模型输出；若过滤后生成质量提升 >20%，则规则有效；否则重新定义过滤条件。\"}, {\"text\": \"探索 oracle 条件迁移：在 QASPER 上复现‘金标准证据’实验，但将证据替换为 Agent 自行检索的结果，评估检索质量对最终回答的影响。\", \"basis_claim_indices\": [4], \"assumptions\": [\"检索模块可集成到 Agent\", \"金标准证据代表最优上下文\"], \"validation_plan\": \"分三组：(1) 金标准证据，(2) 检索证据，(3) 无证据；比较 F1 差距；若 (2) 接近 (1)，则检索可行；否则需优化检索策略。\"]}\n",
+      "verification_status": "needs_human_review"
+    },
+    "normalized_columns": [],
+    "validation_status": "rejected",
+    "id": "a3194358-8844-4b96-8bb7-c16e574554e4",
+    "workspace_id": "c03d7ae9-0b06-4871-93c9-091eb03e6845",
+    "created_at": "2026-11-08T15:31:50.439531+00:00",
+    "updated_at": "2026-11-08T15:31:50.457092+00:00",
+    "error": "2 validation errors for CompactReport\nclaims.5.evidence_ids\n  List should have at least 1 item after validation, not 0 [type=too_short, input_value=[], input_type=list]\n    For further information visit https://errors.pydantic.dev/2.14/v/too_short\nproposals\n  Input should be a valid list [type=list_type, input_value='\\n[{\"text\": \"设计最...化检索策略。\"]}\\n', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.14/v/list_type"
+  }
+]

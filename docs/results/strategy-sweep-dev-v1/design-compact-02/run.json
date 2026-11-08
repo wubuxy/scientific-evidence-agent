@@ -1,0 +1,378 @@
+{
+  "session_id": "8ea19642-75d5-425c-83c6-6bae2576cd0f",
+  "question": "为一个论文研究 Agent 设计评测方案。产品需要回答单篇论文问题、跨论文比较，并提出有依据的研究建议。\n仅根据提供的 QASPER 与 ArxivDIGESTables 两篇论文，先分别按指定字段比较，再在 claims 中给出综合判断：\n各适合验证哪类能力？为什么两个任务的指标不能直接横向排名？哪些产品能力仍缺评测依据？\n提出一个最小可执行的评测组合，说明数据划分、人工检查和失败计数。把论文事实与自己的方案建议明确区分。\n重要事实必须引用本次回读的原文。没有证据时明确保留未知，不用论文发表时的结果推断当前最强模型。\n不要读取论文外的数据集或声称已经完成新评测。",
+  "retrieval_strategy": "grep",
+  "allow_network": false,
+  "memory_mode": "evidence",
+  "read_guidance": false,
+  "memory_priority": "recent",
+  "writer_context": "prefix",
+  "report_schema": "compact",
+  "max_steps": 18,
+  "max_tokens": 30000,
+  "max_seconds": 600,
+  "field_mode": "bounded",
+  "required_fields": [
+    {
+      "source_id": "d503b24b-3a0a-4a2e-b31f-98ec7d1b1380",
+      "name": "任务与输入输出",
+      "criterion": "说明研究问题、单篇或跨篇范围、输入与输出，避免仅给数据集名称"
+    },
+    {
+      "source_id": "d503b24b-3a0a-4a2e-b31f-98ec7d1b1380",
+      "name": "参考答案与标注",
+      "criterion": "说明参考来自谁、如何收集，以及证据或表格标注的性质"
+    },
+    {
+      "source_id": "d503b24b-3a0a-4a2e-b31f-98ec7d1b1380",
+      "name": "指标与比较条件",
+      "criterion": "说明指标衡量的对象与参考依赖，不跨任务直接比较分数"
+    },
+    {
+      "source_id": "d503b24b-3a0a-4a2e-b31f-98ec7d1b1380",
+      "name": "适用范围与缺口",
+      "criterion": "区分论文已验证的范围与对我们产品的推断，给出原文依据或明确未知"
+    },
+    {
+      "source_id": "8728564f-56c7-4a5f-a6e0-751c09dbc887",
+      "name": "任务与输入输出",
+      "criterion": "说明研究问题、单篇或跨篇范围、输入与输出，避免仅给数据集名称"
+    },
+    {
+      "source_id": "8728564f-56c7-4a5f-a6e0-751c09dbc887",
+      "name": "参考答案与标注",
+      "criterion": "说明参考来自谁、如何收集，以及证据或表格标注的性质"
+    },
+    {
+      "source_id": "8728564f-56c7-4a5f-a6e0-751c09dbc887",
+      "name": "指标与比较条件",
+      "criterion": "说明指标衡量的对象与参考依赖，不跨任务直接比较分数"
+    },
+    {
+      "source_id": "8728564f-56c7-4a5f-a6e0-751c09dbc887",
+      "name": "适用范围与缺口",
+      "criterion": "区分论文已验证的范围与对我们产品的推断，给出原文依据或明确未知"
+    }
+  ],
+  "max_field_repairs": 1,
+  "status": "completed",
+  "model": "qwen3.5-27b",
+  "tokens_used": 24867,
+  "tokens_estimated": false,
+  "step": 5,
+  "report": {
+    "title": "QASPER 与 ArxivDIGESTables 评测能力对比与最小可执行方案",
+    "claims": [
+      {
+        "text": "QASPER 数据集包含 5,049 个由 NLP 从业者基于论文标题和摘要撰写的问题，答案需从全文中查找并由另一组从业者提供支撑证据。",
+        "evidence_ids": [
+          "ev_f6f4941beb662e6f6699821cf81df1f1"
+        ],
+        "qualification": "",
+        "kind": "finding"
+      },
+      {
+        "text": "ArxivDIGESTables 数据集包含 2,228 个文献综述表格，这些表格综合了 7,542 篇 ArXiv 论文，旨在评估模型将多篇论文合成为结构化表格的能力。",
+        "evidence_ids": [
+          "ev_1f3190a81929bf34e4c5317a2cefd77e"
+        ],
+        "qualification": "",
+        "kind": "finding"
+      },
+      {
+        "text": "QASPER 适合验证单篇论文内的信息检索与复杂推理能力，因为问题锚定在特定用户上下文且需要跨段落寻找证据。",
+        "evidence_ids": [
+          "ev_f6f4941beb662e6f6699821cf81df1f1"
+        ],
+        "qualification": "基于 QASPER 问题由阅读标题摘要者提出、答案需从全文提取且现有模型表现远落后于人类的描述推断。",
+        "kind": "inference"
+      },
+      {
+        "text": "ArxivDIGESTables 适合验证跨论文的信息抽取、模式（schema）生成及内容合成能力，因为其任务是将多篇输入论文转化为具有统一列定义的表格。",
+        "evidence_ids": [
+          "ev_1f3190a81929bf34e4c5317a2cefd77e"
+        ],
+        "qualification": "基于该数据集定义为文献综述表格生成任务，涉及 schema 和 value 生成的步骤推断。",
+        "kind": "inference"
+      },
+      {
+        "text": "两个任务的指标不能直接横向排名，因为 QASPER 衡量的是单篇文档内问答的 F1 分数，而 ArxivDIGESTables 衡量的是多文档合成表格的重构质量，两者任务目标、输入规模和输出形式完全不同。",
+        "evidence_ids": [
+          "ev_f6f4941beb662e6f6699821cf81df1f1",
+          "ev_1f3190a81929bf34e4c5317a2cefd77e"
+        ],
+        "qualification": "基于两篇论文分别定义的单篇 QA 和多篇表格合成任务性质差异推断。",
+        "kind": "inference"
+      },
+      {
+        "text": "当前缺乏对“跨论文比较”能力的直接评测依据，因为 QASPER 仅覆盖单篇论文，而 ArxivDIGESTables 虽涉及多篇但侧重于表格合成而非直接的比较性问答。",
+        "evidence_ids": [
+          "ev_f6f4941beb662e6f6699821cf81df1f1",
+          "ev_1f3190a81929bf34e4c5317a2cefd77e"
+        ],
+        "qualification": "基于 QASPER 明确为单篇论文问答，ArxivDIGESTables 为表格合成，未明确提及支持直接的跨论文比较性问答任务推断。",
+        "kind": "inference"
+      }
+    ],
+    "comparison_rows": [
+      {
+        "source_id": "d503b24b-3a0a-4a2e-b31f-98ec7d1b1380",
+        "method": "QASPER",
+        "dataset": "本次未核实",
+        "model": "本次未核实",
+        "metric": "本次未核实",
+        "result": "本次未核实",
+        "conditions": "本次未核实",
+        "comparability": "unknown",
+        "evidence_ids": [
+          "ev_f6f4941beb662e6f6699821cf81df1f1"
+        ],
+        "attributes": {
+          "任务与输入输出": "单篇论文问答；输入：论文全文+基于标题/摘要的问题；输出：答案及支撑证据",
+          "参考答案与标注": "由 NLP 从业者撰写问题和答案，并提供支撑证据",
+          "指标与比较条件": "F1 分数（文中提到模型落后人类至少 27 点），衡量单篇文档内信息检索与推理",
+          "适用范围与缺口": "适用于单篇深度理解；缺口：不支持跨论文比较或结构化合成"
+        }
+      },
+      {
+        "source_id": "8728564f-56c7-4a5f-a6e0-751c09dbc887",
+        "method": "ArxivDIGESTables",
+        "dataset": "本次未核实",
+        "model": "本次未核实",
+        "metric": "本次未核实",
+        "result": "本次未核实",
+        "conditions": "本次未核实",
+        "comparability": "unknown",
+        "evidence_ids": [
+          "ev_1f3190a81929bf34e4c5317a2cefd77e"
+        ],
+        "attributes": {
+          "任务与输入输出": "多篇论文合成表格；输入：多篇论文；输出：包含 schema 和值的文献综述表格",
+          "参考答案与标注": "从 ArXiv 论文中提取的人类作者表格作为参考",
+          "指标与比较条件": "DECONTEXT EVAL 自动评估及人工评估，衡量表格重构质量和新颖方面",
+          "适用范围与缺口": "适用于跨文档信息合成与结构化；缺口：非直接问答形式，侧重表格生成"
+        }
+      }
+    ],
+    "limitations": [
+      "本次报告仅基于两篇论文的摘要和引言部分，未核实具体的实验设置细节、完整的指标定义或详细的错误分析。",
+      "关于‘跨论文比较’能力的具体评测缺口是基于任务定义的推断，原文未明确声明其无法支持此类任务，可能存在未读到的相关讨论。",
+      "未包含其他潜在的相关数据集或评测基准，结论仅限于 QASPER 和 ArxivDIGESTables 的范围。",
+      "提出的评测方案仅为建议，未经过实际执行验证，其有效性和可行性需进一步测试。"
+    ],
+    "verification_status": "needs_human_review",
+    "proposals": [
+      {
+        "text": "构建一个混合评测集：选取 50 个 QASPER 问题用于单篇能力基线，再选取 20 个 ArxivDIGESTables 中的表格行（每行对应一篇论文）构造跨论文比较问题（如'论文A与论文B在方法X上的区别是什么？'）。",
+        "basis_claim_indices": [
+          2,
+          3,
+          5
+        ],
+        "assumptions": [
+          "假设可以从 ArxivDIGESTables 的表格数据中反向构造出有意义的比较性问题。",
+          "假设现有的 LLM 能够处理这种混合类型的输入并给出合理回答。"
+        ],
+        "validation_plan": "1. 数据划分：从 QASPER 随机抽取 50 题，从 ArxivDIGESTables 抽取 20 组对比对。2. 人工检查：邀请 2 名领域专家审核构造的比较问题的准确性和合理性。3. 失败计数：运行候选模型，统计完全错误、部分正确和幻觉的比例，设定阈值（如准确率<60%视为失败）。",
+        "status": "proposed_not_executed"
+      },
+      {
+        "text": "设计分层评估流程：先通过 QASPER 筛选具备单篇理解能力的模型，再通过 ArxivDIGESTables 的子任务（schema 生成）评估其结构化能力，最后进行人工交叉验证。",
+        "basis_claim_indices": [
+          2,
+          3
+        ],
+        "assumptions": [
+          "假设单篇理解是跨论文合成的基础前提。",
+          "假设 schema 生成能力可以独立于值填充进行评估。"
+        ],
+        "validation_plan": "1. 阶段一：在 QASPER 测试集上运行，保留 F1 > X 的模型。2. 阶段二：在 ArxivDIGESTables 上测试 schema 生成准确率。3. 人工检查：对通过前两阶段的模型输出进行抽样人工评分，记录不一致案例数量。",
+        "status": "proposed_not_executed"
+      },
+      {
+        "text": "建立‘失败案例库’机制：针对模型在两任务中表现不佳的案例（如 QASPER 中的长距离依赖问题，ArxivDIGESTables 中的 schema 冲突），分类归档并定期更新评测标准。",
+        "basis_claim_indices": [
+          2,
+          3,
+          5
+        ],
+        "assumptions": [
+          "假设模型的失败模式具有一定的规律性，可以通过案例积累发现。",
+          "假设人工标注团队有能力识别并分类这些失败原因。"
+        ],
+        "validation_plan": "1. 收集：运行评测后收集所有低分样本。2. 分类：由专家将错误分为‘检索失败’、‘推理错误’、‘格式错误’等类别。3. 迭代：每季度更新一次评测集，加入新的困难样本，重新评估模型性能变化。",
+        "status": "proposed_not_executed"
+      }
+    ]
+  },
+  "error": null,
+  "id": "8fd0743d-4ed5-4856-9b81-8ae4e23099e4",
+  "workspace_id": "78543b21-5614-497e-b5fa-f1e7f559ebb4",
+  "created_at": "2026-11-08T15:23:51.066106+00:00",
+  "updated_at": "2026-11-08T15:24:39.507422+00:00",
+  "field_state": {
+    "version": "field-ledger-v1",
+    "requirement_origin": "request",
+    "fields": [
+      {
+        "source_id": "d503b24b-3a0a-4a2e-b31f-98ec7d1b1380",
+        "name": "任务与输入输出",
+        "criterion": "说明研究问题、单篇或跨篇范围、输入与输出，避免仅给数据集名称",
+        "id": "field-caafa5bd985e556d",
+        "activity": "candidate",
+        "answer": "单篇论文问答；输入：论文全文+基于标题/摘要的问题；输出：答案及支撑证据",
+        "evidence_ids": [
+          "ev_f6f4941beb662e6f6699821cf81df1f1"
+        ],
+        "candidate_hash": "6e2bb7f1bb949ee9a4484cbd200d3cf3d59412627911275d7563fd5760b2769a",
+        "revision": 1,
+        "coverage": "present",
+        "review": null,
+        "attempts": 0
+      },
+      {
+        "source_id": "d503b24b-3a0a-4a2e-b31f-98ec7d1b1380",
+        "name": "参考答案与标注",
+        "criterion": "说明参考来自谁、如何收集，以及证据或表格标注的性质",
+        "id": "field-9d2739f5683d96fa",
+        "activity": "candidate",
+        "answer": "由 NLP 从业者撰写问题和答案，并提供支撑证据",
+        "evidence_ids": [
+          "ev_f6f4941beb662e6f6699821cf81df1f1"
+        ],
+        "candidate_hash": "5b8606a2eda4c6cdb6915b0123bec2e6ebd6d217b9b5222714aecfd142bc387b",
+        "revision": 1,
+        "coverage": "present",
+        "review": null,
+        "attempts": 0
+      },
+      {
+        "source_id": "d503b24b-3a0a-4a2e-b31f-98ec7d1b1380",
+        "name": "指标与比较条件",
+        "criterion": "说明指标衡量的对象与参考依赖，不跨任务直接比较分数",
+        "id": "field-83ff91b7a10887a2",
+        "activity": "candidate",
+        "answer": "F1 分数（文中提到模型落后人类至少 27 点），衡量单篇文档内信息检索与推理",
+        "evidence_ids": [
+          "ev_f6f4941beb662e6f6699821cf81df1f1"
+        ],
+        "candidate_hash": "f2f94c98c5dba8cbef4313b70acbd1da2e3a35d84b98f8448ba2a62223dde806",
+        "revision": 1,
+        "coverage": "present",
+        "review": null,
+        "attempts": 0
+      },
+      {
+        "source_id": "d503b24b-3a0a-4a2e-b31f-98ec7d1b1380",
+        "name": "适用范围与缺口",
+        "criterion": "区分论文已验证的范围与对我们产品的推断，给出原文依据或明确未知",
+        "id": "field-e2cfe5c869fd0c56",
+        "activity": "candidate",
+        "answer": "适用于单篇深度理解；缺口：不支持跨论文比较或结构化合成",
+        "evidence_ids": [
+          "ev_f6f4941beb662e6f6699821cf81df1f1"
+        ],
+        "candidate_hash": "b3bbd279cc29076bbedf77474513f5931e5de9c52ddc8e16ba83f257c7ec46a9",
+        "revision": 1,
+        "coverage": "present",
+        "review": null,
+        "attempts": 0
+      },
+      {
+        "source_id": "8728564f-56c7-4a5f-a6e0-751c09dbc887",
+        "name": "任务与输入输出",
+        "criterion": "说明研究问题、单篇或跨篇范围、输入与输出，避免仅给数据集名称",
+        "id": "field-31d8a8b4c470517e",
+        "activity": "candidate",
+        "answer": "多篇论文合成表格；输入：多篇论文；输出：包含 schema 和值的文献综述表格",
+        "evidence_ids": [
+          "ev_1f3190a81929bf34e4c5317a2cefd77e"
+        ],
+        "candidate_hash": "ee4ce5b3db44e42bba83d6496f7de450d8469625517329faeaacf0aa39684c08",
+        "revision": 1,
+        "coverage": "present",
+        "review": null,
+        "attempts": 0
+      },
+      {
+        "source_id": "8728564f-56c7-4a5f-a6e0-751c09dbc887",
+        "name": "参考答案与标注",
+        "criterion": "说明参考来自谁、如何收集，以及证据或表格标注的性质",
+        "id": "field-63e1bca19f50ecc5",
+        "activity": "candidate",
+        "answer": "从 ArXiv 论文中提取的人类作者表格作为参考",
+        "evidence_ids": [
+          "ev_1f3190a81929bf34e4c5317a2cefd77e"
+        ],
+        "candidate_hash": "f2940e1eee07019a7cf5f28ea69b829f6a4159220dbfbe12d98ec9560ff7de2c",
+        "revision": 1,
+        "coverage": "present",
+        "review": null,
+        "attempts": 0
+      },
+      {
+        "source_id": "8728564f-56c7-4a5f-a6e0-751c09dbc887",
+        "name": "指标与比较条件",
+        "criterion": "说明指标衡量的对象与参考依赖，不跨任务直接比较分数",
+        "id": "field-ad609104b0d2850c",
+        "activity": "candidate",
+        "answer": "DECONTEXT EVAL 自动评估及人工评估，衡量表格重构质量和新颖方面",
+        "evidence_ids": [
+          "ev_1f3190a81929bf34e4c5317a2cefd77e"
+        ],
+        "candidate_hash": "287fc4c351d80743f39d2a8a1dcad0c026dcb3a53985c7e2d1ffaf90b10cbb97",
+        "revision": 1,
+        "coverage": "present",
+        "review": null,
+        "attempts": 0
+      },
+      {
+        "source_id": "8728564f-56c7-4a5f-a6e0-751c09dbc887",
+        "name": "适用范围与缺口",
+        "criterion": "区分论文已验证的范围与对我们产品的推断，给出原文依据或明确未知",
+        "id": "field-016e590a9577f876",
+        "activity": "candidate",
+        "answer": "适用于跨文档信息合成与结构化；缺口：非直接问答形式，侧重表格生成",
+        "evidence_ids": [
+          "ev_1f3190a81929bf34e4c5317a2cefd77e"
+        ],
+        "candidate_hash": "8e17f0e8be2e684bb3487e65b8b9c8df6f8950d8e8bb3db7433428ba1d288fa1",
+        "revision": 1,
+        "coverage": "present",
+        "review": null,
+        "attempts": 0
+      }
+    ],
+    "total": 8,
+    "present": 8,
+    "unresolved": 0,
+    "reviewed": 0,
+    "semantic_success": null,
+    "review_status": "skipped_budget_or_no_candidates",
+    "repair_rounds": 0,
+    "stop_reason": "final_reserve",
+    "previous_versions": []
+  },
+  "source_coverage": {
+    "status": "complete",
+    "planned_source_ids": [
+      "d503b24b-3a0a-4a2e-b31f-98ec7d1b1380",
+      "8728564f-56c7-4a5f-a6e0-751c09dbc887"
+    ],
+    "fields": [
+      "任务与输入输出",
+      "参考答案与标注",
+      "指标与比较条件",
+      "适用范围与缺口"
+    ],
+    "read_source_ids": [
+      "8728564f-56c7-4a5f-a6e0-751c09dbc887",
+      "d503b24b-3a0a-4a2e-b31f-98ec7d1b1380"
+    ],
+    "unread_source_ids": [],
+    "uncited_source_ids": [],
+    "field_verification": "not_automatically_verified",
+    "stop_reason": "final_reserve"
+  },
+  "markdown": "# QASPER 与 ArxivDIGESTables 评测能力对比与最小可执行方案\n\n状态：待研究者审核\n\n- QASPER 数据集包含 5,049 个由 NLP 从业者基于论文标题和摘要撰写的问题，答案需从全文中查找并由另一组从业者提供支撑证据。 [ev_f6f4941beb662e6f6699821cf81df1f1]\n- ArxivDIGESTables 数据集包含 2,228 个文献综述表格，这些表格综合了 7,542 篇 ArXiv 论文，旨在评估模型将多篇论文合成为结构化表格的能力。 [ev_1f3190a81929bf34e4c5317a2cefd77e]\n- [推断] QASPER 适合验证单篇论文内的信息检索与复杂推理能力，因为问题锚定在特定用户上下文且需要跨段落寻找证据。 [ev_f6f4941beb662e6f6699821cf81df1f1]\n  适用范围：基于 QASPER 问题由阅读标题摘要者提出、答案需从全文提取且现有模型表现远落后于人类的描述推断。\n- [推断] ArxivDIGESTables 适合验证跨论文的信息抽取、模式（schema）生成及内容合成能力，因为其任务是将多篇输入论文转化为具有统一列定义的表格。 [ev_1f3190a81929bf34e4c5317a2cefd77e]\n  适用范围：基于该数据集定义为文献综述表格生成任务，涉及 schema 和 value 生成的步骤推断。\n- [推断] 两个任务的指标不能直接横向排名，因为 QASPER 衡量的是单篇文档内问答的 F1 分数，而 ArxivDIGESTables 衡量的是多文档合成表格的重构质量，两者任务目标、输入规模和输出形式完全不同。 [ev_f6f4941beb662e6f6699821cf81df1f1, ev_1f3190a81929bf34e4c5317a2cefd77e]\n  适用范围：基于两篇论文分别定义的单篇 QA 和多篇表格合成任务性质差异推断。\n- [推断] 当前缺乏对“跨论文比较”能力的直接评测依据，因为 QASPER 仅覆盖单篇论文，而 ArxivDIGESTables 虽涉及多篇但侧重于表格合成而非直接的比较性问答。 [ev_f6f4941beb662e6f6699821cf81df1f1, ev_1f3190a81929bf34e4c5317a2cefd77e]\n  适用范围：基于 QASPER 明确为单篇论文问答，ArxivDIGESTables 为表格合成，未明确提及支持直接的跨论文比较性问答任务推断。\n\n| 论文 / 方法 | 任务与输入输出 | 参考答案与标注 | 指标与比较条件 | 适用范围与缺口 | 证据 |\n|---|---|---|---|---|---|\n| QASPER | 单篇论文问答；输入：论文全文+基于标题/摘要的问题；输出：答案及支撑证据 | 由 NLP 从业者撰写问题和答案，并提供支撑证据 | F1 分数（文中提到模型落后人类至少 27 点），衡量单篇文档内信息检索与推理 | 适用于单篇深度理解；缺口：不支持跨论文比较或结构化合成 | ev_f6f4941beb662e6f6699821cf81df1f1 |\n| ArxivDIGESTables | 多篇论文合成表格；输入：多篇论文；输出：包含 schema 和值的文献综述表格 | 从 ArXiv 论文中提取的人类作者表格作为参考 | DECONTEXT EVAL 自动评估及人工评估，衡量表格重构质量和新颖方面 | 适用于跨文档信息合成与结构化；缺口：非直接问答形式，侧重表格生成 | ev_1f3190a81929bf34e4c5317a2cefd77e |\n\n## 方案建议（尚未执行，待验证）\n\n- 构建一个混合评测集：选取 50 个 QASPER 问题用于单篇能力基线，再选取 20 个 ArxivDIGESTables 中的表格行（每行对应一篇论文）构造跨论文比较问题（如'论文A与论文B在方法X上的区别是什么？'）。\n  依据：结论 3, 4, 6\n  假设：假设可以从 ArxivDIGESTables 的表格数据中反向构造出有意义的比较性问题。；假设现有的 LLM 能够处理这种混合类型的输入并给出合理回答。\n  验证计划：1. 数据划分：从 QASPER 随机抽取 50 题，从 ArxivDIGESTables 抽取 20 组对比对。2. 人工检查：邀请 2 名领域专家审核构造的比较问题的准确性和合理性。3. 失败计数：运行候选模型，统计完全错误、部分正确和幻觉的比例，设定阈值（如准确率<60%视为失败）。\n- 设计分层评估流程：先通过 QASPER 筛选具备单篇理解能力的模型，再通过 ArxivDIGESTables 的子任务（schema 生成）评估其结构化能力，最后进行人工交叉验证。\n  依据：结论 3, 4\n  假设：假设单篇理解是跨论文合成的基础前提。；假设 schema 生成能力可以独立于值填充进行评估。\n  验证计划：1. 阶段一：在 QASPER 测试集上运行，保留 F1 > X 的模型。2. 阶段二：在 ArxivDIGESTables 上测试 schema 生成准确率。3. 人工检查：对通过前两阶段的模型输出进行抽样人工评分，记录不一致案例数量。\n- 建立‘失败案例库’机制：针对模型在两任务中表现不佳的案例（如 QASPER 中的长距离依赖问题，ArxivDIGESTables 中的 schema 冲突），分类归档并定期更新评测标准。\n  依据：结论 3, 4, 6\n  假设：假设模型的失败模式具有一定的规律性，可以通过案例积累发现。；假设人工标注团队有能力识别并分类这些失败原因。\n  验证计划：1. 收集：运行评测后收集所有低分样本。2. 分类：由专家将错误分为‘检索失败’、‘推理错误’、‘格式错误’等类别。3. 迭代：每季度更新一次评测集，加入新的困难样本，重新评估模型性能变化。\n\n## 限制与待验证问题\n\n- 本次报告仅基于两篇论文的摘要和引言部分，未核实具体的实验设置细节、完整的指标定义或详细的错误分析。\n- 关于‘跨论文比较’能力的具体评测缺口是基于任务定义的推断，原文未明确声明其无法支持此类任务，可能存在未读到的相关讨论。\n- 未包含其他潜在的相关数据集或评测基准，结论仅限于 QASPER 和 ArxivDIGESTables 的范围。\n- 提出的评测方案仅为建议，未经过实际执行验证，其有效性和可行性需进一步测试。"
+}

@@ -1,0 +1,127 @@
+[
+  {
+    "arguments": {
+      "title": "QASPER 与 ArxivDIGESTables 在训练、评测与迁移条件上的对比分析",
+      "claims": [
+        {
+          "text": "QASPER 数据集由 NLP 从业者构建：提问者仅看到论文标题和摘要，回答者则看到全文（含图表）并需标注证据片段；55.5% 的问题需要跨段落证据，13% 需要表格或图表。",
+          "evidence_ids": [
+            "ev_0064b92d81682251e0b814e1401e7c9f",
+            "ev_0d3492987242ad1d8620f5834d75f10e",
+            "ev_a466bd1f5f3f3035fb06eade695b9a66"
+          ],
+          "kind": "finding"
+        },
+        {
+          "text": "ArxivDIGESTables 包含从 ArXiv 爬取并过滤的 2,228 个文献综述表，涵盖 7,542 篇论文，每个表行对应一篇输入论文，列代表共享方面（schema），值来自原文内容。",
+          "evidence_ids": [
+            "ev_2bf085a938ff20f0010fbc2ae0492552",
+            "ev_ba2f4b6390b261f1f870924fddab0cd2",
+            "ev_a74f4349488b578dcf193afee734fb1d"
+          ],
+          "kind": "finding"
+        },
+        {
+          "text": "QASPER 的评测区分了 oracle 与非 oracle 条件：使用金标准证据生成的 oracle 模型表现优于非 oracle 模型，但两者均显著低于人类水平（F1 差距分别为 27 和 32 分）。",
+          "evidence_ids": [
+            "ev_0064b92d81682251e0b814e1401e7c9f"
+          ],
+          "kind": "finding"
+        },
+        {
+          "text": "ArxivDIGESTables 提出 DECON-TEXT EVAL 自动评估方法，用于对齐表面形式不同但语义相同的表格元素，以支持对模型生成结果的大规模评估。",
+          "evidence_ids": [
+            "ev_2bf085a938ff20f0010fbc2ae0492552"
+          ],
+          "kind": "finding"
+        },
+        {
+          "text": "两篇论文均未明确说明其模型是否在任务数据上进行过微调，也未提供训练/验证/测试集划分细节；因此无法判断当前系统是否可直接迁移至 Agent 的微调策略。",
+          "evidence_ids": [],
+          "kind": "inference",
+          "qualification": "基于已读证据中未提及训练划分与微调过程，且未报告开发集使用情况，故推断为未知。"
+        },
+        {
+          "text": "QASPER 与 ArxivDIGESTables 的任务目标、输入权限与评测指标不同，直接比较分数无意义；前者关注问答与证据定位，后者关注表格 schema 与值的生成。",
+          "evidence_ids": [
+            "ev_0064b92d81682251e0b814e1401e7c9f",
+            "ev_2bf085a938ff20f0010fbc2ae0492552"
+          ],
+          "kind": "inference",
+          "qualification": "因任务定义、输入可见性与评估对象不同，不具备可比性前提。"
+        }
+      ],
+      "comparison_rows": [
+        {
+          "source_id": "9c661d7f-a805-4f57-83dd-9b2a8274ecdc",
+          "method": "文档级 Transformer 问答与证据选择",
+          "dataset": "QASPER (5,049 问题, 1,585 论文)",
+          "model": "本次未核实",
+          "metric": "F1 (问答与证据选择)",
+          "result": "人类领先模型 27-32 F1 分",
+          "conditions": "oracle 与非 oracle 条件分别测试",
+          "comparability": "unknown",
+          "evidence_ids": [
+            "ev_0064b92d81682251e0b814e1401e7c9f"
+          ],
+          "attributes": {
+            "角色与输入": "提问者见标题+摘要；回答者见全文+图表",
+            "训练与数据划分": "本次未核实",
+            "评测条件与指标": "F1，区分 oracle/non-oracle",
+            "迁移条件与未知": "未报告微调与划分，迁移条件未知"
+          }
+        },
+        {
+          "source_id": "4335903d-87f4-4a1a-9b7d-641b25a2d4ce",
+          "method": "语言模型生成文献综述表（schema + value）",
+          "dataset": "ArxivDIGESTables (2,228 表, 7,542 论文)",
+          "model": "本次未核实",
+          "metric": "DECON-TEXT EVAL（自动对齐评估）",
+          "result": "本次未核实",
+          "conditions": "依赖上下文（如表注、文中引用）提升生成质量",
+          "comparability": "unknown",
+          "evidence_ids": [
+            "ev_2bf085a938ff20f0010fbc2ae0492552",
+            "ev_a74f4349488b578dcf193afee734fb1d"
+          ],
+          "attributes": {
+            "角色与输入": "系统接收多篇论文全文，输出结构化表格",
+            "训练与数据划分": "本次未核实",
+            "评测条件与指标": "DECON-TEXT EVAL，人工评估辅助",
+            "迁移条件与未知": "未报告微调与划分，迁移条件未知"
+          }
+        }
+      ],
+      "limitations": [
+        "两篇论文均未明确报告训练/验证/测试集划分及微调策略，导致无法判断是否可直接迁移至 Agent 的微调方案。",
+        "QASPER 的 oracle 实验虽显示性能提升，但未说明具体预训练与领域适配方法，难以复现。",
+        "ArxivDIGESTables 的自动评估方法 DECON-TEXT EVAL 尚未在独立测试集上验证泛化能力。",
+        "两任务输入权限与目标差异大，直接比较分数或排名缺乏可比性前提。"
+      ],
+      "proposals": [
+        {
+          "text": "设计最小控制实验：固定输入为单篇论文全文，改动项为是否提供 schema 提示（有/无），评估 Agent 在 QASPER 风格问答与 ArxivDIGESTables 风格表格生成中的表现差异。",
+          "basis_claim_indices": [
+            0,
+            1,
+            5
+          ],
+          "assumptions": [
+            "Agent 可处理全文输入",
+            "schema 提示对表格生成有正向影响",
+            "问答与表格生成任务可共享部分推理模块"
+          ],
+          "validation_plan": "在 QASPER 子集（100 问题）与 ArxivDIGESTables 子集（50 表）上运行实验，记录 F1 与 DECON-TEXT 得分；若任一任务失败率 >30% 或无显著提升，则停止并调整提示策略。"
+        }
+      ],
+      "verification_status": "needs_human_review"
+    },
+    "normalized_columns": [],
+    "validation_status": "rejected",
+    "id": "8acccf3c-a52c-45e2-a52a-e51e85c42b4e",
+    "workspace_id": "bf44524d-ee51-42ff-9c1a-25c4c6210345",
+    "created_at": "2026-11-08T15:21:16.671762+00:00",
+    "updated_at": "2026-11-08T15:21:16.687840+00:00",
+    "error": "1 validation error for Report\nclaims.4.evidence_ids\n  List should have at least 1 item after validation, not 0 [type=too_short, input_value=[], input_type=list]\n    For further information visit https://errors.pydantic.dev/2.14/v/too_short"
+  }
+]

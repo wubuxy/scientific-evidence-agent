@@ -1,0 +1,124 @@
+[
+  {
+    "arguments": {
+      "title": "QASPER 与 ArxivDIGESTables 在训练、评测与迁移条件上的对比分析",
+      "claims": [
+        {
+          "text": "QASPER 数据集由 NLP 从业者基于论文标题和摘要撰写问题，答案及证据需从全文（含图表）中检索；回答者可见全文，但问题作者仅见标题与摘要。",
+          "evidence_ids": [
+            "ev_8c43caa13b82e24b5246046da6c0afaf",
+            "ev_f177acdb5c28282a6bf114f2c45e94d5"
+          ],
+          "kind": "finding"
+        },
+        {
+          "text": "ArxivDIGESTables 通过解析 ArXiv 论文的 LaTeX 源文件提取表格，并匹配引用以构建“文献综述表”，其数据构建依赖自动提取与启发式过滤，而非人工标注问答对。",
+          "evidence_ids": [
+            "ev_8f1c376c3235fe5bc06c7671c0ecaeb2"
+          ],
+          "kind": "finding"
+        },
+        {
+          "text": "QASPER 的评测包含基于金标准证据的 oracle 实验，显示当前模型在全文问答任务上与人类表现存在显著差距（F1 差值达 27-32 分）。",
+          "evidence_ids": [
+            "ev_8c43caa13b82e24b5246046da6c0afaf"
+          ],
+          "kind": "finding"
+        },
+        {
+          "text": "两篇论文均未明确报告用于模型微调的训练数据划分细节或具体的微调超参数设置，无法直接推断其训练过程是否适用于新 Agent 的微调。",
+          "evidence_ids": [],
+          "kind": "inference",
+          "qualification": "基于已读原文未提及训练划分与微调细节，故推断为未知。"
+        },
+        {
+          "text": "QASPER 的评测指标（如 F1）针对特定问答任务，而 ArxivDIGESTables 侧重于表格生成的结构正确性，两者任务目标与评估对象不同，分数不可直接比较排名。",
+          "evidence_ids": [
+            "ev_8c43caa13b82e24b5246046da6c0afaf",
+            "ev_4a849e16cdfb1a85b72db384d659a485"
+          ],
+          "kind": "inference",
+          "qualification": "因任务定义（问答 vs. 表格生成）与评估维度（语义匹配 vs. 结构/内容一致性）不同，缺乏统一基准导致不可比。"
+        },
+        {
+          "text": "将 QASPER 的问答能力迁移至 Agent 需解决多段落推理与证据定位难题，而 ArxivDIGESTables 的表格合成能力可能更适用于结构化信息抽取场景，两者迁移路径不同。",
+          "evidence_ids": [
+            "ev_8c43caa13b82e24b5246046da6c0afaf",
+            "ev_4a849e16cdfb1a85b72db384d659a485"
+          ],
+          "kind": "inference",
+          "qualification": "基于两文任务特性差异推断，具体迁移效果需实验验证。"
+        }
+      ],
+      "comparison_rows": [
+        {
+          "source_id": "99a742e7-472c-42d5-97b6-d3b06c66213d",
+          "method": "QASPER 问答系统",
+          "dataset": "QASPER (5,049 问题)",
+          "model": "本次未核实",
+          "metric": "F1 (问答/证据选择)",
+          "result": "模型落后人类 27-32 F1 分",
+          "conditions": "Oracle: 使用金标准证据; Non-oracle: 全文检索",
+          "comparability": "unknown",
+          "evidence_ids": [
+            "ev_8c43caa13b82e24b5246046da6c0afaf"
+          ],
+          "attributes": {
+            "角色与输入": "问题作者见标题/摘要; 回答者见全文",
+            "训练与数据划分": "本次未核实",
+            "评测条件与指标": "F1, Oracle/Non-oracle",
+            "迁移条件与未知": "需解决多段落推理"
+          }
+        },
+        {
+          "source_id": "a35bfc17-06dc-4b3b-be50-a880b5a916ae",
+          "method": "ArxivDIGESTables 表格生成",
+          "dataset": "ArxivDIGESTables (2,228 表格)",
+          "model": "本次未核实",
+          "metric": "本次未核实",
+          "result": "本次未核实",
+          "conditions": "基于 LaTeX 解析与引用匹配",
+          "comparability": "unknown",
+          "evidence_ids": [
+            "ev_8f1c376c3235fe5bc06c7671c0ecaeb2",
+            "ev_4a849e16cdfb1a85b72db384d659a485"
+          ],
+          "attributes": {
+            "角色与输入": "自动提取表格与引用",
+            "训练与数据划分": "本次未核实",
+            "评测条件与指标": "本次未核实",
+            "迁移条件与未知": "适用于结构化信息抽取"
+          }
+        }
+      ],
+      "limitations": [
+        "原文未提供模型训练的具体数据划分与微调策略，无法确认直接复用可行性。",
+        "两篇论文评测指标与任务目标不同，缺乏统一基准进行跨任务性能排名。",
+        "ArxivDIGESTables 的表格生成质量评估指标未在已读片段中明确给出。",
+        "关于将现有方法迁移至新 Agent 的具体效果，目前仅有理论推断，缺乏实证支持。"
+      ],
+      "proposals": [
+        {
+          "text": "设计最小控制实验：固定基础模型，分别使用 QASPER 风格问答数据与 ArxivDIGESTables 风格表格数据进行微调，对比在混合任务上的表现。",
+          "basis_claim_indices": [
+            0,
+            1,
+            5
+          ],
+          "assumptions": [
+            "两种数据格式均可被同一基础模型有效学习",
+            "混合任务能反映真实 Agent 需求"
+          ],
+          "validation_plan": "固定项：基础模型架构、训练轮数、硬件环境；改动项：微调数据集类型（纯问答 vs. 纯表格 vs. 混合）；失败计数：若任一配置在验证集上 F1/准确率低于基线 10% 则视为失败；停止条件：连续 3 次实验均无显著提升或达到预设最大迭代次数。"
+        }
+      ]
+    },
+    "normalized_columns": [],
+    "validation_status": "rejected",
+    "id": "7861e2f1-9d44-4396-b0a4-88aad665ed23",
+    "workspace_id": "cb95a09c-475a-490c-814f-7cda77024b97",
+    "created_at": "2026-11-08T15:23:03.696663+00:00",
+    "updated_at": "2026-11-08T15:23:03.712144+00:00",
+    "error": "1 validation error for Report\nclaims.3.evidence_ids\n  List should have at least 1 item after validation, not 0 [type=too_short, input_value=[], input_type=list]\n    For further information visit https://errors.pydantic.dev/2.14/v/too_short"
+  }
+]

@@ -76,6 +76,35 @@ def test_strategy_sweep_is_balanced_and_each_single_arm_changes_one_switch(monke
             assert sum(flags[k]!=sweep.BASE[k] for k in flags)==1
 
 
+def test_strategy_aggregation_keeps_failed_and_missing_denominators(monkeypatch):
+    monkeypatch.syspath_prepend(str(ROOT/'scripts'))
+    analysis=module('summarize_strategy_sweep')
+    success=dict(status='completed',contract_pass=True,field_presence_rate=1,known_tokens=100,returned_tokens=100)
+    failed=dict(status='failed',contract_pass=False,field_presence_rate=0,known_tokens=200,returned_tokens=200)
+    result=analysis.aggregate([success,failed])
+    assert result['planned']==2 and result['contract_passes']==1 and result['mean_returned_tokens']==150
+    missing=dict(status='missing',contract_pass=False,known_tokens=0,returned_tokens=None)
+    result=analysis.aggregate([success,failed,missing])
+    assert result['planned']==3 and result['executed']==2 and result['mean_returned_tokens'] is None
+    assert result['mean_field_presence']==pytest.approx(1/3) and result['semantic_accuracy'] is None
+
+
+def test_audit_budget_counter_exception_requires_exact_failed_call_and_event_pattern():
+    from copy import deepcopy
+    audit=module('audit_architecture_study')
+    run=dict(status='failed',error='Measured token budget exceeded',tokens_used=80)
+    trace=dict(calls=[dict(tokens_used=80),dict(tokens_used=30)],
+               events=[dict(type='model_usage',data=dict(total_tokens=80))])
+    manifest=dict(strategies={'report_schema':'compact'},max_tokens=100)
+    assert audit.interrupted_budget_counter(run,trace,manifest,110)
+    for key,value in [('status','completed'),('error','Something else'),('tokens_used',79)]:
+        corrupt=dict(run,**{key:value})
+        assert not audit.interrupted_budget_counter(corrupt,trace,manifest,110)
+    wrong=deepcopy(trace); wrong['events'][0]['data']['total_tokens']=79
+    assert not audit.interrupted_budget_counter(run,wrong,manifest,110)
+    assert not audit.interrupted_budget_counter(run,trace,manifest,90)
+
+
 @pytest.mark.parametrize('fault',['usage','human_score','missing','quote'])
 def test_architecture_audit_rejects_corrupt_result(tmp_path,fault):
     auditor=module('audit_architecture_study')
@@ -109,6 +138,7 @@ def test_report_packets_keep_conditions_private_and_human_labels_blank(tmp_path,
     for slot in ('annotator-a','annotator-b'):
         with zipfile.ZipFile(tmp_path/'review'/(slot+'.zip')) as packet:
             assert 'coordinator-mapping.json' not in packet.namelist()
+            assert 'review.html' in packet.namelist() and 'evidence-index.json' in packet.namelist()
             assert not any('trace' in n or 'summary' in n for n in packet.namelist())
             labels=json.loads(packet.read('labels.json'))
             assert labels['slot']==slot and labels['annotator'] is None
@@ -116,3 +146,4 @@ def test_report_packets_keep_conditions_private_and_human_labels_blank(tmp_path,
             assert all(len(r['items'])==6 and all(i['score'] is None and i['rationale'] is None
                 and not i['evidence_spans'] for i in r['items']) for r in labels['reports'])
             assert 'memory_mode' not in packet.read('reports.md').decode()
+            assert 'memory_mode' not in packet.read('review.html').decode()

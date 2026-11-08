@@ -1,0 +1,141 @@
+[
+  {
+    "arguments": {
+      "title": "QASPER 与 ArxivDIGESTables 训练评测做法迁移性比较报告",
+      "claims": [
+        {
+          "text": "QASPER 数据集构建采用解耦流程：研究生撰写问题，另一组经过资格考核的标注者基于全文回答并选择最小证据片段；系统输入为检索到的上下文伪文档列表。",
+          "evidence_ids": [
+            "ev_dbd51bfe615cf2f61578502434256dc7",
+            "ev_41a8045d162faf52b65c54038c9b52cd",
+            "ev_89d62505e66c7db455184fe28318360d"
+          ],
+          "kind": "finding"
+        },
+        {
+          "text": "ArxivDIGESTables 数据集由从论文中解析出的参考表格构成，过滤了字符数、引用数和行列数不满足条件的表格；部分表格值（如实验结果）无法仅从输入文本推导。",
+          "evidence_ids": [
+            "ev_9aeb9f5f73e6ac8a1f44fb6ae5e00ac4",
+            "ev_2643df162aa82f062f26bef562f74a68"
+          ],
+          "kind": "finding"
+        },
+        {
+          "text": "QASPER 评测指标为 Answer-F1 和 Evidence-F1，基于系统选择的段落/图表/表格与参考证据的匹配；人类性能估计为 Answer-F1 60.9、Evidence-F1 71.6，此为下限。",
+          "evidence_ids": [
+            "ev_e4c799ac6be5608f64e32b3748e1742a"
+          ],
+          "kind": "finding"
+        },
+        {
+          "text": "ArxivDIGESTables 评测包含 schema 对齐（DECONTEXT EVAL）与单元格语义等价判断；模型生成时为避免刷高 recall，被指令限制生成与参考相同数量的方面。",
+          "evidence_ids": [
+            "ev_9e30f13e93d36b6f1cfce039c02b3d73",
+            "ev_4bec3941768b23e1f3c68c2b46194953"
+          ],
+          "kind": "finding"
+        },
+        {
+          "text": "QASPER 基线模型使用 LED-base（基于 BART 初始化），支持长文档（16K tokens）；ArxivDIGESTables 实验使用了 Mixtral 8x22 和 GPT-3.5-Turbo，但未说明是否微调。",
+          "evidence_ids": [
+            "ev_741fd24f5360d351968ae598608b289a",
+            "ev_9e30f13e93d36b6f1cfce039c02b3d73"
+          ],
+          "kind": "finding"
+        },
+        {
+          "text": "两篇论文的评测条件不同：QASPER 依赖检索上下文且存在多证据参考，ArxivDIGESTables 依赖表格结构对齐与额外上下文（如生成的 caption）；直接跨任务排名不可比。",
+          "evidence_ids": [
+            "ev_89d62505e66c7db455184fe28318360d",
+            "ev_2643df162aa82f062f26bef562f74a68",
+            "ev_9e30f13e93d36b6f1cfce039c02b3d73"
+          ],
+          "kind": "inference",
+          "qualification": "基于两文对输入上下文、参考形式及指标定义的差异推断"
+        }
+      ],
+      "comparison_rows": [
+        {
+          "source_id": "8cadbd33-cfb9-46b9-a8c7-95fe04c9546b",
+          "method": "LED-base (BART-initialized)",
+          "dataset": "QASPER (18K papers, decoupled QA)",
+          "model": "LED-base",
+          "metric": "Answer-F1, Evidence-F1",
+          "result": "Human lower bound: 60.9 / 71.6",
+          "conditions": "Retrieved context; multiple evidence refs allowed",
+          "comparability": "unknown",
+          "evidence_ids": [
+            "ev_741fd24f5360d351968ae598608b289a",
+            "ev_e4c799ac6be5608f64e32b3748e1742a",
+            "ev_dbd51bfe615cf2f61578502434256dc7"
+          ],
+          "attributes": {
+            "角色与输入": "问题作者 vs 标注者；系统输入为检索伪文档",
+            "训练与数据划分": "未明确微调细节；使用预训练权重",
+            "评测条件与指标": "F1 over paragraphs/figures/tables; oracle-based",
+            "迁移条件与未知": "需验证检索质量对 F1 的影响"
+          }
+        },
+        {
+          "source_id": "1e13f213-0cc9-433d-9ab1-e7191a280039",
+          "method": "Mixtral 8x22, GPT-3.5-Turbo",
+          "dataset": "ArxivDIGESTables (filtered tables from papers)",
+          "model": "Mixtral 8x22, GPT-3.5-Turbo",
+          "metric": "Schema alignment, cell semantic equivalence",
+          "result": "本次未核实",
+          "conditions": "Additional context (e.g., generated captions); fixed aspect count",
+          "comparability": "unknown",
+          "evidence_ids": [
+            "ev_9e30f13e93d36b6f1cfce039c02b3d73",
+            "ev_2643df162aa82f062f26bef562f74a68",
+            "ev_9aeb9f5f73e6ac8a1f44fb6ae5e00ac4"
+          ],
+          "attributes": {
+            "角色与输入": "无显式标注者；输入为论文文本+可选上下文",
+            "训练与数据划分": "未说明微调；可能为零样本/少样本推理",
+            "评测条件与指标": "DECONTEXT EVAL for schema; non-oracle cell check",
+            "迁移条件与未知": "需验证额外上下文对 schema 重建的贡献"
+          }
+        }
+      ],
+      "limitations": [
+        "QASPER 未明确说明模型是否经过微调，仅提及使用预训练权重初始化",
+        "ArxivDIGESTables 未提供具体数值结果，仅描述评测方法",
+        "两文评测指标定义不同，无法直接进行跨任务性能排名",
+        "部分表格值无法从输入文本推导，影响非 oracle 条件下的评估有效性"
+      ],
+      "proposals": [
+        {
+          "text": "在 QASPER 子集上对比零样本推理与微调后的 LED-base 在 Answer-F1 上的差异，固定检索器与上下文长度。",
+          "basis_claim_indices": [
+            0,
+            4
+          ],
+          "assumptions": [
+            "微调能提升复杂推理任务的 F1",
+            "检索质量是主要瓶颈而非模型容量"
+          ],
+          "validation_plan": "选取 500 个问答对，分别用零样本和微调模型测试，记录 F1 变化；若提升<2%则停止微调尝试"
+        },
+        {
+          "text": "在 ArxivDIGESTables 上测试添加不同上下文（caption、示例表）对 schema 对齐率的影响，固定模型为 GPT-3.5-Turbo。",
+          "basis_claim_indices": [
+            1,
+            5
+          ],
+          "assumptions": [
+            "额外上下文能显著提升 schema 重建能力",
+            "模型对提示敏感"
+          ],
+          "validation_plan": "设计三组提示（无上下文、仅 caption、caption+示例），各测 200 表，统计 schema 对齐率；若差异不显著则放弃该方向"
+        }
+      ]
+    },
+    "normalized_columns": [],
+    "validation_status": "accepted",
+    "id": "96d0eefe-d86b-4df6-b396-d50aa6d93cc9",
+    "workspace_id": "dc6f8288-dff1-4017-93ef-2e2f7adeec52",
+    "created_at": "2026-11-08T15:18:25.022305+00:00",
+    "updated_at": "2026-11-08T15:18:25.153463+00:00"
+  }
+]

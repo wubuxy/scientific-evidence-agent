@@ -1,0 +1,130 @@
+[
+  {
+    "arguments": {
+      "title": "QASPER 与 ArxivDIGESTables 训练评测做法迁移性比较报告",
+      "claims": [
+        {
+          "text": "QASPER 数据集由 NLP 从业者构建，问题撰写者与回答者分离；问题撰写者仅看到论文标题和摘要，但被要求提出无法从标题/摘要回答、需全文检索的问题。",
+          "evidence_ids": [
+            "ev_04f0dd1fd5d6d1cd3e5dce1cda8401ff",
+            "ev_0e94c0a265a7c2e8b25cba12809af2b1",
+            "ev_d907aeff2be0371445770fb366547dcf",
+            "ev_2e810ad9fb6476c4e1e92ce56703059c"
+          ],
+          "kind": "finding"
+        },
+        {
+          "text": "QASPER 中 55.5% 的问题需要跨段落证据，13% 需要表格或图表；当前最佳模型在回答问题任务上比人类低 27 F1 分。",
+          "evidence_ids": [
+            "ev_04f0dd1fd5d6d1cd3e5dce1cda8401ff"
+          ],
+          "kind": "finding"
+        },
+        {
+          "text": "ArxivDIGESTables 将文献综述表生成任务分解为 schema 生成（确定共享方面）和 value 生成（给定方面和论文确定值）两个子任务。",
+          "evidence_ids": [
+            "ev_fed637b783e37c6085f89b45976103c2",
+            "ev_e4b37cf95410284d4f7dd7a6a25e5333",
+            "ev_f49e6df6290738166c3f7b009da65a65"
+          ],
+          "kind": "finding"
+        },
+        {
+          "text": "ArxivDIGESTables 包含 2,228 个文献综述表，综合了 7,542 篇研究论文；评估采用 DECONTEXT EVAL 方法对齐表格元素，并发现额外上下文（如表格标题、文中引用）有助于生成。",
+          "evidence_ids": [
+            "ev_fed637b783e37c6085f89b45976103c2",
+            "ev_f4c96f337456b585c5806ca577d3f0eb"
+          ],
+          "kind": "finding"
+        },
+        {
+          "text": "两篇论文均未明确说明用于模型训练/微调的具体数据划分策略（如训练集/验证集/测试集比例），也未提供针对特定 Agent 任务的微调实验结果。",
+          "evidence_ids": [],
+          "kind": "inference",
+          "qualification": "基于已回读内容未找到关于训练数据划分或微调实验的明确描述，故推断为未知。"
+        },
+        {
+          "text": "QASPER 的评测指标（F1）针对问答任务，而 ArxivDIGESTables 使用自动对齐评估（DECONTEXT EVAL）及人工评估针对表格生成任务；两者任务目标与指标对象不同，不具备直接可比性。",
+          "evidence_ids": [
+            "ev_04f0dd1fd5d6d1cd3e5dce1cda8401ff",
+            "ev_fed637b783e37c6085f89b45976103c2"
+          ],
+          "kind": "inference",
+          "qualification": "基于任务定义（QA vs 表格生成）和评估方法差异推断不可直接排名。"
+        }
+      ],
+      "comparison_rows": [
+        {
+          "source_id": "66ef3050-ad1b-4999-8d8f-52e922d2996a",
+          "method": "文档级 Transformer 进行证据选择与答案生成",
+          "dataset": "QASPER (5,049 个问题, 1,585 篇 NLP 论文)",
+          "model": "本次未核实",
+          "metric": "F1 (问答任务)",
+          "result": "最佳模型比人类低 27 F1 分",
+          "conditions": "Oracle: 无明确说明; Non-oracle: 模型需从全文检索证据",
+          "comparability": "unknown",
+          "evidence_ids": [
+            "ev_04f0dd1fd5d6d1cd3e5dce1cda8401ff"
+          ],
+          "attributes": {
+            "角色与输入": "问题撰写者见标题/摘要; 回答者见全文; 系统输入为全文",
+            "训练与数据划分": "本次未核实",
+            "评测条件与指标": "F1, 跨段落/图表证据需求高",
+            "迁移条件与未知": "未见微调细节, 任务为 QA"
+          }
+        },
+        {
+          "source_id": "6c3e6464-3cb5-4fe7-800a-95f318a4eb9f",
+          "method": "LM 分解为 Schema 生成与 Value 生成",
+          "dataset": "ArxivDIGESTables (2,228 表, 7,542 篇论文)",
+          "model": "本次未核实",
+          "metric": "DECONTEXT EVAL (自动对齐) + 人工评估",
+          "result": "额外上下文(标题/引用)有益",
+          "conditions": "Oracle: 参考表; Non-oracle: 生成表需对齐",
+          "comparability": "unknown",
+          "evidence_ids": [
+            "ev_fed637b783e37c6085f89b45976103c2",
+            "ev_e4b37cf95410284d4f7dd7a6a25e5333",
+            "ev_f49e6df6290738166c3f7b009da65a65"
+          ],
+          "attributes": {
+            "角色与输入": "系统输入为多篇论文; 输出为结构化表格",
+            "训练与数据划分": "本次未核实",
+            "评测条件与指标": "自动对齐+人工评估, 依赖上下文",
+            "迁移条件与未知": "未见微调细节, 任务为表格生成"
+          }
+        }
+      ],
+      "limitations": [
+        "未找到两篇论文中关于模型训练/微调的具体数据划分（训练/验证/测试集）信息。",
+        "未找到针对特定 Agent 任务的微调实验结果或超参数设置。",
+        "QASPER 与 ArxivDIGESTables 的任务目标（QA vs 表格生成）和评估指标不同，无法直接比较性能优劣。",
+        "关于 Oracle/Non-oracle 条件的具体实现细节在两篇论文的回读范围内未完全明确。"
+      ],
+      "proposals": [
+        {
+          "text": "设计最小控制实验：固定基础 LM，对比在 QASPER 风格 QA 任务与 ArxivDIGESTables 风格表格生成任务上的表现，分别使用仅标题/摘要输入与全文输入两种条件。",
+          "basis_claim_indices": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "assumptions": [
+            "基础 LM 具备处理两类任务的基本能力",
+            "输入范围（标题/摘要 vs 全文）对两类任务影响显著"
+          ],
+          "validation_plan": "固定项：基础 LM 模型、评估指标（F1 for QA, 对齐准确率 for Table）。改动项：输入文本范围（仅标题/摘要 vs 全文）、任务类型（QA vs Table）。失败计数：若任一条件下性能低于基线 10%，则停止该分支实验。停止条件：完成所有组合实验或达到预设失败阈值。"
+        }
+      ],
+      "verification_status": "needs_human_review"
+    },
+    "normalized_columns": [],
+    "validation_status": "rejected",
+    "id": "175f173b-356b-4cbe-a05c-3adff594fe8a",
+    "workspace_id": "c6950118-9485-4f75-b4cf-3c05e4d31b9a",
+    "created_at": "2026-11-08T15:22:20.237031+00:00",
+    "updated_at": "2026-11-08T15:22:20.252550+00:00",
+    "error": "1 validation error for Report\nclaims.4.evidence_ids\n  List should have at least 1 item after validation, not 0 [type=too_short, input_value=[], input_type=list]\n    For further information visit https://errors.pydantic.dev/2.14/v/too_short"
+  }
+]

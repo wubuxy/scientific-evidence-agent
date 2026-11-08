@@ -79,6 +79,8 @@ jobs:
         run: |
           python ../scripts/audit_architecture_study.py --root ../docs/results/grounding-gate-dev001-v1
           python ../scripts/audit_architecture_study.py --root ../docs/results/memory-ablation-dev001-v1
+      - name: Audit all six Agent strategy conditions and retained failures
+        run: python ../scripts/strategy_sweep.py audit
       - name: Audit published verifier pilot
         run: python ../scripts/audit_verifier_pilot.py
       - name: Audit repair study and cached gate comparison
