@@ -6,6 +6,7 @@ import math
 import time
 import re
 from .memory import EvidenceMemory
+from .grounding import unread_leads, read_context
 from .providers import decode_tool_arguments, provider_tools
 from pydantic import ValidationError
 from .schemas import Report, ComparisonRow, FieldCandidate, ResearchPlanRequest
@@ -392,6 +393,8 @@ class Runtime:
         plan = None
         read_ids, read_sources = set(), set()
         read_evidence = {}
+        pending_leads = []
+        read_feedback = ""
         for step in range(run["max_steps"]):
             if self.store.get(owner, workspace_id, "run", run_id)["status"] == "cancelled":
                 return
@@ -416,6 +419,13 @@ class Runtime:
             # This only makes a tool available; it is not a sufficiency judgment.
             report_tool_available = plan and set(plan["source_ids"]).issubset(read_sources)
             research_definitions = definitions if report_tool_available else definitions[:-1]
+            reading = bool(plan and pending_leads)
+            if reading:
+                # One grounded action after a batch of searches, before more
+                # search history can consume the writing reserve. The model
+                # still chooses the actual source, window and batch of reads.
+                messages = read_context(question_text, progress_note, pending_leads, feedback=read_feedback)
+                research_definitions = [d for d in definitions if d["function"]["name"] == "sources_read"]
             full_reserve = math.ceil(estimate_prompt_tokens(messages, research_definitions) * calibration * 1.1)
             final_system = FINAL_SYSTEM + progress_note
             minimum_final = final_context(final_system, question_text, read_evidence,
@@ -427,6 +437,15 @@ class Runtime:
                 "time_reserve" if ledger is not None and deadline-time.monotonic() < min(20, run["max_seconds"]*.15) else
                 "final_reserve" if research_output < 700 else None)
             finishing = stop_reason is not None
+            if finishing and reading and not read_evidence:
+                if ledger is not None:
+                    ledger.stop_reason = "no_read_evidence"
+                    self._save_fields(owner, workspace_id, run_id, ledger)
+                self.store.event(owner, workspace_id, run_id, "read_checkpoint_blocked", dict(
+                    reason=stop_reason, pending_leads=len(pending_leads), tokens_used=used_tokens,
+                    semantic_success=None))
+                raise ValueError("已有搜索线索但尚未回读原文，剩余预算或步数不足；停止生成无依据报告")
+            reading = reading and not finishing
             active_definitions = definitions[-1:] if finishing else research_definitions
             evidence_char_budget = None
             if finishing:
@@ -441,6 +460,7 @@ class Runtime:
                 raise ValueError("已达到 token 预算，请缩小资料范围或提高预算")
             output_allowance = min(2800 if finishing else research_output, remaining)
             budget_decision = dict(step=step+1, finishing=finishing, stop_reason=stop_reason,
+                phase="read" if reading else "final" if finishing else "research",
                 tokens_before_call=used_tokens, prompt_estimate=reserve, output_allowance=output_allowance,
                 final_prompt_reserve=final_reserve, final_output_reserve=FINAL_OUTPUT_RESERVE,
                 evidence_char_budget=evidence_char_budget, read_windows=len(read_evidence),
@@ -448,6 +468,10 @@ class Runtime:
                 schema_characters=len(json.dumps(provider_tools(active_definitions), ensure_ascii=False)),
                 system_characters=len(messages[0]["content"]))
             self.store.event(owner, workspace_id, run_id, "budget_decision", budget_decision)
+            if reading:
+                self.store.event(owner, workspace_id, run_id, "read_checkpoint_requested", dict(
+                    pending_leads=len(pending_leads), source_ids=sorted({item["source_id"] for item in pending_leads}),
+                    evidence_sufficiency="not_assessed"))
             started = time.monotonic()
             completion = await self.model.complete(messages, active_definitions, output_allowance)
             self.store.event(owner, workspace_id, run_id, "model_usage", dict(step=step + 1,
@@ -487,6 +511,8 @@ class Runtime:
                     if decoded_paths:
                         self.store.event(owner, workspace_id, run_id, "tool_arguments_decoded", dict(name=name, paths=decoded_paths,
                             raw_arguments=call["function"]["arguments"]))
+                    if reading and name != "sources_read":
+                        raise ValueError("本轮只允许 sources_read：先回读搜索命中的原文，再继续研究")
                     if name == "finish_report":
                         draft = self.store.put(owner, workspace_id, "report_draft", dict(arguments=arguments,
                             normalized_columns=[], validation_status="pending"), parent_id=run_id)
@@ -566,11 +592,17 @@ class Runtime:
                         if ledger is not None:
                             ledger.plan(plan)
                     elif name == "sources_read":
+                        pending_leads = []
+                        read_feedback = ""
                         read_ids.add(result["data"]["id"])
                         read_sources.add(result["data"]["source_id"])
                         read_evidence[result["data"]["id"]] = result["data"]
                         if ledger is not None:
                             ledger.read(result["data"]["source_id"])
+                    elif name == "sources_search":
+                        read_feedback = ""
+                        pending_leads.extend(unread_leads(result["data"].get("hits",[]),read_evidence,
+                            arguments.get("query", "")))
                     if ledger is not None:
                         self._save_fields(owner, workspace_id, run_id, ledger)
                     if name in {"plan_research", "sources_read"}:
@@ -583,6 +615,8 @@ class Runtime:
                     self.store.event(owner, workspace_id, run_id, "tool_completed",
                                      {"name": name, "tool_call_id": result["id"]})
                 except (ValueError, Unavailable, NotFound, LookupError) as exc:
+                    if reading:
+                        read_feedback = validation_feedback(exc)
                     if name == "finish_report":
                         report_feedback = validation_feedback(exc)
                     if draft:

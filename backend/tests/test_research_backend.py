@@ -246,7 +246,8 @@ class EvidenceModel:
         if self.steps == 1:
             name, args = "sources_search", {"query": "batch", "grep_query": "batch"}
         else:
-            observation = json.loads(messages[-1]["content"].split("\n", 1)[1])["evidence"][0]
+            state = json.loads(messages[-1]["content"].split("\n", 1)[1])
+            observation = (state.get("search_leads") or state.get("evidence"))[0]
             if self.steps == 2:
                 name, args = "plan_research", {"source_ids": [observation["source_id"]], "fields": ["batch size"]}
             elif self.steps == 3:

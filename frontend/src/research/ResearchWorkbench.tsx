@@ -21,8 +21,10 @@ const STATUS: Record<Run['status'], string> = { queued: '排队中', running: '�
 const KINDS: Record<string, string> = { paper: '论文全文', document: '文档', slides: '演示文稿', transcript: '转写文本', web: '网络线索', abstract: '论文摘要' }
 const TOOL_NAMES: Record<string, string> = { sources_search: '定位原文证据', plan_research: '规划必读论文与字段', papers_collect: '收集候选论文全文', sources_grep: '检索关键词与原文', sources_read: '回读原文', sources_rag: '检索语义证据', papers_search: '检索 arXiv 文献', web_search: '搜索网络资料', database_query: '查询资料数据', sources_list: '浏览课题资料' }
 const isActive = (run: Run | null) => run?.status === 'running' || run?.status === 'queued'
-const FIELD_EVENTS: Record<string, string> = { field_state_updated: '更新字段进度', field_repair_requested: '补齐未解决字段', field_review_recorded: '记录模型核验意见', field_repair_failed: '补读未完成，保留原报告' }
+const FIELD_EVENTS: Record<string, string> = { field_state_updated: '更新字段进度', field_repair_requested: '补齐未解决字段', field_review_recorded: '记录模型核验意见', field_repair_failed: '补读未完成，保留原报告', read_checkpoint_requested: '先回读搜索命中的原文', read_checkpoint_blocked: '尚无已读证据，停止生成报告' }
 function fieldEventDetail(event: RunEvent) {
+  if (event.type === 'read_checkpoint_requested') return '正在从搜索线索中选择原文窗口；回读后仍需核对字段与结论。'
+  if (event.type === 'read_checkpoint_blocked') return '剩余预算或步数不足以继续回读，本次没有形成有依据的报告。'
   if (event.type === 'field_state_updated') return `${event.data.present} / ${event.data.total} 个字段已有候选答案，${event.data.unresolved} 个仍待补齐；语义尚未确认。`
   if (event.type === 'field_repair_requested') return `第 ${event.data.round} 轮缺项补读；已填写内容由程序保留。`
   if (event.type === 'field_repair_failed') return '已保留此前有效报告与失败记录，未解决字段仍待核实。'

@@ -1,0 +1,46 @@
+{
+  "audit": "passed",
+  "task_gate": "failed",
+  "planned_attempts": 2,
+  "valid_reports": 0,
+  "returned_tokens": 56034,
+  "offline_projection": true,
+  "new_model_calls": 0,
+  "quality_result": null,
+  "checks": [
+    {
+      "repeat": "repeat-01",
+      "measured_tokens": 28037,
+      "first_batch_leads": 20,
+      "tokens_after_first_search": 7985,
+      "projected_read_prompt_reserve": 3443,
+      "projected_final_prompt_reserve": 2813,
+      "projected_read_output_allowance": 1200,
+      "read_handoff_fits_estimate": true,
+      "projected_read_tool_names": [
+        "sources_read"
+      ],
+      "semantic_success": null
+    },
+    {
+      "repeat": "repeat-02",
+      "measured_tokens": 27997,
+      "first_batch_leads": 20,
+      "tokens_after_first_search": 8097,
+      "projected_read_prompt_reserve": 3475,
+      "projected_final_prompt_reserve": 2860,
+      "projected_read_output_allowance": 1200,
+      "read_handoff_fits_estimate": true,
+      "projected_read_tool_names": [
+        "sources_read"
+      ],
+      "semantic_success": null
+    }
+  ],
+  "caveat": "Projected affordability does not establish actual tool use, evidence sufficiency or quality.",
+  "code_sha256": {
+    "scripts/audit_context_gate.py": "d1b0ce43af3bc85f01c4e57c22b2dda4f0897b3af37110150f979383db35940e",
+    "backend/app/research_backend/grounding.py": "1982e81757f3907eeb850bdd4d470662d7c3e794597c22e32b4c6ed59113a317",
+    "backend/app/research_backend/runtime.py": "c4fc1d9d91d50f842a460026b7d3c09de17fddc0dbc922f7182bff73bda30367"
+  }
+}

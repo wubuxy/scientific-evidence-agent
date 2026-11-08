@@ -1,0 +1,2295 @@
+[
+  {
+    "name": "plan_research",
+    "arguments": {
+      "source_ids": [
+        "2555e2d7-5cbb-4a24-8b99-a3b05e025604",
+        "66745208-f526-40c6-896a-268fb67f8151"
+      ],
+      "fields": [
+        "任务与输入输出",
+        "参考答案与标注",
+        "指标与比较条件",
+        "适用范围与缺口"
+      ]
+    },
+    "run_id": "5022f05f-af6f-454d-a849-75c1d90c7346",
+    "status": "succeeded",
+    "data": {
+      "source_ids": [
+        "2555e2d7-5cbb-4a24-8b99-a3b05e025604",
+        "66745208-f526-40c6-896a-268fb67f8151"
+      ],
+      "fields": [
+        "任务与输入输出",
+        "参考答案与标注",
+        "指标与比较条件",
+        "适用范围与缺口"
+      ],
+      "id": "0685cb1e-4ac9-4a7c-a4cb-e7d8a8fa5f62",
+      "workspace_id": "139f7b30-a566-4221-a92d-d7f4a369c5b6",
+      "created_at": "2026-11-08T10:23:40.094355+00:00"
+    },
+    "error": null,
+    "elapsed_ms": 21,
+    "id": "1020a8a2-88a5-45e4-8977-e248d186e25c",
+    "workspace_id": "139f7b30-a566-4221-a92d-d7f4a369c5b6",
+    "created_at": "2026-11-08T10:23:40.103067+00:00"
+  },
+  {
+    "name": "sources_search",
+    "arguments": {
+      "query": "What is the task definition, input format, and output format for the QASPER dataset?",
+      "grep_query": "task|input|output|question.*answer|format",
+      "source_ids": [
+        "2555e2d7-5cbb-4a24-8b99-a3b05e025604"
+      ],
+      "limit": 5
+    },
+    "run_id": "5022f05f-af6f-454d-a849-75c1d90c7346",
+    "status": "succeeded",
+    "data": {
+      "hits": [
+        {
+          "source_id": "2555e2d7-5cbb-4a24-8b99-a3b05e025604",
+          "source_hash": "7aaa103d0d4a431142c64d6f38bbff246e14ba8b5369fd0582a8a0e32d75a78f",
+          "title": "A Dataset of Information-Seeking Questions and Answers Anchored in Research Papers",
+          "uri": "https://arxiv.org/abs/2105.03011v1",
+          "quote": "A Dataset of Information-Seeking Questions\nand Answers Anchored in Research Papers",
+          "start_line": 1,
+          "end_line": 2,
+          "locations": [
+            {
+              "block_index": 0,
+              "page": 1,
+              "start_seconds": null,
+              "end_seconds": null,
+              "block_type": "text"
+            },
+            {
+              "block_index": 0,
+              "page": 1,
+              "start_seconds": null,
+              "end_seconds": null,
+              "block_type": "text"
+            }
+          ],
+          "id": "ev_0dc65591f8cc6ac85039349adca6e437",
+          "workspace_id": "139f7b30-a566-4221-a92d-d7f4a369c5b6",
+          "created_at": "2026-11-08T10:23:49.184614+00:00",
+          "method": "grep",
+          "score": 0.01639344262295082,
+          "backend_ranks": {
+            "grep": 1
+          },
+          "match_lines": [
+            1
+          ]
+        },
+        {
+          "source_id": "2555e2d7-5cbb-4a24-8b99-a3b05e025604",
+          "source_hash": "7aaa103d0d4a431142c64d6f38bbff246e14ba8b5369fd0582a8a0e32d75a78f",
+          "title": "A Dataset of Information-Seeking Questions and Answers Anchored in Research Papers",
+          "uri": "https://arxiv.org/abs/2105.03011v1",
+          "quote": "read with the goal of answering speciﬁc ques-\ntions. Question Answering systems that can\nanswer those questions can make consumption",
+          "start_line": 9,
+          "end_line": 11,
+          "locations": [
+            {
+              "block_index": 0,
+              "page": 1,
+              "start_seconds": null,
+              "end_seconds": null,
+              "block_type": "text"
+            },
+            {
+              "block_index": 0,
+              "page": 1,
+              "start_seconds": null,
+              "end_seconds": null,
+              "block_type": "text"
+            },
+            {
+              "block_index": 0,
+              "page": 1,
+              "start_seconds": null,
+              "end_seconds": null,
+              "block_type": "text"
+            }
+          ],
+          "id": "ev_e64603510e2b5bf98e69f9b7e4fea3f3",
+          "workspace_id": "139f7b30-a566-4221-a92d-d7f4a369c5b6",
+          "created_at": "2026-11-08T10:23:49.200769+00:00",
+          "method": "grep",
+          "score": 0.016129032258064516,
+          "backend_ranks": {
+            "grep": 2
+          },
+          "match_lines": [
+            10
+          ]
+        },
+        {
+          "source_id": "2555e2d7-5cbb-4a24-8b99-a3b05e025604",
+          "source_hash": "7aaa103d0d4a431142c64d6f38bbff246e14ba8b5369fd0582a8a0e32d75a78f",
+          "title": "A Dataset of Information-Seeking Questions and Answers Anchored in Research Papers",
+          "uri": "https://arxiv.org/abs/2105.03011v1",
+          "quote": "building such tools requires data that reﬂect\nthe difﬁculty of the task arising from complex\nreasoning about claims made in multiple parts\nof a paper. In contrast, existing information-\nseeking question answering datasets usually\ncontain questions about generic factoid-type\ninformation. We therefore present Q ASPER ,\na dataset of 5,049 questions over 1,585 Natu-",
+          "start_line": 13,
+          "end_line": 20,
+          "locations": [
+            {
+              "block_index": 0,
+              "page": 1,
+              "start_seconds": null,
+              "end_seconds": null,
+              "block_type": "text"
+            },
+            {
+              "block_index": 0,
+              "page": 1,
+              "start_seconds": null,
+              "end_seconds": null,
+              "block_type": "text"
+            },
+            {
+              "block_index": 0,
+              "page": 1,
+              "start_seconds": null,
+              "end_seconds": null,
+              "block_type": "text"
+            },
+            {
+              "block_index": 0,
+              "page": 1,
+              "start_seconds": null,
+              "end_seconds": null,
+              "block_type": "text"
+            },
+            {
+              "block_index": 0,
+              "page": 1,
+              "start_seconds": null,
+              "end_seconds": null,
+              "block_type": "text"
+            },
+            {
+              "block_index": 0,
+              "page": 1,
+              "start_seconds": null,
+              "end_seconds": null,
+              "block_type": "text"
+            },
+            {
+              "block_index": 0,
+              "page": 1,
+              "start_seconds": null,
+              "end_seconds": null,
+              "block_type": "text"
+            },
+            {
+              "block_index": 0,
+              "page": 1,
+              "start_seconds": null,
+              "end_seconds": null,
+              "block_type": "text"
+            }
+          ],
+          "id": "ev_d1fd9e6bf195b15f7728b29413460da6",
+          "workspace_id": "139f7b30-a566-4221-a92d-d7f4a369c5b6",
+          "created_at": "2026-11-08T10:23:49.217391+00:00",
+          "method": "grep",
+          "score": 0.015873015873015872,
+          "backend_ranks": {
+            "grep": 3
+          },
+          "match_lines": [
+            14
+          ]
+        },
+        {
+          "source_id": "2555e2d7-5cbb-4a24-8b99-a3b05e025604",
+          "source_hash": "7aaa103d0d4a431142c64d6f38bbff246e14ba8b5369fd0582a8a0e32d75a78f",
+          "title": "A Dataset of Information-Seeking Questions and Answers Anchored in Research Papers",
+          "uri": "https://arxiv.org/abs/2105.03011v1",
+          "quote": "idence to answers. We ﬁnd that existing mod-\nels that do well on other QA tasks do not per-\nform well on answering these questions, un-",
+          "start_line": 28,
+          "end_line": 30,
+          "locations": [
+            {
+              "block_index": 0,
+              "page": 1,
+              "start_seconds": null,
+              "end_seconds": null,
+              "block_type": "text"
+            },
+            {
+              "block_index": 0,
+              "page": 1,
+              "start_seconds": null,
+              "end_seconds": null,
+              "block_type": "text"
+            },
+            {
+              "block_index": 0,
+              "page": 1,
+              "start_seconds": null,
+              "end_seconds": null,
+              "block_type": "text"
+            }
+          ],
+          "id": "ev_e15ed421971d746965b358e5761d9602",
+          "workspace_id": "139f7b30-a566-4221-a92d-d7f4a369c5b6",
+          "created_at": "2026-11-08T10:23:49.234277+00:00",
+          "method": "grep",
+          "score": 0.015625,
+          "backend_ranks": {
+            "grep": 4
+          },
+          "match_lines": [
+            29
+          ]
+        },
+        {
+          "source_id": "2555e2d7-5cbb-4a24-8b99-a3b05e025604",
+          "source_hash": "7aaa103d0d4a431142c64d6f38bbff246e14ba8b5369fd0582a8a0e32d75a78f",
+          "title": "A Dataset of Information-Seeking Questions and Answers Anchored in Research Papers",
+          "uri": "https://arxiv.org/abs/2105.03011v1",
+          "quote": "vating further research in document-grounded,\ninformation-seeking QA, which our dataset is\ndesigned to facilitate.",
+          "start_line": 33,
+          "end_line": 35,
+          "locations": [
+            {
+              "block_index": 0,
+              "page": 1,
+              "start_seconds": null,
+              "end_seconds": null,
+              "block_type": "text"
+            },
+            {
+              "block_index": 0,
+              "page": 1,
+              "start_seconds": null,
+              "end_seconds": null,
+              "block_type": "text"
+            },
+            {
+              "block_index": 0,
+              "page": 1,
+              "start_seconds": null,
+              "end_seconds": null,
+              "block_type": "text"
+            }
+          ],
+          "id": "ev_574fe545e482616e4b5ca642ce3f5531",
+          "workspace_id": "139f7b30-a566-4221-a92d-d7f4a369c5b6",
+          "created_at": "2026-11-08T10:23:49.252273+00:00",
+          "method": "grep",
+          "score": 0.015384615384615385,
+          "backend_ranks": {
+            "grep": 5
+          },
+          "match_lines": [
+            34
+          ]
+        }
+      ],
+      "warnings": [],
+      "partial": false,
+      "truncated": true,
+      "backends": [
+        "ripgrep"
+      ],
+      "backend_runs": [
+        {
+          "name": "grep",
+          "backend": "ripgrep",
+          "status": "succeeded",
+          "elapsed_ms": 122.02,
+          "hits": 5,
+          "truncated": true,
+          "evidence_ids": [
+            "ev_eaa0c4e1649cc34bcbc663e803bfe756",
+            "ev_45d68fdee2fc835e76e2e878f773c3f1",
+            "ev_8a87cd5620dc9aff46ff06d41e07ba4f",
+            "ev_e7787e17eb4df7d216570c3f91f295b2",
+            "ev_6bf192c7eb266147c0515b1f177b8a94"
+          ],
+          "next_offset": 5,
+          "total_windows": 79,
+          "total_matches": 121
+        }
+      ],
+      "merge": "overlap_window_rrf",
+      "strategy": "grep",
+      "grep_next_offset": 5,
+      "grep_total_windows": 79,
+      "coverage": "仅为检索返回的证据窗口；不得据此声称已读全文或论文未报告"
+    },
+    "error": null,
+    "elapsed_ms": 210,
+    "id": "514c024d-6644-418d-a5e0-c19a5ce6f3d2",
+    "workspace_id": "139f7b30-a566-4221-a92d-d7f4a369c5b6",
+    "created_at": "2026-11-08T10:23:49.260692+00:00"
+  },
+  {
+    "name": "sources_search",
+    "arguments": {
+      "query": "How are reference answers created or annotated in QASPER? Who provides them?",
+      "grep_query": "annotation|annotator|reference|gold|human",
+      "source_ids": [
+        "2555e2d7-5cbb-4a24-8b99-a3b05e025604"
+      ],
+      "limit": 5
+    },
+    "run_id": "5022f05f-af6f-454d-a849-75c1d90c7346",
+    "status": "succeeded",
+    "data": {
+      "hits": [
+        {
+          "source_id": "2555e2d7-5cbb-4a24-8b99-a3b05e025604",
+          "source_hash": "7aaa103d0d4a431142c64d6f38bbff246e14ba8b5369fd0582a8a0e32d75a78f",
+          "title": "A Dataset of Information-Seeking Questions and Answers Anchored in Research Papers",
+          "uri": "https://arxiv.org/abs/2105.03011v1",
+          "quote": "form well on answering these questions, un-\nderperforming humans by at least 27 F1points\nwhen answering them from entire papers, moti-",
+          "start_line": 30,
+          "end_line": 32,
+          "locations": [
+            {
+              "block_index": 0,
+              "page": 1,
+              "start_seconds": null,
+              "end_seconds": null,
+              "block_type": "text"
+            },
+            {
+              "block_index": 0,
+              "page": 1,
+              "start_seconds": null,
+              "end_seconds": null,
+              "block_type": "text"
+            },
+            {
+              "block_index": 0,
+              "page": 1,
+              "start_seconds": null,
+              "end_seconds": null,
+              "block_type": "text"
+            }
+          ],
+          "id": "ev_8c1e78d5964e4f8e7236d8badb05271b",
+          "workspace_id": "139f7b30-a566-4221-a92d-d7f4a369c5b6",
+          "created_at": "2026-11-08T10:23:49.439382+00:00",
+          "method": "grep",
+          "score": 0.01639344262295082,
+          "backend_ranks": {
+            "grep": 1
+          },
+          "match_lines": [
+            31
+          ]
+        },
+        {
+          "source_id": "2555e2d7-5cbb-4a24-8b99-a3b05e025604",
+          "source_hash": "7aaa103d0d4a431142c64d6f38bbff246e14ba8b5369fd0582a8a0e32d75a78f",
+          "title": "A Dataset of Information-Seeking Questions and Answers Anchored in Research Papers",
+          "uri": "https://arxiv.org/abs/2105.03011v1",
+          "quote": "1 Introduction\nMachines built to assist humans who engage with\ntexts to seek information ought to be designed with",
+          "start_line": 36,
+          "end_line": 38,
+          "locations": [
+            {
+              "block_index": 0,
+              "page": 1,
+              "start_seconds": null,
+              "end_seconds": null,
+              "block_type": "text"
+            },
+            {
+              "block_index": 0,
+              "page": 1,
+              "start_seconds": null,
+              "end_seconds": null,
+              "block_type": "text"
+            },
+            {
+              "block_index": 0,
+              "page": 1,
+              "start_seconds": null,
+              "end_seconds": null,
+              "block_type": "text"
+            }
+          ],
+          "id": "ev_bd67dfb29a5ac17d5b28c28a6fc09a82",
+          "workspace_id": "139f7b30-a566-4221-a92d-d7f4a369c5b6",
+          "created_at": "2026-11-08T10:23:49.456310+00:00",
+          "method": "grep",
+          "score": 0.016129032258064516,
+          "backend_ranks": {
+            "grep": 2
+          },
+          "match_lines": [
+            37
+          ]
+        },
+        {
+          "source_id": "2555e2d7-5cbb-4a24-8b99-a3b05e025604",
+          "source_hash": "7aaa103d0d4a431142c64d6f38bbff246e14ba8b5369fd0582a8a0e32d75a78f",
+          "title": "A Dataset of Information-Seeking Questions and Answers Anchored in Research Papers",
+          "uri": "https://arxiv.org/abs/2105.03011v1",
+          "quote": "an awareness of the information need. Abstractly,\nthe human’s need should deﬁne the lens through\nwhich the system views the text in order to ﬁnd",
+          "start_line": 39,
+          "end_line": 41,
+          "locations": [
+            {
+              "block_index": 0,
+              "page": 1,
+              "start_seconds": null,
+              "end_seconds": null,
+              "block_type": "text"
+            },
+            {
+              "block_index": 0,
+              "page": 1,
+              "start_seconds": null,
+              "end_seconds": null,
+              "block_type": "text"
+            },
+            {
+              "block_index": 0,
+              "page": 1,
+              "start_seconds": null,
+              "end_seconds": null,
+              "block_type": "text"
+            }
+          ],
+          "id": "ev_c9ff94c3c56583a52a3189c5abbc39ca",
+          "workspace_id": "139f7b30-a566-4221-a92d-d7f4a369c5b6",
+          "created_at": "2026-11-08T10:23:49.474290+00:00",
+          "method": "grep",
+          "score": 0.015873015873015872,
+          "backend_ranks": {
+            "grep": 3
+          },
+          "match_lines": [
+            40
+          ]
+        },
+        {
+          "source_id": "2555e2d7-5cbb-4a24-8b99-a3b05e025604",
+          "source_hash": "7aaa103d0d4a431142c64d6f38bbff246e14ba8b5369fd0582a8a0e32d75a78f",
+          "title": "A Dataset of Information-Seeking Questions and Answers Anchored in Research Papers",
+          "uri": "https://arxiv.org/abs/2105.03011v1",
+          "quote": "Quasar: Datasets for Question Answering by Search and Reading\nAbstractWepresenttwonewlarge-scaledatasetsaimedatevaluatingsystemsdesignedtocomprehendanaturallanguagequeryandextractitsanswerfromalargecorpusoftext.TheQUASAR-Sdatasetconsistsof37000cloze-style(fill-in-the-gap)queriesconstructedfromdefinitionsofsoftwareentitytagsonthepopularwebsiteStackOverflow.Weevaluateseveralbaselinesonbothdatasets,rangingfromsimpleheuristicstopowerfulneuralmodels,andshowthattheselagbehindhumanperformanceby16.4%&32.1%forQuasar-Sand-Trespectively.\n3 Dataset Construction Each dataset consists of a collection of records with one QA problem per record. For each record, we include some question text, a context document relevant to the question, a set of candidate solutions, and the correct solution. ",
+          "start_line": 50,
+          "end_line": 52,
+          "locations": [
+            {
+              "block_index": 0,
+              "page": 1,
+              "start_seconds": null,
+              "end_seconds": null,
+              "block_type": "text"
+            },
+            {
+              "block_index": 0,
+              "page": 1,
+              "start_seconds": null,
+              "end_seconds": null,
+              "block_type": "text"
+            },
+            {
+              "block_index": 0,
+              "page": 1,
+              "start_seconds": null,
+              "end_seconds": null,
+              "block_type": "text"
+            }
+          ],
+          "id": "ev_15247467d80cf4f6bdcf81151bafa3cc",
+          "workspace_id": "139f7b30-a566-4221-a92d-d7f4a369c5b6",
+          "created_at": "2026-11-08T10:23:49.492709+00:00",
+          "method": "grep",
+          "score": 0.015625,
+          "backend_ranks": {
+            "grep": 4
+          },
+          "match_lines": [
+            51
+          ]
+        },
+        {
+          "source_id": "2555e2d7-5cbb-4a24-8b99-a3b05e025604",
+          "source_hash": "7aaa103d0d4a431142c64d6f38bbff246e14ba8b5369fd0582a8a0e32d75a78f",
+          "title": "A Dataset of Information-Seeking Questions and Answers Anchored in Research Papers",
+          "uri": "https://arxiv.org/abs/2105.03011v1",
+          "quote": "viding answers when the questions are answerable,\nthe annotators were asked to select text, tables, or\nﬁgures as evidence required for answering the ques-",
+          "start_line": 96,
+          "end_line": 98,
+          "locations": [
+            {
+              "block_index": 1,
+              "page": 2,
+              "start_seconds": null,
+              "end_seconds": null,
+              "block_type": "text"
+            },
+            {
+              "block_index": 1,
+              "page": 2,
+              "start_seconds": null,
+              "end_seconds": null,
+              "block_type": "text"
+            },
+            {
+              "block_index": 1,
+              "page": 2,
+              "start_seconds": null,
+              "end_seconds": null,
+              "block_type": "text"
+            }
+          ],
+          "id": "ev_bac9086075007400bd50ae606c07b9fa",
+          "workspace_id": "139f7b30-a566-4221-a92d-d7f4a369c5b6",
+          "created_at": "2026-11-08T10:23:49.511876+00:00",
+          "method": "grep",
+          "score": 0.015384615384615385,
+          "backend_ranks": {
+            "grep": 5
+          },
+          "match_lines": [
+            97
+          ]
+        }
+      ],
+      "warnings": [],
+      "partial": false,
+      "truncated": true,
+      "backends": [
+        "ripgrep"
+      ],
+      "backend_runs": [
+        {
+          "name": "grep",
+          "backend": "ripgrep",
+          "status": "succeeded",
+          "elapsed_ms": 119.95,
+          "hits": 5,
+          "truncated": true,
+          "evidence_ids": [
+            "ev_68549b99c0b311c8797c0ae69b758206",
+            "ev_0ac1ed0c82ca24508d5547188002cbdd",
+            "ev_98fe51b471eb3e51fda432a1ffb30952",
+            "ev_7f76396a49beeca6177839d10225d50e",
+            "ev_943c5c74db6ea6c9015c269fb56c78fe"
+          ],
+          "next_offset": 5,
+          "total_windows": 51,
+          "total_matches": 79
+        }
+      ],
+      "merge": "overlap_window_rrf",
+      "strategy": "grep",
+      "grep_next_offset": 5,
+      "grep_total_windows": 51,
+      "coverage": "仅为检索返回的证据窗口；不得据此声称已读全文或论文未报告"
+    },
+    "error": null,
+    "elapsed_ms": 213,
+    "id": "e541a366-c4e7-4ec5-ae92-4b3994a5703d",
+    "workspace_id": "139f7b30-a566-4221-a92d-d7f4a369c5b6",
+    "created_at": "2026-11-08T10:23:49.520320+00:00"
+  },
+  {
+    "name": "sources_search",
+    "arguments": {
+      "query": "What evaluation metrics are used in QASPER and what do they measure?",
+      "grep_query": "metric|evaluation|F1|accuracy|BLEU|ROUGE",
+      "source_ids": [
+        "2555e2d7-5cbb-4a24-8b99-a3b05e025604"
+      ],
+      "limit": 5
+    },
+    "run_id": "5022f05f-af6f-454d-a849-75c1d90c7346",
+    "status": "succeeded",
+    "data": {
+      "hits": [
+        {
+          "source_id": "2555e2d7-5cbb-4a24-8b99-a3b05e025604",
+          "source_hash": "7aaa103d0d4a431142c64d6f38bbff246e14ba8b5369fd0582a8a0e32d75a78f",
+          "title": "A Dataset of Information-Seeking Questions and Answers Anchored in Research Papers",
+          "uri": "https://arxiv.org/abs/2105.03011v1",
+          "quote": "form well on answering these questions, un-\nderperforming humans by at least 27 F1points\nwhen answering them from entire papers, moti-",
+          "start_line": 30,
+          "end_line": 32,
+          "locations": [
+            {
+              "block_index": 0,
+              "page": 1,
+              "start_seconds": null,
+              "end_seconds": null,
+              "block_type": "text"
+            },
+            {
+              "block_index": 0,
+              "page": 1,
+              "start_seconds": null,
+              "end_seconds": null,
+              "block_type": "text"
+            },
+            {
+              "block_index": 0,
+              "page": 1,
+              "start_seconds": null,
+              "end_seconds": null,
+              "block_type": "text"
+            }
+          ],
+          "id": "ev_8c1e78d5964e4f8e7236d8badb05271b",
+          "workspace_id": "139f7b30-a566-4221-a92d-d7f4a369c5b6",
+          "created_at": "2026-11-08T10:23:49.439382+00:00",
+          "method": "grep",
+          "score": 0.01639344262295082,
+          "backend_ranks": {
+            "grep": 1
+          },
+          "match_lines": [
+            31
+          ]
+        },
+        {
+          "source_id": "2555e2d7-5cbb-4a24-8b99-a3b05e025604",
+          "source_hash": "7aaa103d0d4a431142c64d6f38bbff246e14ba8b5369fd0582a8a0e32d75a78f",
+          "title": "A Dataset of Information-Seeking Questions and Answers Anchored in Research Papers",
+          "uri": "https://arxiv.org/abs/2105.03011v1",
+          "quote": "Q. Which retrieval system was used for the baselines?\n4.4 ResultsSeveral baselines rely on the retrieved context to extract the answer to a question. For these, we refer to the fraction of instances for which the correct answer is present in the context as Search Accuracy. The performance of the baseline amongthese instances is referred to as the Reading Accuracy.\nA:The dataset comes with a ranked set of relevant documents. Hence the baselines do not use a retrieval system.",
+          "start_line": 54,
+          "end_line": 56,
+          "locations": [
+            {
+              "block_index": 0,
+              "page": 1,
+              "start_seconds": null,
+              "end_seconds": null,
+              "block_type": "text"
+            },
+            {
+              "block_index": 0,
+              "page": 1,
+              "start_seconds": null,
+              "end_seconds": null,
+              "block_type": "text"
+            },
+            {
+              "block_index": 0,
+              "page": 1,
+              "start_seconds": null,
+              "end_seconds": null,
+              "block_type": "text"
+            }
+          ],
+          "id": "ev_564c3264297f31e3e35952c050148e9b",
+          "workspace_id": "139f7b30-a566-4221-a92d-d7f4a369c5b6",
+          "created_at": "2026-11-08T10:23:49.703337+00:00",
+          "method": "grep",
+          "score": 0.016129032258064516,
+          "backend_ranks": {
+            "grep": 2
+          },
+          "match_lines": [
+            55
+          ]
+        },
+        {
+          "source_id": "2555e2d7-5cbb-4a24-8b99-a3b05e025604",
+          "source_hash": "7aaa103d0d4a431142c64d6f38bbff246e14ba8b5369fd0582a8a0e32d75a78f",
+          "title": "A Dataset of Information-Seeking Questions and Answers Anchored in Research Papers",
+          "uri": "https://arxiv.org/abs/2105.03011v1",
+          "quote": "show that the best model performance lags behind\nhumans by 27 F1points at answering questions\nfrom entire papers, and 32 F1points at selecting\nthe paragraphs that provide evidence to answer the",
+          "start_line": 109,
+          "end_line": 112,
+          "locations": [
+            {
+              "block_index": 1,
+              "page": 2,
+              "start_seconds": null,
+              "end_seconds": null,
+              "block_type": "text"
+            },
+            {
+              "block_index": 1,
+              "page": 2,
+              "start_seconds": null,
+              "end_seconds": null,
+              "block_type": "text"
+            },
+            {
+              "block_index": 1,
+              "page": 2,
+              "start_seconds": null,
+              "end_seconds": null,
+              "block_type": "text"
+            },
+            {
+              "block_index": 1,
+              "page": 2,
+              "start_seconds": null,
+              "end_seconds": null,
+              "block_type": "text"
+            }
+          ],
+          "id": "ev_b1420a9ec449feb704a67cfa784e2b1a",
+          "workspace_id": "139f7b30-a566-4221-a92d-d7f4a369c5b6",
+          "created_at": "2026-11-08T10:23:49.722326+00:00",
+          "method": "grep",
+          "score": 0.015873015873015872,
+          "backend_ranks": {
+            "grep": 3
+          },
+          "match_lines": [
+            110
+          ]
+        },
+        {
+          "source_id": "2555e2d7-5cbb-4a24-8b99-a3b05e025604",
+          "source_hash": "7aaa103d0d4a431142c64d6f38bbff246e14ba8b5369fd0582a8a0e32d75a78f",
+          "title": "A Dataset of Information-Seeking Questions and Answers Anchored in Research Papers",
+          "uri": "https://arxiv.org/abs/2105.03011v1",
+          "quote": "4 Modeling Q ASPER\nThis section explains the task, evaluation metrics,\nand a model addressing Q ASPER tasks.",
+          "start_line": 342,
+          "end_line": 344,
+          "locations": [
+            {
+              "block_index": 3,
+              "page": 4,
+              "start_seconds": null,
+              "end_seconds": null,
+              "block_type": "text"
+            },
+            {
+              "block_index": 3,
+              "page": 4,
+              "start_seconds": null,
+              "end_seconds": null,
+              "block_type": "text"
+            },
+            {
+              "block_index": 3,
+              "page": 4,
+              "start_seconds": null,
+              "end_seconds": null,
+              "block_type": "text"
+            }
+          ],
+          "id": "ev_b6fc989e5fb3f776be25ffadb64de0d5",
+          "workspace_id": "139f7b30-a566-4221-a92d-d7f4a369c5b6",
+          "created_at": "2026-11-08T10:23:49.738975+00:00",
+          "method": "grep",
+          "score": 0.015625,
+          "backend_ranks": {
+            "grep": 4
+          },
+          "match_lines": [
+            343
+          ]
+        },
+        {
+          "source_id": "2555e2d7-5cbb-4a24-8b99-a3b05e025604",
+          "source_hash": "7aaa103d0d4a431142c64d6f38bbff246e14ba8b5369fd0582a8a0e32d75a78f",
+          "title": "A Dataset of Information-Seeking Questions and Answers Anchored in Research Papers",
+          "uri": "https://arxiv.org/abs/2105.03011v1",
+          "quote": "against labeled evidence spans.\nEvaluation metrics As an automatic proxy for\nthe measure of correctness of all types of answers,\nwe use the span-level F1measure proposed by Ra-\njpurkar et al. (2016). We convert answers that",
+          "start_line": 362,
+          "end_line": 366,
+          "locations": [
+            {
+              "block_index": 4,
+              "page": 5,
+              "start_seconds": null,
+              "end_seconds": null,
+              "block_type": "text"
+            },
+            {
+              "block_index": 4,
+              "page": 5,
+              "start_seconds": null,
+              "end_seconds": null,
+              "block_type": "text"
+            },
+            {
+              "block_index": 4,
+              "page": 5,
+              "start_seconds": null,
+              "end_seconds": null,
+              "block_type": "text"
+            },
+            {
+              "block_index": 4,
+              "page": 5,
+              "start_seconds": null,
+              "end_seconds": null,
+              "block_type": "text"
+            },
+            {
+              "block_index": 4,
+              "page": 5,
+              "start_seconds": null,
+              "end_seconds": null,
+              "block_type": "text"
+            }
+          ],
+          "id": "ev_e95132480eaa4f4fbaad9752e43ea3c7",
+          "workspace_id": "139f7b30-a566-4221-a92d-d7f4a369c5b6",
+          "created_at": "2026-11-08T10:23:49.759030+00:00",
+          "method": "grep",
+          "score": 0.015384615384615385,
+          "backend_ranks": {
+            "grep": 5
+          },
+          "match_lines": [
+            363
+          ]
+        }
+      ],
+      "warnings": [],
+      "partial": false,
+      "truncated": true,
+      "backends": [
+        "ripgrep"
+      ],
+      "backend_runs": [
+        {
+          "name": "grep",
+          "backend": "ripgrep",
+          "status": "succeeded",
+          "elapsed_ms": 107.13,
+          "hits": 5,
+          "truncated": true,
+          "evidence_ids": [
+            "ev_68549b99c0b311c8797c0ae69b758206",
+            "ev_a68c213456c6d1596faeaae4f9b25048",
+            "ev_51e26a10f623b3d4e1d5a6fcc670b674",
+            "ev_7a2b8733b4fcae176a73b03839d6b3c2",
+            "ev_dce6ac925f9b2ed0de234c06cad87dd3"
+          ],
+          "next_offset": 5,
+          "total_windows": 23,
+          "total_matches": 29
+        }
+      ],
+      "merge": "overlap_window_rrf",
+      "strategy": "grep",
+      "grep_next_offset": 5,
+      "grep_total_windows": 23,
+      "coverage": "仅为检索返回的证据窗口；不得据此声称已读全文或论文未报告"
+    },
+    "error": null,
+    "elapsed_ms": 204,
+    "id": "001acfaf-4b8e-450f-85d3-657c257875af",
+    "workspace_id": "139f7b30-a566-4221-a92d-d7f4a369c5b6",
+    "created_at": "2026-11-08T10:23:49.767119+00:00"
+  },
+  {
+    "name": "sources_search",
+    "arguments": {
+      "query": "What is the scope and limitations of QASPER dataset?",
+      "grep_query": "scope|limitation|domain|coverage",
+      "source_ids": [
+        "2555e2d7-5cbb-4a24-8b99-a3b05e025604"
+      ],
+      "limit": 5
+    },
+    "run_id": "5022f05f-af6f-454d-a849-75c1d90c7346",
+    "status": "succeeded",
+    "data": {
+      "hits": [
+        {
+          "source_id": "2555e2d7-5cbb-4a24-8b99-a3b05e025604",
+          "source_hash": "7aaa103d0d4a431142c64d6f38bbff246e14ba8b5369fd0582a8a0e32d75a78f",
+          "title": "A Dataset of Information-Seeking Questions and Answers Anchored in Research Papers",
+          "uri": "https://arxiv.org/abs/2105.03011v1",
+          "quote": "Guu et al., 2020; Liu et al., 2020). However, most\nof those benchmarks focus on an “open domain”\nsetting where the questions are not anchored in any",
+          "start_line": 46,
+          "end_line": 48,
+          "locations": [
+            {
+              "block_index": 0,
+              "page": 1,
+              "start_seconds": null,
+              "end_seconds": null,
+              "block_type": "text"
+            },
+            {
+              "block_index": 0,
+              "page": 1,
+              "start_seconds": null,
+              "end_seconds": null,
+              "block_type": "text"
+            },
+            {
+              "block_index": 0,
+              "page": 1,
+              "start_seconds": null,
+              "end_seconds": null,
+              "block_type": "text"
+            }
+          ],
+          "id": "ev_ebe96686c5a47e27eed49c60c6ee50ea",
+          "workspace_id": "139f7b30-a566-4221-a92d-d7f4a369c5b6",
+          "created_at": "2026-11-08T10:23:49.940889+00:00",
+          "method": "grep",
+          "score": 0.01639344262295082,
+          "backend_ranks": {
+            "grep": 1
+          },
+          "match_lines": [
+            47
+          ]
+        },
+        {
+          "source_id": "2555e2d7-5cbb-4a24-8b99-a3b05e025604",
+          "source_hash": "7aaa103d0d4a431142c64d6f38bbff246e14ba8b5369fd0582a8a0e32d75a78f",
+          "title": "A Dataset of Information-Seeking Questions and Answers Anchored in Research Papers",
+          "uri": "https://arxiv.org/abs/2105.03011v1",
+          "quote": "QASPER is the ﬁrst QA dataset in the academic\nresearch domain focusing on entire papers, and not\njust abstracts.",
+          "start_line": 102,
+          "end_line": 104,
+          "locations": [
+            {
+              "block_index": 1,
+              "page": 2,
+              "start_seconds": null,
+              "end_seconds": null,
+              "block_type": "text"
+            },
+            {
+              "block_index": 1,
+              "page": 2,
+              "start_seconds": null,
+              "end_seconds": null,
+              "block_type": "text"
+            },
+            {
+              "block_index": 1,
+              "page": 2,
+              "start_seconds": null,
+              "end_seconds": null,
+              "block_type": "text"
+            }
+          ],
+          "id": "ev_418fd8aa4988ca7f0f828dab2cb7d55a",
+          "workspace_id": "139f7b30-a566-4221-a92d-d7f4a369c5b6",
+          "created_at": "2026-11-08T10:23:49.958776+00:00",
+          "method": "grep",
+          "score": 0.016129032258064516,
+          "backend_ranks": {
+            "grep": 2
+          },
+          "match_lines": [
+            103
+          ]
+        },
+        {
+          "source_id": "2555e2d7-5cbb-4a24-8b99-a3b05e025604",
+          "source_hash": "7aaa103d0d4a431142c64d6f38bbff246e14ba8b5369fd0582a8a0e32d75a78f",
+          "title": "A Dataset of Information-Seeking Questions and Answers Anchored in Research Papers",
+          "uri": "https://arxiv.org/abs/2105.03011v1",
+          "quote": "cles that answer questions from gold evidence and\nﬁnd that better pretraining and domain-adaptation\nmight be helpful.",
+          "start_line": 115,
+          "end_line": 117,
+          "locations": [
+            {
+              "block_index": 1,
+              "page": 2,
+              "start_seconds": null,
+              "end_seconds": null,
+              "block_type": "text"
+            },
+            {
+              "block_index": 1,
+              "page": 2,
+              "start_seconds": null,
+              "end_seconds": null,
+              "block_type": "text"
+            },
+            {
+              "block_index": 1,
+              "page": 2,
+              "start_seconds": null,
+              "end_seconds": null,
+              "block_type": "text"
+            }
+          ],
+          "id": "ev_8f2e3ffdccedd17faf7157bf69e0b54a",
+          "workspace_id": "139f7b30-a566-4221-a92d-d7f4a369c5b6",
+          "created_at": "2026-11-08T10:23:49.980002+00:00",
+          "method": "grep",
+          "score": 0.015873015873015872,
+          "backend_ranks": {
+            "grep": 3
+          },
+          "match_lines": [
+            116
+          ]
+        },
+        {
+          "source_id": "2555e2d7-5cbb-4a24-8b99-a3b05e025604",
+          "source_hash": "7aaa103d0d4a431142c64d6f38bbff246e14ba8b5369fd0582a8a0e32d75a78f",
+          "title": "A Dataset of Information-Seeking Questions and Answers Anchored in Research Papers",
+          "uri": "https://arxiv.org/abs/2105.03011v1",
+          "quote": "LaTeX source ﬁle,3and(ii)are in the computa-\ntional linguistics domain.4We limited our domain\nto computational linguistics to ensure high qual-",
+          "start_line": 132,
+          "end_line": 134,
+          "locations": [
+            {
+              "block_index": 1,
+              "page": 2,
+              "start_seconds": null,
+              "end_seconds": null,
+              "block_type": "text"
+            },
+            {
+              "block_index": 1,
+              "page": 2,
+              "start_seconds": null,
+              "end_seconds": null,
+              "block_type": "text"
+            },
+            {
+              "block_index": 1,
+              "page": 2,
+              "start_seconds": null,
+              "end_seconds": null,
+              "block_type": "text"
+            }
+          ],
+          "id": "ev_2bdf0ae5d18870a38d9cb20c2c918476",
+          "workspace_id": "139f7b30-a566-4221-a92d-d7f4a369c5b6",
+          "created_at": "2026-11-08T10:23:50.003612+00:00",
+          "method": "grep",
+          "score": 0.015625,
+          "backend_ranks": {
+            "grep": 4
+          },
+          "match_lines": [
+            133
+          ]
+        },
+        {
+          "source_id": "2555e2d7-5cbb-4a24-8b99-a3b05e025604",
+          "source_hash": "7aaa103d0d4a431142c64d6f38bbff246e14ba8b5369fd0582a8a0e32d75a78f",
+          "title": "A Dataset of Information-Seeking Questions and Answers Anchored in Research Papers",
+          "uri": "https://arxiv.org/abs/2105.03011v1",
+          "quote": "ity as we have access to realistic users through\nour research network; broader domain collection\nis left to future work and should be enabled by the",
+          "start_line": 135,
+          "end_line": 137,
+          "locations": [
+            {
+              "block_index": 1,
+              "page": 2,
+              "start_seconds": null,
+              "end_seconds": null,
+              "block_type": "text"
+            },
+            {
+              "block_index": 1,
+              "page": 2,
+              "start_seconds": null,
+              "end_seconds": null,
+              "block_type": "text"
+            },
+            {
+              "block_index": 1,
+              "page": 2,
+              "start_seconds": null,
+              "end_seconds": null,
+              "block_type": "text"
+            }
+          ],
+          "id": "ev_f2a9d1c6bb191a05b5fd14f01befbdd1",
+          "workspace_id": "139f7b30-a566-4221-a92d-d7f4a369c5b6",
+          "created_at": "2026-11-08T10:23:50.029142+00:00",
+          "method": "grep",
+          "score": 0.015384615384615385,
+          "backend_ranks": {
+            "grep": 5
+          },
+          "match_lines": [
+            136
+          ]
+        }
+      ],
+      "warnings": [],
+      "partial": false,
+      "truncated": true,
+      "backends": [
+        "ripgrep"
+      ],
+      "backend_runs": [
+        {
+          "name": "grep",
+          "backend": "ripgrep",
+          "status": "succeeded",
+          "elapsed_ms": 110.95,
+          "hits": 5,
+          "truncated": true,
+          "evidence_ids": [
+            "ev_527a1a3a2ce9a9d11d594656f824e6f5",
+            "ev_51f8bc5b2e11915a0895e6c9d9c1e699",
+            "ev_5d4dddb7494a702ca7fe4baa232774ae",
+            "ev_5effeaa542a819b9299347a0196cb1f7",
+            "ev_f6e56c8132139fb30b4110f61ffdbde5"
+          ],
+          "next_offset": 5,
+          "total_windows": 16,
+          "total_matches": 17
+        }
+      ],
+      "merge": "overlap_window_rrf",
+      "strategy": "grep",
+      "grep_next_offset": 5,
+      "grep_total_windows": 16,
+      "coverage": "仅为检索返回的证据窗口；不得据此声称已读全文或论文未报告"
+    },
+    "error": null,
+    "elapsed_ms": 223,
+    "id": "a16bd08b-7a86-4fb2-a8ce-7b1bf7627add",
+    "workspace_id": "139f7b30-a566-4221-a92d-d7f4a369c5b6",
+    "created_at": "2026-11-08T10:23:50.038249+00:00"
+  },
+  {
+    "name": "sources_search",
+    "arguments": {
+      "query": "What is the task definition, input format, and output format for ArxivDIGESTables?",
+      "grep_query": "task|input|output|table|synthesis",
+      "source_ids": [
+        "66745208-f526-40c6-896a-268fb67f8151"
+      ],
+      "limit": 5
+    },
+    "run_id": "5022f05f-af6f-454d-a849-75c1d90c7346",
+    "status": "succeeded",
+    "data": {
+      "hits": [
+        {
+          "source_id": "66745208-f526-40c6-896a-268fb67f8151",
+          "source_hash": "f0a41771d2f878a6b4f34cba435fa838a6bb93195a63e4356a2210b3abd37cbd",
+          "title": "ArxivDIGESTables: Synthesizing Scientific Literature into Tables using Language Models",
+          "uri": "https://arxiv.org/abs/2410.22360v1",
+          "quote": "ARXIV DIGEST ABLES : Synthesizing Scientific Literature into\nTables using Language Models\nBenjamin Newman♠*Yoonjoo Lee♡∗",
+          "start_line": 1,
+          "end_line": 3,
+          "locations": [
+            {
+              "block_index": 0,
+              "page": 1,
+              "start_seconds": null,
+              "end_seconds": null,
+              "block_type": "text"
+            },
+            {
+              "block_index": 0,
+              "page": 1,
+              "start_seconds": null,
+              "end_seconds": null,
+              "block_type": "text"
+            },
+            {
+              "block_index": 0,
+              "page": 1,
+              "start_seconds": null,
+              "end_seconds": null,
+              "block_type": "text"
+            }
+          ],
+          "id": "ev_11b9c5a0528a075b362df40e03612f63",
+          "workspace_id": "139f7b30-a566-4221-a92d-d7f4a369c5b6",
+          "created_at": "2026-11-08T10:24:00.049360+00:00",
+          "method": "grep",
+          "score": 0.01639344262295082,
+          "backend_ranks": {
+            "grep": 1
+          },
+          "match_lines": [
+            2
+          ]
+        },
+        {
+          "source_id": "66745208-f526-40c6-896a-268fb67f8151",
+          "source_hash": "f0a41771d2f878a6b4f34cba435fa838a6bb93195a63e4356a2210b3abd37cbd",
+          "title": "ArxivDIGESTables: Synthesizing Scientific Literature into Tables using Language Models",
+          "uri": "https://arxiv.org/abs/2410.22360v1",
+          "quote": "When conducting literature reviews, scien-\ntists often create literature review tables —\ntables whose rows are publications and whose\ncolumns constitute a schema , a set of as-",
+          "start_line": 9,
+          "end_line": 12,
+          "locations": [
+            {
+              "block_index": 0,
+              "page": 1,
+              "start_seconds": null,
+              "end_seconds": null,
+              "block_type": "text"
+            },
+            {
+              "block_index": 0,
+              "page": 1,
+              "start_seconds": null,
+              "end_seconds": null,
+              "block_type": "text"
+            },
+            {
+              "block_index": 0,
+              "page": 1,
+              "start_seconds": null,
+              "end_seconds": null,
+              "block_type": "text"
+            },
+            {
+              "block_index": 0,
+              "page": 1,
+              "start_seconds": null,
+              "end_seconds": null,
+              "block_type": "text"
+            }
+          ],
+          "id": "ev_49c52a30e605c2190193323a5f6c3fa9",
+          "workspace_id": "139f7b30-a566-4221-a92d-d7f4a369c5b6",
+          "created_at": "2026-11-08T10:24:00.066862+00:00",
+          "method": "grep",
+          "score": 0.016129032258064516,
+          "backend_ranks": {
+            "grep": 2
+          },
+          "match_lines": [
+            10
+          ]
+        },
+        {
+          "source_id": "66745208-f526-40c6-896a-268fb67f8151",
+          "source_hash": "f0a41771d2f878a6b4f34cba435fa838a6bb93195a63e4356a2210b3abd37cbd",
+          "title": "ArxivDIGESTables: Synthesizing Scientific Literature into Tables using Language Models",
+          "uri": "https://arxiv.org/abs/2410.22360v1",
+          "quote": "work, we introduce a framework that lever-\nages LMs to perform this task by decompos-\ning it into separate schema andvalue gener-",
+          "start_line": 16,
+          "end_line": 18,
+          "locations": [
+            {
+              "block_index": 0,
+              "page": 1,
+              "start_seconds": null,
+              "end_seconds": null,
+              "block_type": "text"
+            },
+            {
+              "block_index": 0,
+              "page": 1,
+              "start_seconds": null,
+              "end_seconds": null,
+              "block_type": "text"
+            },
+            {
+              "block_index": 0,
+              "page": 1,
+              "start_seconds": null,
+              "end_seconds": null,
+              "block_type": "text"
+            }
+          ],
+          "id": "ev_61196ba571b0e576fe3f945fd907cb6e",
+          "workspace_id": "139f7b30-a566-4221-a92d-d7f4a369c5b6",
+          "created_at": "2026-11-08T10:24:00.084514+00:00",
+          "method": "grep",
+          "score": 0.015873015873015872,
+          "backend_ranks": {
+            "grep": 3
+          },
+          "match_lines": [
+            17
+          ]
+        },
+        {
+          "source_id": "66745208-f526-40c6-896a-268fb67f8151",
+          "source_hash": "f0a41771d2f878a6b4f34cba435fa838a6bb93195a63e4356a2210b3abd37cbd",
+          "title": "ArxivDIGESTables: Synthesizing Scientific Literature into Tables using Language Models",
+          "uri": "https://arxiv.org/abs/2410.22360v1",
+          "quote": "come a lack of high-quality datasets to bench-\nmark table generation by curating and releas-\ning",
+          "start_line": 21,
+          "end_line": 23,
+          "locations": [
+            {
+              "block_index": 0,
+              "page": 1,
+              "start_seconds": null,
+              "end_seconds": null,
+              "block_type": "text"
+            },
+            {
+              "block_index": 0,
+              "page": 1,
+              "start_seconds": null,
+              "end_seconds": null,
+              "block_type": "text"
+            },
+            {
+              "block_index": 0,
+              "page": 1,
+              "start_seconds": null,
+              "end_seconds": null,
+              "block_type": "text"
+            }
+          ],
+          "id": "ev_1f0e957a6c7e158a056a65754a36d1c1",
+          "workspace_id": "139f7b30-a566-4221-a92d-d7f4a369c5b6",
+          "created_at": "2026-11-08T10:24:00.103460+00:00",
+          "method": "grep",
+          "score": 0.015625,
+          "backend_ranks": {
+            "grep": 4
+          },
+          "match_lines": [
+            22
+          ]
+        },
+        {
+          "source_id": "66745208-f526-40c6-896a-268fb67f8151",
+          "source_hash": "f0a41771d2f878a6b4f34cba435fa838a6bb93195a63e4356a2210b3abd37cbd",
+          "title": "ArxivDIGESTables: Synthesizing Scientific Literature into Tables using Language Models",
+          "uri": "https://arxiv.org/abs/2410.22360v1",
+          "quote": " ARXIV DIGEST ABLES , a new dataset of\n2,228 literature review tables extracted from\nArXiv papers that synthesize a total of 7,542",
+          "start_line": 24,
+          "end_line": 26,
+          "locations": [
+            {
+              "block_index": 0,
+              "page": 1,
+              "start_seconds": null,
+              "end_seconds": null,
+              "block_type": "text"
+            },
+            {
+              "block_index": 0,
+              "page": 1,
+              "start_seconds": null,
+              "end_seconds": null,
+              "block_type": "text"
+            },
+            {
+              "block_index": 0,
+              "page": 1,
+              "start_seconds": null,
+              "end_seconds": null,
+              "block_type": "text"
+            }
+          ],
+          "id": "ev_13e05b5b0878be1cb23bdaba3ad1b57e",
+          "workspace_id": "139f7b30-a566-4221-a92d-d7f4a369c5b6",
+          "created_at": "2026-11-08T10:24:00.122462+00:00",
+          "method": "grep",
+          "score": 0.015384615384615385,
+          "backend_ranks": {
+            "grep": 5
+          },
+          "match_lines": [
+            25
+          ]
+        }
+      ],
+      "warnings": [],
+      "partial": false,
+      "truncated": true,
+      "backends": [
+        "ripgrep"
+      ],
+      "backend_runs": [
+        {
+          "name": "grep",
+          "backend": "ripgrep",
+          "status": "succeeded",
+          "elapsed_ms": 175.29,
+          "hits": 5,
+          "truncated": true,
+          "evidence_ids": [
+            "ev_825591addbf604215fefcdaf8d59a346",
+            "ev_a2cb19cd89ba2a33d2c9250894521754",
+            "ev_1c0ec1c067162a8dbfc1290380b4e721",
+            "ev_f6ec91f55aa65b4ca06e8cf4e26ff18b",
+            "ev_b5a9cdffab6939163ec25410a29eccdc"
+          ],
+          "next_offset": 5,
+          "total_windows": 166,
+          "total_matches": 322
+        }
+      ],
+      "merge": "overlap_window_rrf",
+      "strategy": "grep",
+      "grep_next_offset": 5,
+      "grep_total_windows": 166,
+      "coverage": "仅为检索返回的证据窗口；不得据此声称已读全文或论文未报告"
+    },
+    "error": null,
+    "elapsed_ms": 272,
+    "id": "402283e5-f994-413c-bb2c-0e8637b3d09e",
+    "workspace_id": "139f7b30-a566-4221-a92d-d7f4a369c5b6",
+    "created_at": "2026-11-08T10:24:00.130778+00:00"
+  },
+  {
+    "name": "sources_search",
+    "arguments": {
+      "query": "How are reference tables or answers created in ArxivDIGESTables? Who provides them?",
+      "grep_query": "annotation|annotator|reference|gold|human|expert",
+      "source_ids": [
+        "66745208-f526-40c6-896a-268fb67f8151"
+      ],
+      "limit": 5
+    },
+    "run_id": "5022f05f-af6f-454d-a849-75c1d90c7346",
+    "status": "succeeded",
+    "data": {
+      "hits": [
+        {
+          "source_id": "66745208-f526-40c6-896a-268fb67f8151",
+          "source_hash": "f0a41771d2f878a6b4f34cba435fa838a6bb93195a63e4356a2210b3abd37cbd",
+          "title": "ArxivDIGESTables: Synthesizing Scientific Literature into Tables using Language Models",
+          "uri": "https://arxiv.org/abs/2410.22360v1",
+          "quote": "research papers. Second, to support scalable\nevaluation of model generations against human-\nauthored reference tables, we develop DECON -\nTEXT EVAL, an automatic evaluation method",
+          "start_line": 27,
+          "end_line": 30,
+          "locations": [
+            {
+              "block_index": 0,
+              "page": 1,
+              "start_seconds": null,
+              "end_seconds": null,
+              "block_type": "text"
+            },
+            {
+              "block_index": 0,
+              "page": 1,
+              "start_seconds": null,
+              "end_seconds": null,
+              "block_type": "text"
+            },
+            {
+              "block_index": 0,
+              "page": 1,
+              "start_seconds": null,
+              "end_seconds": null,
+              "block_type": "text"
+            },
+            {
+              "block_index": 0,
+              "page": 1,
+              "start_seconds": null,
+              "end_seconds": null,
+              "block_type": "text"
+            }
+          ],
+          "id": "ev_a6fd9f5cd6bbc189238e4f7fbaa8f7ac",
+          "workspace_id": "139f7b30-a566-4221-a92d-d7f4a369c5b6",
+          "created_at": "2026-11-08T10:24:00.316169+00:00",
+          "method": "grep",
+          "score": 0.01639344262295082,
+          "backend_ranks": {
+            "grep": 1
+          },
+          "match_lines": [
+            28
+          ]
+        },
+        {
+          "source_id": "66745208-f526-40c6-896a-268fb67f8151",
+          "source_hash": "f0a41771d2f878a6b4f34cba435fa838a6bb93195a63e4356a2210b3abd37cbd",
+          "title": "ArxivDIGESTables: Synthesizing Scientific Literature into Tables using Language Models",
+          "uri": "https://arxiv.org/abs/2410.22360v1",
+          "quote": "Given these tools, we evaluate LMs’ abilities\nto reconstruct reference tables, finding this task\nbenefits from additional context to ground the",
+          "start_line": 33,
+          "end_line": 35,
+          "locations": [
+            {
+              "block_index": 0,
+              "page": 1,
+              "start_seconds": null,
+              "end_seconds": null,
+              "block_type": "text"
+            },
+            {
+              "block_index": 0,
+              "page": 1,
+              "start_seconds": null,
+              "end_seconds": null,
+              "block_type": "text"
+            },
+            {
+              "block_index": 0,
+              "page": 1,
+              "start_seconds": null,
+              "end_seconds": null,
+              "block_type": "text"
+            }
+          ],
+          "id": "ev_c98fc898b10ddfad8dc4fd6ae8c1f6fb",
+          "workspace_id": "139f7b30-a566-4221-a92d-d7f4a369c5b6",
+          "created_at": "2026-11-08T10:24:00.333949+00:00",
+          "method": "grep",
+          "score": 0.016129032258064516,
+          "backend_ranks": {
+            "grep": 2
+          },
+          "match_lines": [
+            34
+          ]
+        },
+        {
+          "source_id": "66745208-f526-40c6-896a-268fb67f8151",
+          "source_hash": "f0a41771d2f878a6b4f34cba435fa838a6bb93195a63e4356a2210b3abd37cbd",
+          "title": "ArxivDIGESTables: Synthesizing Scientific Literature into Tables using Language Models",
+          "uri": "https://arxiv.org/abs/2410.22360v1",
+          "quote": "generation (e.g. table captions, in-text refer-\nences). Finally, through a human evaluation\nstudy we find that even when LMs fail to fully\nreconstruct a reference table, their generated\nnovel aspects can still be useful.",
+          "start_line": 36,
+          "end_line": 40,
+          "locations": [
+            {
+              "block_index": 0,
+              "page": 1,
+              "start_seconds": null,
+              "end_seconds": null,
+              "block_type": "text"
+            },
+            {
+              "block_index": 0,
+              "page": 1,
+              "start_seconds": null,
+              "end_seconds": null,
+              "block_type": "text"
+            },
+            {
+              "block_index": 0,
+              "page": 1,
+              "start_seconds": null,
+              "end_seconds": null,
+              "block_type": "text"
+            },
+            {
+              "block_index": 0,
+              "page": 1,
+              "start_seconds": null,
+              "end_seconds": null,
+              "block_type": "text"
+            },
+            {
+              "block_index": 0,
+              "page": 1,
+              "start_seconds": null,
+              "end_seconds": null,
+              "block_type": "text"
+            }
+          ],
+          "id": "ev_6cb6e0f2ab502c4487371174ac354fb1",
+          "workspace_id": "139f7b30-a566-4221-a92d-d7f4a369c5b6",
+          "created_at": "2026-11-08T10:24:00.352633+00:00",
+          "method": "grep",
+          "score": 0.015873015873015872,
+          "backend_ranks": {
+            "grep": 3
+          },
+          "match_lines": [
+            37
+          ]
+        },
+        {
+          "source_id": "66745208-f526-40c6-896a-268fb67f8151",
+          "source_hash": "f0a41771d2f878a6b4f34cba435fa838a6bb93195a63e4356a2210b3abd37cbd",
+          "title": "ArxivDIGESTables: Synthesizing Scientific Literature into Tables using Language Models",
+          "uri": "https://arxiv.org/abs/2410.22360v1",
+          "quote": "summarization (Yang et al., 2023; Ahuja et al.,arXiv:2410.22360v1  [cs.CL]  25 Oct 2024\nDataset sizeAnnotation methodIntended ApplicationEvaluation MetricPaper 11,200 video sequencesSubjectively annotatedObjective VQA method developmentSubjective Mean Opinion ScorePaper 2585 videosSubjective video quality scores via crowdsourcingNR video quality prediction advancementSubjective video quality scoresPaper 3153,841 videosCoarsely annotated set with five quality ratings eachDeep-learning VQA model trainingSpearman rank-order correlation coefficientPaper 41 million YouTube videosN/ALarge-scale video classification and action recognitionPerformance improvements over baselinesDatasetSizeTaskAnnotationsPaper 1KoNViD-1k1200VQA114Paper 2LIVE-VQC585VQA240Paper 3KoNViD-150k153,841VQA5Paper 4Sports-1M1,133,158Classification- (auto)\nOriginal Reference Table\nModel Generated TableFigure 2: Side-by-side comparison of a reference literature review table from an ArXiv paper (Liu et al., 2023)\nand a model-generated table given the same input papers. The generated table has reconstructed two gold aspects:\nthepink and blue aspects are the same, despite surface form differences (e.g., “Task” vs “Intended Application”).",
+          "start_line": 81,
+          "end_line": 86,
+          "locations": [
+            {
+              "block_index": 0,
+              "page": 1,
+              "start_seconds": null,
+              "end_seconds": null,
+              "block_type": "text"
+            },
+            {
+              "block_index": 1,
+              "page": 2,
+              "start_seconds": null,
+              "end_seconds": null,
+              "block_type": "text"
+            },
+            {
+              "block_index": 1,
+              "page": 2,
+              "start_seconds": null,
+              "end_seconds": null,
+              "block_type": "text"
+            },
+            {
+              "block_index": 1,
+              "page": 2,
+              "start_seconds": null,
+              "end_seconds": null,
+              "block_type": "text"
+            },
+            {
+              "block_index": 1,
+              "page": 2,
+              "start_seconds": null,
+              "end_seconds": null,
+              "block_type": "text"
+            },
+            {
+              "block_index": 1,
+              "page": 2,
+              "start_seconds": null,
+              "end_seconds": null,
+              "block_type": "text"
+            }
+          ],
+          "id": "ev_041b5761f723a4f43390ebcb6e377bdf",
+          "workspace_id": "139f7b30-a566-4221-a92d-d7f4a369c5b6",
+          "created_at": "2026-11-08T10:24:00.371551+00:00",
+          "method": "grep",
+          "score": 0.015625,
+          "backend_ranks": {
+            "grep": 4
+          },
+          "match_lines": [
+            82
+          ]
+        },
+        {
+          "source_id": "66745208-f526-40c6-896a-268fb67f8151",
+          "source_hash": "f0a41771d2f878a6b4f34cba435fa838a6bb93195a63e4356a2210b3abd37cbd",
+          "title": "ArxivDIGESTables: Synthesizing Scientific Literature into Tables using Language Models",
+          "uri": "https://arxiv.org/abs/2410.22360v1",
+          "quote": "The generated table has also proposed two novel aspects that are still relevant and useful, like “evaluation metric”\n(green) or “Annotation method” ( yellow) not to be confused with reference table’s “Annotations”.\n2022) advances methods that are also suitable for",
+          "start_line": 87,
+          "end_line": 89,
+          "locations": [
+            {
+              "block_index": 1,
+              "page": 2,
+              "start_seconds": null,
+              "end_seconds": null,
+              "block_type": "text"
+            },
+            {
+              "block_index": 1,
+              "page": 2,
+              "start_seconds": null,
+              "end_seconds": null,
+              "block_type": "text"
+            },
+            {
+              "block_index": 1,
+              "page": 2,
+              "start_seconds": null,
+              "end_seconds": null,
+              "block_type": "text"
+            }
+          ],
+          "id": "ev_fe25f179735ccd2603fcc093a192339c",
+          "workspace_id": "139f7b30-a566-4221-a92d-d7f4a369c5b6",
+          "created_at": "2026-11-08T10:24:00.391385+00:00",
+          "method": "grep",
+          "score": 0.015384615384615385,
+          "backend_ranks": {
+            "grep": 5
+          },
+          "match_lines": [
+            88
+          ]
+        }
+      ],
+      "warnings": [],
+      "partial": false,
+      "truncated": true,
+      "backends": [
+        "ripgrep"
+      ],
+      "backend_runs": [
+        {
+          "name": "grep",
+          "backend": "ripgrep",
+          "status": "succeeded",
+          "elapsed_ms": 124.47,
+          "hits": 5,
+          "truncated": true,
+          "evidence_ids": [
+            "ev_885de1c223eb7d4ee12f5d0acfbd43a8",
+            "ev_1e2d7b1b56f991f6fd38ace73bf0cb0b",
+            "ev_2e274312363d7466d947a2e21683aca2",
+            "ev_f01299c20fe1ecdf063599852a2fca25",
+            "ev_0bfee47834ea0aa2bc5662a4811f3ca2"
+          ],
+          "next_offset": 5,
+          "total_windows": 86,
+          "total_matches": 123
+        }
+      ],
+      "merge": "overlap_window_rrf",
+      "strategy": "grep",
+      "grep_next_offset": 5,
+      "grep_total_windows": 86,
+      "coverage": "仅为检索返回的证据窗口；不得据此声称已读全文或论文未报告"
+    },
+    "error": null,
+    "elapsed_ms": 223,
+    "id": "6dc45859-e30c-4027-9748-59c1df96c9c0",
+    "workspace_id": "139f7b30-a566-4221-a92d-d7f4a369c5b6",
+    "created_at": "2026-11-08T10:24:00.400680+00:00"
+  },
+  {
+    "name": "sources_search",
+    "arguments": {
+      "query": "What evaluation metrics are used in ArxivDIGESTables and what do they measure?",
+      "grep_query": "metric|evaluation|F1|accuracy|BLEU|ROUGE|Jaccard",
+      "source_ids": [
+        "66745208-f526-40c6-896a-268fb67f8151"
+      ],
+      "limit": 5
+    },
+    "run_id": "5022f05f-af6f-454d-a849-75c1d90c7346",
+    "status": "succeeded",
+    "data": {
+      "hits": [
+        {
+          "source_id": "66745208-f526-40c6-896a-268fb67f8151",
+          "source_hash": "f0a41771d2f878a6b4f34cba435fa838a6bb93195a63e4356a2210b3abd37cbd",
+          "title": "ArxivDIGESTables: Synthesizing Scientific Literature into Tables using Language Models",
+          "uri": "https://arxiv.org/abs/2410.22360v1",
+          "quote": "research papers. Second, to support scalable\nevaluation of model generations against human-\nauthored reference tables, we develop DECON -\nTEXT EVAL, an automatic evaluation method\nthat aligns elements of tables with the same un-",
+          "start_line": 27,
+          "end_line": 31,
+          "locations": [
+            {
+              "block_index": 0,
+              "page": 1,
+              "start_seconds": null,
+              "end_seconds": null,
+              "block_type": "text"
+            },
+            {
+              "block_index": 0,
+              "page": 1,
+              "start_seconds": null,
+              "end_seconds": null,
+              "block_type": "text"
+            },
+            {
+              "block_index": 0,
+              "page": 1,
+              "start_seconds": null,
+              "end_seconds": null,
+              "block_type": "text"
+            },
+            {
+              "block_index": 0,
+              "page": 1,
+              "start_seconds": null,
+              "end_seconds": null,
+              "block_type": "text"
+            },
+            {
+              "block_index": 0,
+              "page": 1,
+              "start_seconds": null,
+              "end_seconds": null,
+              "block_type": "text"
+            }
+          ],
+          "id": "ev_1dfe00795c21d81e778c0619aeead7db",
+          "workspace_id": "139f7b30-a566-4221-a92d-d7f4a369c5b6",
+          "created_at": "2026-11-08T10:24:00.595385+00:00",
+          "method": "grep",
+          "score": 0.01639344262295082,
+          "backend_ranks": {
+            "grep": 1
+          },
+          "match_lines": [
+            28
+          ]
+        },
+        {
+          "source_id": "66745208-f526-40c6-896a-268fb67f8151",
+          "source_hash": "f0a41771d2f878a6b4f34cba435fa838a6bb93195a63e4356a2210b3abd37cbd",
+          "title": "ArxivDIGESTables: Synthesizing Scientific Literature into Tables using Language Models",
+          "uri": "https://arxiv.org/abs/2410.22360v1",
+          "quote": "generation (e.g. table captions, in-text refer-\nences). Finally, through a human evaluation\nstudy we find that even when LMs fail to fully",
+          "start_line": 36,
+          "end_line": 38,
+          "locations": [
+            {
+              "block_index": 0,
+              "page": 1,
+              "start_seconds": null,
+              "end_seconds": null,
+              "block_type": "text"
+            },
+            {
+              "block_index": 0,
+              "page": 1,
+              "start_seconds": null,
+              "end_seconds": null,
+              "block_type": "text"
+            },
+            {
+              "block_index": 0,
+              "page": 1,
+              "start_seconds": null,
+              "end_seconds": null,
+              "block_type": "text"
+            }
+          ],
+          "id": "ev_068231bd7fdcf8461bb544d229358136",
+          "workspace_id": "139f7b30-a566-4221-a92d-d7f4a369c5b6",
+          "created_at": "2026-11-08T10:24:00.619130+00:00",
+          "method": "grep",
+          "score": 0.016129032258064516,
+          "backend_ranks": {
+            "grep": 2
+          },
+          "match_lines": [
+            37
+          ]
+        },
+        {
+          "source_id": "66745208-f526-40c6-896a-268fb67f8151",
+          "source_hash": "f0a41771d2f878a6b4f34cba435fa838a6bb93195a63e4356a2210b3abd37cbd",
+          "title": "ArxivDIGESTables: Synthesizing Scientific Literature into Tables using Language Models",
+          "uri": "https://arxiv.org/abs/2410.22360v1",
+          "quote": "summarization (Yang et al., 2023; Ahuja et al.,arXiv:2410.22360v1  [cs.CL]  25 Oct 2024\nDataset sizeAnnotation methodIntended ApplicationEvaluation MetricPaper 11,200 video sequencesSubjectively annotatedObjective VQA method developmentSubjective Mean Opinion ScorePaper 2585 videosSubjective video quality scores via crowdsourcingNR video quality prediction advancementSubjective video quality scoresPaper 3153,841 videosCoarsely annotated set with five quality ratings eachDeep-learning VQA model trainingSpearman rank-order correlation coefficientPaper 41 million YouTube videosN/ALarge-scale video classification and action recognitionPerformance improvements over baselinesDatasetSizeTaskAnnotationsPaper 1KoNViD-1k1200VQA114Paper 2LIVE-VQC585VQA240Paper 3KoNViD-150k153,841VQA5Paper 4Sports-1M1,133,158Classification- (auto)\nOriginal Reference Table",
+          "start_line": 81,
+          "end_line": 83,
+          "locations": [
+            {
+              "block_index": 0,
+              "page": 1,
+              "start_seconds": null,
+              "end_seconds": null,
+              "block_type": "text"
+            },
+            {
+              "block_index": 1,
+              "page": 2,
+              "start_seconds": null,
+              "end_seconds": null,
+              "block_type": "text"
+            },
+            {
+              "block_index": 1,
+              "page": 2,
+              "start_seconds": null,
+              "end_seconds": null,
+              "block_type": "text"
+            }
+          ],
+          "id": "ev_612c4b65227028254093ab1c9a69ef97",
+          "workspace_id": "139f7b30-a566-4221-a92d-d7f4a369c5b6",
+          "created_at": "2026-11-08T10:24:00.641256+00:00",
+          "method": "grep",
+          "score": 0.015873015873015872,
+          "backend_ranks": {
+            "grep": 3
+          },
+          "match_lines": [
+            82
+          ]
+        },
+        {
+          "source_id": "66745208-f526-40c6-896a-268fb67f8151",
+          "source_hash": "f0a41771d2f878a6b4f34cba435fa838a6bb93195a63e4356a2210b3abd37cbd",
+          "title": "ArxivDIGESTables: Synthesizing Scientific Literature into Tables using Language Models",
+          "uri": "https://arxiv.org/abs/2410.22360v1",
+          "quote": "thepink and blue aspects are the same, despite surface form differences (e.g., “Task” vs “Intended Application”).\nThe generated table has also proposed two novel aspects that are still relevant and useful, like “evaluation metric”\n(green) or “Annotation method” ( yellow) not to be confused with reference table’s “Annotations”.",
+          "start_line": 86,
+          "end_line": 88,
+          "locations": [
+            {
+              "block_index": 1,
+              "page": 2,
+              "start_seconds": null,
+              "end_seconds": null,
+              "block_type": "text"
+            },
+            {
+              "block_index": 1,
+              "page": 2,
+              "start_seconds": null,
+              "end_seconds": null,
+              "block_type": "text"
+            },
+            {
+              "block_index": 1,
+              "page": 2,
+              "start_seconds": null,
+              "end_seconds": null,
+              "block_type": "text"
+            }
+          ],
+          "id": "ev_62221578d7c02dbb51af7e337f016e40",
+          "workspace_id": "139f7b30-a566-4221-a92d-d7f4a369c5b6",
+          "created_at": "2026-11-08T10:24:00.664101+00:00",
+          "method": "grep",
+          "score": 0.015625,
+          "backend_ranks": {
+            "grep": 4
+          },
+          "match_lines": [
+            87
+          ]
+        },
+        {
+          "source_id": "66745208-f526-40c6-896a-268fb67f8151",
+          "source_hash": "f0a41771d2f878a6b4f34cba435fa838a6bb93195a63e4356a2210b3abd37cbd",
+          "title": "ArxivDIGESTables: Synthesizing Scientific Literature into Tables using Language Models",
+          "uri": "https://arxiv.org/abs/2410.22360v1",
+          "quote": "be expressed with different surface forms, which\nmakes automatic evaluation difficult even with ahigh-quality dataset. An example of these surface\nform differences is in Figure 2. To address these",
+          "start_line": 111,
+          "end_line": 113,
+          "locations": [
+            {
+              "block_index": 1,
+              "page": 2,
+              "start_seconds": null,
+              "end_seconds": null,
+              "block_type": "text"
+            },
+            {
+              "block_index": 1,
+              "page": 2,
+              "start_seconds": null,
+              "end_seconds": null,
+              "block_type": "text"
+            },
+            {
+              "block_index": 1,
+              "page": 2,
+              "start_seconds": null,
+              "end_seconds": null,
+              "block_type": "text"
+            }
+          ],
+          "id": "ev_63e2f332130cda625861eff0d8bc61c3",
+          "workspace_id": "139f7b30-a566-4221-a92d-d7f4a369c5b6",
+          "created_at": "2026-11-08T10:24:00.686653+00:00",
+          "method": "grep",
+          "score": 0.015384615384615385,
+          "backend_ranks": {
+            "grep": 5
+          },
+          "match_lines": [
+            112
+          ]
+        }
+      ],
+      "warnings": [],
+      "partial": false,
+      "truncated": true,
+      "backends": [
+        "ripgrep"
+      ],
+      "backend_runs": [
+        {
+          "name": "grep",
+          "backend": "ripgrep",
+          "status": "succeeded",
+          "elapsed_ms": 128.55,
+          "hits": 5,
+          "truncated": true,
+          "evidence_ids": [
+            "ev_44921ac478e9ca56ae3d3f9ec4175d7f",
+            "ev_9dc62dfe9205f0b304e6e52a17881e9f",
+            "ev_01e44a22411dd46c02edeca225ce5247",
+            "ev_b64255fccf5d2020a4028c99fd25862a",
+            "ev_6c657368b58a8876dc36fec13565480d"
+          ],
+          "next_offset": 5,
+          "total_windows": 37,
+          "total_matches": 59
+        }
+      ],
+      "merge": "overlap_window_rrf",
+      "strategy": "grep",
+      "grep_next_offset": 5,
+      "grep_total_windows": 37,
+      "coverage": "仅为检索返回的证据窗口；不得据此声称已读全文或论文未报告"
+    },
+    "error": null,
+    "elapsed_ms": 248,
+    "id": "11481e83-fe46-4d65-8921-77a27e6f274d",
+    "workspace_id": "139f7b30-a566-4221-a92d-d7f4a369c5b6",
+    "created_at": "2026-11-08T10:24:00.695323+00:00"
+  },
+  {
+    "name": "sources_search",
+    "arguments": {
+      "query": "What is the scope and limitations of ArxivDIGESTables dataset?",
+      "grep_query": "scope|limitation|domain|coverage",
+      "source_ids": [
+        "66745208-f526-40c6-896a-268fb67f8151"
+      ],
+      "limit": 5
+    },
+    "run_id": "5022f05f-af6f-454d-a849-75c1d90c7346",
+    "status": "succeeded",
+    "data": {
+      "hits": [
+        {
+          "source_id": "66745208-f526-40c6-896a-268fb67f8151",
+          "source_hash": "f0a41771d2f878a6b4f34cba435fa838a6bb93195a63e4356a2210b3abd37cbd",
+          "title": "ArxivDIGESTables: Synthesizing Scientific Literature into Tables using Language Models",
+          "uri": "https://arxiv.org/abs/2410.22360v1",
+          "quote": "to monitor air quality”). This indicates that there is\nscope for further research in developing more sen-\nsitive featurizers and scorers for value evaluation.",
+          "start_line": 677,
+          "end_line": 679,
+          "locations": [
+            {
+              "block_index": 7,
+              "page": 8,
+              "start_seconds": null,
+              "end_seconds": null,
+              "block_type": "text"
+            },
+            {
+              "block_index": 7,
+              "page": 8,
+              "start_seconds": null,
+              "end_seconds": null,
+              "block_type": "text"
+            },
+            {
+              "block_index": 7,
+              "page": 8,
+              "start_seconds": null,
+              "end_seconds": null,
+              "block_type": "text"
+            }
+          ],
+          "id": "ev_1f3fb84ba7a5c68ff61aa071931e4c07",
+          "workspace_id": "139f7b30-a566-4221-a92d-d7f4a369c5b6",
+          "created_at": "2026-11-08T10:24:00.890199+00:00",
+          "method": "grep",
+          "score": 0.01639344262295082,
+          "backend_ranks": {
+            "grep": 1
+          },
+          "match_lines": [
+            678
+          ]
+        },
+        {
+          "source_id": "66745208-f526-40c6-896a-268fb67f8151",
+          "source_hash": "f0a41771d2f878a6b4f34cba435fa838a6bb93195a63e4356a2210b3abd37cbd",
+          "title": "ArxivDIGESTables: Synthesizing Scientific Literature into Tables using Language Models",
+          "uri": "https://arxiv.org/abs/2410.22360v1",
+          "quote": "thesis abilities.\nLimitations\nWe only study scientific papers from ArXiv.",
+          "start_line": 769,
+          "end_line": 771,
+          "locations": [
+            {
+              "block_index": 8,
+              "page": 9,
+              "start_seconds": null,
+              "end_seconds": null,
+              "block_type": "text"
+            },
+            {
+              "block_index": 9,
+              "page": 10,
+              "start_seconds": null,
+              "end_seconds": null,
+              "block_type": "text"
+            },
+            {
+              "block_index": 9,
+              "page": 10,
+              "start_seconds": null,
+              "end_seconds": null,
+              "block_type": "text"
+            }
+          ],
+          "id": "ev_062302d343472ae900389477dedb1f48",
+          "workspace_id": "139f7b30-a566-4221-a92d-d7f4a369c5b6",
+          "created_at": "2026-11-08T10:24:00.908883+00:00",
+          "method": "grep",
+          "score": 0.016129032258064516,
+          "backend_ranks": {
+            "grep": 2
+          },
+          "match_lines": [
+            770
+          ]
+        },
+        {
+          "source_id": "66745208-f526-40c6-896a-268fb67f8151",
+          "source_hash": "f0a41771d2f878a6b4f34cba435fa838a6bb93195a63e4356a2210b3abd37cbd",
+          "title": "ArxivDIGESTables: Synthesizing Scientific Literature into Tables using Language Models",
+          "uri": "https://arxiv.org/abs/2410.22360v1",
+          "quote": "Wang, Xiaoman Pan, Linda Petzold, and Dong Yu.\n2023. OASum: Large-scale open domain aspect-\nbased summarization. In Findings of the Association",
+          "start_line": 1047,
+          "end_line": 1049,
+          "locations": [
+            {
+              "block_index": 11,
+              "page": 12,
+              "start_seconds": null,
+              "end_seconds": null,
+              "block_type": "text"
+            },
+            {
+              "block_index": 11,
+              "page": 12,
+              "start_seconds": null,
+              "end_seconds": null,
+              "block_type": "text"
+            },
+            {
+              "block_index": 11,
+              "page": 12,
+              "start_seconds": null,
+              "end_seconds": null,
+              "block_type": "text"
+            }
+          ],
+          "id": "ev_d043a9ee067f4c4c5471e2af02efa10d",
+          "workspace_id": "139f7b30-a566-4221-a92d-d7f4a369c5b6",
+          "created_at": "2026-11-08T10:24:00.927117+00:00",
+          "method": "grep",
+          "score": 0.015873015873015872,
+          "backend_ranks": {
+            "grep": 3
+          },
+          "match_lines": [
+            1048
+          ]
+        },
+        {
+          "source_id": "66745208-f526-40c6-896a-268fb67f8151",
+          "source_hash": "f0a41771d2f878a6b4f34cba435fa838a6bb93195a63e4356a2210b3abd37cbd",
+          "title": "ArxivDIGESTables: Synthesizing Scientific Literature into Tables using Language Models",
+          "uri": "https://arxiv.org/abs/2410.22360v1",
+          "quote": "Radev. 2021. QMSum: A new benchmark for query-\nbased multi-domain meeting summarization. In Pro-\nceedings of the 2021 Conference of the North Amer-",
+          "start_line": 1072,
+          "end_line": 1074,
+          "locations": [
+            {
+              "block_index": 11,
+              "page": 12,
+              "start_seconds": null,
+              "end_seconds": null,
+              "block_type": "text"
+            },
+            {
+              "block_index": 11,
+              "page": 12,
+              "start_seconds": null,
+              "end_seconds": null,
+              "block_type": "text"
+            },
+            {
+              "block_index": 11,
+              "page": 12,
+              "start_seconds": null,
+              "end_seconds": null,
+              "block_type": "text"
+            }
+          ],
+          "id": "ev_56d822dd4ab8cd40e87a09cf783ebf25",
+          "workspace_id": "139f7b30-a566-4221-a92d-d7f4a369c5b6",
+          "created_at": "2026-11-08T10:24:00.945444+00:00",
+          "method": "grep",
+          "score": 0.015625,
+          "backend_ranks": {
+            "grep": 4
+          },
+          "match_lines": [
+            1073
+          ]
+        },
+        {
+          "source_id": "66745208-f526-40c6-896a-268fb67f8151",
+          "source_hash": "f0a41771d2f878a6b4f34cba435fa838a6bb93195a63e4356a2210b3abd37cbd",
+          "title": "ArxivDIGESTables: Synthesizing Scientific Literature into Tables using Language Models",
+          "uri": "https://arxiv.org/abs/2410.22360v1",
+          "quote": "Caption : \"A categorization of\nscope regarding design\nvariations observed in",
+          "start_line": 1153,
+          "end_line": 1155,
+          "locations": [
+            {
+              "block_index": 12,
+              "page": 13,
+              "start_seconds": null,
+              "end_seconds": null,
+              "block_type": "text"
+            },
+            {
+              "block_index": 12,
+              "page": 13,
+              "start_seconds": null,
+              "end_seconds": null,
+              "block_type": "text"
+            },
+            {
+              "block_index": 12,
+              "page": 13,
+              "start_seconds": null,
+              "end_seconds": null,
+              "block_type": "text"
+            }
+          ],
+          "id": "ev_cef65a37810e5ffa005414487fa85fe6",
+          "workspace_id": "139f7b30-a566-4221-a92d-d7f4a369c5b6",
+          "created_at": "2026-11-08T10:24:00.964151+00:00",
+          "method": "grep",
+          "score": 0.015384615384615385,
+          "backend_ranks": {
+            "grep": 5
+          },
+          "match_lines": [
+            1154
+          ]
+        }
+      ],
+      "warnings": [],
+      "partial": false,
+      "truncated": true,
+      "backends": [
+        "ripgrep"
+      ],
+      "backend_runs": [
+        {
+          "name": "grep",
+          "backend": "ripgrep",
+          "status": "succeeded",
+          "elapsed_ms": 129.23,
+          "hits": 5,
+          "truncated": true,
+          "evidence_ids": [
+            "ev_6b969764be31948f57b7ac97133fd571",
+            "ev_bba1cfea5acce8b869296598b77c843d",
+            "ev_e94d53e12ae007fb91f2b71b85f7f46d",
+            "ev_4b353801801a363ad229550d8fe8ae52",
+            "ev_7c1486b727b9cf17b2d5590a43406819"
+          ],
+          "next_offset": 5,
+          "total_windows": 7,
+          "total_matches": 7
+        }
+      ],
+      "merge": "overlap_window_rrf",
+      "strategy": "grep",
+      "grep_next_offset": 5,
+      "grep_total_windows": 7,
+      "coverage": "仅为检索返回的证据窗口；不得据此声称已读全文或论文未报告"
+    },
+    "error": null,
+    "elapsed_ms": 226,
+    "id": "b645e1a1-9d23-4d38-854e-ac7f2070fc6c",
+    "workspace_id": "139f7b30-a566-4221-a92d-d7f4a369c5b6",
+    "created_at": "2026-11-08T10:24:00.972369+00:00"
+  }
+]

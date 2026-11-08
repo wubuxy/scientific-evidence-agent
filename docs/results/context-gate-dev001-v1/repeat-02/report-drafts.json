@@ -1,0 +1,357 @@
+[
+  {
+    "arguments": {
+      "title": "基于QASPER与ArxivDIGESTables的Agent评测方案设计与能力缺口分析",
+      "claims": [
+        {
+          "text": "由于本次未实际回读任何原文证据，无法确认QASPER数据集的具体任务定义、输入输出格式及单篇/跨篇范围。",
+          "evidence_ids": [],
+          "kind": "finding",
+          "qualification": "无原文证据支持"
+        },
+        {
+          "text": "由于本次未实际回读任何原文证据，无法确认ArxivDIGESTables的任务目标、表格合成方法及参考标注来源。",
+          "evidence_ids": [],
+          "kind": "finding",
+          "qualification": "无原文证据支持"
+        },
+        {
+          "text": "两个任务的指标（如QASPER的问答准确率与ArxivDIGESTables的表格生成质量）衡量对象不同，且依赖不同的参考标准，因此不能直接横向排名。",
+          "evidence_ids": [],
+          "kind": "inference",
+          "qualification": "基于通用评测原则推断，但缺乏原文对指标定义的验证"
+        },
+        {
+          "text": "产品所需的“跨论文比较”与“提出有依据的研究建议”能力，在现有资料中尚未找到明确的评测依据或验证范围。",
+          "evidence_ids": [],
+          "kind": "inference",
+          "qualification": "原文未读，无法确认是否覆盖此类能力"
+        }
+      ],
+      "comparison_rows": [
+        {
+          "source_id": "2555e2d7-5cbb-4a24-8b99-a3b05e025604",
+          "method": "本次未核实",
+          "dataset": "本次未核实",
+          "model": "本次未核实",
+          "metric": "本次未核实",
+          "result": "本次未核实",
+          "conditions": "本次未核实",
+          "comparability": "unknown",
+          "evidence_ids": [],
+          "attributes": {
+            "任务与输入输出": "本次未核实",
+            "参考答案与标注": "本次未核实",
+            "指标与比较条件": "本次未核实",
+            "适用范围与缺口": "本次未核实"
+          }
+        },
+        {
+          "source_id": "66745208-f526-40c6-896a-268fb67f8151",
+          "method": "本次未核实",
+          "dataset": "本次未核实",
+          "model": "本次未核实",
+          "metric": "本次未核实",
+          "result": "本次未核实",
+          "conditions": "本次未核实",
+          "comparability": "unknown",
+          "evidence_ids": [],
+          "attributes": {
+            "任务与输入输出": "本次未核实",
+            "参考答案与标注": "本次未核实",
+            "指标与比较条件": "本次未核实",
+            "适用范围与缺口": "本次未核实"
+          }
+        }
+      ],
+      "limitations": [
+        "本次报告未实际读取任何原文内容，所有字段均标记为‘本次未核实’。",
+        "无法确认两篇论文的具体任务定义、数据划分及指标计算方式。",
+        "无法判断现有数据集是否覆盖产品所需的跨论文比较与建议生成能力。",
+        "提出的评测方案仅为假设，未经过原文验证或实际执行。"
+      ],
+      "proposals": [
+        {
+          "text": "设计最小可执行评测组合：选取QASPER中的单篇问答子集与ArxivDIGESTables中的表格生成子集，分别测试Agent的单篇理解与结构化信息提取能力。",
+          "basis_claim_indices": [
+            0,
+            1
+          ],
+          "assumptions": [
+            "QASPER包含单篇问答任务",
+            "ArxivDIGESTables包含表格生成任务"
+          ],
+          "validation_plan": "待读取原文后确认任务细节，划分开发集与测试集，引入人工检查机制统计失败案例。"
+        },
+        {
+          "text": "建立跨任务指标归一化方法，避免直接比较不同任务的原始分数，转而关注相对性能提升或错误类型分布。",
+          "basis_claim_indices": [
+            2
+          ],
+          "assumptions": [
+            "两任务指标不可直接比较"
+          ],
+          "validation_plan": "待原文确认后设计归一化公式，并在小规模测试中验证其合理性。"
+        },
+        {
+          "text": "针对‘跨论文比较’与‘研究建议’能力，设计新的评测任务，收集多论文输入与专家标注的建议作为参考。",
+          "basis_claim_indices": [
+            3
+          ],
+          "assumptions": [
+            "现有数据集未覆盖此类能力"
+          ],
+          "validation_plan": "需额外构建数据集并邀请领域专家进行标注，后续再行验证。"
+        }
+      ],
+      "verification_status": "needs_human_review"
+    },
+    "normalized_columns": [],
+    "validation_status": "rejected",
+    "id": "5be59d7c-51b4-4929-a5f0-69089568bdfd",
+    "workspace_id": "139f7b30-a566-4221-a92d-d7f4a369c5b6",
+    "created_at": "2026-11-08T10:24:16.315987+00:00",
+    "updated_at": "2026-11-08T10:24:16.332647+00:00",
+    "error": "6 validation errors for Report\nclaims.0.evidence_ids\n  List should have at least 1 item after validation, not 0 [type=too_short, input_value=[], input_type=list]\n    For further information visit https://errors.pydantic.dev/2.14/v/too_short\nclaims.1.evidence_ids\n  List should have at least 1 item after validation, not 0 [type=too_short, input_value=[], input_type=list]\n    For further information visit https://errors.pydantic.dev/2.14/v/too_short\nclaims.2.evidence_ids\n  List should have at least 1 item after validation, not 0 [type=too_short, input_value=[], input_type=list]\n    For further information visit https://errors.pydantic.dev/2.14/v/too_short\nclaims.3.evidence_ids\n  List should have at least 1 item after validation, not 0 [type=too_short, input_value=[], input_type=list]\n    For further information visit https://errors.pydantic.dev/2.14/v/too_short\ncomparison_rows.0.evidence_ids\n  List should have at least 1 item after validation, not 0 [type=too_short, input_value=[], input_type=list]\n    For further information visit https://errors.pydantic.dev/2.14/v/too_short\ncomparison_rows.1.evidence_ids\n  List should have at least 1 item after validation, not 0 [type=too_short, input_value=[], input_type=list]\n    For further information visit https://errors.pydantic.dev/2.14/v/too_short"
+  },
+  {
+    "arguments": {
+      "title": "基于QASPER与ArxivDIGESTables的Agent评测方案对比与缺口分析",
+      "claims": [
+        {
+          "text": "当前无法确认QASPER数据集的具体任务定义、输入输出格式及参考答案来源，因为尚未回读该论文原文。",
+          "evidence_ids": [],
+          "kind": "finding",
+          "qualification": "本次未读取到证据ID 2555e2d7-5cbb-4a24-8b99-a3b05e025604的内容"
+        },
+        {
+          "text": "当前无法确认ArxivDIGESTables数据集的具体任务定义、输入输出格式及表格生成指标，因为尚未回读该论文原文。",
+          "evidence_ids": [],
+          "kind": "finding",
+          "qualification": "本次未读取到证据ID 66745208-f526-40c6-896a-268fb67f8151的内容"
+        },
+        {
+          "text": "由于缺乏两篇论文的原文证据，无法判断它们各自适合验证哪类Agent能力（如单篇问答或跨篇比较）。",
+          "evidence_ids": [],
+          "kind": "inference",
+          "qualification": "推断基于“无原文证据”这一事实，而非论文内容本身"
+        },
+        {
+          "text": "由于缺乏原文证据，无法说明为何两个任务的指标不能直接横向排名，也无法确定哪些产品能力仍缺评测依据。",
+          "evidence_ids": [],
+          "kind": "inference",
+          "qualification": "推断基于“无原文证据”这一事实，无法进行具体比较"
+        }
+      ],
+      "comparison_rows": [
+        {
+          "source_id": "2555e2d7-5cbb-4a24-8b99-a3b05e025604",
+          "method": "本次未核实",
+          "dataset": "本次未核实",
+          "model": "本次未核实",
+          "metric": "本次未核实",
+          "result": "本次未核实",
+          "conditions": "本次未核实",
+          "comparability": "unknown",
+          "evidence_ids": [],
+          "attributes": {
+            "任务与输入输出": "本次未核实",
+            "参考答案与标注": "本次未核实",
+            "指标与比较条件": "本次未核实",
+            "适用范围与缺口": "本次未核实"
+          }
+        },
+        {
+          "source_id": "66745208-f526-40c6-896a-268fb67f8151",
+          "method": "本次未核实",
+          "dataset": "本次未核实",
+          "model": "本次未核实",
+          "metric": "本次未核实",
+          "result": "本次未核实",
+          "conditions": "本次未核实",
+          "comparability": "unknown",
+          "evidence_ids": [],
+          "attributes": {
+            "任务与输入输出": "本次未核实",
+            "参考答案与标注": "本次未核实",
+            "指标与比较条件": "本次未核实",
+            "适用范围与缺口": "本次未核实"
+          }
+        }
+      ],
+      "limitations": [
+        "本次报告未能回读任何原文证据，所有关于论文内容的字段均为未知。",
+        "无法基于现有信息构建有效的评测方案或提出有依据的研究建议。",
+        "缺少对QASPER和ArxivDIGESTables任务细节、指标定义及适用范围的实证支持。",
+        "无法区分论文已验证范围与对产品能力的推断，因无原文依据。"
+      ],
+      "proposals": [
+        {
+          "text": "优先回读QASPER与ArxivDIGESTables两篇论文的原文，提取任务定义、输入输出、指标及适用范围等关键信息。",
+          "basis_claim_indices": [
+            0,
+            1
+          ],
+          "assumptions": [
+            "论文原文包含所需的关键信息",
+            "回读操作能够成功获取完整内容"
+          ],
+          "validation_plan": "执行回读操作后，重新检查各字段是否被填充，并验证提取信息的准确性。"
+        },
+        {
+          "text": "在获取原文证据后，设计最小可执行的评测组合，包括数据划分、人工检查和失败计数机制。",
+          "basis_claim_indices": [
+            2,
+            3
+          ],
+          "assumptions": [
+            "原文证据足以支持评测方案设计",
+            "评测方案符合产品需求"
+          ],
+          "validation_plan": "基于原文证据制定详细方案，并进行小规模试点测试以验证可行性。"
+        },
+        {
+          "text": "建立明确的引用机制，确保所有论文事实与建议均能追溯到具体的原文证据。",
+          "basis_claim_indices": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "assumptions": [
+            "引用机制能够有效防止编造内容",
+            "人工审核能够发现潜在问题"
+          ],
+          "validation_plan": "在后续报告中严格执行引用要求，并由人工审核团队进行复核。"
+        }
+      ],
+      "verification_status": "needs_human_review"
+    },
+    "normalized_columns": [],
+    "validation_status": "rejected",
+    "id": "900fbc34-599c-4952-96f2-aab0bf607176",
+    "workspace_id": "139f7b30-a566-4221-a92d-d7f4a369c5b6",
+    "created_at": "2026-11-08T10:24:28.901339+00:00",
+    "updated_at": "2026-11-08T10:24:28.921428+00:00",
+    "error": "6 validation errors for Report\nclaims.0.evidence_ids\n  List should have at least 1 item after validation, not 0 [type=too_short, input_value=[], input_type=list]\n    For further information visit https://errors.pydantic.dev/2.14/v/too_short\nclaims.1.evidence_ids\n  List should have at least 1 item after validation, not 0 [type=too_short, input_value=[], input_type=list]\n    For further information visit https://errors.pydantic.dev/2.14/v/too_short\nclaims.2.evidence_ids\n  List should have at least 1 item after validation, not 0 [type=too_short, input_value=[], input_type=list]\n    For further information visit https://errors.pydantic.dev/2.14/v/too_short\nclaims.3.evidence_ids\n  List should have at least 1 item after validation, not 0 [type=too_short, input_value=[], input_type=list]\n    For further information visit https://errors.pydantic.dev/2.14/v/too_short\ncomparison_rows.0.evidence_ids\n  List should have at least 1 item after validation, not 0 [type=too_short, input_value=[], input_type=list]\n    For further information visit https://errors.pydantic.dev/2.14/v/too_short\ncomparison_rows.1.evidence_ids\n  List should have at least 1 item after validation, not 0 [type=too_short, input_value=[], input_type=list]\n    For further information visit https://errors.pydantic.dev/2.14/v/too_short"
+  },
+  {
+    "arguments": {
+      "title": "基于QASPER与ArxivDIGESTables的论文研究Agent评测方案分析",
+      "claims": [
+        {
+          "text": "当前无法确认QASPER数据集的具体任务定义、输入输出格式及单篇/跨篇范围，因原文尚未回读。",
+          "evidence_ids": [],
+          "kind": "finding",
+          "qualification": "本次回读证据为空，无法从原文提取该信息。"
+        },
+        {
+          "text": "当前无法确认ArxivDIGESTables的任务目标、表格合成方法及标注来源，因原文尚未回读。",
+          "evidence_ids": [],
+          "kind": "finding",
+          "qualification": "本次回读证据为空，无法从原文提取该信息。"
+        },
+        {
+          "text": "两个任务的指标衡量对象与比较条件未知，因此不能直接进行横向排名。",
+          "evidence_ids": [],
+          "kind": "inference",
+          "qualification": "由于缺乏原文中关于指标定义和实验条件的证据，无法判断其可比性。"
+        },
+        {
+          "text": "产品所需的单篇问答、跨论文比较及研究建议能力，目前均缺少来自这两篇论文的评测依据。",
+          "evidence_ids": [],
+          "kind": "inference",
+          "qualification": "未读取原文导致无法确认数据集是否覆盖这些能力维度。"
+        }
+      ],
+      "comparison_rows": [
+        {
+          "source_id": "2555e2d7-5cbb-4a24-8b99-a3b05e025604",
+          "method": "本次未核实",
+          "dataset": "本次未核实",
+          "model": "本次未核实",
+          "metric": "本次未核实",
+          "result": "本次未核实",
+          "conditions": "本次未核实",
+          "comparability": "unknown",
+          "evidence_ids": [],
+          "attributes": {
+            "任务与输入输出": "本次未核实",
+            "参考答案与标注": "本次未核实",
+            "指标与比较条件": "本次未核实",
+            "适用范围与缺口": "本次未核实"
+          }
+        },
+        {
+          "source_id": "66745208-f526-40c6-896a-268fb67f8151",
+          "method": "本次未核实",
+          "dataset": "本次未核实",
+          "model": "本次未核实",
+          "metric": "本次未核实",
+          "result": "本次未核实",
+          "conditions": "本次未核实",
+          "comparability": "unknown",
+          "evidence_ids": [],
+          "attributes": {
+            "任务与输入输出": "本次未核实",
+            "参考答案与标注": "本次未核实",
+            "指标与比较条件": "本次未核实",
+            "适用范围与缺口": "本次未核实"
+          }
+        }
+      ],
+      "limitations": [
+        "本次回读未获取到任何原文证据，所有字段内容均为缺失状态。",
+        "无法验证QASPER与ArxivDIGESTables的具体任务定义、数据构成及指标含义。",
+        "无法判断两个数据集在评测论文研究Agent时的互补性或重叠性。",
+        "提出的评测方案仅基于通用原则，缺乏针对这两篇论文具体特性的定制依据。"
+      ],
+      "proposals": [
+        {
+          "text": "执行最小可执行评测组合：选取QASPER（若确认为单篇问答）和ArxivDIGESTables（若确认为表格生成）各10个样本，人工构建测试集。",
+          "basis_claim_indices": [
+            0,
+            1
+          ],
+          "assumptions": [
+            "假设QASPER包含单篇论文问答任务",
+            "假设ArxivDIGESTables包含科学文献表格合成任务"
+          ],
+          "validation_plan": "1. 回读两篇论文原文以确认任务类型；2. 按原文方法抽取或构造测试样本；3. 运行Agent并记录失败案例；4. 人工核对答案准确性。"
+        },
+        {
+          "text": "建立失败计数机制：对每个任务定义明确的失败标准（如关键信息遗漏、幻觉生成），统计错误率。",
+          "basis_claim_indices": [
+            2,
+            3
+          ],
+          "assumptions": [
+            "假设可以定义清晰的失败标准",
+            "假设人工检查资源充足"
+          ],
+          "validation_plan": "1. 制定详细的评估指南；2. 对模型输出进行双盲评审；3. 计算各类错误的分布比例。"
+        },
+        {
+          "text": "设计跨论文比较模块：若两数据集支持，尝试构建需要综合多篇信息的复杂问题。",
+          "basis_claim_indices": [
+            0,
+            1
+          ],
+          "assumptions": [
+            "假设至少一个数据集支持跨篇推理",
+            "假设可以构造合理的跨篇问题"
+          ],
+          "validation_plan": "1. 分析数据集结构是否允许跨篇关联；2. 构造少量跨篇测试题；3. 评估模型在信息整合方面的表现。"
+        }
+      ],
+      "verification_status": "needs_human_review"
+    },
+    "normalized_columns": [],
+    "validation_status": "rejected",
+    "id": "2714c0c9-454c-433a-beb0-ec213b0256df",
+    "workspace_id": "139f7b30-a566-4221-a92d-d7f4a369c5b6",
+    "created_at": "2026-11-08T10:24:42.238442+00:00",
+    "updated_at": "2026-11-08T10:24:42.256328+00:00",
+    "error": "6 validation errors for Report\nclaims.0.evidence_ids\n  List should have at least 1 item after validation, not 0 [type=too_short, input_value=[], input_type=list]\n    For further information visit https://errors.pydantic.dev/2.14/v/too_short\nclaims.1.evidence_ids\n  List should have at least 1 item after validation, not 0 [type=too_short, input_value=[], input_type=list]\n    For further information visit https://errors.pydantic.dev/2.14/v/too_short\nclaims.2.evidence_ids\n  List should have at least 1 item after validation, not 0 [type=too_short, input_value=[], input_type=list]\n    For further information visit https://errors.pydantic.dev/2.14/v/too_short\nclaims.3.evidence_ids\n  List should have at least 1 item after validation, not 0 [type=too_short, input_value=[], input_type=list]\n    For further information visit https://errors.pydantic.dev/2.14/v/too_short\ncomparison_rows.0.evidence_ids\n  List should have at least 1 item after validation, not 0 [type=too_short, input_value=[], input_type=list]\n    For further information visit https://errors.pydantic.dev/2.14/v/too_short\ncomparison_rows.1.evidence_ids\n  List should have at least 1 item after validation, not 0 [type=too_short, input_value=[], input_type=list]\n    For further information visit https://errors.pydantic.dev/2.14/v/too_short"
+  }
+]
