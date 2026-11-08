@@ -45,7 +45,9 @@ def write(path, value):
     path.write_text(json.dumps(value, ensure_ascii=False, indent=2)+"\n", encoding="utf-8")
 
 
-def prepare(directory):
+def prepare(directory, memory_mode="legacy"):
+    if memory_mode not in {"legacy", "evidence"}:
+        raise ValueError("Unsupported memory mode")
     directory.mkdir(parents=True, exist_ok=False)
     inputs = directory/"inputs"
     inputs.mkdir()
@@ -64,6 +66,7 @@ def prepare(directory):
     code = [ROOT/"scripts/run_research_case.py"] + sorted((ROOT/"backend/app/research_backend").glob("*.py")) + [ROOT/"backend/app/research_backend/benchmarks/measurement.py"]
     write(directory/"manifest.json", dict(purpose="single real-paper development case; no accuracy claim",
         model="qwen3.5-27b", max_tokens=30000, max_steps=18, max_seconds=600, field_mode="bounded", max_field_repairs=1,
+        memory_mode=memory_mode, retrieval_strategy="grep", allow_network=False,
         temperature=0.1, extra_body=dict(enable_thinking=False), sdk_transport_retries=1, application_result_retries=0,
         input_sha256={str(p.relative_to(directory)).replace("\\","/"):sha(p) for p in sorted(inputs.iterdir())},
         rubric_sha256=sha(directory/"rubric.json"),
@@ -109,6 +112,8 @@ async def run_case(directory, env_file):
         sources.append(imported)
     session = store.put(owner,wid,"session",dict(title=task["id"]))
     body = RunCreate(session_id=session["id"], question=task["question"],
+        memory_mode=manifest.get("memory_mode", "legacy"),
+        retrieval_strategy=manifest.get("retrieval_strategy", "grep"), allow_network=manifest.get("allow_network", False),
         **{k:manifest[k] for k in ("max_tokens","max_steps","max_seconds","field_mode","max_field_repairs")},
         required_fields=[dict(source_id=source["id"], **field) for source in sources for field in task["fields"]])
     run = store.put(owner,wid,"run",dict(**body.model_dump(),status="queued",model=settings.llm_model,
@@ -125,7 +130,8 @@ async def run_case(directory, env_file):
     state=final.get("field_state",{})
     summary=dict(task_id=task["id"],purpose=manifest["purpose"],status=final["status"],configured_model=settings.llm_model,
         model_calls=len(measured.calls),tokens_used=measured.tokens,known_tokens_used=measured.known_tokens,
-        elapsed_seconds=round(time.monotonic()-started,2),fields=state.get("total"),present=state.get("present"),
+        elapsed_seconds=round(time.monotonic()-started,2),memory_mode=body.memory_mode,
+        fields=state.get("total"),present=state.get("present"),
         unresolved=state.get("unresolved"),repair_rounds=state.get("repair_rounds"),stop_reason=state.get("stop_reason"),
         review_status=state.get("review_status"),semantic_accuracy=None,human_rubric_score=None,
         usage_note="Returned logical usage; failed SDK transport attempts cannot be independently billed from this trace")
@@ -148,7 +154,8 @@ if __name__ == "__main__":
     parser.add_argument("action",choices=["prepare","run"])
     parser.add_argument("--case-dir",type=Path,required=True)
     parser.add_argument("--env-file",type=Path)
+    parser.add_argument("--memory-mode",choices=["legacy", "evidence"],default="legacy",help="Preparation only; run uses the frozen manifest")
     args=parser.parse_args()
-    if args.action=="prepare": prepare(args.case_dir.resolve())
+    if args.action=="prepare": prepare(args.case_dir.resolve(), args.memory_mode)
     elif args.env_file is None: parser.error("run requires --env-file")
     else: raise SystemExit(asyncio.run(run_case(args.case_dir.resolve(),args.env_file.resolve())))

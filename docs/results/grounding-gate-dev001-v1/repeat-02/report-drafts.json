@@ -1,0 +1,149 @@
+[
+  {
+    "arguments": {
+      "title": "基于 QASPER 与 ArxivDIGESTables 的论文研究 Agent 评测方案对比与建议",
+      "claims": [
+        {
+          "text": "QASPER 数据集包含 5,049 个由 NLP 从业者撰写的问题，这些问题仅基于论文的标题和摘要提出，但答案需从全文中检索并引用证据。",
+          "evidence_ids": [
+            "ev_cadc78c4a7a328825b8ee6aa2fa6bb6f"
+          ],
+          "kind": "finding"
+        },
+        {
+          "text": "ArxivDIGESTables 数据集包含 2,228 个文献综述表格，这些表格综合了 7,542 篇 ArXiv 论文，旨在评估语言模型将多篇论文合成为结构化表格的能力。",
+          "evidence_ids": [
+            "ev_b5cd17111ce07d4493062bda3c29e406"
+          ],
+          "kind": "finding"
+        },
+        {
+          "text": "QASPER 任务要求回答者提供支撑答案的证据段落，且问题设计模拟了真实读者在仅阅读标题和摘要后对全文内容的信息需求。",
+          "evidence_ids": [
+            "ev_37e52b9ce24205e023fef3140fc231de"
+          ],
+          "kind": "finding"
+        },
+        {
+          "text": "ArxivDIGESTables 任务被分解为两个子任务：Schema-generation（确定共享方面）和 Value-generation（确定具体值），并开发了 DECONTEXT EVAL 方法以自动评估生成表格与人工参考表格的对齐情况。",
+          "evidence_ids": [
+            "ev_9a7001e8e813a004c63fd110f7bb90e5"
+          ],
+          "kind": "finding"
+        },
+        {
+          "text": "QASPER 适合验证单篇论文内的深度阅读理解与信息检索能力，而 ArxivDIGESTables 适合验证跨多篇论文的文献综合与结构化表达能力。",
+          "evidence_ids": [
+            "ev_cadc78c4a7a328825b8ee6aa2fa6bb6f",
+            "ev_b5cd17111ce07d4493062bda3c29e406"
+          ],
+          "kind": "inference",
+          "qualification": "基于两篇论文各自定义的任务目标、输入输出形式及数据集构建方式推断得出。"
+        },
+        {
+          "text": "由于 QASPER 衡量的是问答准确率（F1），而 ArxivDIGESTables 衡量的是表格生成的对齐度与有用性，两者任务目标、输出形式及评估指标完全不同，因此不能直接进行横向排名。",
+          "evidence_ids": [
+            "ev_cadc78c4a7a328825b8ee6aa2fa6bb6f",
+            "ev_b5cd17111ce07d4493062bda3c29e406"
+          ],
+          "kind": "inference",
+          "qualification": "基于两篇论文中明确描述的评估方法和任务性质差异推断得出。"
+        }
+      ],
+      "comparison_rows": [
+        {
+          "source_id": "79256b77-e776-4ca8-812c-bf44af584616",
+          "method": "QASPER",
+          "dataset": "5,049 个问题，1,585 篇 NLP 论文",
+          "model": "本次未核实",
+          "metric": "F1 (与人类表现差距至少 27 点)",
+          "result": "现有模型表现不佳",
+          "conditions": "单篇全文检索，需提供证据",
+          "comparability": "unknown",
+          "evidence_ids": [
+            "ev_cadc78c4a7a328825b8ee6aa2fa6bb6f",
+            "ev_37e52b9ce24205e023fef3140fc231de"
+          ],
+          "attributes": {
+            "任务与输入输出": "单篇论文 QA；输入：问题+全文；输出：答案+证据",
+            "参考答案与标注": "NLP 从业者撰写问题并提供答案与证据",
+            "指标与比较条件": "F1 分数，衡量答案准确性",
+            "适用范围与缺口": "验证单篇深度理解，缺跨篇综合能力验证"
+          }
+        },
+        {
+          "source_id": "ce5e24c8-8694-488c-9d98-aca1025b9d4a",
+          "method": "ArxivDIGESTables",
+          "dataset": "2,228 个表格，综合 7,542 篇论文",
+          "model": "本次未核实",
+          "metric": "DECONTEXT EVAL (自动对齐) + 人工评估",
+          "result": "额外上下文有助于生成，新生成方面仍有价值",
+          "conditions": "多篇论文合成表格，分 Schema 与 Value 生成",
+          "comparability": "unknown",
+          "evidence_ids": [
+            "ev_b5cd17111ce07d4493062bda3c29e406",
+            "ev_9a7001e8e813a004c63fd110f7bb90e5"
+          ],
+          "attributes": {
+            "任务与输入输出": "跨篇文献综述；输入：多篇论文；输出：结构化表格",
+            "参考答案与标注": "从 ArXiv 提取的人工综述表格",
+            "指标与比较条件": "表格元素对齐度，人工评估有用性",
+            "适用范围与缺口": "验证跨篇综合能力，缺单篇细节问答验证"
+          }
+        }
+      ],
+      "limitations": [
+        "本报告仅基于提供的两篇论文摘要及引言部分，未涵盖完整的实验设置、数据划分细节或所有基线模型结果。",
+        "关于产品能力的具体缺口分析是基于任务定义的推断，未经过实际产品测试验证。",
+        "提出的评测方案仅为理论建议，尚未执行，其有效性和可行性需进一步验证。",
+        "未涉及除 QASPER 和 ArxivDIGESTables 之外的其他相关评测数据集或最新模型性能。"
+      ],
+      "proposals": [
+        {
+          "text": "构建最小可执行评测组合：选取 QASPER 中 50 个单篇问题和 ArxivDIGESTables 中 20 个跨篇表格生成任务作为测试集。",
+          "basis_claim_indices": [
+            0,
+            1,
+            4
+          ],
+          "assumptions": [
+            "QASPER 和 ArxivDIGESTables 的数据格式可直接用于当前 Agent 接口",
+            "小规模样本足以初步反映 Agent 在两类任务上的基本能力"
+          ],
+          "validation_plan": "1. 数据准备：按上述数量随机抽取样本，确保覆盖不同难度和主题。\n2. 人工检查：由领域专家对 Agent 的输出进行双盲评审，记录错误类型（如事实错误、幻觉、格式错误等）。\n3. 失败计数：统计无法正确回答问题或生成无效表格的比例，设定阈值（如错误率>30% 视为失败）。\n4. 迭代优化：根据失败案例调整 Agent 提示词或检索策略，重新测试直至达标。"
+        },
+        {
+          "text": "针对跨篇比较能力，设计专门的‘对比维度发现’子任务，要求 Agent 从多篇论文中自动识别并列出可比属性。",
+          "basis_claim_indices": [
+            3,
+            4
+          ],
+          "assumptions": [
+            "Agent 具备基本的文本分析和归纳能力",
+            "ArxivDIGESTables 中的 Schema-generation 任务可作为该子任务的参考标准"
+          ],
+          "validation_plan": "1. 选取 ArxivDIGESTables 中 10 组论文作为输入。\n2. 要求 Agent 输出可比属性列表（Schema）。\n3. 将 Agent 输出与人工参考 Schema 进行比对，计算重合度和新颖性。\n4. 邀请研究人员评估 Agent 发现的属性是否具有实际研究价值。"
+        },
+        {
+          "text": "建立‘证据溯源’强制机制，要求 Agent 在回答任何问题时必须提供原文引用片段，否则视为无效回答。",
+          "basis_claim_indices": [
+            2,
+            5
+          ],
+          "assumptions": [
+            "QASPER 任务中对证据的要求是合理的，且适用于更广泛的场景",
+            "Agent 能够准确定位并提取原文片段"
+          ],
+          "validation_plan": "1. 在评测中加入‘无证据即失败’的规则。\n2. 检查 Agent 提供的证据是否确实支持其答案。\n3. 统计因缺乏证据或证据不匹配导致的失败比例。\n4. 分析失败原因，优化 Agent 的检索和引用模块。"
+        }
+      ],
+      "verification_status": "needs_human_review"
+    },
+    "normalized_columns": [],
+    "validation_status": "accepted",
+    "id": "305b710e-7eb6-4005-a082-54858c523d7d",
+    "workspace_id": "d6f519e5-dac6-49c2-9745-b168f45753df",
+    "created_at": "2026-11-08T14:32:15.475645+00:00",
+    "updated_at": "2026-11-08T14:32:15.575773+00:00"
+  }
+]
