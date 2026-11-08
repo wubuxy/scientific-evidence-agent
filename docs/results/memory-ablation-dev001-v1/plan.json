@@ -1,0 +1,80 @@
+{
+  "id": "memory-ablation-dev001-v1",
+  "prepared_at": "2026-11-08T14:37:03.822146+00:00",
+  "code_commit": "49afbf40917d7b3130c674b250281610b3e521a5",
+  "scope": "One previously observed development task, two repetitions per condition. Exploratory architecture diagnosis, not a generalization estimate.",
+  "schedule": [
+    {
+      "case": "legacy-01",
+      "memory_mode": "legacy"
+    },
+    {
+      "case": "evidence-01",
+      "memory_mode": "evidence"
+    },
+    {
+      "case": "evidence-02",
+      "memory_mode": "evidence"
+    },
+    {
+      "case": "legacy-02",
+      "memory_mode": "legacy"
+    }
+  ],
+  "independent_variable": "memory_mode only; production Runtime, read controller, task, tools, output contract, temperature and budgets are shared.",
+  "model": "qwen3.5-27b",
+  "temperature": 0.1,
+  "extra_body": {
+    "enable_thinking": false
+  },
+  "max_tokens_per_run": 30000,
+  "max_steps_per_run": 18,
+  "max_seconds_per_run": 600,
+  "logical_token_ceiling_total": 120000,
+  "sdk_transport_retries": 1,
+  "application_result_retries": 0,
+  "stopping_rule": "Run the four scheduled attempts in order; no replacement for task failures. Stop after an external service fault or unknown billing and retain missing attempts.",
+  "hypotheses": [
+    "Evidence memory can reduce input-token accumulation without reducing structurally valid delivery.",
+    "Evidence memory may reduce repeated reading and permit deeper reading; depth is not relevance or correctness."
+  ],
+  "primary_metrics": [
+    "contract_pass",
+    "returned_tokens"
+  ],
+  "diagnostic_metrics": [
+    "read_calls",
+    "unique_read_lines",
+    "repeated_line_fraction",
+    "unique_lines_after_80",
+    "field_presence_rate",
+    "rejected_drafts",
+    "phase_sequence",
+    "max_input_tokens"
+  ],
+  "human_metrics": [
+    "six frozen research rubrics",
+    "claim support",
+    "condition preservation",
+    "proposal feasibility"
+  ],
+  "human_scores": null,
+  "semantic_accuracy": null,
+  "held_out_data_used": false,
+  "adoption_rule": "No automatic default switch from token or completion counts. Preserve quality as unmeasured until independent review. New-paper confirmation is required.",
+  "manifest_sha256": {
+    "legacy-01": "eaf5513742596b6b05c70781da135bd38029b9fa12029e419931457036cf0e35",
+    "evidence-01": "5ee042bba74077bf842e165f5ab2c938c41e8c6c4129ba126dab7112212f5920",
+    "evidence-02": "5ee042bba74077bf842e165f5ab2c938c41e8c6c4129ba126dab7112212f5920",
+    "legacy-02": "eaf5513742596b6b05c70781da135bd38029b9fa12029e419931457036cf0e35"
+  },
+  "input_sha256": {
+    "inputs/digestables.blocks.json": "5758194e55d5222b8dbfdde83c2b2248f4d08e5bc0f725fbe50e0bac10a69fb2",
+    "inputs/digestables.txt": "243150fdb32bcde1d3c164b23744de83b9dc254df30252ff1ad56f70e309e342",
+    "inputs/qasper.blocks.json": "d9334c8d9d2bb50fcfcbcc08fe25dd70ec0b5691e1c30eef01a1759a88945baa",
+    "inputs/qasper.txt": "5137e9aae0d5c9ca7031585c93adaf76267931d9cd194408954475f37f375cc3",
+    "inputs/task.json": "d2af176659d72b40d80f27019c20e260737bf29229d2bbea7ad691b175f89613"
+  },
+  "rubric_sha256": "5080dd2c58b3022b005580b7617d30778acfd0e1652376a6eb43823afdcdf6a0",
+  "preparation_script_sha256": "d3a6a0b50e54d0a0bcf780aa1126e50e7e366dbb05a7664d2255141e80f24765"
+}
